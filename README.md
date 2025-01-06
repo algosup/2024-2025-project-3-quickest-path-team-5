@@ -4,7 +4,7 @@
 
 | Photo | Name | Role | Contact |
 |---|---|---|---|
-|<img src="https://ca.slack-edge.com/T088237FKC0-U0876KV5EKG-g852fc97e876-512" width="100" height="100"> | Project Manager | Habi CAILLEAU| [GitHub](https://github.com/habicll) \| [LinkedIn](https://www.linkedin.com/in/habi-cailleau-3b72b5293/) \| [Mail](mailto:habi.cailleau@algosup.com) |
+| <img src="https://avatars.githubusercontent.com/u/145991425?v=4" width="100" height="100"> | Project Manager | Habi CAILLEAU| [GitHub](https://github.com/habicll) \| [LinkedIn](https://www.linkedin.com/in/habi-cailleau-3b72b5293/) \| [Mail](mailto:habi.cailleau@algosup.com) |
 | <img src="https://ca.slack-edge.com/T088237FKC0-U087D6H7PDZ-g9ae85fa69e4-512" width="100" height="100"> | Program Manager | Robin GOUMY |[GitHub](https://github.com/RobinGOUMY) \| [LinkedIn](https://www.linkedin.com/in/robin-goumy-66452832a/) \| [Mail](mailto:robin.goumy@algosup.com) |
 | <img src="https://ca.slack-edge.com/T088237FKC0-U08823Q6DKJ-g7986289d5c2-512" width="100" height="100"> |  Tech Lead | Mathias GAGNEPAIN |[GitHub](https://github.com/MistzSoftware) \| [LinkedIn](https://www.linkedin.com/in/mathias-gagnepain-426a131b0/) \| [Mail](mailto:mathias.gagnepain@algosup.com) |
 | <img src="https://ca.slack-edge.com/T088237FKC0-U087D90QN9G-gfe688c3d7f4-512" width="100" height="100">| Software Developer | Rémy CHARLES |[GitHub](https://github.com/RemyCHARLES) \| [LinkedIn](https://www.linkedin.com/in/r%C3%A9my-charles-2a8960232/) \| [Mail](mailto:remy.charles@algosup.com) |
