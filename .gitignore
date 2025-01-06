@@ -1,1 +1,4 @@
 .DS_STORE
+.zig-cache
+build
+data/*
