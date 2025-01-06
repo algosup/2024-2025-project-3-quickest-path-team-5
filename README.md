@@ -1,4 +1,4 @@
-# 2024-2025-project-3-quickest-path-team-5-
+# 2024-2025-project-3-quickest-path-team-5
 
 ## Team Members
 
@@ -23,7 +23,7 @@ This is a student-led ALGOSUP project. The aim of the project is to create a RES
 
 A REST API (Representational State Transfer Application Programming Interface) is a way for systems to communicate over the internet. It uses URLs to access resources and standard actions like getting, adding, or deleting data. It’s simple, fast, and commonly used to build web services.
 
-To find out more about [REST](https://fr.wikipedia.org/wiki/Representational_state_transfer) and [API](https://en.wikipedia.org/wiki/API).
+To find out more about [REST](https://en.wikipedia.org/wiki/REST) and [API](https://en.wikipedia.org/wiki/API).
 
 
 ## C++
