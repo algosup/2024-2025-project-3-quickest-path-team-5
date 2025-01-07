@@ -4,13 +4,13 @@
 
 | Photo | Name | Role | Contact |
 |---|---|---|---|
-| <img src="https://avatars.githubusercontent.com/u/145991425?v=4" width="100" height="100"> | Project Manager | Habi CAILLEAU| [GitHub](https://github.com/habicll) \| [LinkedIn](https://www.linkedin.com/in/habi-cailleau-3b72b5293/) \| [Mail](mailto:habi.cailleau@algosup.com) |
-| <img src="https://ca.slack-edge.com/T088237FKC0-U087D6H7PDZ-g9ae85fa69e4-512" width="100" height="100"> | Program Manager | Robin GOUMY |[GitHub](https://github.com/RobinGOUMY) \| [LinkedIn](https://www.linkedin.com/in/robin-goumy-66452832a/) \| [Mail](mailto:robin.goumy@algosup.com) |
-| <img src="https://ca.slack-edge.com/T088237FKC0-U08823Q6DKJ-g7986289d5c2-512" width="100" height="100"> |  Tech Lead | Mathias GAGNEPAIN |[GitHub](https://github.com/MistzSoftware) \| [LinkedIn](https://www.linkedin.com/in/mathias-gagnepain-426a131b0/) \| [Mail](mailto:mathias.gagnepain@algosup.com) |
-| <img src="https://ca.slack-edge.com/T088237FKC0-U087D90QN9G-gfe688c3d7f4-512" width="100" height="100">| Software Developer | Rémy CHARLES |[GitHub](https://github.com/RemyCHARLES) \| [LinkedIn](https://www.linkedin.com/in/r%C3%A9my-charles-2a8960232/) \| [Mail](mailto:remy.charles@algosup.com) |
-| <img src="https://ca.slack-edge.com/T019N8PRR7W-U05SZ8EATJP-2f1b14ca0bd5-512" width="100" height="100">| Software Developer | Maxime Caron |[GitHub](https://github.com/MaximeAlgosup) \| [LinkedIn](https://www.linkedin.com/in/maxime-caron-dev/) \| [Mail](mailto:maxime.caron@algosup.com) |
-| <img src="https://ca.slack-edge.com/T019N8PRR7W-U0434UXGH6J-005e03a4a1c4-512" width="100" height="100"> | Quality Assurance | Jason GROSSO |[GitHub](https://github.com/JasonGROSSO) \| [LinkedIn](https://www.linkedin.com/in/jason-grosso-847b39251/) \|[Mail](mailto:jason.grosso@algosup.com) |
-| <img src="https://ca.slack-edge.com/T088237FKC0-U087D90JPGS-g6aca67c5a97-512" width="100" height="100"> | Technical Writer | Alexandre BOPP |[GitHub](https://github.com/Boppalex) \| [LinkedIn](https://www.linkedin.com/in/alexandre-bopp-682a97250/) \| [Mail](mailto:alexandre.bopp@algosup.com) |
+| <img src="https://avatars.githubusercontent.com/u/145991425?v=4" width="100" height="100"> | Project Manager | Habi CAILLEAU| [GitHub](https://github.com/habicll) \| [LinkedIn](https://www.linkedin.com/in/habi-cailleau-3b72b5293/) | 
+| <img src="https://avatars.githubusercontent.com/u/182214449?v=4" width="100" height="100"> | Program Manager | Robin GOUMY |[GitHub](https://github.com/RobinGOUMY) \| [LinkedIn](https://www.linkedin.com/in/robin-goumy-66452832a/) |
+| <img src="https://avatars.githubusercontent.com/u/145995367?v=4" width="100" height="100"> |  Tech Lead | Mathias GAGNEPAIN |[GitHub](https://github.com/MistzSoftware) \| [LinkedIn](https://www.linkedin.com/in/mathias-gagnepain-426a131b0/) |
+| <img src="https://avatars.githubusercontent.com/u/100137905?v=4" width="100" height="100">| Software Developer | Rémy CHARLES |[GitHub](https://github.com/RemyCHARLES) \| [LinkedIn](https://www.linkedin.com/in/r%C3%A9my-charles-2a8960232/) |
+| <img src="https://avatars.githubusercontent.com/u/145995231?v=4" width="100" height="100">| Software Developer | Maxime CARON |[GitHub](https://github.com/MaximeAlgosup) \| [LinkedIn](https://www.linkedin.com/in/maxime-caron-dev/) |
+| <img src="https://avatars.githubusercontent.com/u/114397870?v=4" width="100" height="100"> | Quality Assurance | Jason GROSSO |[GitHub](https://github.com/JasonGROSSO) \| [LinkedIn](https://www.linkedin.com/in/jason-grosso-847b39251/) |
+| <img src="https://avatars.githubusercontent.com/u/123485791?v=4" width="100" height="100"> | Technical Writer | Alexandre BOPP |[GitHub](https://github.com/Boppalex) \| [LinkedIn](https://www.linkedin.com/in/alexandre-bopp-682a97250/) |
 
 --- 
 
