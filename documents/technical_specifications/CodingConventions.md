@@ -16,6 +16,10 @@
     - [Code Comments](#code-comments)
       - [1. Single-Line Comments](#1-single-line-comments)
       - [2. Multi-Line Comments](#2-multi-line-comments)
+      - [3. Documenting Function Parameters and Return Values](#3-documenting-function-parameters-and-return-values)
+      - [4. Documenting Pointer Parameters](#4-documenting-pointer-parameters)
+      - [5. Documenting Complex Parameters and Structures](#5-documenting-complex-parameters-and-structures)
+      - [6. Documenting Return Types](#6-documenting-return-types)
     - [Function Design](#function-design)
       - [1. Single Responsibility](#1-single-responsibility)
       - [2. Function Length](#2-function-length)
@@ -182,10 +186,12 @@
 >[!TIP]
 >- `Good Practice:` Use /* */ for detailed explanations.
 >```c
->// Calculate the sum of two numbers
 >/*
 > * Function: calculate_sum
-> * Purpose: Adds two numbers and returns the result.
+> * \brief Adds two numbers and returns the result.
+> * \param a The first integer.
+> * \param b The second integer.
+> * \return The sum of a and b.
 > */
 >int calculate_sum(int a, int b) {
 >    return a + b;
@@ -199,7 +205,162 @@
 > * This function calculates a product (outdated comment, incorrect).
 > */
 >int calculate_sum(int a, int b) {
->    return a + b; // Adds, not multiplies.
+>    return a + b; // Actually adds, not multiplies.
+>}
+>```
+
+
+#### 3. Documenting Function Parameters and Return Values
+
+>[!TIP]
+>- `Good Practice:` Use Doxygen's \param and \return tags for precise descriptions.
+>```c
+>/*
+> * \brief Adds two integers and returns the result.
+> * 
+> * This function takes two integers as input, calculates their sum, and returns the result.
+> *
+> * \param a The first integer to be added.
+> * \param b The second integer to be added.
+> * \return The sum of the two integers as an integer.
+> */
+>int add_numbers(int a, int b) {
+>    return a + b;
+>}
+>```
+
+>[!CAUTION]
+>- `Bad Practice:` Avoid vague or incomplete descriptions of parameters and return types.
+>```c
+>/*
+> * Adds two numbers.
+> * \param a First number.
+> * \param b Second number.
+> * \return The result.
+> */
+>int add_numbers(int a, int b) {
+>    return a + b; 
+>}
+>```
+
+#### 4. Documenting Pointer Parameters
+
+>[!TIP]
+>- `Good Practice:` Clearly indicate the purpose of pointers.
+>```c
+>/*
+> * \brief Updates the value of an integer through a pointer.
+> *
+> * This function takes a pointer to an integer and updates its value to a specified number.
+> *
+> * \param[out] ptr A pointer to an integer that will be updated.
+> * \param value The new value to set.
+> * \return Void.
+> */
+>void update_value(int *ptr, int value) {
+>    if (ptr != NULL) {
+>        *ptr = value;
+>    }
+>}
+>```
+
+>[!CAUTION]
+>- `Bad Practice:` Failing to specify the purpose of the pointer.
+>```c
+>/*
+> * Updates a value.
+> * \param ptr A pointer to something.
+> * \param value The new value.
+> */
+>void update_value(int *ptr, int value) {
+>    if (ptr != NULL) {
+>        *ptr = value;
+>    }
+>}
+>```
+
+#### 5. Documenting Complex Parameters and Structures
+
+>[!TIP]
+>- `Good Practice:` Provide details about the structure fields.
+>```c
+>/*
+> * \brief Initializes a 2D point with the specified coordinates.
+> *
+> * \param[out] point A pointer to a Point structure to be initialized.
+> * \param x The x-coordinate of the point.
+> * \param y The y-coordinate of the point.
+> * \return Void.
+> */
+>struct Point {
+>    int x; /**< The x-coordinate */
+>    int y; /**< The y-coordinate */
+>};
+>
+>void init_point(struct Point *point, int x, int y) {
+>    if (point != NULL) {
+>        point->x = x;
+>        point->y = y;
+>    }
+>}
+>```
+
+>[!CAUTION]
+>- `Bad Practice:` Leaving out details of the structure or failing to document it altogether.
+>```c
+>/*
+> * Initializes a point.
+> * \param point Pointer to a Point structure.
+> * \param x X-coordinate.
+> * \param y Y-coordinate.
+> */
+>struct Point {
+>    int x;
+>    int y;
+>};
+>
+>void init_point(struct Point *point, int x, int y) {
+>    if (point != NULL) {
+>        point->x = x;
+>        point->y = y;
+>    }
+>}
+>```
+
+#### 6. Documenting Return Types
+
+>[!TIP]
+>- `Good Practice:` Explicitly describe the return value.
+>```c
+>/*
+> * \brief Divides two integers and returns the quotient.
+> *
+> * \param numerator The numerator of the division.
+> * \param denominator The denominator of the division.
+> * \return The quotient of the division. If the denominator is zero, returns INT_MAX.
+> */
+>int divide(int numerator, int denominator) {
+>    if (denominator == 0) {
+>        return INT_MAX; // Avoid division by zero.
+>    }
+>    return numerator / denominator;
+>}
+>```
+
+>[!CAUTION]
+>- `Bad Practice:` Avoiding edge cases or leaving the return value unexplained.
+>```c
+>/*
+> * Divides two numbers.
+> * \param numerator The numerator.
+> * \param denominator The denominator.
+> * \return The result.
+> */
+>int divide(int numerator, int denominator) {
+>    if (denominator == 0) {
+>        return INT_MAX; // Avoid division by zero.
+>    }
+>    return numerator / denominator;
 >}
 >```
 
