@@ -13,8 +13,8 @@
       - [1.4.1 File tree and documents](#141-file-tree-and-documents)
       - [1.4.2 Code](#142-code)
         - [Quick Reminder](#quick-reminder)
-          - [Zig Naming](#zig-naming)
-          - [C++ Naming](#c-naming)
+          - [C Naming](#c-naming)
+          - [C++ Naming](#c-naming-1)
   - [2. System Requirements](#2-system-requirements)
     - [2.1 Functional Requirements](#21-functional-requirements)
       - [2.1.1 Data Checker](#211-data-checker)
@@ -24,12 +24,26 @@
       - [2.2.2 REST API](#222-rest-api)
   - [3. System Architecture](#3-system-architecture)
     - [3.1 Overview](#31-overview)
-    - [3.1 Overview](#31-overview-1)
-      - [**Key Design Considerations**](#key-design-considerations)
-  - [Data Checking](#data-checking)
-  - [Data Structure](#data-structure)
-  - [Quick Path Algorithm](#quick-path-algorithm)
-  - [API Implementation](#api-implementation)
+      - [3.1.1 Key Design Considerations](#311-key-design-considerations)
+    - [3.2 Flow Chart](#32-flow-chart)
+    - [3.3 Data Flow Diagram](#33-data-flow-diagram)
+  - [4. Detailed Design](#4-detailed-design)
+    - [4.1 User Interface Design](#41-user-interface-design)
+    - [4.2 Backend Design](#42-backend-design)
+      - [4.2.1. REST API Endpoint](#421-rest-api-endpoint)
+      - [4.2.2. Request Handling Layer](#422-request-handling-layer)
+      - [4.2.3. Pathfinding Engine](#423-pathfinding-engine)
+      - [4.2.4. Data Validation Tool Integration](#424-data-validation-tool-integration)
+      - [4.2.5. Security Layer](#425-security-layer)
+      - [4.2.6. Response Serialization](#426-response-serialization)
+      - [4.2.7. Scalability Design](#427-scalability-design)
+      - [4.2.8. Testing and Monitoring](#428-testing-and-monitoring)
+    - [4.3 Data Structure](#43-data-structure)
+      - [4.3.1 Graph Characteristics](#431-graph-characteristics)
+      - [4.3.2 Graph Properties](#432-graph-properties)
+      - [4.3.3 Data Representation](#433-data-representation)
+      - [4.3.4 Data Integrity Validation](#434-data-integrity-validation)
+    - [4.3.5 Usage in Pathfinding](#435-usage-in-pathfinding)
   - [5. Development Approach](#5-development-approach)
     - [5.1 Methodology](#51-methodology)
     - [5.2 Tools and Technologies](#52-tools-and-technologies)
@@ -57,7 +71,7 @@ The project encompasses the following key components, each tailored for cross-pl
 1. **Data Checker**
    - **Name:** `NAME`
    - **Type:** Desktop Application
-   - **Technology:** Developed in [Zig][2]
+   - **Technology:** Developed in [C][2]
    - **Supported Platforms:** Linux, Windows, and macOS
 2. **REST API**<sup>[2](#glossary-2)</sup>
    - **Name:** `NAME`
@@ -108,24 +122,28 @@ You can find the full coding convention guidelines in the [Coding Conventions do
 
 ##### Quick Reminder
 
-###### Zig Naming
+###### C Naming
+[<img height="48px" width="48px" alt="Icone C" src="https://skillicons.dev/icons?i=c"/>][2]
+
 <hr>
 
-| Type     | Convention |
-| -------- | ---------- |
-| `Variable` | snake_case |
-| `Function` | camelCase  |
-| `Type`     | camelCase  |
+| Type              | Convention       |
+| ----------------- | ---------------- |
+| `Variables`       | snake_case       |
+| `Constants`       | UPPER_SNAKE_CASE |
+| `Functions`       | camelCase        |
+| `Structs & Enums` | PascalCase       |
 
 ###### C++ Naming
+[<img height="48px" width="48px" alt="Icone C++" src="https://skillicons.dev/icons?i=cpp"/>][1]
 <hr>
 
-| Type     | Convention |
-| -------- | ---------- |
-| `Variable` | camelCase |
+| Type        | Convention       |
+| ----------- | ---------------- |
+| `Variables` | camelCase        |
 | `Constants` | UPPER_SNAKE_CASE |
-| `Function` | camelCase  |
-| `Class`     | PascalCase  |
+| `Functions` | camelCase        |
+| `Class`     | PascalCase       |
 
 ## 2. System Requirements
 
@@ -197,21 +215,12 @@ You can find the full coding convention guidelines in the [Coding Conventions do
 
 <br>
 
-### 3.1 Overview
-
-The system architecture is designed to ensure a seamless and efficient user experience across all platforms. It comprises the following components:
-
-Desktop Application (Data Checker): Developed using Zing for compatibility across Linux, Windows, and MacOS.
-REST API: Developed using C++ for platform agnostic
-Authentication Service: 
-
-
 ### 3.1 Overview  
 
 The system architecture is designed to ensure seamless functionality, high performance, and a user-friendly experience across all supported platforms. It consists of the following key components:   
 
 - **Desktop Application (Data Checker)**  
-  - **Technology**: Developed using [Zig][2] for its simplicity and performance in handling data integrity checks.  
+  - **Technology**: Developed using [C][2] for it performance in handling data integrity checks.  
   - **Purpose**: A utility application used to validate the integrity of the dataset (e.g., CSV file) by verifying graph properties such as connectivity and absence of loops.  
   - **Supported Platforms**: Compatible with Linux, Windows, and macOS.  
 
@@ -225,48 +234,156 @@ The system architecture is designed to ensure seamless functionality, high perfo
   - **Purpose**: Ensures secure access to the REST API by validating user credentials and managing authorization.  
   - **Scalability**: Supports role-based access control for future scalability and extended functionality.  
 
-#### **Key Design Considerations**  
+#### 3.1.1 Key Design Considerations
 
 - **Modular Design**: Each component is designed to operate independently, ensuring maintainability and ease of updates.  
 - **High Performance**: The architecture prioritizes efficiency to handle large datasets and complex computations within the defined performance constraints.  
 - **Cross-Platform Support**: Desktop applications and the REST API are built to function seamlessly across Linux, Windows, and macOS.  
 - **Extensibility**: The system is designed to accommodate future enhancements, such as adding new endpoints, improving UI/UX, or integrating with external services.  
 
+<!-- TODO: Change the name and link of this section -->
+### 3.2 Flow Chart
 
+<!-- TODO: Add a flow chart -->
 
+### 3.3 Data Flow Diagram
 
+<!-- TODO: [Insert Data Flow Diagram Here] -->
 
+## 4. Detailed Design
 
+<br>
 
+### 4.1 User Interface Design
 
+<!-- TODO: Have to decide if we do a UI -->
 
+### 4.2 Backend Design
 
+The backend is structured to handle multiple requests efficiently and securely. Key components include:
 
+#### 4.2.1. REST API Endpoint
+- **Purpose**: Provides access to the core functionality of the application through a single GET endpoint.  
+- **Input**: Accepts source and destination landmark IDs as query parameters.  
+- **Output**: Returns the travel time and the ordered list of landmarks in the shortest path in both `XML` and `JSON` formats.  
+- **Design**: Built using C++ for high performance, leveraging lightweight HTTP server libraries such as `Boost.Beast`, `cpp-httplib` or `Pistache`.
 
+#### 4.2.2. Request Handling Layer
+- **Purpose**: Parses incoming requests, validates inputs, and routes them to the appropriate modules.  
+- **Error Handling**: Ensures that invalid or incomplete requests return descriptive error messages (e.g., `400 Bad Request`).  
+- **Concurrency**: Supports handling multiple requests simultaneously using threading or asynchronous techniques.
 
+#### 4.2.3. Pathfinding Engine
+- **Purpose**: Implements the core algorithm for finding the shortest path between two landmarks.  
+- **Algorithm**: Utilizes Dijkstra’s or A* algorithm for optimal performance with heuristics to meet the 10% approximation rule.  
+- **Data Loading**: Reads the graph data (from `USA-roads.csv`) into memory during initialization to optimize query response times.  
+- **Performance Goals**: Ensures responses within 1 second for typical requests.
 
+#### 4.2.4. Data Validation Tool Integration
+- **Purpose**: Verifies the integrity of the graph data before it is loaded into memory.  
+- **Functionality**: Ensures that the dataset forms a fully connected graph and is free of loops.  
+- **Implementation**: Operates as a pre-processing step, run infrequently but essential for ensuring data accuracy.
 
+#### 4.2.5. Security Layer
+- **Purpose**: Protects the REST API from unauthorized access.  
+- **Implementation**:  
+  - API key-based authentication for identifying and authorizing clients.  
+  - Input sanitization to prevent injection attacks.  
+  - Rate limiting to mitigate DoS (Denial of Service) attacks.
 
+#### 4.2.6. Response Serialization
+- **Purpose**: Converts the output of the pathfinding engine into the requested format (XML or JSON).  
+- **Design**: Utilizes lightweight serialization libraries to minimize overhead while maintaining compatibility with modern REST standards.
 
+#### 4.2.7. Scalability Design
+- **Purpose**: Prepares the backend for increasing traffic and data loads.  
+- **Techniques**:  
+  - Modular architecture to allow easy scaling of individual components.  
+  - Potential integration with a load balancer for distributed deployments in production environments.
 
+#### 4.2.8. Testing and Monitoring
+- **Unit Testing**: Comprehensive test suite to validate the correctness of each backend component.  
+- **Performance Testing**: Ensures the API meets the 1-second response time requirement under normal conditions.  
+- **Logging and Monitoring**: Captures API usage and performance metrics to diagnose issues and optimize performance over time.
 
+### 4.3 Data Structure
 
+The application relies on a **weighted, undirected graph** to model the road network of landmarks and travel times. This graph structure serves as the foundation for implementing efficient pathfinding algorithms and ensuring accurate results within the defined performance constraints.
 
+#### 4.3.1 Graph Characteristics
 
+- **Nodes (Vertices):**  
+  Represent landmarks in the road network. Each node is uniquely identified by a landmark ID.
 
+- **Edges:**  
+  Represent bidirectional roads connecting two landmarks. Each edge has a weight, which corresponds to the travel time between the two connected landmarks.
 
+- **Weights:**  
+  Edge weights are integer values representing travel time in an unspecified unit. Lower weights indicate shorter travel times.
 
+#### 4.3.2 Graph Properties
 
-<!-- TODO: Rework this section -->
+- **Weighted:**  
+  Each edge has a numerical value (weight) representing travel time.
 
+- **Undirected:**  
+  Roads are bidirectional. If an edge exists from landmark A to landmark B, the reverse is also true.
 
-## Data Checking
+- **Cyclic:**  
+  The graph inherently contains cycles, as multiple paths often connect landmarks.
 
-## Data Structure
+- **Sparse Graph:**  
+  Since real-world road networks are typically sparse (many fewer edges than the maximum possible), efficient data structures are used to optimize memory and runtime performance.
 
-## Quick Path Algorithm
+#### 4.3.3 Data Representation
 
-## API Implementation
+The graph will be implemented using the following data structures for optimal performance and scalability:
+
+1. **Adjacency List:**  
+   - Used for representing the graph. Each node maintains a list of its neighbors and associated weights (travel times).  
+   - Efficient for sparse graphs, as it minimizes memory usage.
+
+   **Example:**  
+   ```text
+    Node A: [(B, 5), (C, 10)]  
+    Node B: [(A, 5), (C, 3)]  
+    Node C: [(A, 10), (B, 3)]
+   ```  
+2. **Hash Map for Node Lookup:**
+   - A hash map (or dictionary) is used for fast lookup of nodes by their landmark IDs.
+
+   **Example:**
+    ```cpp
+    std::unordered_map<int, std::vector<std::pair<int, int>>> graph;
+    Priority Queue (for Pathfinding):
+    ```
+
+3. **Priority Queue (for Pathfinding):**
+   - Utilized in algorithms like Dijkstra or A* to efficiently retrieve the next node with the shortest travel time.
+   - Typically implemented as a min-heap.
+
+   **Example:**
+    ```cpp
+    std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<>> minHeap;
+    ```
+#### 4.3.4 Data Integrity Validation
+To ensure the correctness of the graph structure, the following validation steps are performed during the data import phase:
+
+1. **Self-Loop Check:**
+   - Ensure no edge connects a node to itself (e.g., `A -> A`).
+
+2. **Duplicate Edge Check:**
+   - Verify that no duplicate edges exist between two nodes with differing weights.
+
+3. **Connectivity Check:**
+   - Confirm the graph is fully connected, ensuring all nodes are reachable from any other node.
+
+4. **Symmetry Check:**
+   - Ensure bidirectionality of all edges (e.g., if `A -> B` exists, `B -> A` must also exist with the same weight).
+
+### 4.3.5 Usage in Pathfinding
+The weighted, undirected graph is optimized for algorithms like **Dijkstra** and **A\*** to calculate the shortest path efficiently. These algorithms leverage the adjacency list and priority queue to balance performance and memory usage, ensuring the application meets its response time requirements.
+
 
 ## 5. Development Approach
 
@@ -280,8 +397,8 @@ The project will follow the Agile methodology, with development broken down into
 
 | Category                            | Tools/Technologies used                                                                                        |
 | ----------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| Data Checking Application           | Zig to keep a fast runtime but using a modern approache of C/C++.                                              |
-| REST API<sup>[2](#glossary-2)</sup> | C++ to keep a fest runtime and not using to many unnecessary language keeping the project easily maintainable. |
+| Data Checking Application           | C<sup>99</sup> to keep a fast runtime but using a mastered language of our software engineer.                               |
+| REST API<sup>[2](#glossary-2)</sup> | C++<sup>14</sup> to keep a fast runtime and not using to many unnecessary language keeping the project easily maintainable. |
 | Response Format                     | JSON but we want to implement the possibility to get XML also                                                  |
 | Version Control                     | Git with GitHub.                                                                                               |
 | CI/CD<sup>[1](#glossary-1)</sup>    | GitHub Actions for continuous integration and deployment.                                                      |
@@ -296,7 +413,7 @@ The project will follow the Agile methodology, with development broken down into
 
 <!-- LINKS -->
 [1]: https://en.wikipedia.org/wiki/C%2B%2B "C++ Wikipedia"
-[2]: https://ziglang.org/ "Zig Home Page"
+[2]: https://en.wikipedia.org/wiki/C_(programming_language) "C Wikipedia"
 [3]: https://www.youtube.com/watch?v=tas0O586t80 "Program in C"
 [4]: https://en.wikipedia.org/wiki/JSON "JSON Wikipedia"
 [5]: https://en.wikipedia.org/wiki/XML "XML Wikipedia"
