@@ -4,12 +4,12 @@
 
 The purpose of this document is to define and account the different testing strategies that will be employed throughout the project, as well as a link to the result of those strategies.
 
-See the Functional Specifications for a detailled account of the project's functionalities.
-See the Technical Specifications for a detailled account of the project's technical aspect.
+See the Functional Specifications for a detailed account of the project's functionalities.
+See the Technical Specifications for a detailed account of the project's technical aspect.
 
 ## Testing
 
-Tests assert the different functionalities of a project as well as the quality of the software. They provide feedback on the state and quality of the software, and can be used to mesure the advancement of a project.
+Tests assert the different functionalities of a project as well as the quality of the software. They provide feedback on the state and quality of the software, and can be used to measure the advancement of a project.
 
 ### Strategies
 
@@ -24,7 +24,7 @@ Smoke Testing or Build Verification Testing or Confidence Testing, is a software
 
 The Smoke Testing strategy will be used to verify that:
 
-- the software launches succesfully without errors / crashes
+- the software launches successfully without errors / crashes
 - the software output a set of instruction to go from a point A to a point B
 
 ### Unit Tests
@@ -55,7 +55,7 @@ A GitHub Action has been set up on pull requests on the main branch that:
 
 #### GitHub Issues
 
-GitHub Issues allow users to create / manage issues to find and track problems that arised and their resolution; issues can be applied to:
+GitHub Issues allow users to create / manage issues to find and track problems that rose and their resolution; issues can be applied to:
 
 - Bugs in the code
 - Documentation Mistakes
@@ -67,7 +67,7 @@ The Template includes but is not limited to:
 - A label that specify the type of Issue and who does the Issue concerns
 - An assigned person responsible for fixing the Issue
 - A label that specify the severity of the Issue among: High, Medium, Low and Critical
-- A detailled description of the issue and the expected behavior and if necessary a step by step description on how to reproduce the issue
+- A detailed description of the issue and the expected behaviour and if necessary a step by step description on how to reproduce the issue
 
 ## Test Cases
 
