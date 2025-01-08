@@ -4,6 +4,9 @@
 
 The purpose of this document is to define and account the different testing strategies that will be employed throughout the project, as well as a link to the result of those strategies.
 
+See the Functional Specifications for a detailled account of the project's functionalities.
+See the Technical Specifications for a detailled account of the project's technical aspect.
+
 ## Testing
 
 Tests assert the different functionalities of a project as well as the quality of the software. They provide feedback on the state and quality of the software, and can be used to mesure the advancement of a project.
@@ -65,3 +68,18 @@ The Template includes but is not limited to:
 - An assigned person responsible for fixing the Issue
 - A label that specify the severity of the Issue among: High, Medium, Low and Critical
 - A detailled description of the issue and the expected behavior and if necessary a step by step description on how to reproduce the issue
+
+## Test Cases
+
+To mesure the advancement of the project we will document the different Tests done during the project as Test Cases (Click on the following link to access all the [Test Cases](/documents/QA/TestCases.md)).
+
+All the Test Cases will be stored using the following format:
+
+| Test ID | 01 |
+| --- | --- |
+| Description | Compiling the Software |
+| Steps | 1. Enter a terminal <br> 2. type ``cmake -S . -B Build -G "MinGW Makefiles"`` <br> 3. Press Enter|
+| Expected Result | |
+| Severity | Critical |
+
+> The Severity labels mirrors [GitHub Issues](#github-issues) labels: High, Medium, Low and Critical
