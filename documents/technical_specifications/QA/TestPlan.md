@@ -14,7 +14,6 @@ Here is a list of the different testing strategies that will put into place to e
 
 - Smoke Testing
 - Unit Tests
-- Automated Tests
 
 ### Smoke Testing
 
@@ -27,11 +26,7 @@ The Smoke Testing strategy will be used to verify that:
 
 ### Unit Tests
 
-Unit Tests are blocks of code that verifies the accuracy of a smaller, isolated block of application code, typically a function or method. These tests are written by the Software Engineers and are run regularly.
-
-### Automated Tests
-
-Automated Tests are test that are executed automatically every time a certain condition has been fulfilled, in our case it's every time there we want to merge onto the main branch.
+Unit Tests are blocks of code that verifies the accuracy of a smaller, isolated block of application code, typically a function or method. These tests are written by the Software Engineers and are run regularly. In our case they are run automatically every time we are merging on the main branch
 
 ## External Tools
 
@@ -47,4 +42,26 @@ It allows us to write and execute a series of unit tests.
 
 #### GitHub Actions
 
+GitHub Actions allow users to create / implement workflows to automate certain tasks when certain conditions are fulfilled.
+
+A GitHub Action has been set up on pull requests on the main branch that:
+
+- Launch the software
+- Run the Units Tests
+(WIP)
+
 #### GitHub Issues
+
+GitHub Issues allow users to create / manage issues to find and track problems that arised and their resolution; issues can be applied to:
+
+- Bugs in the code
+- Documentation Mistakes
+- Missing Features
+
+A GitHub Issue Template is put at the disposition of the team members and must be filled when creating an Issue. Failure to comply will result in the Issue being deleted.
+The Template includes but is not limited to:
+
+- A label that specify the type of Issue and who does the Issue concerns
+- An assigned person responsible for fixing the Issue
+- A label that specify the severity of the Issue among: High, Medium, Low and Critical
+- A detailled description of the issue and the expected behavior and if necessary a step by step description on how to reproduce the issue
