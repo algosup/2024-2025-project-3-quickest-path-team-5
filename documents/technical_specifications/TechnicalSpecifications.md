@@ -47,7 +47,22 @@
   - [5. Development Approach](#5-development-approach)
     - [5.1 Methodology](#51-methodology)
     - [5.2 Tools and Technologies](#52-tools-and-technologies)
-  - [Glossary](#glossary)
+    - [5.3 Libraries used](#53-libraries-used)
+    - [5.4 Software](#54-software)
+    - [5.5 Target](#55-target)
+      - [5.5.1 Desktop Platforms](#551-desktop-platforms)
+      - [5.5.2 Web Server for REST API](#552-web-server-for-rest-api)
+    - [Notes:](#notes)
+  - [6. Testing](#6-testing)
+    - [6.1 Testing Strategy](#61-testing-strategy)
+    - [6.2 Tools](#62-tools)
+  - [7. Deployment](#7-deployment)
+    - [7.1 Deployment Pipeline](#71-deployment-pipeline)
+    - [7.2 Maintenance](#72-maintenance)
+  - [8. Security](#8-security)
+    - [8.1 Data Security](#81-data-security)
+    - [8.2 Compliance](#82-compliance)
+  - [9. Glossary](#9-glossary)
 
 </details>
 
@@ -398,12 +413,100 @@ The project will follow the Agile methodology, with development broken down into
 | Category                            | Tools/Technologies used                                                                                        |
 | ----------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | Data Checking Application           | C<sup>99</sup> to keep a fast runtime but using a mastered language of our software engineer.                               |
-| REST API<sup>[2](#glossary-2)</sup> | C++<sup>14</sup> to keep a fast runtime and not using to many unnecessary language keeping the project easily maintainable. |
+| REST API<sup>[2](#glossary-2)</sup> | C++<sup>17</sup> to keep a fast runtime and not using to many unnecessary language keeping the project easily maintainable. |
 | Response Format                     | JSON but we want to implement the possibility to get XML also                                                  |
 | Version Control                     | Git with GitHub.                                                                                               |
 | CI/CD<sup>[1](#glossary-1)</sup>    | GitHub Actions for continuous integration and deployment.                                                      |
 
-## Glossary
+### 5.3 Libraries used
+
+| C++ Library Name     | Version       | Description                                                                                                  | Links                                                                                                                    |
+| -------------------- | ------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| Standard Template Library (STL) | **C++11+**   | Provides a collection of generic classes and functions, such as vectors, lists, stacks, queues, and algorithms. | [Reference](https://en.cppreference.com/w/cpp/standard_library)                                                          |
+
+<!-- TODO: Add all used C++ libs and add a new table with C libs -->
+
+### 5.4 Software
+
+| Name         | Link                                                                     |
+| ------------ | ------------------------------------------------------------------------ |
+| CMake        | [Install](https://cmake.org/download/)                                   |
+| Clang        | [Install](https://clang.llvm.org/get_started.html)                       |
+
+### 5.5 Target
+
+We decided to target the following platforms for compatibility, performance, and user reach:
+
+#### 5.5.1 Desktop Platforms
+
+| Platform     | Supported Versions                           | Rationale                                                                                  |
+| ------------ | ------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| **Linux**    | Distributions with GCC/Clang and C++17 support | Ensures compatibility with the majority of modern Linux distributions.                     |
+| **Windows**  | Windows 10 and later                        | Covers the largest user base, with extended support for performance and compatibility.      |
+| **macOS**    | macOS 14 (Sequoia) and later                | Targets devices capable of running modern macOS features and supporting your development tools. |
+
+#### 5.5.2 Web Server for REST API
+
+| Server Type      | Supported Platforms               | Rationale                                                                                 |
+| ----------------- | --------------------------------- | ----------------------------------------------------------------------------------------- |
+| **HTTP Servers**  | Linux, Windows, macOS            | Platform-agnostic support ensures flexibility for deployment and development.              |
+| **Localhost**     | Development environments         | Simplifies testing and debugging during the development phase.                             |
+
+---
+
+### Notes:
+1. **macOS Targeting:**  
+   - **macOS 14 (Sequoia)** is the primary target version for this project.  
+   - **macOS 13 (Ventura)** and **macOS 12 (Monterey)** are supported, systems running earlier versions may still work but are not officially supported.
+
+2. **Cross-Platform Compatibility:**  
+   - By leveraging C++ and standardized libraries, the project ensures a seamless experience across major desktop platforms.  
+   - The REST API is developed to work with any platform hosting an HTTP server capable of supporting the required runtime.
+
+## 6. Testing
+
+<br>
+
+### 6.1 Testing Strategy
+
+Unit Testing: For individual components and functions.
+Integration Testing: To ensure different parts of the application work together.
+System Testing: To test the complete system as a whole.
+
+The detailed testing strategy can be seen in the test plan: [HERE](QA/TestPlan.md)
+
+### 6.2 Tools
+
+Unit Testing: Wrote by our Quality Assurance team and ran with googleTest.
+CI/CD Testing: Automated testing using GitHub Actions.
+
+## 7. Deployment
+
+<br>
+
+### 7.1 Deployment Pipeline
+
+Staging Environment: For pre-production testing.
+Production Environment: For the live application.
+
+### 7.2 Maintenance
+
+Regular updates and bug fixes based on user feedback and performance metrics.
+
+## 8. Security
+
+<br>
+
+### 8.1 Data Security
+
+Encryption: HTTPS & SSL.
+Authorization: API access token <!-- TODO: Fill with client answer -->
+
+### 8.2 Compliance
+
+GDPR: Ensure compliance with the General Data Protection Regulation for user data protection.
+
+## 9. Glossary
 
 | Id                       | Term              | Definition                                                                                                                                                                                                        |
 | ------------------------ | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
