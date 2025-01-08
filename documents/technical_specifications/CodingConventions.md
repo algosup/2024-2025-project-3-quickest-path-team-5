@@ -94,7 +94,7 @@
 #### 3. Function Names
 
 >[!TIP]
->- `Good Practice:` Use descriptive names with snake_case or camelCase consistently.
+>- `Good Practice:` Use descriptive names with camelCase consistently.
 >```c
 >int calculate_sum(int a, int b);
 >```
@@ -108,7 +108,7 @@
 #### 4. Struct and Enum Names
 
 >[!TIP]
->- `Good Practice:` Use PascalCase or CamelCase for struct and enum names.
+>- `Good Practice:` Use PascalCase for struct and enum names.
 >```c
 >typedef struct Person {
 >    char name[50];
