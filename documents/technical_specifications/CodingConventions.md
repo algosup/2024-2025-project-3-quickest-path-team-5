@@ -42,8 +42,13 @@
       - [2. Line Length](#2-line-length-1)
       - [3. Braces](#3-braces)
     - [Comments](#comments)
-      - [1. Descriptive Comments](#1-descriptive-comments)
-      - [2. Inline Comments](#2-inline-comments)
+      - [1. Single-Line Comments](#1-single-line-comments-1)
+      - [2. Multi-Line Comments](#2-multi-line-comments-1)
+      - [3. Documenting Function Parameters and Return Values](#3-documenting-function-parameters-and-return-values-1)
+      - [4. Documenting Classes and Methods](#4-documenting-classes-and-methods)
+      - [5. Documenting Pointer and Reference Parameters](#5-documenting-pointer-and-reference-parameters)
+      - [6. Documenting Templates and Overloaded Functions](#6-documenting-templates-and-overloaded-functions)
+      - [7. Documenting Complex Functions](#7-documenting-complex-functions)
     - [Error Handling](#error-handling-1)
       - [1. Use Exceptions](#1-use-exceptions)
       - [2. Avoid Catch-All Blocks](#2-avoid-catch-all-blocks)
@@ -230,7 +235,7 @@
 >```
 
 >[!CAUTION]
->- `Bad Practice:` Avoid vague or incomplete descriptions of parameters and return types.
+>- `Bad Practice:` Vague or incomplete descriptions of parameters and return types.
 >```c
 >/*
 > * Adds two numbers.
@@ -375,7 +380,7 @@
 >```
 
 >[!CAUTION]
->- `Bad Practice:` Avoid multi-purpose functions.
+>- `Bad Practice:` Multi-purpose functions.
 >```c
 >void do_all_the_things(int a, int b) {
 >    printf("Hello, World!\n");
@@ -395,7 +400,7 @@
 >```
 
 >[!CAUTION]
->- `Bad Practice:` Avoid excessively long functions.
+>- `Bad Practice:` Excessively long functions.
 >```c
 >int calculate_sum_and_print_message_and_log(int a, int b) {
 >    printf("Calculating...\n");
@@ -421,7 +426,7 @@
 >```
 
 >[!CAUTION]
->- `Bad Practice:` Avoid arbitrary return values.
+>- `Bad Practice:` Arbitrary return values.
 >```c
 >int open_file(const char *filename) {
 >    // No error handling
@@ -618,38 +623,242 @@
 >    std::cout << "Positive" << std::endl; }
 >```
 ### Comments
-#### 1. Descriptive Comments
+#### 1. Single-Line Comments
 
 >[!TIP]
->- `Good Practice:` Use comments to explain why, not what.
+> - `Good Practice:` Use `//` for short, clear comments.
 >```cpp
->// This function calculates the employee's salary based on hourly rate and hours worked.
->double calculateSalary(double hourlyRate, int hoursWorked) {
->    return hourlyRate * hoursWorked;
+>// Calculate the sum of two numbers
+>int sum = a + b;
+>```
+
+>[!CAUTION]
+>- `Bad Practice:` Irrelevant or excessive comments.
+>```cpp
+>// This is a comment that doesn't say anything meaningful
+>int sum = a + b; // adding numbers
+>```
+
+#### 2. Multi-Line Comments
+
+>[!TIP]
+> - `Good Practice:` Use `/**/` for detailed explanations or blocks of comments.
+>```cpp
+>/*
+> * Function: calculateSum
+> * Purpose: Adds two numbers and returns the result.
+> */
+>int calculateSum(int a, int b) {
+>    return a + b;
 >}
 >```
 
 >[!CAUTION]
->- `Bad Practice:` Write obvious or outdated comments.
+>- `Bad Practice:` Excessive or outdated comments.
 >```cpp
->// This function calculates salary
->double calculateSalary(double hourlyRate, int hoursWorked) {
->    return hourlyRate * hoursWorked;
+>/*
+> * This function calculates a product (outdated comment, incorrect).
+> */
+>int calculateSum(int a, int b) {
+>    return a + b; // Adds, not multiplies.
 >}
 >```
-#### 2. Inline Comments
+
+#### 3. Documenting Function Parameters and Return Values
 
 >[!TIP]
->- `Good Practice:` Use inline comments sparingly.
+> - `Good Practice:` Use \param and \return to describe inputs and outputs.
 >```cpp
->x = y + z; // Combine y and z
+>/*
+> * \brief Adds two integers and returns the result.
+> *
+> * This function takes two integers as input, calculates their sum, and returns the result.
+> *
+> * \param a The first integer to be added.
+> * \param b The second integer to be added.
+> * \return The sum of the two integers as an integer.
+> */
+>int addNumbers(int a, int b) {
+>    return a + b;
+>}
 >```
 
 >[!CAUTION]
->- `Bad Practice:` Overuse inline comments or write non-descriptive ones.
+>- `Bad Practice:` Vague or incomplete descriptions.
 >```cpp
->x = y + z; // Add numbers
+>/*
+> * Adds two numbers.
+> * \param a First number.
+> * \param b Second number.
+> * \return The result.
+> */
+>int addNumbers(int a, int b) {
+>    return a + b; 
+>}
 >```
+
+#### 4. Documenting Classes and Methods
+
+>[!TIP]
+> - `Good Practice:` Always document class purposes and public methods.
+>```cpp
+>/*
+> * \class Calculator
+> * \brief A utility class for performing basic arithmetic operations.
+> *
+> * This class provides methods to perform addition, subtraction, multiplication, and division.
+> */
+>class Calculator {
+>public:
+>    /*
+>     * \brief Adds two numbers.
+>     * \param a The first operand.
+>     * \param b The second operand.
+>     * \return The sum of a and b.
+>     */
+>    int add(int a, int b) {
+>        return a + b;
+>    }
+>};
+>```
+
+>[!CAUTION]
+>- `Bad Practice:` Leaving class or method documentation incomplete.
+>```cpp
+>/*
+> * Calculator class.
+> */
+>class Calculator {
+>public:
+>    /*
+>     * Adds two numbers.
+>     */
+>    int add(int a, int b) {
+>        return a + b;
+>    }
+>};
+>```
+
+#### 5. Documenting Pointer and Reference Parameters
+
+>[!TIP]
+> - `Good Practice:` Clearly indicate the purpose of pointers and references.
+>```cpp
+>/*
+> * \brief Updates the value of an integer through a pointer.
+> *
+> * This function takes a pointer to an integer and updates its value to the specified number.
+> *
+> * \param[out] ptr A pointer to an integer that will be updated.
+> * \param value The new value to set.
+>/ * \return Void.
+> */
+>void updateValue(int *ptr, int value) {
+>    if (ptr != nullptr) {
+>        *ptr = value;
+>    }
+>}
+>```
+
+>[!CAUTION]
+>- `Bad Practice:` Ambiguous descriptions of pointer or reference usage.
+>```cpp
+>/*
+> * Updates a value.
+> * \param ptr Pointer to a variable.
+> * \param value New value.
+> */
+>void updateValue(int *ptr, int value) {
+>    if (ptr != nullptr) {
+>        *ptr = value;
+>    }
+>}
+>```
+
+#### 6. Documenting Templates and Overloaded Functions
+
+>[!TIP]
+> - `Good Practice:` Use detailed comments for template parameters.
+>```cpp
+>/*
+> * \brief Swaps two values.
+> *
+> * A generic function to swap the values of two variables.
+> *
+> * \tparam T The type of the variables to swap.
+> * \param a A reference to the first variable.
+> * \param b A reference to the second variable.
+> */
+>template <typename T>
+>void swapValues(T &a, T &b) {
+>    T temp = a;
+>    a = b;
+>    b = temp;
+>}
+>```
+
+>[!CAUTION]
+>- `Bad Practice:` Omitting documentation for template parameters.
+>```cpp
+>/*
+> * Swaps two values.
+> */
+>template <typename T>
+>void swapValues(T &a, T &b) {
+>    T temp = a;
+>    a = b;
+>    b = temp;
+>}
+>```
+
+#### 7. Documenting Complex Functions
+
+>[!TIP]
+> - `Good Practice:` Provide comprehensive descriptions for algorithms and expected behavior.
+>```cpp
+>/*
+> * \brief Finds the greatest common divisor (GCD) of two numbers.
+> *
+> * This function uses the Euclidean algorithm to calculate the GCD of two integers.
+> *
+> * \param a The first integer.
+> * \param b The second integer.
+> * \return The greatest common divisor of a and b.
+> *
+> * \details
+> * The function repeatedly replaces the larger number by its remainder when divided
+> * by the smaller number, until one of them becomes zero. The non-zero number at this
+> * point is the GCD.
+> */
+>int findGCD(int a, int b) {
+>    while (b != 0) {
+>        int temp = b;
+>        b = a % b;
+>        a = temp;
+>    }
+>    return a;
+>}
+>```
+
+>[!CAUTION]
+>- `Bad Practice:` Skipping algorithm details or leaving parts undocumented.
+>```cpp
+>/*
+> * Finds the GCD.
+> * \param a A number.
+> * \param b Another number.
+> * \return The result.
+> */
+>int findGCD(int a, int b) {
+>    while (b != 0) {
+>        int temp = b;
+>        b = a % b;
+>        a = temp;
+>    }
+>    return a;
+>}
+>```
+
 ### Error Handling
 #### 1. Use Exceptions
 
