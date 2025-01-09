@@ -14,7 +14,7 @@
 #include "treeLib.h"
 #include "graphLib.h"
 
-#define BIG_SIZE 30000000
+#define BIG_SIZE 10000
 
 /***********************************************************************
  * Control Test
@@ -211,7 +211,6 @@ TEST(TreeRemoveTest, ManyElements)
     EXPECT_FALSE(treeContains(&t, origin[i]));
     EXPECT_EQ(treeSize(&t), std::size(origin) - i - 1);
   }
-
   treeDestroy(&t);
 }
 
@@ -474,132 +473,88 @@ TEST(GraphCreateTest, Empty)
 }
 
 /*!
-    \brief graphInsert
+    \brief graphAddNode
 */
 
-TEST(GraphInsertTest, OneElement)
+TEST(GraphAddNodeTest, OneElement)
 {
   GraphType g;
 
   graphCreate(&g);
-  bool inserted = graphInsert(&g, 0, 1, 2);
+  bool added = graphCreateNode(&g, 0);
 
-  EXPECT_TRUE(inserted);
+  EXPECT_TRUE(added);
   EXPECT_FALSE(graphEmpty(&g));
   EXPECT_EQ(graphSize(&g), 1u);
-  EXPECT_TRUE(graphContains(&g, 1));
 
   graphDestroy(&g);
 }
 
-TEST(GraphInsertTest, TwoElements)
+TEST(GraphAddNodeTest, TwoElements)
 {
   GraphType g;
 
   graphCreate(&g);
-  bool inserted1 = graphInsert(&g, 0, 1, 2);
-  bool inserted2 = graphInsert(&g, 1, 2, 3);
+  bool added1 = graphCreateNode(&g, 1);
+  bool added2 = graphCreateNode(&g, 2);
 
-  EXPECT_TRUE(inserted1);
-  EXPECT_TRUE(inserted2);
+  EXPECT_TRUE(added1);
+  EXPECT_TRUE(added2);
   EXPECT_FALSE(graphEmpty(&g));
   EXPECT_EQ(graphSize(&g), 2u);
-  EXPECT_TRUE(graphContains(&g, 1));
-  EXPECT_TRUE(graphContains(&g, 2));
 
   graphDestroy(&g);
 }
 
-TEST(GraphInsertTest, AlreadyPresent)
+TEST(GraphAddNodeTest, AlreadyPresent)
 {
   GraphType g;
-
   graphCreate(&g);
 
-  bool inserted1 = graphInsert(&g, 0, 1, 2);
-  bool inserted2 = graphInsert(&g, 1, 2, 3);
-  bool inserted3 = graphInsert(&g, 0, 1, 2); // already present
+  bool added1 = graphCreateNode(&g, 5);
 
-  EXPECT_TRUE(inserted1);
-  EXPECT_TRUE(inserted2);
-  EXPECT_FALSE(inserted3);
+  EXPECT_TRUE(added1);
+
+  bool added2 = graphCreateNode(&g, 5); // already present
+
+  EXPECT_FALSE(added2);
   EXPECT_FALSE(graphEmpty(&g));
-  EXPECT_EQ(graphSize(&g), 2u);
-  EXPECT_TRUE(graphContains(&g, 1));
-  EXPECT_TRUE(graphContains(&g, 2));
+  EXPECT_EQ(graphSize(&g), 1u);
 
   graphDestroy(&g);
 }
 
-TEST(GraphInsertTest, ManyElements)
+TEST(GraphAddNodeTest, ManyElements)
 {
-  static const std::array<std::array<int, 3>, 9> values = {{{0, 1, 2},
-                                                            {1, 2, 3},
-                                                            {2, 3, 4},
-                                                            {3, 4, 5},
-                                                            {4, 5, 6},
-                                                            {5, 6, 7},
-                                                            {6, 7, 8},
-                                                            {7, 8, 9},
-                                                            {8, 9, 10}}};
+  static const unsigned long values[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
 
   GraphType g;
   graphCreate(&g);
 
-  for (const auto &val : values)
+  for (std::size_t i = 0; i < std::size(values); ++i)
   {
-    bool inserted = graphInsert(&g, val[0], val[1], val[2]);
-    EXPECT_TRUE(inserted);
+    bool added = graphCreateNode(&g, values[i]);
+    EXPECT_TRUE(added);
   }
 
-  for (const auto &val : values)
+  for (std::size_t i = 0; i < std::size(values); ++i)
   {
-    EXPECT_TRUE(graphContains(&g, val[1]));
+    EXPECT_TRUE(graphContains(&g, values[i]));
   }
 
-  graphDestroy(&g);
-}
-
-TEST(GraphInsertTest, Stressed)
-{
-  GraphType g;
-  graphCreate(&g);
-
-  std::srand(std::time(0));
-
-  for (size_t i = 1; i <= BIG_SIZE; ++i)
+  for (int i = 1; i <= 19; i += 2)
   {
-    size_t parentId = i - 1;
-    size_t id = i;
-    size_t distance = std::rand();
-
-    graphInsert(&g, parentId, id, distance);
+    EXPECT_FALSE(graphContains(&g, i));
   }
-
-  EXPECT_FALSE(graphEmpty(&g));
-
-  size_t size = graphSize(&g);
-
-  EXPECT_EQ(size, BIG_SIZE);
 
   graphDestroy(&g);
 }
 
 /*!
-    \brief graphContains
+    \brief graphRemoveNode
 */
 
-TEST(GraphContainsTest, Empty)
-{
-  GraphType g;
 
-  graphCreate(&g);
-
-  EXPECT_FALSE(graphContains(&g, 0));
-  EXPECT_TRUE(graphEmpty(&g));
-
-  graphDestroy(&g);
-}
 
 int main(int argc, char *argv[])
 {

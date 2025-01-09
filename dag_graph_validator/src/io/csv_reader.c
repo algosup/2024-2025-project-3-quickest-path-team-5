@@ -21,7 +21,16 @@ GraphType readFormatCSV(const char *filename)
         char line[256];
         while (fgets(line, sizeof(line), file))
         {
-            printf("%s", line);
+            unsigned long id, destId, distance;
+            sscanf(line, "%lu,%lu,%lu", &id, &destId, &distance);
+            if (id > graph.num_nodes)
+            {
+                graph.num_nodes = id;
+            }
+            if (destId > graph.num_nodes)
+            {
+                graph.num_nodes = destId;
+            }
         }
         fclose(file);
     }

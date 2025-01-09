@@ -1,3 +1,9 @@
+/*!
+    \file treeLib.c
+    \brief Tree library
+    \authors CHARLES Rémy, CARON Maxime
+*/
+
 #include "treeLib.h"
 
 #include <stdlib.h>

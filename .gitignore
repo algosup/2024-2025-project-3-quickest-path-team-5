@@ -15,3 +15,4 @@ CTestTestfile.cmake
 _deps
 CMakeUserPresets.json
 googletest/
+.vscode/

@@ -38,7 +38,7 @@ typedef struct Node
 typedef struct Graph
 {
     size_t num_nodes;
-    NodeType *node;
+    NodeType **nodes;
 } GraphType;
 
 #ifdef __cplusplus
@@ -80,15 +80,33 @@ extern "C"
     */
     bool graphContains(const GraphType *self, unsigned long id);
 
+
     /*!
-        \brief Insert a node in the graph
-        \param self The graph to insert the node in
-        \param parentId The id of the parent node
-        \param id The id of the node to insert
-        \param distance The distance between the parent and the node
-        \return True if the node was inserted, false otherwise
+        \brief Tell if a link exists between two nodes
+        \param self The graph to check
+        \param id1 The id of the first node
+        \param id2 The id of the second node
+        \return True if the link exists, false otherwise
     */
-    bool graphInsert(GraphType *self, unsigned long parentId, unsigned long id, unsigned long distance);
+    bool linkExist(GraphType *self, unsigned long id1, unsigned long id2);
+
+    /*!
+        \brief Create a node in the graph
+        \param self The graph to create the node in
+        \param id The id of the node to create
+        \return True if the node was created, false otherwise
+    */
+    bool graphCreateNode(GraphType *self, unsigned long id);
+
+    /*!
+        \brief Create a link between two nodes in the graph
+        \param self The graph to create the link in
+        \param parentId The id of the parent node
+        \param id The id of the node to link to
+        \param distance The distance between the two nodes
+        \return True if the link was created, false otherwise
+    */
+    bool createLink(GraphType *self, unsigned long parentId, unsigned long id, unsigned long distance);
 
     /*!
         \brief Remove a node from the graph
@@ -96,7 +114,16 @@ extern "C"
         \param id The id of the node to remove
         \return True if the node was removed, false otherwise
     */
-    bool graphRemove(GraphType *self, unsigned long id);
+    bool graphRemoveNode(GraphType *self, unsigned long id);
+
+    /*!
+        \brief Remove a link between two nodes in the graph
+        \param self The graph to remove the link from
+        \param parentId The id of the parent node
+        \param id The id of the node to unlink
+        \return True if the link was removed, false otherwise
+    */
+    bool removeLink(GraphType *self, unsigned long parentId, unsigned long id);
 
 #ifdef __cplusplus
 }
