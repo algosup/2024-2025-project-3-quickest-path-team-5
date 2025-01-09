@@ -1,3 +1,9 @@
+/*!
+    \file
+    \brief Thie file contains the tests for all DAG graph validator functions
+    \authors CHARLES Rémy, CARON Maxime
+*/
+
 #include <cassert>
 #include <cstdlib>
 #include <cstring>
@@ -5,12 +11,21 @@
 
 #include "gtest/gtest.h"
 #include "treeLib.h"
+#include "graphLib.h"
 
 #define BIG_SIZE 10000
+
+/*********************************************************************** 
+ * Control Test
+***********************************************************************/
 
 TEST(ExampleTest, Example) {
     ASSERT_EQ(1, 1);
 }
+
+/*********************************************************************** 
+ * Tree Test
+***********************************************************************/
 
 /*!
     \brief Tree library checkings
@@ -394,6 +409,28 @@ TEST(TreeWalkPostOrderTest, Count) {
   }
 
   treeDestroy(&t);
+}
+
+/*********************************************************************** 
+ * Graph Test
+***********************************************************************/
+
+/*!
+    \brief Graph library checkings
+*/
+
+/*!
+    \brief graphCreate
+*/
+TEST(GraphCreateTest, Empty) {
+  GraphType g;
+
+  graphCreate(&g);
+
+  EXPECT_TRUE(graphEmpty(&g));
+  EXPECT_EQ(graphSize(&g), 0u);
+
+  graphDestroy(&g);
 }
 
 int main(int argc, char *argv[]) {

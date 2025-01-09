@@ -9,33 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
-
-/*!
-    \typedef Link
-    \brief A struct representing a link between two nodes
-*/
-typedef struct Link {
-    struct Node *node;
-    unsigned long distance;
-} LinkType;
-
-/*!
-    \typedef Node
-    \brief A struct representing a node and its links in a graph
-*/
-typedef struct Node {
-    unsigned long id;
-    LinkType *links;
-} NodeType;
-
-/*!
-    \typedef Graph
-    \brief A struct representing a graph
-*/
-typedef struct Graph {
-    unsigned long num_nodes;
-    NodeType *nodes;
-} GraphType;
+#include "graphLib.h"
 
 #ifdef __cplusplus
 extern "C" {
