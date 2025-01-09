@@ -12,22 +12,23 @@
 #include "graphLib.h"
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
-/*!
-    \brief Check if a file exists
-    \param filename The name of the file to check
-    \return True if the file exists, false otherwise
-*/
-bool checkFileExists(const char *filename);
+    /*!
+        \brief Check if a file exists
+        \param filename The name of the file to check
+        \return True if the file exists, false otherwise
+    */
+    bool checkFileExists(const char *filename);
 
-/*!
-    \brief Read a CSV file and return its contents as Graph
-    \param filename The name of the file to read
-    \return The contents of the file
-*/
-GraphType readFormatCSV(const char *filename);
+    /*!
+        \brief Read a CSV file and return its contents as Graph
+        \param filename The name of the file to read
+        \return The contents of the file
+    */
+    GraphType readFormatCSV(const char *filename);
 
 #ifdef __cplusplus
 }

@@ -8,24 +8,26 @@
 #include <cstdlib>
 #include <cstring>
 #include <array>
+#include <ctime>
 
 #include "gtest/gtest.h"
 #include "treeLib.h"
 #include "graphLib.h"
 
-#define BIG_SIZE 10000
+#define BIG_SIZE 30000000
 
-/*********************************************************************** 
+/***********************************************************************
  * Control Test
-***********************************************************************/
+ ***********************************************************************/
 
-TEST(ExampleTest, Example) {
-    ASSERT_EQ(1, 1);
+TEST(ExampleTest, Example)
+{
+  ASSERT_EQ(1, 1);
 }
 
-/*********************************************************************** 
+/***********************************************************************
  * Tree Test
-***********************************************************************/
+ ***********************************************************************/
 
 /*!
     \brief Tree library checkings
@@ -35,7 +37,8 @@ TEST(ExampleTest, Example) {
     \brief treeCreate
  */
 
-TEST(TreeCreateTest, Empty) {
+TEST(TreeCreateTest, Empty)
+{
   TreeType t;
 
   treeCreate(&t);
@@ -47,12 +50,12 @@ TEST(TreeCreateTest, Empty) {
   treeDestroy(&t);
 }
 
-
 /*!
     \brief treeInsert
  */
 
-TEST(TreeInsertTest, OneElement) {
+TEST(TreeInsertTest, OneElement)
+{
   TreeType t;
 
   treeCreate(&t);
@@ -67,7 +70,8 @@ TEST(TreeInsertTest, OneElement) {
   treeDestroy(&t);
 }
 
-TEST(TreeInsertTest, TwoElements) {
+TEST(TreeInsertTest, TwoElements)
+{
   TreeType t;
 
   treeCreate(&t);
@@ -85,7 +89,8 @@ TEST(TreeInsertTest, TwoElements) {
   treeDestroy(&t);
 }
 
-TEST(TreeInsertTest, AlreadyPresent) {
+TEST(TreeInsertTest, AlreadyPresent)
+{
   TreeType t;
   treeCreate(&t);
 
@@ -109,33 +114,38 @@ TEST(TreeInsertTest, AlreadyPresent) {
   treeDestroy(&t);
 }
 
-
-TEST(TreeInsertTest, ManyElements) {
-  static const int values[] = { 16, 2, 8, 4, 10, 18, 6, 12, 14 };
+TEST(TreeInsertTest, ManyElements)
+{
+  static const int values[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
 
   TreeType t;
   treeCreate(&t);
 
-  for (std::size_t i = 0; i < std::size(values); ++i) {
+  for (std::size_t i = 0; i < std::size(values); ++i)
+  {
     bool inserted = treeInsert(&t, values[i]);
     EXPECT_TRUE(inserted);
   }
 
-  for (std::size_t i = 0; i < std::size(values); ++i) {
+  for (std::size_t i = 0; i < std::size(values); ++i)
+  {
     EXPECT_TRUE(treeContains(&t, values[i]));
   }
 
-  for (int i = 1; i <= 19; i += 2) {
+  for (int i = 1; i <= 19; i += 2)
+  {
     EXPECT_FALSE(treeContains(&t, i));
   }
 
   treeDestroy(&t);
 }
 
-static size_t log_2(size_t x) {
+static size_t log_2(size_t x)
+{
   size_t res = 0;
 
-  while (x != 0) {
+  while (x != 0)
+  {
     res++;
     x /= 2;
   }
@@ -143,17 +153,20 @@ static size_t log_2(size_t x) {
   return res;
 }
 
-TEST(TreeInsertTest, Stressed) {
+TEST(TreeInsertTest, Stressed)
+{
   TreeType t;
   treeCreate(&t);
 
   std::size_t expected = 0;
   std::srand(0);
 
-  for (int i = 0; i < BIG_SIZE; ++i) {
+  for (size_t i = 0; i < BIG_SIZE; ++i)
+  {
     int value = std::rand();
 
-    if (treeInsert(&t, value)) {
+    if (treeInsert(&t, value))
+    {
       ++expected;
     }
 
@@ -176,17 +189,20 @@ TEST(TreeInsertTest, Stressed) {
     \brief treeRemove
 */
 
-TEST(TreeRemoveTest, ManyElements) {
-  static const int origin[] = { 16, 2, 8, 4, 10, 18, 6, 12, 14 };
+TEST(TreeRemoveTest, ManyElements)
+{
+  static const int origin[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
 
   TreeType t;
   treeCreate(&t);
 
-  for (int val : origin) {
+  for (int val : origin)
+  {
     treeInsert(&t, val);
   }
 
-  for (std::size_t i = 0; i < std::size(origin); ++i) {
+  for (std::size_t i = 0; i < std::size(origin); ++i)
+  {
     EXPECT_TRUE(treeContains(&t, origin[i]));
 
     bool removed = treeRemove(&t, origin[i]);
@@ -199,13 +215,15 @@ TEST(TreeRemoveTest, ManyElements) {
   treeDestroy(&t);
 }
 
-TEST(TreeRemoveTest, NotPresentBefore) {
-  static const int origin[] = { 16, 2, 8, 4, 10, 18, 6, 12, 14 };
+TEST(TreeRemoveTest, NotPresentBefore)
+{
+  static const int origin[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
 
   TreeType t;
   treeCreate(&t);
 
-  for (int val : origin) {
+  for (int val : origin)
+  {
     treeInsert(&t, val);
   }
 
@@ -217,13 +235,15 @@ TEST(TreeRemoveTest, NotPresentBefore) {
   treeDestroy(&t);
 }
 
-TEST(TreeRemoveTest, NotPresentMiddle) {
-  static const int origin[] = { 16, 2, 8, 4, 10, 18, 6, 12, 14 };
+TEST(TreeRemoveTest, NotPresentMiddle)
+{
+  static const int origin[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
 
   TreeType t;
   treeCreate(&t);
 
-  for (int val : origin) {
+  for (int val : origin)
+  {
     treeInsert(&t, val);
   }
 
@@ -235,13 +255,15 @@ TEST(TreeRemoveTest, NotPresentMiddle) {
   treeDestroy(&t);
 }
 
-TEST(TreeRemoveTest, NotPresentAfter) {
-  static const int origin[] = { 16, 2, 8, 4, 10, 18, 6, 12, 14 };
+TEST(TreeRemoveTest, NotPresentAfter)
+{
+  static const int origin[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
 
   TreeType t;
   treeCreate(&t);
 
-  for (int val : origin) {
+  for (int val : origin)
+  {
     treeInsert(&t, val);
   }
 
@@ -253,13 +275,15 @@ TEST(TreeRemoveTest, NotPresentAfter) {
   treeDestroy(&t);
 }
 
-TEST(TreeRemoveTest, Stressed) {
+TEST(TreeRemoveTest, Stressed)
+{
   TreeType t;
   treeCreate(&t);
 
   std::srand(0);
 
-  for (int i = 0; i < BIG_SIZE; ++i) {
+  for (size_t i = 0; i < BIG_SIZE; ++i)
+  {
     int value = rand();
     treeInsert(&t, value);
   }
@@ -269,12 +293,14 @@ TEST(TreeRemoveTest, Stressed) {
 
   std::srand(0); // reinit
 
-  for (int i = 0; i < BIG_SIZE; ++i) {
+  for (size_t i = 0; i < BIG_SIZE; ++i)
+  {
     int value = rand();
 
     bool present = treeContains(&t, value);
 
-    if (present) {
+    if (present)
+    {
       --expected;
     }
 
@@ -293,7 +319,8 @@ TEST(TreeRemoveTest, Stressed) {
     \brief treeWalkInOrder
  */
 
-static void checkTree(int value, void *userData) {
+static void checkTree(int value, void *userData)
+{
   int *expected = static_cast<int *>(userData);
 
   ASSERT_TRUE(expected != NULL);
@@ -302,13 +329,15 @@ static void checkTree(int value, void *userData) {
   (*expected) += 2;
 }
 
-TEST(TreeWalkInOrderTest, Ordered) {
-  static const int origin[] = { 16, 2, 8, 4, 10, 18, 6, 12, 14 };
+TEST(TreeWalkInOrderTest, Ordered)
+{
+  static const int origin[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
 
   TreeType t;
   treeCreate(&t);
 
-  for (std::size_t i = 0; i < std::size(origin); ++i) {
+  for (std::size_t i = 0; i < std::size(origin); ++i)
+  {
     treeInsert(&t, origin[i]);
   }
 
@@ -321,7 +350,8 @@ TEST(TreeWalkInOrderTest, Ordered) {
   treeDestroy(&t);
 }
 
-static void checkOnce(int value, void *userData) {
+static void checkOnce(int value, void *userData)
+{
   int *count = static_cast<int *>(userData);
 
   ASSERT_TRUE(count != NULL);
@@ -331,13 +361,15 @@ static void checkOnce(int value, void *userData) {
   count[value / 2] = 1;
 }
 
-TEST(TreeWalkInOrderTest, Count) {
-  static const int origin[] = { 16, 2, 8, 4, 10, 18, 6, 12, 14 };
+TEST(TreeWalkInOrderTest, Count)
+{
+  static const int origin[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
 
   TreeType t;
   treeCreate(&t);
 
-  for (std::size_t i = 0; i < std::size(origin); ++i) {
+  for (std::size_t i = 0; i < std::size(origin); ++i)
+  {
     treeInsert(&t, origin[i]);
   }
 
@@ -348,7 +380,8 @@ TEST(TreeWalkInOrderTest, Count) {
 
   EXPECT_EQ(count[0], 0);
 
-  for (std::size_t i = 1; i < std::size(count); ++i) {
+  for (std::size_t i = 1; i < std::size(count); ++i)
+  {
     EXPECT_EQ(count[i], 1);
   }
 
@@ -359,13 +392,15 @@ TEST(TreeWalkInOrderTest, Count) {
     \brief treeWalkPostOrder
  */
 
-TEST(TreeWalkPreOrderTest, Count) {
-  static const int origin[] = { 16, 2, 8, 4, 10, 18, 6, 12, 14 };
+TEST(TreeWalkPreOrderTest, Count)
+{
+  static const int origin[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
 
   TreeType t;
   treeCreate(&t);
 
-  for (std::size_t i = 0; i < std::size(origin); ++i) {
+  for (std::size_t i = 0; i < std::size(origin); ++i)
+  {
     treeInsert(&t, origin[i]);
   }
 
@@ -376,7 +411,8 @@ TEST(TreeWalkPreOrderTest, Count) {
 
   EXPECT_EQ(count[0], 0);
 
-  for (std::size_t i = 1; i < std::size(count); ++i) {
+  for (std::size_t i = 1; i < std::size(count); ++i)
+  {
     EXPECT_EQ(count[i], 1);
   }
 
@@ -387,13 +423,15 @@ TEST(TreeWalkPreOrderTest, Count) {
     \brief treeWalkPostOrder
  */
 
-TEST(TreeWalkPostOrderTest, Count) {
-  static const int origin[] = { 16, 2, 8, 4, 10, 18, 6, 12, 14 };
+TEST(TreeWalkPostOrderTest, Count)
+{
+  static const int origin[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
 
   TreeType t;
   treeCreate(&t);
 
-  for (std::size_t i = 0; i < std::size(origin); ++i) {
+  for (std::size_t i = 0; i < std::size(origin); ++i)
+  {
     treeInsert(&t, origin[i]);
   }
 
@@ -404,16 +442,17 @@ TEST(TreeWalkPostOrderTest, Count) {
 
   EXPECT_EQ(count[0], 0);
 
-  for (std::size_t i = 1; i < std::size(count); ++i) {
+  for (std::size_t i = 1; i < std::size(count); ++i)
+  {
     EXPECT_EQ(count[i], 1);
   }
 
   treeDestroy(&t);
 }
 
-/*********************************************************************** 
+/***********************************************************************
  * Graph Test
-***********************************************************************/
+ ***********************************************************************/
 
 /*!
     \brief Graph library checkings
@@ -422,7 +461,8 @@ TEST(TreeWalkPostOrderTest, Count) {
 /*!
     \brief graphCreate
 */
-TEST(GraphCreateTest, Empty) {
+TEST(GraphCreateTest, Empty)
+{
   GraphType g;
 
   graphCreate(&g);
@@ -433,7 +473,136 @@ TEST(GraphCreateTest, Empty) {
   graphDestroy(&g);
 }
 
-int main(int argc, char *argv[]) {
+/*!
+    \brief graphInsert
+*/
+
+TEST(GraphInsertTest, OneElement)
+{
+  GraphType g;
+
+  graphCreate(&g);
+  bool inserted = graphInsert(&g, 0, 1, 2);
+
+  EXPECT_TRUE(inserted);
+  EXPECT_FALSE(graphEmpty(&g));
+  EXPECT_EQ(graphSize(&g), 1u);
+  EXPECT_TRUE(graphContains(&g, 1));
+
+  graphDestroy(&g);
+}
+
+TEST(GraphInsertTest, TwoElements)
+{
+  GraphType g;
+
+  graphCreate(&g);
+  bool inserted1 = graphInsert(&g, 0, 1, 2);
+  bool inserted2 = graphInsert(&g, 1, 2, 3);
+
+  EXPECT_TRUE(inserted1);
+  EXPECT_TRUE(inserted2);
+  EXPECT_FALSE(graphEmpty(&g));
+  EXPECT_EQ(graphSize(&g), 2u);
+  EXPECT_TRUE(graphContains(&g, 1));
+  EXPECT_TRUE(graphContains(&g, 2));
+
+  graphDestroy(&g);
+}
+
+TEST(GraphInsertTest, AlreadyPresent)
+{
+  GraphType g;
+
+  graphCreate(&g);
+
+  bool inserted1 = graphInsert(&g, 0, 1, 2);
+  bool inserted2 = graphInsert(&g, 1, 2, 3);
+  bool inserted3 = graphInsert(&g, 0, 1, 2); // already present
+
+  EXPECT_TRUE(inserted1);
+  EXPECT_TRUE(inserted2);
+  EXPECT_FALSE(inserted3);
+  EXPECT_FALSE(graphEmpty(&g));
+  EXPECT_EQ(graphSize(&g), 2u);
+  EXPECT_TRUE(graphContains(&g, 1));
+  EXPECT_TRUE(graphContains(&g, 2));
+
+  graphDestroy(&g);
+}
+
+TEST(GraphInsertTest, ManyElements)
+{
+  static const std::array<std::array<int, 3>, 9> values = {{{0, 1, 2},
+                                                            {1, 2, 3},
+                                                            {2, 3, 4},
+                                                            {3, 4, 5},
+                                                            {4, 5, 6},
+                                                            {5, 6, 7},
+                                                            {6, 7, 8},
+                                                            {7, 8, 9},
+                                                            {8, 9, 10}}};
+
+  GraphType g;
+  graphCreate(&g);
+
+  for (const auto &val : values)
+  {
+    bool inserted = graphInsert(&g, val[0], val[1], val[2]);
+    EXPECT_TRUE(inserted);
+  }
+
+  for (const auto &val : values)
+  {
+    EXPECT_TRUE(graphContains(&g, val[1]));
+  }
+
+  graphDestroy(&g);
+}
+
+TEST(GraphInsertTest, Stressed)
+{
+  GraphType g;
+  graphCreate(&g);
+
+  std::srand(std::time(0));
+
+  for (size_t i = 1; i <= BIG_SIZE; ++i)
+  {
+    size_t parentId = i - 1;
+    size_t id = i;
+    size_t distance = std::rand();
+
+    graphInsert(&g, parentId, id, distance);
+  }
+
+  EXPECT_FALSE(graphEmpty(&g));
+
+  size_t size = graphSize(&g);
+
+  EXPECT_EQ(size, BIG_SIZE);
+
+  graphDestroy(&g);
+}
+
+/*!
+    \brief graphContains
+*/
+
+TEST(GraphContainsTest, Empty)
+{
+  GraphType g;
+
+  graphCreate(&g);
+
+  EXPECT_FALSE(graphContains(&g, 0));
+  EXPECT_TRUE(graphEmpty(&g));
+
+  graphDestroy(&g);
+}
+
+int main(int argc, char *argv[])
+{
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

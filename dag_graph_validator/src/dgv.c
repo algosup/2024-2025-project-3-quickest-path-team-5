@@ -6,12 +6,16 @@
 
 #define FILE_PATH "../../data/USA-roads.csv"
 
-int main() {
+int main()
+{
     printf("Verify that file %s exists\n", FILE_PATH);
 
-    if (checkFileExists(FILE_PATH)) {
+    if (checkFileExists(FILE_PATH))
+    {
         printf("File exists\n");
-    } else {
+    }
+    else
+    {
         printf("File does not exist\n");
         return 1;
     }

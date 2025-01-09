@@ -1,5 +1,5 @@
 .DS_STORE
-Build/
+build/
 data/
 bin/
 CMakeLists.txt.user
