@@ -29,7 +29,6 @@
   - [Project Rules](#project-rules)
 - [Glossary](#glossary)
 - [Requirements](#requirements)
-  - [Core Requirements](#core-requirements)
     - [Performance Goals](#performance-goals)
     - [Data Integrity Verification](#data-integrity-verification)
 - [Product](#product)
@@ -65,20 +64,11 @@
   - [Product problem](#product-problem)
   - [Data](#data)
   - [Risk Management Plan](#risk-management-plan)
-- [Futur Improvement](#futur-improvement)
-  - [Precision](#precision)
-  - [UI](#ui)
-  - [Efficient](#efficient)
 - [Future Improvements](#future-improvements)
-  - [Precision](#precision-1)
+  - [Precision](#precision)
   - [User Interface (UI)](#user-interface-ui)
   - [Efficiency and Optimization](#efficiency-and-optimization)
   - [Additional Features](#additional-features)
-- [Future Improvements](#future-improvements-1)
-  - [Precision](#precision-2)
-  - [User Interface (UI)](#user-interface-ui-1)
-  - [Efficiency and Optimization](#efficiency-and-optimization-1)
-  - [Additional Features](#additional-features-1)
 
 
 </details>
@@ -113,6 +103,8 @@ As defined by the project owner, the team is arranged as follows:
 
 # Glossary
 
+<br>
+
 | Term | Definition |
 |------|------------|
 | **Algorithm** | A clear set of steps or instructions designed to solve a specific problem or complete a task. Common examples include sorting methods and search procedures. |
@@ -143,34 +135,121 @@ As defined by the project owner, the team is arranged as follows:
 
 
 # Requirements
+
+<br>
+
 The requirements are the conditions that must be fulfilled to meet the school's objectives. These represent the core functionalities we need to implement before the deadline. Any additional features developed beyond these requirements will be considered a bonus and add extra value to our work.
 
-## Core Requirements
-| **Section**               | **Details**                                                                                 |
-|---------------------------|---------------------------------------------------------------------------------------------|
-| **Programming Language**  | The programming language that we must use is C++ to achieve optimal performance.            |
-| **REST API Specification**| The software will expose its functionality through a REST API that must run on an HTTP server (localhost). |
-| **Data Source**           | A document has been given by the customer. This file contains approximately 24 million nodes. This is the base of our software to develop the quickest path possible in this node. |
-| **C++ Source Code**            | The source code must include comments and clear documentation. The code must be of our own creation and use no libraries besides STL. This is necessary for the web server. |
-| **Time and Space Complexity**  | We must use Big O notation for the main algorithms.                                                                     |
-| **REST API Implementation**    | Our REST API must be compatible with multiple formats like XML and JSON.                                                |
-| **Test Suite**                 | We must test our code to validate correctness, performance, and compliance with the approximation rule of 10%.          |
-| **Data Validation Tool**       | We need a utility to check the integrity of the CSV file supplied.                                                      |
+<br>
+
+
+<table> 
+  <thead> 
+    <tr> 
+      <th>Category</th> 
+      <th>Details</th> 
+    </tr> 
+  </thead> 
+  <tbody> 
+    <tr> 
+      <td><strong>Programming Language</strong></td> 
+      <td>The project must be implemented in <strong>C++</strong> to achieve optimal performance.</td>
+    </tr> 
+    <tr> 
+      <td rowspan="4"><strong>REST API</strong></td>
+      <td>A REST API must be developed to expose the software's functionality via an HTTP server (localhost).</td>
+    </tr> 
+    <tr> 
+      <td><strong>Endpoint:</strong> A single GET request to calculate the quickest path.</td>
+    </tr> 
+    <tr> 
+      <td><strong>Input:</strong> Source and destination landmark IDs.</td>
+    </tr>
+    <tr> 
+      <td><strong>Output:</strong> Ordered list of landmarks in the path and total travel time. <br> <strong>Response Formats:</strong> Support both <strong>JSON</strong> and <strong>XML</strong>.</td>
+    </tr>
+    <tr>
+      <td><strong>Data Source</strong></td>
+      <td> The provided dataset (<code>USA-roads.csv</code>) contains ~24 million nodes. This serves as the foundation for computing paths.<br> <ul> <li><strong>Format:</strong> Each line represents a connection: <code>Landmark_A_ID, Landmark_B_ID, Time</code>.</li> <li>Connections are <strong>bidirectional</strong> even if not explicitly listed in the file.</li> </ul> </td>
+    </tr>
+    <tr>
+      <td><strong>Source Code</strong></td>
+      <td>The C++ source code must include <strong>comments</strong> and <strong>clear documentation</strong>. Only <strong>STL libraries</strong> and those required for the web server may be used.</td>
+    </tr>
+    <tr>
+      <td><strong>Algorithm Complexity</strong></td> 
+      <td>Use <strong>Big O notation</strong> to document the time and space complexity of key algorithms.</td>
+    </tr>
+    <tr> 
+      <td><strong>Test Suite</strong></td>
+      <td> A comprehensive test suite is required to validate: <ul> <li>Correctness of outputs.</li> <li>Compliance with the <strong>10% approximation rule</strong>.</li> <li>General performance goals.</li> </ul> </td>
+    </tr>
+    <tr> 
+      <td><strong>Data Validation Tool</strong></td> 
+      <td>A utility must verify the integrity of the dataset before use, ensuring its structure and validity.</td>
+    </tr>
+  </tbody>
+</table>
+
+
 ### Performance Goals
-| **Section**        | **Details**                                                                                                        |
-|-------------------------------|--------------------------------------------------------------------------------------------------------------------|
-| **Response Time**             | The API must handle all queries within 1 second on a typical laptop.                                               |
-| **Approximation Heuristics**  | To prioritize speed over precision, the solution may use heuristics. The returned path should not exceed the shortest path duration by more than 10%. |
-### Data Integrity Verification
-| **Section** | **Details**                                                                                                       |
-|----------------------------------|-------------------------------------------------------------------------------------------------------------------|
-| **Graph Validation**             | We need to verify that the file forms a Directed Acyclic Graph (DAG) and is free of loops.                        |
-| **Connectivity**                 | We need to ensure that the graph is fully connected, meaning it is possible to navigate between any two landmarks. |
-| **Programming Language**         | Another language besides C++ is acceptable if it is more convenient for these parts.                             |
+
+<table> 
+  <thead> 
+    <tr> 
+      <th>Category</th>
+      <th>Details</th> 
+    </tr> 
+  </thead> 
+  <tbody> 
+    <tr> 
+      <td><strong>Response Time</strong></td> 
+      <td>The API must respond to all queries within <strong>1 second</strong> on a typical laptop.</td> 
+    </tr> 
+    <tr> 
+      <td><strong>Accuracy</strong></td> 
+      <td> The algorithm may prioritize <strong>speed over precision</strong> by using heuristics. <br> <strong>Rule:</strong> The returned path should not exceed the shortest path duration by more than <strong>10%</strong>. 
+      </td>
+    </tr> 
+  </tbody> 
+</table>
+
+
+### Data Integrity Verification                           
+
+<table> 
+  <thead> 
+    <tr> 
+      <th>Category</th> 
+      <th>Details</th> 
+    </tr> 
+  </thead> 
+  <tbody> 
+    <tr> 
+      <td><strong>Graph Validation</strong></td> 
+      <td>Validate that the dataset forms a <strong>Directed Acyclic Graph (DAG)</strong> and is free of loops.</td> 
+    </tr> 
+    <tr> 
+      <td><strong>Connectivity Check</strong></td> 
+      <td>Ensure the graph is <strong>fully connected</strong>, allowing navigation between any two landmarks.</td>
+    </tr> 
+    <tr>
+      <td><strong>Programming Language Flexibility</strong></td> 
+      <td>A language other than C++ may be used for this validation, as performance is not critical in these tasks.</td> 
+    </tr>
+  </tbody> 
+</table>
+
 
 # Product
 
 # Description 
+
+This project involves developing a software solution in C++ to determine the quickest path between two landmarks in the United States, such as Los Angeles and New York. The goal is to design an algorithm capable of calculating the optimal route efficiently, ensuring results are delivered in under one second.
+
+Users simply provide the IDs of two landmarks as input, and the software calculates and returns the quickest path, including travel time and an ordered list of landmarks along the route. Unlike a GPS, this software does not track real-time location but focuses on providing pre-calculated routes between fixed landmarks.
+
+
 
 ## Input 
 
@@ -225,6 +304,113 @@ The XML and JSON file are two commonly used formats for structuring and exchangi
 --- 
 
 ## Personnas
+
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Picture</strong></th>
+      <th><strong>Attribute</strong></th>
+      <th><strong>Details</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="7">
+        <img src="https://t4.ftcdn.net/jpg/03/96/16/79/360_F_396167959_aAhZiGlJoeXOBHivMvaO0Aloxvhg3eVT.jpg" alt="Traveler Tom" width="350" height="250" style="object-fit: cover;" />
+      </td>
+      <td><strong>Name</strong></td>
+      <td>Tom Smith</td>
+    </tr>
+    <tr>
+      <td><strong>Age</strong></td>
+      <td>30 - 40</td>
+    </tr>
+    <tr>
+      <td><strong>Occupation</strong></td>
+      <td>Business Traveler</td>
+    </tr>
+    <tr>
+      <td><strong>Skills</strong></td>
+      <td>Basic tech skills, regularly uses navigation apps</td>
+    </tr>
+    <tr>
+      <td><strong>Usage Scenario</strong></td>
+      <td>Tom opens the app to calculate the quickest route between New York and Los Angeles, seeking the shortest travel time while avoiding delays. He can then report the results to his company to calculate kilometers traveled and receive a gas reimbursement.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Picture</strong></th>
+      <th><strong>Attribute</strong></th>
+      <th><strong>Details</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="7">
+        <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?cs=srgb&dl=pexels-danxavier-1239291.jpg&fm=jpg" alt="Traveler Sarah" width="400" height="250" style="object-fit: cover;"/>
+      </td>
+      <td><strong>Name</strong></td>
+      <td>Sarah Johnson</td>
+    </tr>
+    <tr>
+      <td><strong>Age</strong></td>
+      <td>25 - 35</td>
+    </tr>
+    <tr>
+      <td><strong>Occupation</strong></td>
+      <td>Delivery Planning Manager</td>
+    </tr>
+    <tr>
+      <td><strong>Skills</strong></td>
+      <td>Project management, logistics coordination, team leadership, data analysis</td>
+    </tr>
+    <tr>
+      <td><strong>Usage Scenario</strong></td>
+      <td>Sarah uses the app to plan the most efficient delivery routes for her team's drivers. She needs to calculate the fastest routes, avoid traffic, and ensure that deliveries are made on time. Additionally, Sarah tracks delivery times and distances for reporting to her logistics department and calculating transportation costs.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Picture</strong></th>
+      <th><strong>Attribute</strong></th>
+      <th><strong>Details</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="7">
+        <img src="https://t4.ftcdn.net/jpg/05/99/07/69/360_F_599076934_L4nJ7MWjLgvmLUUXD6Y5VSFvQEFPSv6c.jpg" alt="Vacation Planner Lucy" width="300" height="250" style="object-fit: cover;" />
+      </td>
+      <td><strong>Name</strong></td>
+      <td>Lucy Martinez</td>
+    </tr>
+    <tr>
+      <td><strong>Age</strong></td>
+      <td>60 - 80</td>
+    </tr>
+    <tr>
+      <td><strong>Occupation</strong></td>
+      <td>Retired</td>
+    </tr>
+    <tr>
+      <td><strong>Skills</strong></td>
+      <td>Researching destinations, budgeting, planning activities, travel booking</td>
+    </tr>
+    <tr>
+      <td><strong>Usage Scenario</strong></td>
+      <td>Lucy uses the app to plan her upcoming vacation. She is looking for the best path to her destination, avoiding long drives. She also needs to calculate trip costs, including transportation, to stay within her budget.</td>
+    </tr>
+  </tbody>
+</table>
+
 
 ## Use Cases
 
@@ -364,56 +550,6 @@ To kown more about it : [RGPD License](https://en.wikipedia.org/wiki/General_Dat
 | Organizational issues    | Delays            | Medium          | Hold weekly meetings to monitor progress.                                              |
 
 ---
-
-# Futur Improvement 
-
-
-## Precision 
-Expand dataset to include more landmarks and improve accuracy.
-
-## UI 
-Enhance the user interface for a better user experience.
-
-## Efficient 
-Integrate machine learning to improve heuristics.
-
----
-
-# Future Improvements
-
-## Precision
-
-Expanding the dataset to include additional landmarks and routes can significantly enhance the accuracy of the shortest path calculations. Incorporating real-time data, such as live traffic updates, could further improve the precision and relevance of the results. Furthermore, refining the graph representation to include more nuanced details like road conditions, speed limits, or weather impacts would provide a more comprehensive and precise calculation.
-
-## User Interface (UI)
-
-A modern, intuitive, and responsive user interface would drastically improve the user experience. Key enhancements could include:
-
-- Interactive Map Visualization: Displaying routes on a dynamic map with zoom and pan functionalities.
-- Customizable Settings: Allowing users to set preferences such as avoiding toll roads or prioritizing highways.
-- Mobile App Integration: Creating a seamless experience across devices, with native applications for smartphones and tablets.
-- Accessibility Features: Ensuring the UI is accessible to users with disabilities by adhering to WCAG standards.
-
-## Efficiency and Optimization
-
-Integrating machine learning techniques could optimize the heuristics used in the algorithm. Potential machine learning applications include:
-
-- Path Prediction: Training models to predict commonly traveled paths based on historical data.
-- Dynamic Routing: Adapting routes in real time based on evolving data such as traffic congestion or road closures.
-- Data Clustering: Using unsupervised learning to group similar nodes, reducing the complexity of the graph and improving computation speed.
-- Additionally, leveraging parallel computing or GPU acceleration could further enhance performance, enabling the software to handle larger datasets and more complex queries efficiently.
-
-## Additional Features
-
-Future improvements could also include features like:
-
-- Offline Mode: Allowing users to access the software without an active internet connection.
-- Multilingual Support: Providing the interface in multiple languages to cater to a global audience.
-- Integration with Other Services: Linking with external services like calendar apps for automated route planning based on schedules.
-
-These enhancements would not only improve the core functionality but also elevate the overall value of the software for diverse user needs.
-
-
 
 # Future Improvements
 
