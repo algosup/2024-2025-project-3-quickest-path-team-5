@@ -17,6 +17,7 @@ Here is a list of the different testing strategies that will put into place to e
 
 - Smoke Testing
 - Unit Tests
+- Feasture Testing
 
 ### Smoke Testing
 
@@ -53,9 +54,11 @@ GitHub Actions allow users to create / implement workflows to automate certain t
 
 A GitHub Action has been set up on pull requests on the main branch that:
 
-- Launch the software
-- Run the Units Tests
-(WIP)
+- Install the required programs to run the project
+- Checkout the codebase of the pull request
+- Clone the test framework
+- Build the project
+- Run the tests
 
 #### Self-Hosted Runner
 
@@ -77,7 +80,12 @@ The Template includes but is not limited to:
 - A label that specify the severity of the Issue among: High, Medium, Low and Critical
 - A detailed description of the issue and the expected behaviour and if necessary a step by step description on how to reproduce the issue
 
-## Test Cases
+## Feature Testing
+
+Feature Testing consist of testing the different features detailled in the Functional Specifications.
+These tests allow testing of all the functions of the software are working as intented as well as find and fix any edge cases.
+
+### Test Cases
 
 To mesure the advancement of the project we will document the different Tests done during the project as Test Cases (Click on the following link to access all the [Test Cases](/documents/QA/TestCases.md)).
 
@@ -91,3 +99,12 @@ All the Test Cases will be stored using the following format:
 | Severity | Critical |
 
 > The Severity labels mirrors [GitHub Issues](#github-issues) labels: High, Medium, Low and Critical
+
+### Test History
+
+To see the detailled Test History follow the link to the spreadsheet (WIP).
+
+The Test History will be presented as follows:
+
+| Date | ID | Expected | Result | Success? |
+| --- | --- | --- | --- | --- |

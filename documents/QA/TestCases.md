@@ -10,6 +10,10 @@ The purpose of this document is to regroup all of the different Test Cases creat
 | Medium | Important but not critical |
 | High | Critical, is to be tested ASAP |
 
+## History
+
+You can find the detailled history of our tests on the linked spreadsheet (WIP)
+
 ## Tests
 
 | Test ID | 01 |
