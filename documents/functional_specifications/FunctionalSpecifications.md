@@ -27,6 +27,9 @@
   - [Document Purpose](#document-purpose)
   - [Project Goal](#project-goal)
   - [Glossary](#glossary)
+- [New version](#new-version)
+  - [Glossary](#glossary-1)
+    - [Additional Terms](#additional-terms)
 - [Requirements](#requirements)
   - [Core Requirements](#core-requirements)
     - [Performance Goals](#performance-goals)
@@ -86,6 +89,31 @@ Frameworks: Flask, FastAPI, etc.
 
 Data Structures: Graph representation, adjacency lists.
 
+---
+
+# New version 
+
+## Glossary  
+| **Term**           | **Definition**                                                                                   |  
+|--------------------|--------------------------------------------------------------------------------------------------|  
+| **API**            | **Application Programming Interface**: APIs are a set of functions and procedures that allow for the creation of applications. |  
+| **REST**           | **Representational State Transfer**: A software architecture style, where communication is stateless and resources are accessible via standard HTTP methods like GET, POST, etc. |  
+| **Graph**          | A collection of nodes (landmarks) connected by edges (paths), used to represent relationships or routes. |  
+| **C++**            | High-performance **programming language**, a generic programming language for building software . |  
+| **Localhost**      | Refers to the computer running the software; typically used to test web servers or applications locally. |  
+| **Heuristics**     | **Problem-solving techniques** that prioritize speed over precision by using approximations. Commonly used to make algorithms faster. |  
+| **CSV**            | **Comma-Separated Values**: A file format where data is stored in a plain text file with values separated by commas. |  
+| **Algorithm**      | A step-by-step procedure or formula for solving a problem, such as finding the shortest path in a graph. |  
+| **Frameworks**     | **Prebuilt tools** or libraries, like Flask or FastAPI, that simplify application development. Not allowed for the REST API in this project. |  
+| **DAG**            | **Directed Acyclic Graph**: A graph with directed edges (one-way paths) and no cycles (no path loops back to its start). |  
+
+### Additional Terms
+| **Term**           | **Definition**                                                                                   |  
+|--------------------|--------------------------------------------------------------------------------------------------|  
+| **Shortest Path**  | The minimum travel time or cost between two nodes in a graph.                                     |  
+| **Data Structures**| Ways to organize and store data, such as adjacency lists, which are often used to represent graphs. |  
+
+
 --- 
 
 # Requirements 
@@ -94,33 +122,102 @@ The requirements are the conditions that must be fulfilled to meet the school's 
 
 ## Core Requirements
 
-| **Section**               | **Details**                                                                                 |
-|---------------------------|---------------------------------------------------------------------------------------------|
-| **Programming Language**  | The programming language that we must use is C++ to achieve optimal performance.            |
-| **REST API Specification**| The software will expose its functionality through a REST API that must run on an HTTP server (localhost). |
-| **Data Source**           | A document has been given by the customer. This file contains approximately 24 million nodes. This is the base of our software to develop the quickest path possible in this node. |
-| **C++ Source Code**            | The source code must include comments and clear documentation. The code must be of our own creation and use no libraries besides STL. This is necessary for the web server. |
-| **Time and Space Complexity**  | We must use Big O notation for the main algorithms.                                                                     |
-| **REST API Implementation**    | Our REST API must be compatible with multiple formats like XML and JSON.                                                |
-| **Test Suite**                 | We must test our code to validate correctness, performance, and compliance with the approximation rule of 10%.          |
-| **Data Validation Tool**       | We need a utility to check the integrity of the CSV file supplied.                                                      |
+<table> 
+  <thead> 
+    <tr> 
+      <th>Category</th> 
+      <th>Details</th> 
+    </tr> 
+  </thead> 
+  <tbody> 
+    <tr> 
+      <td><strong>Programming Language</strong></td> 
+      <td>The project must be implemented in <strong>C++</strong> to achieve optimal performance.</td>
+    </tr> 
+    <tr> 
+      <td rowspan="4"><strong>REST API</strong></td>
+      <td>A REST API must be developed to expose the software's functionality via an HTTP server (localhost).</td>
+    </tr> 
+    <tr> 
+      <td><strong>Endpoint:</strong> A single GET request to calculate the quickest path.</td>
+    </tr> 
+    <tr> 
+      <td><strong>Input:</strong> Source and destination landmark IDs.</td>
+    </tr>
+    <tr> 
+      <td><strong>Output:</strong> Ordered list of landmarks in the path and total travel time. <br> <strong>Response Formats:</strong> Support both <strong>JSON</strong> and <strong>XML</strong>.</td>
+    </tr>
+    <tr>
+      <td><strong>Data Source</strong></td>
+      <td> The provided dataset (<code>USA-roads.csv</code>) contains ~24 million nodes. This serves as the foundation for computing paths.<br> <ul> <li><strong>Format:</strong> Each line represents a connection: <code>Landmark_A_ID, Landmark_B_ID, Time</code>.</li> <li>Connections are <strong>bidirectional</strong> even if not explicitly listed in the file.</li> </ul> </td>
+    </tr>
+    <tr>
+      <td><strong>Source Code</strong></td>
+      <td>The C++ source code must include <strong>comments</strong> and <strong>clear documentation</strong>. Only <strong>STL libraries</strong> and those required for the web server may be used.</td>
+    </tr>
+    <tr>
+      <td><strong>Algorithm Complexity</strong></td> 
+      <td>Use <strong>Big O notation</strong> to document the time and space complexity of key algorithms.</td>
+    </tr>
+    <tr> 
+      <td><strong>Test Suite</strong></td>
+      <td> A comprehensive test suite is required to validate: <ul> <li>Correctness of outputs.</li> <li>Compliance with the <strong>10% approximation rule</strong>.</li> <li>General performance goals.</li> </ul> </td>
+    </tr>
+    <tr> 
+      <td><strong>Data Validation Tool</strong></td> 
+      <td>A utility must verify the integrity of the dataset before use, ensuring its structure and validity.</td>
+    </tr>
+  </tbody>
+</table>
 
 
 ### Performance Goals
 
-| **Section**        | **Details**                                                                                                        |
-|-------------------------------|--------------------------------------------------------------------------------------------------------------------|
-| **Response Time**             | The API must handle all queries within 1 second on a typical laptop.                                               |
-| **Approximation Heuristics**  | To prioritize speed over precision, the solution may use heuristics. The returned path should not exceed the shortest path duration by more than 10%. |
+<table> 
+  <thead> 
+    <tr> 
+      <th>Category</th>
+      <th>Details</th> 
+    </tr> 
+  </thead> 
+  <tbody> 
+    <tr> 
+      <td><strong>Response Time</strong></td> 
+      <td>The API must respond to all queries within <strong>1 second</strong> on a typical laptop.</td> 
+    </tr> 
+    <tr> 
+      <td><strong>Accuracy</strong></td> 
+      <td> The algorithm may prioritize <strong>speed over precision</strong> by using heuristics. <br> <strong>Rule:</strong> The returned path should not exceed the shortest path duration by more than <strong>10%</strong>. 
+      </td>
+    </tr> 
+  </tbody> 
+</table>
 
 
-### Data Integrity Verification
+### Data Integrity Verification                           
 
-| **Section** | **Details**                                                                                                       |
-|----------------------------------|-------------------------------------------------------------------------------------------------------------------|
-| **Graph Validation**             | We need to verify that the file forms a Directed Acyclic Graph (DAG) and is free of loops.                        |
-| **Connectivity**                 | We need to ensure that the graph is fully connected, meaning it is possible to navigate between any two landmarks. |
-| **Programming Language**         | Another language besides C++ is acceptable if it is more convenient for these parts.                             |
+<table> 
+  <thead> 
+    <tr> 
+      <th>Category</th> 
+      <th>Details</th> 
+    </tr> 
+  </thead> 
+  <tbody> 
+    <tr> 
+      <td><strong>Graph Validation</strong></td> 
+      <td>Validate that the dataset forms a <strong>Directed Acyclic Graph (DAG)</strong> and is free of loops.</td> 
+    </tr> 
+    <tr> 
+      <td><strong>Connectivity Check</strong></td> 
+      <td>Ensure the graph is <strong>fully connected</strong>, allowing navigation between any two landmarks.</td>
+    </tr> 
+    <tr>
+      <td><strong>Programming Language Flexibility</strong></td> 
+      <td>A language other than C++ may be used for this validation, as performance is not critical in these tasks.</td> 
+    </tr>
+  </tbody> 
+</table>
 
 
 ### Deliverables
@@ -138,6 +235,12 @@ For this project all the deadlines for the customer are February 7th 2025. But o
 ---
 
 # Description 
+
+This project involves developing a software solution in C++ to determine the quickest path between two landmarks in the United States, such as Los Angeles and New York. The goal is to design an algorithm capable of calculating the optimal route efficiently, ensuring results are delivered in under one second.
+
+Users simply provide the IDs of two landmarks as input, and the software calculates and returns the quickest path, including travel time and an ordered list of landmarks along the route. Unlike a GPS, this software does not track real-time location but focuses on providing pre-calculated routes between fixed landmarks.
+
+
 
 ## Interface 
 
