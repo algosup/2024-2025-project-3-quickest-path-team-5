@@ -25,19 +25,25 @@
   - [3. System Architecture](#3-system-architecture)
     - [3.1 Overview](#31-overview)
       - [3.1.1 Key Design Considerations](#311-key-design-considerations)
-    - [3.2 Flow Chart](#32-flow-chart)
-    - [3.3 Data Flow Diagram](#33-data-flow-diagram)
+    - [3.2 Pathfinding Algorithms](#32-pathfinding-algorithms)
+      - [3.2.1 Dijkstra's Algorithm](#321-dijkstras-algorithm)
+      - [3.2.2 A\* Algorithm](#322-a-algorithm)
+      - [3.2.3 Algorithm Selection Process](#323-algorithm-selection-process)
+      - [3.2.4 Integration](#324-integration)
+    - [3.3 Data Flow](#33-data-flow)
+      - [Explanation:](#explanation)
+    - [3.4 Flow Chart](#34-flow-chart)
+      - [Explanation:](#explanation-1)
   - [4. Detailed Design](#4-detailed-design)
-    - [4.1 User Interface Design](#41-user-interface-design)
-    - [4.2 Backend Design](#42-backend-design)
-      - [4.2.1. REST API Endpoint](#421-rest-api-endpoint)
-      - [4.2.2. Request Handling Layer](#422-request-handling-layer)
-      - [4.2.3. Pathfinding Engine](#423-pathfinding-engine)
-      - [4.2.4. Data Validation Tool Integration](#424-data-validation-tool-integration)
-      - [4.2.5. Security Layer](#425-security-layer)
-      - [4.2.6. Response Serialization](#426-response-serialization)
-      - [4.2.7. Scalability Design](#427-scalability-design)
-      - [4.2.8. Testing and Monitoring](#428-testing-and-monitoring)
+    - [4.1 Backend Design](#41-backend-design)
+      - [4.1.1. REST API Endpoint](#411-rest-api-endpoint)
+      - [4.1.2. Request Handling Layer](#412-request-handling-layer)
+      - [4.1.3. Pathfinding Engine](#413-pathfinding-engine)
+      - [4.1.4. Data Validation Tool Integration](#414-data-validation-tool-integration)
+      - [4.1.5. Security Layer](#415-security-layer)
+      - [4.1.6. Response Serialization](#416-response-serialization)
+      - [4.1.7. Scalability Design](#417-scalability-design)
+      - [4.1.8. Testing and Monitoring](#418-testing-and-monitoring)
     - [4.3 Data Structure](#43-data-structure)
       - [4.3.1 Graph Characteristics](#431-graph-characteristics)
       - [4.3.2 Graph Properties](#432-graph-properties)
@@ -180,8 +186,9 @@ You can find the full coding convention guidelines in the [Coding Conventions do
 - **Node and Connection Validation**  
   - The application will verify the integrity of the imported data, ensuring all nodes and connections are valid and consistent with the required format.  
 
-- **Export Corrected Data**  
-  - Users should be able to export corrected or validated data to a new CSV file for further use.  
+<!-- TODO: Modify depending of software engineers implemented algo -->
+- **Algorithm Complexity**  
+  - The data validation algorithm used for checks, such as graph validation and connectivity, will operate with a time complexity of **O(log n)** for most operations, ensuring efficient processing of large datasets.
 
 #### 2.1.2 REST API  
 
@@ -256,67 +263,143 @@ The system architecture is designed to ensure seamless functionality, high perfo
 - **Cross-Platform Support**: Desktop applications and the REST API are built to function seamlessly across Linux, Windows, and macOS.  
 - **Extensibility**: The system is designed to accommodate future enhancements, such as adding new endpoints, improving UI/UX, or integrating with external services.  
 
-<!-- TODO: Change the name and link of this section -->
-### 3.2 Flow Chart
+### 3.2 Pathfinding Algorithms 
 
-<!-- TODO: Add a flow chart -->
+To complete this project, we employ two robust algorithms, **Dijkstra's Algorithm** and **A\***, to balance fast runtime and accuracy in pathfinding.  
 
-### 3.3 Data Flow Diagram
+#### 3.2.1 Dijkstra's Algorithm  
+- **Purpose:**  
+  Finds the shortest path between two landmarks in a graph.  
+- **Advantages:**  
+  - Guarantees the shortest path.  
+  - Works well when all edge weights are non-negative.  
+- **Usage in the Project:**  
+  Dijkstra's algorithm is used for cases where simplicity and guaranteed accuracy are prioritized over speed.  
 
-<!-- TODO: [Insert Data Flow Diagram Here] -->
+#### 3.2.2 A\* Algorithm  
+- **Purpose:**  
+  An optimized version of Dijkstra's algorithm that uses a heuristic to prioritize nodes, reducing computation time.  
+- **Advantages:**  
+  - Faster than Dijkstra for large graphs.  
+  - Offers a good trade-off between speed and precision.  
+- **Usage in the Project:**  
+  A\* is used for most route calculations to ensure results are delivered within the project's strict performance constraints (e.g., under 1 second).  
+
+#### 3.2.3 Algorithm Selection Process  
+- **Why Two Algorithms?**  
+  - **Dijkstra's Algorithm:** Ensures correctness for critical paths requiring precision.  
+  - **A\* Algorithm:** Optimized for real-time performance, especially for large-scale graphs with millions of nodes.  
+- **Heuristic in A\*:**  
+  We use an admissible heuristic (e.g., Euclidean or Manhattan distance) to guide the search towards the target landmark while maintaining the 10% accuracy constraint.  
+
+#### 3.2.4 Integration  
+The system dynamically selects between Dijkstra and A\* based on the query complexity and time constraints. Both algorithms are implemented to handle the provided 24-million-node dataset efficiently.  
+
+### 3.3 Data Flow
+
+Below is a high-level representation of the data flow in the system using a Mermaid diagram:  
+
+```mermaid
+graph TD  
+    A[Client Request] -->|REST API Call| B[Backend Server]  
+    B -->|Validate Input| C[Input Validation Module]  
+    C -->|Fetch Data| D[Graph Data Loader]  
+    D -->|Process Shortest Path| E[Algorithm Selector]  
+    E -->|Run Algorithm| F{Dijkstra or A*}  
+    F -->|Compute Path| G[Path Result Generator]  
+    G -->|Format Response 'JSON or XML'| H[Response Formatter]  
+    H -->|Return Response| I[Client]  
+```
+
+#### Explanation:  
+1. **Client Request:** The user initiates a request through the REST API, specifying source and destination landmarks.  
+2. **Input Validation Module:** Ensures the request parameters are valid (e.g., valid IDs, non-empty input).  
+3. **Graph Data Loader:** Loads graph data from the dataset into memory for processing.  
+4. **Algorithm Selector:** Chooses between Dijkstra and A\* based on query requirements.  
+5. **Algorithm Execution:** Executes the selected algorithm to compute the shortest path.  
+6. **Path Result Generator:** Converts raw algorithm results into meaningful data.  
+7. **Response Formatter:** Formats the response in JSON or XML as requested by the client.  
+8. **Client Response:** Sends the formatted data back to the client.  
+
+### 3.4 Flow Chart
+
+Below is a flow chart that represents the overall process of handling a request in the system:
+
+```mermaid  
+graph TD  
+    A[Start] --> B[Receive Request from Client]  
+    B --> C[Validate Input Data]  
+    C --> D{Is Input Valid?}  
+    D -->|Yes| E[Load Graph Data]  
+    D -->|No| F[Return Error Response]  
+    E --> G[Select Algorithm 'Dijkstra / A*']  
+    G --> H[Run Algorithm]  
+    H --> I[Generate Path Result]  
+    I --> J[Format Response 'JSON / XML']  
+    J --> K[Send Response to Client]  
+    K --> L[End]  
+```
+
+#### Explanation:  
+1. **Receive Request:** The client sends a request with source and destination data.
+2. **Validate Input Data:** The system checks if the input data is valid (e.g., source and destination IDs).
+3. **Is Input Valid?**: A decision point to verify if the input data is valid. If it’s not, the system returns an error response.
+4. **Load Graph Data:** If the input is valid, the system loads the graph data to process the request.
+5. **Select Algorithm:** The algorithm is selected based on the input parameters (either Dijkstra or A*).
+6. **Run Algorithm:** The selected algorithm is executed to find the shortest path.
+7. **Generate Path Result:** The result of the algorithm is converted into a usable format.
+8. **Format Response:** The path result is formatted into JSON or XML for the client.
+9. **Send Response:** The formatted response is sent back to the client.
+10. **End:** The process ends after the response is sent.
 
 ## 4. Detailed Design
 
 <br>
 
-### 4.1 User Interface Design
-
-<!-- TODO: Have to decide if we do a UI -->
-
-### 4.2 Backend Design
+### 4.1 Backend Design
 
 The backend is structured to handle multiple requests efficiently and securely. Key components include:
 
-#### 4.2.1. REST API Endpoint
+#### 4.1.1. REST API Endpoint
 - **Purpose**: Provides access to the core functionality of the application through a single GET endpoint.  
 - **Input**: Accepts source and destination landmark IDs as query parameters.  
 - **Output**: Returns the travel time and the ordered list of landmarks in the shortest path in both `XML` and `JSON` formats.  
 - **Design**: Built using C++ for high performance, leveraging lightweight HTTP server libraries such as `Boost.Beast`, `cpp-httplib` or `Pistache`.
 
-#### 4.2.2. Request Handling Layer
+#### 4.1.2. Request Handling Layer
 - **Purpose**: Parses incoming requests, validates inputs, and routes them to the appropriate modules.  
 - **Error Handling**: Ensures that invalid or incomplete requests return descriptive error messages (e.g., `400 Bad Request`).  
 - **Concurrency**: Supports handling multiple requests simultaneously using threading or asynchronous techniques.
 
-#### 4.2.3. Pathfinding Engine
+#### 4.1.3. Pathfinding Engine
 - **Purpose**: Implements the core algorithm for finding the shortest path between two landmarks.  
 - **Algorithm**: Utilizes Dijkstra’s or A* algorithm for optimal performance with heuristics to meet the 10% approximation rule.  
 - **Data Loading**: Reads the graph data (from `USA-roads.csv`) into memory during initialization to optimize query response times.  
 - **Performance Goals**: Ensures responses within 1 second for typical requests.
 
-#### 4.2.4. Data Validation Tool Integration
+#### 4.1.4. Data Validation Tool Integration
 - **Purpose**: Verifies the integrity of the graph data before it is loaded into memory.  
 - **Functionality**: Ensures that the dataset forms a fully connected graph and is free of loops.  
 - **Implementation**: Operates as a pre-processing step, run infrequently but essential for ensuring data accuracy.
 
-#### 4.2.5. Security Layer
+#### 4.1.5. Security Layer
 - **Purpose**: Protects the REST API from unauthorized access.  
 - **Implementation**:  
   - API key-based authentication for identifying and authorizing clients.  
   - Input sanitization to prevent injection attacks.  
   - Rate limiting to mitigate DoS (Denial of Service) attacks.
 
-#### 4.2.6. Response Serialization
+#### 4.1.6. Response Serialization
 - **Purpose**: Converts the output of the pathfinding engine into the requested format (XML or JSON).  
 - **Design**: Utilizes lightweight serialization libraries to minimize overhead while maintaining compatibility with modern REST standards.
 
-#### 4.2.7. Scalability Design
+#### 4.1.7. Scalability Design
 - **Purpose**: Prepares the backend for increasing traffic and data loads.  
 - **Techniques**:  
   - Modular architecture to allow easy scaling of individual components.  
   - Potential integration with a load balancer for distributed deployments in production environments.
 
-#### 4.2.8. Testing and Monitoring
+#### 4.1.8. Testing and Monitoring
 - **Unit Testing**: Comprehensive test suite to validate the correctness of each backend component.  
 - **Performance Testing**: Ensures the API meets the 1-second response time requirement under normal conditions.  
 - **Logging and Monitoring**: Captures API usage and performance metrics to diagnose issues and optimize performance over time.
