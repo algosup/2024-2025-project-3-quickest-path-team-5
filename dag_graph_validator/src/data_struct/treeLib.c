@@ -63,7 +63,7 @@ void treeDestroy(TreeType *self)
   }
 }
 
-bool treeNodeSearch(const TreeNodeType *self, int value)
+bool treeNodeSearch(const TreeNodeType *self, unsigned long value)
 {
   if (self == NULL)
   {
@@ -80,12 +80,12 @@ bool treeNodeSearch(const TreeNodeType *self, int value)
   return true;
 }
 
-bool treeContains(const TreeType *self, int value)
+bool treeContains(const TreeType *self, unsigned long value)
 {
   return treeNodeSearch(self->root, value);
 }
 
-TreeNodeType *addNode(TreeNodeType *node, int value)
+TreeNodeType *addNode(TreeNodeType *node, unsigned long value)
 {
   if (node == NULL)
   {
@@ -105,7 +105,7 @@ TreeNodeType *addNode(TreeNodeType *node, int value)
   return node;
 }
 
-bool treeInsert(TreeType *self, int value)
+bool treeInsert(TreeType *self, unsigned long value)
 {
   if (treeContains(self, value))
     return false;
@@ -114,7 +114,7 @@ bool treeInsert(TreeType *self, int value)
   return true;
 }
 
-TreeNodeType *treeRemovePartial(TreeNodeType *node, int value)
+TreeNodeType *treeRemovePartial(TreeNodeType *node, unsigned long value)
 {
   if (node == NULL)
   {
@@ -133,7 +133,7 @@ TreeNodeType *treeRemovePartial(TreeNodeType *node, int value)
   return treeDestroyPartial(node);
 }
 
-bool treeRemove(TreeType *self, int value)
+bool treeRemove(TreeType *self, unsigned long value)
 {
   if ((treeEmpty(self)) || (!treeContains(self, value)))
   {

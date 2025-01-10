@@ -116,7 +116,7 @@ TEST(TreeInsertTest, AlreadyPresent)
 
 TEST(TreeInsertTest, ManyElements)
 {
-  static const int values[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
+  static const unsigned long  values[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
 
   TreeType t;
   treeCreate(&t);
@@ -163,7 +163,7 @@ TEST(TreeInsertTest, Stressed)
 
   for (size_t i = 0; i < BIG_SIZE; ++i)
   {
-    int value = std::rand();
+    unsigned long  value = std::rand();
 
     if (treeInsert(&t, value))
     {
@@ -216,12 +216,12 @@ TEST(TreeRemoveTest, ManyElements)
 
 TEST(TreeRemoveTest, NotPresentBefore)
 {
-  static const int origin[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
+  static const unsigned long  origin[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
 
   TreeType t;
   treeCreate(&t);
 
-  for (int val : origin)
+  for (unsigned long  val : origin)
   {
     treeInsert(&t, val);
   }
@@ -236,12 +236,12 @@ TEST(TreeRemoveTest, NotPresentBefore)
 
 TEST(TreeRemoveTest, NotPresentMiddle)
 {
-  static const int origin[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
+  static const unsigned long  origin[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
 
   TreeType t;
   treeCreate(&t);
 
-  for (int val : origin)
+  for (unsigned long  val : origin)
   {
     treeInsert(&t, val);
   }
@@ -256,12 +256,12 @@ TEST(TreeRemoveTest, NotPresentMiddle)
 
 TEST(TreeRemoveTest, NotPresentAfter)
 {
-  static const int origin[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
+  static const unsigned long  origin[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
 
   TreeType t;
   treeCreate(&t);
 
-  for (int val : origin)
+  for (unsigned long  val : origin)
   {
     treeInsert(&t, val);
   }
@@ -283,7 +283,7 @@ TEST(TreeRemoveTest, Stressed)
 
   for (size_t i = 0; i < BIG_SIZE; ++i)
   {
-    int value = rand();
+    unsigned long  value = rand();
     treeInsert(&t, value);
   }
 
@@ -294,7 +294,7 @@ TEST(TreeRemoveTest, Stressed)
 
   for (size_t i = 0; i < BIG_SIZE; ++i)
   {
-    int value = rand();
+    unsigned long  value = rand();
 
     bool present = treeContains(&t, value);
 
@@ -318,9 +318,9 @@ TEST(TreeRemoveTest, Stressed)
     \brief treeWalkInOrder
  */
 
-static void checkTree(int value, void *userData)
+static void checkTree(unsigned long value, void *userData)
 {
-  int *expected = static_cast<int *>(userData);
+  unsigned long *expected = static_cast<unsigned long *>(userData);
 
   ASSERT_TRUE(expected != NULL);
   EXPECT_EQ(*expected, value);
@@ -330,7 +330,7 @@ static void checkTree(int value, void *userData)
 
 TEST(TreeWalkInOrderTest, Ordered)
 {
-  static const int origin[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
+  static const unsigned long origin[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
 
   TreeType t;
   treeCreate(&t);
@@ -349,9 +349,9 @@ TEST(TreeWalkInOrderTest, Ordered)
   treeDestroy(&t);
 }
 
-static void checkOnce(int value, void *userData)
+static void checkOnce(unsigned long value, void *userData)
 {
-  int *count = static_cast<int *>(userData);
+  unsigned long  *count = static_cast<unsigned long *>(userData);
 
   ASSERT_TRUE(count != NULL);
   ASSERT_TRUE(2 <= value && value <= 18);
@@ -362,7 +362,7 @@ static void checkOnce(int value, void *userData)
 
 TEST(TreeWalkInOrderTest, Count)
 {
-  static const int origin[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
+  static const unsigned long  origin[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
 
   TreeType t;
   treeCreate(&t);
@@ -372,7 +372,7 @@ TEST(TreeWalkInOrderTest, Count)
     treeInsert(&t, origin[i]);
   }
 
-  int count[10];
+  unsigned long  count[10];
 
   std::memset(count, 0, sizeof count);
   treeWalkInOrder(&t, checkOnce, count);
@@ -393,7 +393,7 @@ TEST(TreeWalkInOrderTest, Count)
 
 TEST(TreeWalkPreOrderTest, Count)
 {
-  static const int origin[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
+  static const unsigned long origin[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
 
   TreeType t;
   treeCreate(&t);
@@ -403,7 +403,7 @@ TEST(TreeWalkPreOrderTest, Count)
     treeInsert(&t, origin[i]);
   }
 
-  int count[10];
+  unsigned long count[10];
 
   std::memset(count, 0, sizeof count);
   treeWalkPreOrder(&t, checkOnce, count);
@@ -424,7 +424,7 @@ TEST(TreeWalkPreOrderTest, Count)
 
 TEST(TreeWalkPostOrderTest, Count)
 {
-  static const int origin[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
+  static const unsigned long origin[] = {16, 2, 8, 4, 10, 18, 6, 12, 14};
 
   TreeType t;
   treeCreate(&t);
@@ -434,7 +434,7 @@ TEST(TreeWalkPostOrderTest, Count)
     treeInsert(&t, origin[i]);
   }
 
-  int count[10];
+  unsigned long count[10];
 
   std::memset(count, 0, sizeof count);
   treeWalkPostOrder(&t, checkOnce, count);

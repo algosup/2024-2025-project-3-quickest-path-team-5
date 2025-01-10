@@ -1,5 +1,12 @@
 #include "csv_reader.h"
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+
+#define CHUNCK_SIZE 64
+
 bool checkFileExists(const char *filename)
 {
     FILE *file = fopen(filename, "r");
@@ -11,28 +18,18 @@ bool checkFileExists(const char *filename)
     return false;
 }
 
-GraphType readFormatCSV(const char *filename)
-{
-    GraphType graph;
+LineType readFileLine(FILE *file){
+    LineType line;
+    char chunck[CHUNCK_SIZE];
+    char* token;
 
-    FILE *file = fopen(filename, "r");
-    if (file)
-    {
-        char line[256];
-        while (fgets(line, sizeof(line), file))
-        {
-            unsigned long id, destId, distance;
-            sscanf(line, "%lu,%lu,%lu", &id, &destId, &distance);
-            if (id > graph.num_nodes)
-            {
-                graph.num_nodes = id;
-            }
-            if (destId > graph.num_nodes)
-            {
-                graph.num_nodes = destId;
-            }
-        }
-        fclose(file);
-    }
-    return graph;
+    fgets(chunck, CHUNCK_SIZE, file);
+
+    token = strtok(chunck, ",");
+    line.id = token;
+    token = strtok(NULL, ",");
+    line.destId = token;
+    token = strtok(NULL, ",");
+    line.distance = strtoul(token, NULL, 10);
+    return line;
 }
