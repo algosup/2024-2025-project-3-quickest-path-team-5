@@ -317,7 +317,7 @@ The XML and JSON file are two commonly used formats for structuring and exchangi
   <tbody>
     <tr>
       <td rowspan="7">
-        <img src="https://t4.ftcdn.net/jpg/03/96/16/79/360_F_396167959_aAhZiGlJoeXOBHivMvaO0Aloxvhg3eVT.jpg" alt="Traveler Tom" width="350" height="250" style="object-fit: cover;" />
+        <img src="https://t4.ftcdn.net/jpg/03/96/16/79/360_F_396167959_aAhZiGlJoeXOBHivMvaO0Aloxvhg3eVT.jpg" alt="Traveler Tom" width="1000" height="200" style="object-fit: cover;" />
       </td>
       <td><strong>Name</strong></td>
       <td>Tom Smith</td>
@@ -352,7 +352,7 @@ The XML and JSON file are two commonly used formats for structuring and exchangi
   <tbody>
     <tr>
       <td rowspan="7">
-        <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?cs=srgb&dl=pexels-danxavier-1239291.jpg&fm=jpg" alt="Traveler Sarah" width="400" height="250" style="object-fit: cover;"/>
+        <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?cs=srgb&dl=pexels-danxavier-1239291.jpg&fm=jpg" alt="Traveler Sarah" width="1000" height="250" style="object-fit: cover;"/>
       </td>
       <td><strong>Name</strong></td>
       <td>Sarah Johnson</td>
@@ -387,7 +387,7 @@ The XML and JSON file are two commonly used formats for structuring and exchangi
   <tbody>
     <tr>
       <td rowspan="7">
-        <img src="https://t4.ftcdn.net/jpg/05/99/07/69/360_F_599076934_L4nJ7MWjLgvmLUUXD6Y5VSFvQEFPSv6c.jpg" alt="Vacation Planner Lucy" width="300" height="250" style="object-fit: cover;" />
+        <img src="https://t4.ftcdn.net/jpg/05/99/07/69/360_F_599076934_L4nJ7MWjLgvmLUUXD6Y5VSFvQEFPSv6c.jpg" alt="Vacation Planner Lucy" width="1000" height="250" style="object-fit: cover;" />
       </td>
       <td><strong>Name</strong></td>
       <td>Lucy Martinez</td>
