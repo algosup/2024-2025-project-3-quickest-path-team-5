@@ -45,13 +45,21 @@ It allows us to write and execute a series of unit tests.
 
 #### GitHub Actions
 
-GitHub Actions allow users to create / implement workflows to automate certain tasks when certain conditions are fulfilled.
+GitHub Actions allow users to create / implement workflows to automate certain tasks when certain conditions are fulfilled, the workflow is composed of 3 parts:
+
+- it's name
+- the activation condition
+- jobs or tasks that the workflow runs
 
 A GitHub Action has been set up on pull requests on the main branch that:
 
 - Launch the software
 - Run the Units Tests
 (WIP)
+
+#### Self-Hosted Runner
+
+A runner is an application that runs jobs from GitHub Actions, we chose to use a Self-Hosted Runner instead of a GitHub Hosted Runner in order to have the control of the hardware, operating system, and software tools.
 
 #### GitHub Issues
 
