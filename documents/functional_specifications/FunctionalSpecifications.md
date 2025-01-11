@@ -14,7 +14,7 @@
 
 ---
 
-### *Last Update on January 10th, 2025*
+### *Last Update on January 11th, 2025*
 
 
 <details>
@@ -22,39 +22,37 @@
 <summary>Table of Contents</summary>
 
 - [**Functional Specifications - 2024-2025-project-3-quickest-path-team-5**](#functional-specifications---2024-2025-project-3-quickest-path-team-5)
-    - [*Last Update on January 10th, 2025*](#last-update-on-january-10th-2025)
+    - [*Last Update on January 11th, 2025*](#last-update-on-january-11th-2025)
 - [Introduction](#introduction)
   - [Document Purpose](#document-purpose)
   - [Project Goal](#project-goal)
   - [Project Rules](#project-rules)
 - [Glossary](#glossary)
 - [Requirements](#requirements)
-    - [Performance Goals](#performance-goals)
-    - [Data Integrity Verification](#data-integrity-verification)
+  - [Performance Goals](#performance-goals)
+  - [Data Integrity Verification](#data-integrity-verification)
+  - [Deliverables](#deliverables)
 - [Product](#product)
 - [Description](#description)
+  - [REST API](#rest-api)
+  - [Data Checker](#data-checker)
+  - [STL](#stl)
   - [Input](#input)
   - [Output](#output)
   - [Algorithm](#algorithm)
   - [Compatibility](#compatibility)
-  - [Interface](#interface)
-    - [Mandatory features](#mandatory-features)
-    - [Optional features](#optional-features)
   - [Acceptance Criteria](#acceptance-criteria)
   - [Personnas](#personnas)
   - [Use Cases](#use-cases)
-    - [Deliverables](#deliverables)
 - [Functional Requirements](#functional-requirements)
 - [Description](#description-1)
   - [Input](#input-1)
   - [Output](#output-1)
   - [Algorithm](#algorithm-1)
   - [Compatibility](#compatibility-1)
-  - [Interface](#interface-1)
+  - [Interface](#interface)
     - [Features](#features)
   - [Acceptance Criteria](#acceptance-criteria-1)
-  - [Personnas](#personnas-1)
-  - [Use Cases](#use-cases-1)
 - [Non-Functional Requirements](#non-functional-requirements)
   - [Costs](#costs)
   - [User Side](#user-side)
@@ -93,7 +91,7 @@ As defined by the project owner, the team is arranged as follows:
 
 | Role               | Description                                                                                     |
 |--------------------|-------------------------------------------------------------------------------------------------|
-| **Project Manager**  | Responsible for organization, planning, and budgeting.<br>Keeps the team motivated.            |
+| **Project Manager**  | Responsible for organization, planning, and budgeting.<br>Keeps the team motivated.           |
 | **Program Manager**  | Ensures the project meets expectations.<br>In charge of design.<br>Writes the Functional Specifications. |
 | **Tech Lead**        | Makes technical decisions for the project.<br>Translates Functional Specifications into Technical Specifications.<br>Performs code reviews. |
 | **Software Engineer**| Writes code.<br>Creates documentation.<br>Participates in technical design.                   |
@@ -192,7 +190,7 @@ The requirements are the conditions that must be fulfilled to meet the school's 
 </table>
 
 
-### Performance Goals
+## Performance Goals
 
 <table> 
   <thead> 
@@ -215,7 +213,7 @@ The requirements are the conditions that must be fulfilled to meet the school's 
 </table>
 
 
-### Data Integrity Verification                           
+## Data Integrity Verification                           
 
 <table> 
   <thead> 
@@ -240,6 +238,20 @@ The requirements are the conditions that must be fulfilled to meet the school's 
   </tbody> 
 </table>
 
+## Deliverables
+
+For this project all the deadlines for the customer are February 7th 2025. But our Project Manager decided to impose his own deadlines. 
+
+| Name | Deadline | Link |
+| --  | -- | -- |
+| Functional Specifications Document  | 20/01/2025 | [functionalSpecifications.md](needs to be updated) |
+| Technical Specifications Document  | 27/01/2024 | [technicalSpecifications.md](needs to be updated) |
+| Code | 07/01/2025  | [code](needs to be updated) |
+| Test Plan | 07/01/2025 | [qualityAssurance/Test-Plan.md](needs to be updated) | 
+| User Manual | 07/01/2025 | [User-Manual](needs to be updated) | 
+
+
+---
 
 # Product
 
@@ -249,7 +261,11 @@ This project involves developing a software solution in C++ to determine the qui
 
 Users simply provide the IDs of two landmarks as input, and the software calculates and returns the quickest path, including travel time and an ordered list of landmarks along the route. Unlike a GPS, this software does not track real-time location but focuses on providing pre-calculated routes between fixed landmarks.
 
+## REST API 
 
+## Data Checker
+
+## STL
 
 ## Input 
 
@@ -278,18 +294,6 @@ We plan to use the C++ algorithm for its optimal performance in terms of speed a
 ## Compatibility
 
 The XML and JSON file are two commonly used formats for structuring and exchanging data, each with its own advantages and disadvantages. Here's a comparison of the two formats.
-
-
-
-
-## Interface 
-
-
-### Mandatory features
-
-
-### Optional features
-
 
 
 ## Acceptance Criteria
@@ -420,18 +424,6 @@ The XML and JSON file are two commonly used formats for structuring and exchangi
 | Logistics Company    | Plan a route for multiple vehicles              | An optimized schedule per vehicle.        |
 
 
-### Deliverables
-
-For this project all the deadlines for the customer are February 7th 2025. But our Project Manager decided to impose his own deadlines. 
-
-| Name | Deadline | Link |
-| --  | -- | -- |
-| Functional Specifications Document  | 20/01/2025 | [functionalSpecifications.md](needs to be updated) |
-| Technical Specifications Document  | 27/01/2024 | [technicalSpecifications.md](needs to be updated) |
-| Code | 07/01/2025  | [code](needs to be updated) |
-| Test Plan | 07/01/2025 | [qualityAssurance/Test-Plan.md](needs to be updated) | 
-| User Manual | 07/01/2025 | [User-Manual](needs to be updated) | 
-
 ---
 
 # Functional Requirements
@@ -484,17 +476,6 @@ The XML and JSON file are two commonly used formats for structuring and exchangi
 | Response time           | The API must respond in less than 1 second for all requests.       |
 | Result accuracy         | The calculated path should not exceed a 10% approximation.         |
 | Robustness              | The API must continue to function under simultaneous requests.     |
-
-
-
-## Personnas
-
-## Use Cases
-
-| **User**             | **Action**                                      | **Expected Result**                       |
-|----------------------|-------------------------------------------------|-------------------------------------------|
-| Individual Customer  | Find the shortest path between two cities       | A list of steps with estimated time.      |
-| Logistics Company    | Plan a route for multiple vehicles              | An optimized schedule per vehicle.        |
 
 
 --- 
