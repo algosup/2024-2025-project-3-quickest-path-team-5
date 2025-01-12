@@ -34,12 +34,18 @@
   - [Deliverables](#deliverables)
 - [Product](#product)
 - [Description](#description)
-  - [REST API](#rest-api)
+  - [REST APIs](#rest-apis)
+    - [Communication Between Different Systems](#communication-between-different-systems)
+    - [Core Operations](#core-operations)
+    - [Client-Server Independence](#client-server-independence)
+    - [Statelessness](#statelessness)
+    - [Resource Access](#resource-access)
+    - [Easy Integration](#easy-integration)
+    - [Scalable Architecture](#scalable-architecture)
   - [Data Checker](#data-checker)
   - [STL](#stl)
   - [Input](#input)
   - [Output](#output)
-  - [Algorithm](#algorithm)
   - [Compatibility](#compatibility)
   - [Acceptance Criteria](#acceptance-criteria)
   - [Personnas](#personnas)
@@ -48,7 +54,7 @@
 - [Description](#description-1)
   - [Input](#input-1)
   - [Output](#output-1)
-  - [Algorithm](#algorithm-1)
+  - [Algorithm](#algorithm)
   - [Compatibility](#compatibility-1)
   - [Interface](#interface)
     - [Features](#features)
@@ -261,11 +267,51 @@ This project involves developing a software solution in C++ to determine the qui
 
 Users simply provide the IDs of two landmarks as input, and the software calculates and returns the quickest path, including travel time and an ordered list of landmarks along the route. Unlike a GPS, this software does not track real-time location but focuses on providing pre-calculated routes between fixed landmarks.
 
-## REST API 
+## REST APIs
+
+A REST API enables data exchange between different systems using HTTP protocol. This approach, based on REST principles, has become widespread due to its simplicity and effectiveness.
+
+### Communication Between Different Systems
+
+REST APIs bridge various technologies. For instance, a JavaScript web app can easily communicate with a Python backend and SQL database.
+
+### Core Operations
+
+REST APIs leverage standard HTTP methods:
+
+- GET to read data
+- POST to create
+- PUT to update
+- DELETE to remove
+
+### Client-Server Independence
+
+The client (browser, mobile app...) and server can evolve separately, as long as they follow the API conventions.
+
+### Statelessness
+
+Each request contains everything needed for processing. No need to remember previous requests, which greatly simplifies things.
+
+### Resource Access
+
+REST APIs provide access to data and functionality without diving into source code.
+
+### Easy Integration
+
+With standard formats like JSON or XML, connecting a REST API to other services becomes straightforward.
+
+### Scalable Architecture
+
+REST APIs scale easily thanks to their clean architecture and smart use of HTTP protocol.
+This streamlined approach makes REST APIs the backbone of modern web development, enabling robust and flexible system interactions while maintaining simplicity in implementation.
 
 ## Data Checker
 
+The goal is to ensure that each node is linked at least to another node, meaning that there is no node that is "alone or lost". It deserves to verify the integrity of data to be sure that we can have a solution for nodes. After this we can is the REST APi to classify data.
+
 ## STL
+
+STL is a powerful collection of C++ template classes and functions that provide programming fundamentals like data structures, algorithms, and iterators. It's a core part of the C++ Standard Library that makes programming easier and more efficient.
 
 ## Input 
 
@@ -283,13 +329,6 @@ The third information is the time, this is an important data to the algorithm, e
 ## Output 
 
 The result of our algorithm should be the ordered list of landmarks on the path and the travel time for each of them.
-
-## Algorithm
-
-We plan to use the C++ algorithm for its optimal performance in terms of speed and accuracy.
-
-...............
-
 
 ## Compatibility
 
