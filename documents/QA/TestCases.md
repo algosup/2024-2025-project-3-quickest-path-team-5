@@ -50,27 +50,27 @@ Test Template
 | Test ID | 03 |
 | --- | --- |
 | Description | Test response time with small test path |
-| Steps |  |
+| Steps | 1. Prepare a stopwatch <br> 2. Enter the small test path and start the stopwatch when starting the program <br> 3. Stop the stopwatch when the program stops |
 | Expected Result | Less than a second |
 | Severity | Medium |
 
 | Test ID | 04 |
 | --- | --- |
 | Description | Test response time with large test path |
-| Steps |  |
+| Steps |1. Prepare a stopwatch <br> 2. Enter the large test path and start the stopwatch when starting the program <br> 3. Stop the stopwatch when the program stops  |
 | Expected Result | Less than a second |
 | Severity | Medium |
 
 | Test ID | 05 |
 | --- | --- |
 | Description | Test path exist |
-| Steps | 1. Generate a path using two random numbers <br> Compare the result with the csv file |
+| Steps | 1. Generate a path using two random numbers <br> Follow the path in the CSV file and compare with the result |
 | Expected Result | The path exist |
 | Severity | Medium |
 
 | Test ID | 06 |
 | --- | --- |
 | Description | Test time is correct |
-| Steps | 1. Use the path from 05 <br> Compare the result with the csv file |
+| Steps | 1. Use the path from 05 <br> Follow the path in the CSV file and compare with the result |
 | Expected Result | The time is correct |
 | Severity | Medium |
