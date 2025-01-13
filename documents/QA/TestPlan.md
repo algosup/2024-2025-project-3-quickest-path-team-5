@@ -7,6 +7,8 @@ The purpose of this document is to define and account the different testing stra
 See the Functional Specifications for a detailed account of the project's functionalities.
 See the Technical Specifications for a detailed account of the project's technical aspect.
 
+---
+
 ## Testing
 
 Tests assert the different functionalities of a project as well as the quality of the software. They provide feedback on the state and quality of the software, and can be used to measure the advancement of a project.
@@ -31,6 +33,37 @@ The Smoke Testing strategy will be used to verify that:
 ### Unit Tests
 
 Unit Tests are blocks of code that verifies the accuracy of a smaller, isolated block of application code, typically a function or method. These tests are written by the Software Engineers and are run regularly. In our case they are run automatically every time we are merging on the main branch
+
+### Feature Testing
+
+Feature Testing consist of testing the different features detailled in the Functional Specifications.
+These tests allow testing of all the functions of the software are working as intented as well as find and fix any edge cases.
+
+#### Test Cases
+
+To mesure the advancement of the project we will document the different Tests done during the project as Test Cases (Click on the following link to access all the [Test Cases](/documents/QA/TestCases.md)). Those tests are executed on the app.
+
+All the Test Cases will be stored using the following format:
+
+| Test ID | ID |
+| --- | --- |
+| Description | Goal of the test |
+| Steps | Series of step to execute |
+| Expected Result | The correct behavior |
+| Severity | Importance of the Test |
+
+> The Severity labels mirrors [GitHub Issues](#github-issues) labels: High, Medium, Low and Critical
+
+#### Test History
+
+To see the detailled Test History follow the link to the [spreadsheet](https://docs.google.com/spreadsheets/d/1JB1lV4f822tu6zhfQbtrtQGsYIInJZw8AnJMDjYGYeo/edit?gid=0#gid=0).
+
+The Test History will be presented as follows:
+
+| Date | ID | Expected | Result | Success? |
+| --- | --- | --- | --- | --- |
+
+---
 
 ## External Tools
 
@@ -80,31 +113,4 @@ The Template includes but is not limited to:
 - A label that specify the severity of the Issue among: High, Medium, Low and Critical
 - A detailed description of the issue and the expected behaviour and if necessary a step by step description on how to reproduce the issue
 
-## Feature Testing
-
-Feature Testing consist of testing the different features detailled in the Functional Specifications.
-These tests allow testing of all the functions of the software are working as intented as well as find and fix any edge cases.
-
-### Test Cases
-
-To mesure the advancement of the project we will document the different Tests done during the project as Test Cases (Click on the following link to access all the [Test Cases](/documents/QA/TestCases.md)). Those tests are executed on the app.
-
-All the Test Cases will be stored using the following format:
-
-| Test ID | ID |
-| --- | --- |
-| Description | Goal of the test |
-| Steps | Series of step to execute |
-| Expected Result | The correct behavior |
-| Severity | Importance of the Test |
-
-> The Severity labels mirrors [GitHub Issues](#github-issues) labels: High, Medium, Low and Critical
-
-### Test History
-
-To see the detailled Test History follow the link to the [spreadsheet](https://docs.google.com/spreadsheets/d/1JB1lV4f822tu6zhfQbtrtQGsYIInJZw8AnJMDjYGYeo/edit?gid=0#gid=0).
-
-The Test History will be presented as follows:
-
-| Date | ID | Expected | Result | Success? |
-| --- | --- | --- | --- | --- |
+---

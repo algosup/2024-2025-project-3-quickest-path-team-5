@@ -43,7 +43,7 @@ Test Template
 | Description | Test a complex path |
 | Steps | 1. For the first Landmark enter: **22,320,316** <br> For the second Landmark enter: **4,890,697** |
 | Expected Result | insert picture |
-| Severity | High |
+| Severity | Medium |
 
 > The path 22,320,316 to 4,890,697 we be referenced enceforth as *large test path*
 
@@ -66,11 +66,11 @@ Test Template
 | Description | Test path exist |
 | Steps | 1. Generate a path using two random numbers <br> Compare the result with the csv file |
 | Expected Result | The path exist |
-| Severity | High |
+| Severity | Medium |
 
 | Test ID | 06 |
 | --- | --- |
 | Description | Test time is correct |
 | Steps | 1. Use the path from 05 <br> Compare the result with the csv file |
 | Expected Result | The time is correct |
-| Severity | High |
+| Severity | Medium |
