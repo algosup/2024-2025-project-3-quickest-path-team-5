@@ -4,8 +4,8 @@
 
 The purpose of this document is to define and account the different testing strategies that will be employed throughout the project, as well as a link to the result of those strategies.
 
-See the Functional Specifications for a detailed account of the project's functionalities.
-See the Technical Specifications for a detailed account of the project's technical aspect.
+See the Functional Specifications for a detailed account of the project's functionalities. (insert link)
+See the Technical Specifications for a detailed account of the project's technical aspect. (insert link)
 
 ---
 
@@ -112,6 +112,19 @@ The Template includes but is not limited to:
 - An assigned person responsible for fixing the Issue
 - A label that specify the severity of the Issue among: High, Medium, Low and Critical
 - A detailed description of the issue and the expected behaviour and if necessary a step by step description on how to reproduce the issue
+
+##### GitHub Issues Labels
+
+Here are the different labels used to specify the type of Issue:
+
+- bug
+- documentation
+- duplicate
+- enhancement
+- good first issue
+- help wanted
+- invalid
+- question
 
 ---
 
