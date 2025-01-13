@@ -14,7 +14,7 @@
 
 ---
 
-### *Last Update on January 11th, 2025*
+### *Last Update on January 13th, 2025*
 
 
 <details>
@@ -22,7 +22,7 @@
 <summary>Table of Contents</summary>
 
 - [**Functional Specifications - 2024-2025-project-3-quickest-path-team-5**](#functional-specifications---2024-2025-project-3-quickest-path-team-5)
-    - [*Last Update on January 11th, 2025*](#last-update-on-january-11th-2025)
+    - [*Last Update on January 13th, 2025*](#last-update-on-january-13th-2025)
 - [Introduction](#introduction)
   - [Document Purpose](#document-purpose)
   - [Project Goal](#project-goal)
@@ -32,8 +32,8 @@
   - [Performance Goals](#performance-goals)
   - [Data Integrity Verification](#data-integrity-verification)
   - [Deliverables](#deliverables)
-- [Product](#product)
-- [Description](#description)
+- [Functional Requirements](#functional-requirements)
+  - [Description](#description)
   - [REST APIs](#rest-apis)
     - [Communication Between Different Systems](#communication-between-different-systems)
     - [Core Operations](#core-operations)
@@ -44,25 +44,20 @@
     - [Scalable Architecture](#scalable-architecture)
   - [Data Checker](#data-checker)
   - [STL](#stl)
-  - [Input](#input)
-  - [Output](#output)
-  - [Compatibility](#compatibility)
-  - [Acceptance Criteria](#acceptance-criteria)
-  - [Personnas](#personnas)
-  - [Use Cases](#use-cases)
-- [Functional Requirements](#functional-requirements)
-- [Description](#description-1)
-  - [Input](#input-1)
-  - [Output](#output-1)
   - [Algorithm](#algorithm)
-  - [Compatibility](#compatibility-1)
+    - [Input](#input)
+  - [Output](#output)
+  - [Graph](#graph)
+  - [Compatibility](#compatibility)
   - [Interface](#interface)
-    - [Features](#features)
-  - [Acceptance Criteria](#acceptance-criteria-1)
+  - [Acceptance Criteria](#acceptance-criteria)
 - [Non-Functional Requirements](#non-functional-requirements)
   - [Costs](#costs)
   - [User Side](#user-side)
   - [Maintainability](#maintainability)
+- [Context](#context)
+  - [Personnas](#personnas)
+  - [Use Cases](#use-cases)
 - [Risk](#risk)
   - [Competitive Landscape](#competitive-landscape)
   - [Product problem](#product-problem)
@@ -89,7 +84,7 @@ The aim of this document is to describe in detail the functionalities and expect
 
 ## Project Goal 
 
-The aim of the project is to create an high-performance software solution that calculates the quickest path between two landmarks in the United States. 
+The aim of the project is to create a high-performance software solution that calculates the quickest path between two landmarks in the United States. 
 
 ## Project Rules 
 
@@ -98,7 +93,7 @@ As defined by the project owner, the team is arranged as follows:
 | Role               | Description                                                                                     |
 |--------------------|-------------------------------------------------------------------------------------------------|
 | **Project Manager**  | Responsible for organization, planning, and budgeting.<br>Keeps the team motivated.           |
-| **Program Manager**  | Ensures the project meets expectations.<br>In charge of design.<br>Writes the Functional Specifications. |
+| **Program Manager**  | Ensures the project meets expectations.<br> In charge of design. <br> Writes the Functional Specifications. |
 | **Tech Lead**        | Makes technical decisions for the project.<br>Translates Functional Specifications into Technical Specifications.<br>Performs code reviews. |
 | **Software Engineer**| Writes code.<br>Creates documentation.<br>Participates in technical design.                   |
 | **Quality Assurance**| Tests all functionalities to identify bugs and issues.<br>Documents bugs and issues.<br>Writes the test plan.<br>Verifies fixes are implemented correctly. |
@@ -259,9 +254,9 @@ For this project all the deadlines for the customer are February 7th 2025. But o
 
 ---
 
-# Product
+# Functional Requirements
 
-# Description 
+## Description
 
 This project involves developing a software solution in C++ to determine the quickest path between two landmarks in the United States, such as Los Angeles and New York. The goal is to design an algorithm capable of calculating the optimal route efficiently, ensuring results are delivered in under one second.
 
@@ -313,7 +308,10 @@ The goal is to ensure that each node is linked at least to another node, meaning
 
 STL is a powerful collection of C++ template classes and functions that provide programming fundamentals like data structures, algorithms, and iterators. It's a core part of the C++ Standard Library that makes programming easier and more efficient.
 
-## Input 
+
+## Algorithm
+
+### Input 
 
 The Client sent us a list of landmarks, tesource and the destination in a CSV file. This one represent 24 million nodes. 
 
@@ -322,7 +320,7 @@ This file is the input of our algorithm. The goal is to classify all this data t
 The CSV file looks like this : 
 
 ![alt text](/documents/functional_specifications/images/CSV_USA.png)
-
+![alt text](/Representation_system)
 
 The third information is the time, this is an important data to the algorithm, essential to find the quickest path.
 
@@ -330,9 +328,32 @@ The third information is the time, this is an important data to the algorithm, e
 
 The result of our algorithm should be the ordered list of landmarks on the path and the travel time for each of them.
 
+
+## Graph
+
+We can represent the CSV file as a graph in mathematics. There are nodes, which represent landmarks, edges, which are the connections between nodes, and weights, which represent the distances between the nodes.
+
+Here an example of a graph in mathematics : 
+
+<br>
+
+<img src="https://imgs.search.brave.com/ZFe7uZ2kdFa_0_6VMQVId4dmkqiexWxnulfp402f_Hk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vd3d3Lm1l/dGhvZGVtYXRocy5m/ci9ncmFwaGVfZGlq/a3N0cmEyLmpwZz93/PTQ3NCZzc2w9MQ" width="600" height="300"> 
+
+
 ## Compatibility
 
 The XML and JSON file are two commonly used formats for structuring and exchanging data, each with its own advantages and disadvantages. Here's a comparison of the two formats.
+
+## Interface 
+
+
+The goal of this project isn't to create a wonderful interface; it's optional. Your interface is very basic. On the first page, you can choose your two landmarks.
+
+After this, you only need to submit. On another page, you get the result: a simple design displaying the time needed to move between these two landmarks.
+
+
+NEED TO BE UPDATE, AND ADD IMAGES
+
 
 
 ## Acceptance Criteria
@@ -345,6 +366,29 @@ The XML and JSON file are two commonly used formats for structuring and exchangi
 
 
 --- 
+
+# Non-Functional Requirements
+
+## Costs
+
+| Product | Price | Link |
+| --  | -- | -- |
+|   |  | |
+|   |  | |
+|   |  | |
+
+
+## User Side
+ - Accessible via smartphones, tablets, and desktops.
+ - Requires an internet connection.
+
+## Maintainability
+ - Clearly commented and documented code.
+ - Comprehensive testing and version control.
+
+---
+
+# Context
 
 ## Personnas
 
@@ -463,81 +507,8 @@ The XML and JSON file are two commonly used formats for structuring and exchangi
 | Logistics Company    | Plan a route for multiple vehicles              | An optimized schedule per vehicle.        |
 
 
+
 ---
-
-# Functional Requirements
-
-# Description 
-
-## Input 
-
-The Client sent us a list of landmarks, tesource and the destination in a CSV file. This one represent 24 million nodes. 
-
-This file is the input of our algorithm. The goal is to classify all this data to finaly find the quickest path.  
-
-The CSV file looks like this : 
-
-![alt text](/documents/functional_specifications/images/CSV_USA.png)
-
-
-The third information is the time, this is an important data to the algorithm, essential to find the quickest path.
-
-## Output 
-
-The result of our algorithm should be the ordered list of landmarks on the path and the travel time for each of them.
-
-## Algorithm
-
-We plan to use the C++ algorithm for its optimal performance in terms of speed and accuracy.
-
-...............
-
-
-## Compatibility
-
-The XML and JSON file are two commonly used formats for structuring and exchanging data, each with its own advantages and disadvantages. Here's a comparison of the two formats.
-
-
-
-
-## Interface 
-
-
-### Features
-
-
-
-
-## Acceptance Criteria
-
-| **Criterion**           | **Description**                                                    |
-|-------------------------|--------------------------------------------------------------------|
-| Response time           | The API must respond in less than 1 second for all requests.       |
-| Result accuracy         | The calculated path should not exceed a 10% approximation.         |
-| Robustness              | The API must continue to function under simultaneous requests.     |
-
-
---- 
-
-# Non-Functional Requirements
-
-## Costs
-
-| Product | Price | Link |
-| --  | -- | -- |
-|   |  | |
-|   |  | |
-|   |  | |
-
-## User Side
- - Accessible via smartphones, tablets, and desktops.
- - Requires an internet connection.
-
-## Maintainability
- - Clearly commented and documented code.
- - Comprehensive testing and version control.
-
---- 
 
 # Risk
 
@@ -558,6 +529,7 @@ In any project, no issue should ever be taken lightly, as even seemingly minor p
 Compliance with the General Data Protection Regulation (GDPR) is crucial in developing software that interacts with users, ensuring personal data protection and privacy. By adhering to these standards, developers not only ensure legal compliance but also build user trust. The GDPR requires transparent data collection, storage, and processing practices, giving users control over their personal information, which is essential for the acceptance of digital technologies.
 
 To kown more about it : [RGPD License](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation)
+
 
 
 
