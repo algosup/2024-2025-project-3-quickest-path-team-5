@@ -25,8 +25,8 @@ Smoke Testing or Build Verification Testing or Confidence Testing, is a software
 
 The Smoke Testing strategy will be used to verify that:
 
-- the software launches successfully without errors / crashes
-- the software output a set of instruction to go from a point A to a point B
+- The software launches successfully without errors / crashes
+- The software output a set of instruction to go from a point A to a point B
 
 ### Unit Tests
 
@@ -48,9 +48,9 @@ It allows us to write and execute a series of unit tests.
 
 GitHub Actions allow users to create / implement workflows to automate certain tasks when certain conditions are fulfilled, the workflow is composed of 3 parts:
 
-- it's name
-- the activation condition
-- jobs or tasks that the workflow runs
+- It's name
+- The activation condition
+- Jobs or tasks that the workflow runs
 
 A GitHub Action has been set up on pull requests on the main branch that:
 
@@ -87,16 +87,16 @@ These tests allow testing of all the functions of the software are working as in
 
 ### Test Cases
 
-To mesure the advancement of the project we will document the different Tests done during the project as Test Cases (Click on the following link to access all the [Test Cases](/documents/QA/TestCases.md)). Tests starts on the app
+To mesure the advancement of the project we will document the different Tests done during the project as Test Cases (Click on the following link to access all the [Test Cases](/documents/QA/TestCases.md)). Those tests are executed on the app.
 
 All the Test Cases will be stored using the following format:
 
-| Test ID | 01 |
+| Test ID | ID |
 | --- | --- |
-| Description |  |
-| Steps | |
-| Expected Result | |
-| Severity | Critical |
+| Description | Goal of the test |
+| Steps | Series of step to execute |
+| Expected Result | The correct behavior |
+| Severity | Importance of the Test |
 
 > The Severity labels mirrors [GitHub Issues](#github-issues) labels: High, Medium, Low and Critical
 
