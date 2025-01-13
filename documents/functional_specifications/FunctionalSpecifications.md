@@ -45,6 +45,9 @@
   - [Data Checker](#data-checker)
   - [STL](#stl)
   - [Algorithm](#algorithm)
+  - [Heuristic](#heuristic)
+    - [Advantages:](#advantages)
+    - [Disadvantages:](#disadvantages)
     - [Input](#input)
   - [Output](#output)
   - [Graph](#graph)
@@ -68,6 +71,7 @@
   - [User Interface (UI)](#user-interface-ui)
   - [Efficiency and Optimization](#efficiency-and-optimization)
   - [Additional Features](#additional-features)
+- [Conclusion](#conclusion)
 
 
 </details>
@@ -110,6 +114,7 @@ As defined by the project owner, the team is arranged as follows:
 | **API** | Application Programming Interface - A set of rules and tools that allow different software applications to communicate with each other. Think of it as a waiter taking orders between the kitchen (server) and customers (clients). |
 | **Approximation** | A practical approach to finding a good-enough answer when exact solutions are too complex or time-consuming. Often used in real-world engineering and scientific calculations. |
 | **Big O Notation** | A mathematical way to describe how an algorithm's performance changes as its input size grows. Written like O(n) or O(n²), it helps developers choose the right algorithm for their needs. |
+| **Heuristics** | Heuristics are problem-solving techniques or shortcuts that help find quick, approximate solutions instead of perfect ones. They're often used when time or resources are limited, like guessing a route on a map by following major roads. | 
 | **C++** | A powerful programming language that builds upon C, offering both high-level and low-level programming features. Popular in game development, system software, and performance-critical applications. |
 | **CSV** | Comma-Separated Values - A simple file format that stores tabular data as plain text, with values separated by commas. Widely used for data exchange between spreadsheets and databases. |
 | **DAG** | Directed Acyclic Graph - A graph structure where connections flow in one direction and never form loops. Essential in task scheduling, build systems, and data processing pipelines. |
@@ -129,6 +134,10 @@ As defined by the project owner, the team is arranged as follows:
 | **Test Plan** | A detailed document mapping out how software will be tested, including what to test, when to test, and how to test it. |
 | **UI** | User Interface - All the elements users see and interact with in a software application, from buttons to menus. |
 | **XML** | Extensible Markup Language - A versatile way to structure data using custom tags, often used in configuration files and data exchange. |
+
+
+
+**SQL Database** 
 
 --- 
 
@@ -245,11 +254,13 @@ For this project all the deadlines for the customer are February 7th 2025. But o
 
 | Name | Deadline | Link |
 | --  | -- | -- |
-| Functional Specifications Document  | 20/01/2025 | [functionalSpecifications.md](needs to be updated) |
-| Technical Specifications Document  | 27/01/2024 | [technicalSpecifications.md](needs to be updated) |
+| Functional Specifications Document  | 20/01/2025 | [functionalSpecifications.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/functional_specifications/FunctionalSpecifications.md) |
+| Technical Specifications Document  | 27/01/2024 | [technicalSpecifications.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/technical_specifications/TechnicalSpecifications.md) |
 | Code | 07/01/2025  | [code](needs to be updated) |
 | Test Plan | 07/01/2025 | [qualityAssurance/Test-Plan.md](needs to be updated) | 
 | User Manual | 07/01/2025 | [User-Manual](needs to be updated) | 
+
+
 
 
 ---
@@ -310,6 +321,23 @@ STL is a powerful collection of C++ template classes and functions that provide 
 
 
 ## Algorithm
+
+## Heuristic 
+
+To prioritize speed over precision, we will use heuristics. 
+
+In pathfinding, a heuristic function estimates the cost to reach the goal from a given node. For instance, the straight-line distance (Euclidean distance) between two points is often used as a heuristic.
+
+### Advantages:
+
+- Reduces computation time.
+- Makes decision-making feasible in large or complex spaces.
+- Often provides "good enough" solutions for practical purposes.
+
+### Disadvantages:
+
+- Does not guarantee the optimal solution.
+- May lead to errors or biases (e.g., in human reasoning or non-optimal algorithm performance).
 
 ### Input 
 
@@ -373,16 +401,18 @@ NEED TO BE UPDATE, AND ADD IMAGES
 
 | Product | Price | Link |
 | --  | -- | -- |
-|   |  | |
+|  Design  | 0 | Made by us |
 |   |  | |
 |   |  | |
 
 
 ## User Side
+
  - Accessible via smartphones, tablets, and desktops.
  - Requires an internet connection.
 
 ## Maintainability
+
  - Clearly commented and documented code.
  - Comprehensive testing and version control.
 
@@ -576,3 +606,9 @@ Beyond the core improvements, we're also developing:
 - Smart integration with your calendar and other apps you use daily
 
 We believe these changes will make a real difference in how people use our software, whether they're daily commuters or occasional travelers.
+
+--- 
+
+# Conclusion
+
+""
