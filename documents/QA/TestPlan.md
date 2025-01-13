@@ -114,3 +114,37 @@ The Template includes but is not limited to:
 - A detailed description of the issue and the expected behaviour and if necessary a step by step description on how to reproduce the issue
 
 ---
+
+## Test Criteria
+
+Test Criteria are crucial to guarentee that the end product is up to the requirement of the client. And also ensure that the testing phase goes as smoothly as possible.
+
+### Entry Criteria
+
+Entry Criteria define conditions under which the testing phadse may start, these criteria assure that the software is ready to be tested before the testing phase can begin.
+
+This project's Entry Criterias:
+
+- The version of the software that is tested passed all the Unit Tests
+- The Development team is aware that a test phase is starting
+
+### Suspension Criteria
+
+Suspension Criteria define conditions under which the testing phase may be suspended to avoid working on a failling software.
+
+This project's Suspension Criterias:
+
+- When multiple High Severity Test Cases are not passing due to bugs the test phase will be suspended, and the developement team as well as the QA team will work together to fix those bugs.
+
+- When multiple testing ressources such as testing environments, tools, or staff become unavailable for an extended period, testing may be suspended; testing will resume when said ressources are available once again.
+
+### Exit Criteria
+
+Exit Criteria define conditions under which the testing phase may end
+
+This project's Exit Criterias:
+
+- A major part of the Test executed passes
+- All of the High Severity Test Cases passes
+- All the Issues have been documented
+- All the documents got reviewed
