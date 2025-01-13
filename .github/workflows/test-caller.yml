@@ -9,7 +9,7 @@ jobs:
     system_requirements:
         runs-on: self-hosted, linux, x64
         steps:
-            - name: Update system
+            - name: Instal software requirements
               run: |  
                     echo "Installing software requirements"
                     sudo apt-get update
@@ -31,10 +31,13 @@ jobs:
               run: |
                     echo "Getting Google Test"
                     git clone https://github.com/google/googletest.git
+            - name: Update software requirements
+              run: |
+                    sudo apt-get update && sudo apt-get install -y cmake clang make
             - name: Build
               run: |
                         echo "Building the project"
-                        cmake -S . -B Build -G "MinGW Makefiles"
+                        cmake -S . -B Build
                         cd Build
                         make
                         cd ..
