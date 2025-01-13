@@ -12,13 +12,13 @@ The purpose of this document is to regroup all of the different Test Cases creat
 
 ## History
 
-You can find the detailled history of our tests on the linked spreadsheet (WIP)
+You can find the detailled history of our tests on the [linked spreadsheet](https://docs.google.com/spreadsheets/d/1JB1lV4f822tu6zhfQbtrtQGsYIInJZw8AnJMDjYGYeo/edit?gid=0#gid=0).
 
 ## Tests
 
 | Test ID | 01 |
 | --- | --- |
-| Description | Compile the Software |
-| Steps | 1. Enter a terminal <br> 2. type ``cmake -S . -B Build -G "MinGW Makefiles"`` <br> 3. Press Enter|
-| Expected Result | |
+| Description | Test a simple travel |
+| Steps | 1. For the first Landmark enter: 1 <br> 2. For the second Landmark enter: 28 |
+| Expected Result |  |
 | Severity | High |

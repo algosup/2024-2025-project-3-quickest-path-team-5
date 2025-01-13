@@ -87,14 +87,14 @@ These tests allow testing of all the functions of the software are working as in
 
 ### Test Cases
 
-To mesure the advancement of the project we will document the different Tests done during the project as Test Cases (Click on the following link to access all the [Test Cases](/documents/QA/TestCases.md)).
+To mesure the advancement of the project we will document the different Tests done during the project as Test Cases (Click on the following link to access all the [Test Cases](/documents/QA/TestCases.md)). Tests starts on the app
 
 All the Test Cases will be stored using the following format:
 
 | Test ID | 01 |
 | --- | --- |
-| Description | Compiling the Software |
-| Steps | 1. Enter a terminal <br> 2. type ``cmake -S . -B Build -G "MinGW Makefiles"`` <br> 3. Press Enter|
+| Description |  |
+| Steps | |
 | Expected Result | |
 | Severity | Critical |
 
@@ -102,7 +102,7 @@ All the Test Cases will be stored using the following format:
 
 ### Test History
 
-To see the detailled Test History follow the link to the spreadsheet (WIP).
+To see the detailled Test History follow the link to the [spreadsheet](https://docs.google.com/spreadsheets/d/1JB1lV4f822tu6zhfQbtrtQGsYIInJZw8AnJMDjYGYeo/edit?gid=0#gid=0).
 
 The Test History will be presented as follows:
 
