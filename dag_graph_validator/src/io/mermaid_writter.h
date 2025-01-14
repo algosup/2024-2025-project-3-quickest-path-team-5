@@ -6,6 +6,7 @@
 
 #pragma once
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
 
@@ -22,7 +23,7 @@ extern "C"
     \param distance The distance between the two points
     \return True if the file was written, false otherwise
 */
-bool writeMermaidNode(const char *filename, char* point1, char* point2, unsigned long distance);
+bool writeMermaidNode(const char *filename, const char *point1, const char *point2, uint32_t distance) ;
 
 #ifdef __cplusplus
 }

@@ -1,3 +1,9 @@
+/*!
+    \file csv_reader.c
+    \brief The header file for the CSV reader
+    \authors CHARLES Rémy, CARON Maxime
+*/
+
 #include "csv_reader.h"
 
 #include <stdlib.h>
@@ -18,18 +24,21 @@ bool checkFileExists(const char *filename)
     return false;
 }
 
-LineType readFileLine(FILE *file){
-    LineType line;
+bool readFileLine(FILE *file , LineType *line){
     char chunck[CHUNCK_SIZE];
     char* token;
 
     fgets(chunck, CHUNCK_SIZE, file);
+    if (feof(file))
+    {
+        return false;
+    }
 
     token = strtok(chunck, ",");
-    line.id = token;
+    line->id = token;
     token = strtok(NULL, ",");
-    line.destId = token;
+    line->destId = token;
     token = strtok(NULL, ",");
-    line.distance = strtoul(token, NULL, 10);
-    return line;
+    line->distance = strtoul(token, NULL, 10);
+    return true;
 }

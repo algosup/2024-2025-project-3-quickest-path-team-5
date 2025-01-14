@@ -6,66 +6,55 @@
 
 #include "graphLib.h"
 
+#include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
 
-void graphCreate(GraphType *self)
-{
+void graphCreate(GraphType *self) {
     self->num_nodes = 0;
     self->nodes = NULL;
+    self->node_lookup = NULL;
+    self->is_directed = false;
+    self->is_weighted = false;
+    self->max_degree = 0;
 }
 
-void graphDestroyPartial(NodeType *node)
-{
-    for (size_t i = 0; i < node->num_links; ++i)
-    {
-        graphDestroyPartial(node->links[i].node);
+void graphDestroy(GraphType *self) {
+    for (size_t i = 0; i < self->num_nodes; ++i) {
+        free(self->nodes[i]->parents);
+        free(self->nodes[i]->childs);
+        free(self->nodes[i]);
     }
-    free(node->links);
-    free(node);
-    return;
+    free(self->nodes);
+    free(self->node_lookup);
+    self->num_nodes = 0;
+    self->nodes = NULL;
+    self->node_lookup = NULL;
 }
 
-void graphDestroy(GraphType *self)
-{
-    for (size_t i = 0; i < self->num_nodes; ++i)
-    {
-        graphDestroyPartial(self->nodes[i]);
-    }
-    return;
+bool graphEmpty(const GraphType *self) {
+    return self->num_nodes == 0;
 }
 
-bool graphEmpty(const GraphType *self)
-{
-    return (self->num_nodes == 0);
-}
-
-size_t graphSize(const GraphType *self)
-{
+size_t graphSize(const GraphType *self) {
     return self->num_nodes;
 }
 
-bool graphContains(const GraphType *self, unsigned long id)
-{
-    for (size_t i = 0; i < self->num_nodes; ++i)
-    {
-        if (self->nodes[i]->id == id)
-        {
+bool graphContains(const GraphType *self, uint32_t id) {
+    for (size_t i = 0; i < self->num_nodes; ++i) {
+        if (self->nodes[i]->id == id) {
             return true;
         }
     }
     return false;
 }
 
-bool linkExist(GraphType *self, unsigned long id1, unsigned long id2)
-{
-    for (size_t i = 0; i < self->num_nodes; ++i)
-    {
-        if (self->nodes[i]->id == id1)
-        {
-            for (size_t j = 0; j < self->nodes[i]->num_links; ++j)
-            {
-                if (self->nodes[i]->links[j].node->id == id2)
-                {
+bool linkExist(GraphType *self, uint32_t id1, uint32_t id2) {
+    for (size_t i = 0; i < self->num_nodes; ++i) {
+        if (self->nodes[i]->id == id1) {
+            for (size_t j = 0; j < self->nodes[i]->num_links; ++j) {
+                if (self->nodes[i]->childs[j].node->id == id2) {
                     return true;
                 }
             }
@@ -74,110 +63,121 @@ bool linkExist(GraphType *self, unsigned long id1, unsigned long id2)
     return false;
 }
 
-bool graphCreateNode(GraphType *self, unsigned long id)
-{
-    // Check if node already exists
-    if (graphContains(self, id))
-    {
+bool graphCreateNode(GraphType *self, uint32_t id) {
+    if (graphContains(self, id)) {
         return false;
     }
-    // add node tt slef->nodes
-    NodeType *node = (NodeType *)malloc(sizeof(NodeType));
-    node->id = id;
-    node->num_links = 0;
-    node->links = NULL;
+
+    NodeType *new_node = (NodeType *)malloc(sizeof(NodeType));
+    if (!new_node) {
+        return false;
+    }
+
+    new_node->id = id;
+    new_node->num_links = 0;
+    new_node->parents = NULL;
+    new_node->childs = NULL;
+    new_node->visited = false;
+    new_node->discovery_time = 0;
+    new_node->finish_time = 0;
+
+    self->nodes = (NodeType **)realloc(self->nodes, (self->num_nodes + 1) * sizeof(NodeType *));
+    self->node_lookup = (NodeType **)realloc(self->node_lookup, (self->num_nodes + 1) * sizeof(NodeType *));
+
+    if (!self->nodes || !self->node_lookup) {
+        free(new_node);
+        return false;
+    }
+
+    self->nodes[self->num_nodes] = new_node;
+    self->node_lookup[self->num_nodes] = new_node;
     self->num_nodes++;
-    self->nodes = (NodeType **)realloc(self->nodes, self->num_nodes * sizeof(NodeType *));
-    self->nodes[self->num_nodes - 1] = node;
+
     return true;
 }
 
-bool createLink(GraphType *self, unsigned long parentId, unsigned long id, unsigned long distance)
-{
-    // check if link already exists
-    if (linkExist(self, parentId, id))
-    {
-        return false;
-    }
-
+bool createLink(GraphType *self, uint32_t parentId, uint32_t id, uint32_t distance) {
     NodeType *parent = NULL;
     NodeType *child = NULL;
-    // check if parent node exists
-    for (size_t i = 0; i < self->num_nodes; ++i)
-    {
-        if (self->nodes[i]->id == id)
-        {
-            child = self->nodes[i];
-        }
-        if (self->nodes[i]->id == parentId)
-        {
+
+    for (size_t i = 0; i < self->num_nodes; ++i) {
+        if (self->nodes[i]->id == parentId) {
             parent = self->nodes[i];
         }
+        if (self->nodes[i]->id == id) {
+            child = self->nodes[i];
+        }
     }
-    if (!parent || !child)
-    {
+
+    if (!parent || !child) {
         return false;
     }
 
-    // add link to parent
+    parent->childs = (LinkType *)realloc(parent->childs, (parent->num_links + 1) * sizeof(LinkType));
+    if (!parent->childs) {
+        return false;
+    }
+
+    parent->childs[parent->num_links].node = child;
+    parent->childs[parent->num_links].distance = distance;
     parent->num_links++;
-    parent->links = (LinkType *)realloc(parent->links, parent->num_links * sizeof(LinkType));
-    parent->links[parent->num_links - 1].node = child;
-    parent->links[parent->num_links - 1].distance = distance;
+
+    if (!self->is_directed) {
+        child->parents = (LinkType *)realloc(child->parents, (child->num_links + 1) * sizeof(LinkType));
+        if (!child->parents) {
+            return false;
+        }
+
+        child->parents[child->num_links].node = parent;
+        child->parents[child->num_links].distance = distance;
+        child->num_links++;
+    }
+
     return true;
 }
 
-bool graphRemoveNode(GraphType *self, unsigned long id)
-{
-    // check if node exists
-    if (!graphContains(self, id))
-    {
-        return false;
-    }
+bool graphRemoveNode(GraphType *self, uint32_t id) {
+    for (size_t i = 0; i < self->num_nodes; ++i) {
+        if (self->nodes[i]->id == id) {
+            free(self->nodes[i]->parents);
+            free(self->nodes[i]->childs);
+            free(self->nodes[i]);
 
-    NodeType *node = NULL;
-    // find node
-    for (size_t i = 0; i < self->num_nodes; ++i)
-    {
-        if (self->nodes[i]->id == id)
-        {
-            node = self->nodes[i];
-        }
-    }
-
-    if (!node)
-    {
-        return false;
-    }
-
-    // remove links
-    for (size_t i = 0; i < self->num_nodes; ++i)
-    {
-        for (size_t j = 0; j < self->nodes[i]->num_links; ++j)
-        {
-            if (self->nodes[i]->links[j].node->id == id)
-            {
-                for (size_t k = j; k < self->nodes[i]->num_links - 1; ++k)
-                {
-                    self->nodes[i]->links[k] = self->nodes[i]->links[k + 1];
-                }
-                self->nodes[i]->num_links--;
-                self->nodes[i]->links = realloc(self->nodes[i]->links, self->nodes[i]->num_links * sizeof(LinkType));
-            }
-        }
-    }
-
-    // remove node
-    for (size_t i = 0; i < self->num_nodes; ++i)
-    {
-        if (self->nodes[i]->id == id)
-        {
-            for (size_t j = i; j < self->num_nodes - 1; ++j)
-            {
+            for (size_t j = i; j < self->num_nodes - 1; ++j) {
                 self->nodes[j] = self->nodes[j + 1];
             }
+
             self->num_nodes--;
-            self->nodes = realloc(self->nodes, self->num_nodes * sizeof(NodeType *));
+            self->nodes = (NodeType **)realloc(self->nodes, self->num_nodes * sizeof(NodeType *));
+            self->node_lookup = (NodeType **)realloc(self->node_lookup, self->num_nodes * sizeof(NodeType *));
+
+            return true;
+        }
+    }
+    return false;
+}
+
+bool removeLink(GraphType *self, uint32_t parentId, uint32_t id) {
+    NodeType *parent = NULL;
+
+    for (size_t i = 0; i < self->num_nodes; ++i) {
+        if (self->nodes[i]->id == parentId) {
+            parent = self->nodes[i];
+            break;
+        }
+    }
+
+    if (!parent) {
+        return false;
+    }
+
+    for (size_t i = 0; i < parent->num_links; ++i) {
+        if (parent->childs[i].node->id == id) {
+            for (size_t j = i; j < parent->num_links - 1; ++j) {
+                parent->childs[j] = parent->childs[j + 1];
+            }
+            parent->num_links--;
+            parent->childs = (LinkType *)realloc(parent->childs, parent->num_links * sizeof(LinkType));
             return true;
         }
     }
@@ -185,44 +185,72 @@ bool graphRemoveNode(GraphType *self, unsigned long id)
     return false;
 }
 
-bool removeLink(GraphType *self, unsigned long parentId, unsigned long id)
-{
-    // check if link exists
-    if (!linkExist(self, parentId, id))
-    {
-        return false;
-    }
-    NodeType *parent = NULL;
-    NodeType *child = NULL;
-    // find parent and child
-    for (size_t i = 0; i < self->num_nodes; ++i)
-    {
-        if (self->nodes[i]->id == id)
-        {
-            child = self->nodes[i];
-        }
-        if (self->nodes[i]->id == parentId)
-        {
-            parent = self->nodes[i];
-        }
-    }
-    if (!parent || !child)
-    {
-        return false;
-    }
-    // remove link
-    for (size_t i = 0; i < parent->num_links; ++i)
-    {
-        if (parent->links[i].node->id == id)
-        {
-            for (size_t j = i; j < parent->num_links - 1; ++j)
-            {
-                parent->links[j] = parent->links[j + 1];
+
+bool dfsCheckLoop(NodeType *node, bool *visited, bool *recStack) {
+    if (!visited[node->id]) {
+        visited[node->id] = true;
+        recStack[node->id] = true;
+
+        for (size_t i = 0; i < node->num_links; ++i) {
+            NodeType *child = node->childs[i].node;
+            if (!visited[child->id] && dfsCheckLoop(child, visited, recStack)) {
+                return true;
+            } else if (recStack[child->id]) {
+                return true;
             }
-            parent->num_links--;
-            parent->links = realloc(parent->links, parent->num_links * sizeof(LinkType));
+        }
+    }
+    recStack[node->id] = false;
+    return false;
+}
+
+bool hasLoop(GraphType *graph) {
+    bool *visited = calloc(graph->num_nodes, sizeof(bool));
+    bool *recStack = calloc(graph->num_nodes, sizeof(bool));
+    if (visited == NULL || recStack == NULL) {
+        free(visited);
+        free(recStack);
+        return false; // Memory allocation failure
+    }
+
+    for (size_t i = 0; i < graph->num_nodes; ++i) {
+        if (!visited[i] && dfsCheckLoop(graph->nodes[i], visited, recStack)) {
+            free(visited);
+            free(recStack);
             return true;
         }
     }
+
+    free(visited);
+    free(recStack);
     return false;
+}
+
+void dfsReachable(NodeType *node, bool *visited) {
+    visited[node->id] = true;
+    for (size_t i = 0; i < node->num_links; ++i) {
+        NodeType *child = node->childs[i].node;
+        if (!visited[child->id]) {
+            dfsReachable(child, visited);
+        }
+    }
+}
+
+bool areAllNodesReachable(GraphType *graph) {
+    bool *visited = calloc(graph->num_nodes, sizeof(bool));
+    if (visited == NULL) {
+        return false;
+    }
+
+    dfsReachable(graph->nodes[0], visited);
+
+    for (size_t i = 0; i < graph->num_nodes; ++i) {
+        if (!visited[i]) {
+            free(visited);
+            return false;
+        }
+    }
+
+    free(visited);
+    return true;
 }

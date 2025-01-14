@@ -32,9 +32,10 @@ bool checkFileExists(const char *filename);
 /*!
     \brief Read a CSV file and return a list of lineType struct
     \param file the file to read
-    \return A lineType struct
+    \param line the line to read
+    \return A boolean indicating if the line was read
 */
-LineType readFileLine(FILE *file);
+bool readFileLine(FILE *file , LineType *line);
 
 #ifdef __cplusplus
 }

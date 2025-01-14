@@ -22,7 +22,6 @@ project(
 find_package(Threads REQUIRED)
 
 add_executable(tests
-  src/data_struct/treeLib.c
   src/data_struct/graphLib.c
   test/test.cc
   ../googletest/googletest/src/gtest-all.cc
@@ -57,7 +56,6 @@ add_executable(dgv
     src/dgv.c
     src/io/csv_reader.c
     src/io/mermaid_writer.c
-    src/data_struct/treeLib.c
     src/data_struct/graphLib.c
 )
 

@@ -7,6 +7,7 @@
 #pragma once
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
 
@@ -17,7 +18,7 @@
 typedef struct Link
 {
     struct Node *node;
-    unsigned long distance;
+    uint32_t distance;
 } LinkType;
 
 /*!
@@ -26,9 +27,12 @@ typedef struct Link
 */
 typedef struct Node
 {
-    unsigned long id;
+    uint32_t id;
     size_t num_links;
-    LinkType *links;
+    LinkType *parents;
+    LinkType *childs;
+    bool visited;
+    int discovery_time, finish_time;
 } NodeType;
 
 /*!
@@ -39,6 +43,10 @@ typedef struct Graph
 {
     size_t num_nodes;
     NodeType **nodes;
+    NodeType **node_lookup;
+    bool is_directed;
+    bool is_weighted;
+    size_t max_degree;
 } GraphType;
 
 #ifdef __cplusplus
@@ -78,7 +86,7 @@ extern "C"
         \param id The id of the node to look for
         \return True if the graph contains the node, false otherwise
     */
-    bool graphContains(const GraphType *self, unsigned long id);
+    bool graphContains(const GraphType *self, uint32_t id);
 
 
     /*!
@@ -88,7 +96,7 @@ extern "C"
         \param id2 The id of the second node
         \return True if the link exists, false otherwise
     */
-    bool linkExist(GraphType *self, unsigned long id1, unsigned long id2);
+    bool linkExist(GraphType *self, uint32_t id1, uint32_t id2);
 
     /*!
         \brief Create a node in the graph
@@ -96,7 +104,7 @@ extern "C"
         \param id The id of the node to create
         \return True if the node was created, false otherwise
     */
-    bool graphCreateNode(GraphType *self, unsigned long id);
+    bool graphCreateNode(GraphType *self, uint32_t id);
 
     /*!
         \brief Create a link between two nodes in the graph
@@ -106,7 +114,7 @@ extern "C"
         \param distance The distance between the two nodes
         \return True if the link was created, false otherwise
     */
-    bool createLink(GraphType *self, unsigned long parentId, unsigned long id, unsigned long distance);
+    bool createLink(GraphType *self, uint32_t parentId, uint32_t id, uint32_t distance);
 
     /*!
         \brief Remove a node from the graph
@@ -114,7 +122,7 @@ extern "C"
         \param id The id of the node to remove
         \return True if the node was removed, false otherwise
     */
-    bool graphRemoveNode(GraphType *self, unsigned long id);
+    bool graphRemoveNode(GraphType *self, uint32_t id);
 
     /*!
         \brief Remove a link between two nodes in the graph
@@ -123,7 +131,37 @@ extern "C"
         \param id The id of the node to unlink
         \return True if the link was removed, false otherwise
     */
-    bool removeLink(GraphType *self, unsigned long parentId, unsigned long id);
+    bool removeLink(GraphType *self, uint32_t parentId, uint32_t id);
+
+    /*!
+        \brief Get the degree of a node in the graph
+        \param self The graph to check
+        \param id The id of the node
+        \return The degree of the node
+    */
+    bool dfsCheckLoop(NodeType *node, bool *visited, bool *recStack);
+
+    /*!
+        \brief Check if the graph has a loop
+        \param graph The graph to check
+        \return True if the graph has a loop, false otherwise
+    */
+    bool hasLoop(GraphType *graph);
+
+    /*!
+        \brief Get the degree of a node in the graph
+        \param self The graph to check
+        \param id The id of the node
+        \return The degree of the node
+    */
+    void dfsReachable(NodeType *node, bool *visited);
+
+    /*!
+        \brief Check if all nodes are reachable
+        \param graph The graph to check
+        \return True if all nodes are reachable, false otherwise
+    */
+    bool areAllNodesReachable(GraphType *graph);
 
 #ifdef __cplusplus
 }
