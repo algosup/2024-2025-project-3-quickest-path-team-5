@@ -185,15 +185,21 @@ bool removeLink(GraphType *self, uint32_t parentId, uint32_t id) {
     return false;
 }
 
+bool dfsCheckLoop(NodeType *node, bool *visited, bool *recStack, size_t max_nodes) {
+    if (node == NULL || node->id >= max_nodes) {
+        return false;
+    }
 
-bool dfsCheckLoop(NodeType *node, bool *visited, bool *recStack) {
     if (!visited[node->id]) {
         visited[node->id] = true;
         recStack[node->id] = true;
 
         for (size_t i = 0; i < node->num_links; ++i) {
             NodeType *child = node->childs[i].node;
-            if (!visited[child->id] && dfsCheckLoop(child, visited, recStack)) {
+            if (child == NULL || child->id >= max_nodes) {
+                continue;
+            }
+            if (!visited[child->id] && dfsCheckLoop(child, visited, recStack, max_nodes)) {
                 return true;
             } else if (recStack[child->id]) {
                 return true;
@@ -205,16 +211,23 @@ bool dfsCheckLoop(NodeType *node, bool *visited, bool *recStack) {
 }
 
 bool hasLoop(GraphType *graph) {
+    if (graph == NULL || graph->nodes == NULL || graph->num_nodes == 0) {
+        return false;
+    }
+
     bool *visited = calloc(graph->num_nodes, sizeof(bool));
     bool *recStack = calloc(graph->num_nodes, sizeof(bool));
     if (visited == NULL || recStack == NULL) {
         free(visited);
         free(recStack);
-        return false; // Memory allocation failure
+        return false;
     }
 
     for (size_t i = 0; i < graph->num_nodes; ++i) {
-        if (!visited[i] && dfsCheckLoop(graph->nodes[i], visited, recStack)) {
+        if (graph->nodes[i] == NULL) {
+            continue;
+        }
+        if (!visited[i] && dfsCheckLoop(graph->nodes[i], visited, recStack, graph->num_nodes)) {
             free(visited);
             free(recStack);
             return true;
@@ -226,26 +239,40 @@ bool hasLoop(GraphType *graph) {
     return false;
 }
 
-void dfsReachable(NodeType *node, bool *visited) {
+void dfsReachable(NodeType *node, bool *visited, size_t max_nodes) {
+    if (node == NULL || node->id >= max_nodes) {
+        return;
+    }
+
     visited[node->id] = true;
     for (size_t i = 0; i < node->num_links; ++i) {
         NodeType *child = node->childs[i].node;
-        if (!visited[child->id]) {
-            dfsReachable(child, visited);
+        if (child != NULL && child->id < max_nodes && !visited[child->id]) {
+            dfsReachable(child, visited, max_nodes);
         }
     }
 }
 
 bool areAllNodesReachable(GraphType *graph) {
+    if (graph == NULL || graph->nodes == NULL || graph->num_nodes == 0) {
+        return false;
+    }
+
     bool *visited = calloc(graph->num_nodes, sizeof(bool));
     if (visited == NULL) {
         return false;
     }
 
-    dfsReachable(graph->nodes[0], visited);
+    for (size_t i = 0; i < graph->num_nodes; ++i) {
+        if (graph->nodes[i] != NULL) {
+            dfsReachable(graph->nodes[i], visited, graph->num_nodes);
+            break;
+        }
+    }
 
     for (size_t i = 0; i < graph->num_nodes; ++i) {
-        if (!visited[i]) {
+        if (graph->nodes[i] != NULL && !visited[graph->nodes[i]->id]) {
+            printf("Node %u is not reachable\n", graph->nodes[i]->id); // Debugging log
             free(visited);
             return false;
         }
@@ -254,3 +281,5 @@ bool areAllNodesReachable(GraphType *graph) {
     free(visited);
     return true;
 }
+
+

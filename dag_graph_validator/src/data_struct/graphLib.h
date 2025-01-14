@@ -137,9 +137,10 @@ extern "C"
         \brief Get the degree of a node in the graph
         \param self The graph to check
         \param id The id of the node
+        \param max_nodes The maximum number of nodes in the graph
         \return The degree of the node
     */
-    bool dfsCheckLoop(NodeType *node, bool *visited, bool *recStack);
+    bool dfsCheckLoop(NodeType *node, bool *visited, bool *recStack, size_t max_nodes);
 
     /*!
         \brief Check if the graph has a loop
@@ -152,9 +153,10 @@ extern "C"
         \brief Get the degree of a node in the graph
         \param self The graph to check
         \param id The id of the node
+        \param max_nodes The maximum number of nodes in the graph
         \return The degree of the node
     */
-    void dfsReachable(NodeType *node, bool *visited);
+    void dfsReachable(NodeType *node, bool *visited, size_t max_nodes);
 
     /*!
         \brief Check if all nodes are reachable
