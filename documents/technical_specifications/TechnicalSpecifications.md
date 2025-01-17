@@ -191,7 +191,7 @@ You can find the full coding convention guidelines in the [Coding Conventions do
 
 <!-- TODO: Modify depending of software engineers implemented algo -->
 - **Algorithm Complexity**  
-  - The data validation algorithm used for checks, such as graph<sup>[8](#glossary-8)</sup> validation and connectivity, will operate with a time complexity<sup>[13](#glossary-13)</sup> of **O(log n)** for most operations, ensuring efficient processing of large datasets.
+  - The data validation algorithm used for checks, such as graph<sup>[8](#glossary-8)</sup> validation and connectivity, will operate with a time complexity<sup>[13](#glossary-13)</sup> of **[O(log n)][6]** for most operations, ensuring efficient processing of large datasets.
 
 #### 2.1.2 REST API<sup>[2](#glossary-2)</sup>  
 
@@ -761,3 +761,4 @@ Since the application is designed for local use (on a local server), the securit
 [3]: https://www.youtube.com/watch?v=tas0O586t80 "Program in C"
 [4]: https://en.wikipedia.org/wiki/JSON "JSON Wikipedia"
 [5]: https://en.wikipedia.org/wiki/XML "XML Wikipedia"
+[6]: https://en.wikipedia.org/wiki/Time_complexity#Logarithmic_time "Logarithmic time Wikipedia"
