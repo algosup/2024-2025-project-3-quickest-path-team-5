@@ -35,13 +35,13 @@
 
 | Role                | Date(DD/MM/YYYY) | Approval |
 | ------------------- | ---------------- | -------- |
-| Project Manager     | 08/01/2025       |          |
+| Project Manager     | 08/01/2025       |    ✅    |
 | Program Manager     | 08/01/2025       |          |
 | Technical Leader    | 08/01/2025       |          |
 | Software Engineer 1 | 08/01/2025       |          |
 | Software Engineer 2 | 08/01/2025       |          |
 | Technical Writer    | 08/01/2025       |          |
-| Quality Assurance   | 08/01/2025       |          |
+| Quality Assurance   | 08/01/2025       |    ✅    |
 
 --- 
 
