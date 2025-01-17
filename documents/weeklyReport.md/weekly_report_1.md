@@ -1,8 +1,5 @@
 <div align="center">
 
----
-
-
 # Weekly Project Report Team 5 - Quickest Path
 # Week 1 : 06/01/25 - 10/01/25
 
