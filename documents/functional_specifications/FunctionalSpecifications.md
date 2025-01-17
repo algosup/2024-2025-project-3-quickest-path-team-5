@@ -27,6 +27,7 @@
   - [Document Purpose](#document-purpose)
   - [Project Goal](#project-goal)
   - [Project Rules](#project-rules)
+  - [Stakeholders](#stakeholders)
 - [Glossary](#glossary)
 - [Requirements](#requirements)
   - [Performance Goals](#performance-goals)
@@ -44,6 +45,7 @@
     - [Scalable Architecture](#scalable-architecture)
   - [Data Checker](#data-checker)
   - [STL](#stl)
+  - [Errors](#errors)
   - [Algorithm](#algorithm)
   - [Heuristic](#heuristic)
     - [Advantages:](#advantages)
@@ -102,6 +104,11 @@ As defined by the project owner, the team is arranged as follows:
 | **Software Engineer**| Writes code.<br>Creates documentation.<br>Participates in technical design.                   |
 | **Quality Assurance**| Tests all functionalities to identify bugs and issues.<br>Documents bugs and issues.<br>Writes the test plan.<br>Verifies fixes are implemented correctly. |
 
+
+## Stakeholders
+| Name           | Occupation                  | Links                          |
+|----------------|-----------------------------|--------------------------------|
+| Franck JEANNIN | Client (ALGOSUP's director) | [Website](https://algosup.com) |
 
 
 # Glossary
@@ -273,6 +280,10 @@ This project involves developing a software solution in C++ to determine the qui
 
 Users simply provide the IDs of two landmarks as input, and the software calculates and returns the quickest path, including travel time and an ordered list of landmarks along the route. Unlike a GPS, this software does not track real-time location but focuses on providing pre-calculated routes between fixed landmarks.
 
+
+
+![alt text](/documents/functional_specifications/images/logic_quickest_path.png)
+
 ## REST APIs
 
 A REST API enables data exchange between different systems using HTTP protocol. This approach, based on REST principles, has become widespread due to its simplicity and effectiveness.
@@ -320,7 +331,19 @@ The goal is to ensure that each node is linked at least to another node, meaning
 STL is a powerful collection of C++ template classes and functions that provide programming fundamentals like data structures, algorithms, and iterators. It's a core part of the C++ Standard Library that makes programming easier and more efficient.
 
 
+
+## Errors 
+
+- 200
+- 202
+- 404
+- 400
+
+
 ## Algorithm
+
+
+![alt text](/documents/functional_specifications/images/Input_output_system.png)
 
 ## Heuristic 
 
@@ -345,10 +368,27 @@ The Client sent us a list of landmarks, tesource and the destination in a CSV fi
 
 This file is the input of our algorithm. The goal is to classify all this data to finaly find the quickest path.  
 
-The CSV file looks like this : 
+The CSV file is a excel looks like this : 
 
-![alt text](/documents/functional_specifications/images/CSV_USA.png)
-![alt text](/Representation_system)
+
+| Point A   | Point B   | Travel Time |
+|-----------|-----------|-------------|
+| 6         | 5         | 359         |
+| 7         | 8         | 5822        |
+| 10        | 9         | 7211        |
+| 11        | 12        | 6217        |
+| 14        | 13        | 20          |
+| 14        | 15        | 2194        |
+| 12        | 16        | 34871       |
+| 14        | 17        | 3782        |
+| 2         | 18        | 1639        |
+| 19        | 16        | 40717       |
+| 20        | 21        | 1022        |
+
+`This is an example, the values do not correspond to the actual values.  `  
+
+
+![alt text](/documents/functional_specifications/images/example_path.png)
 
 The third information is the time, this is an important data to the algorithm, essential to find the quickest path.
 
@@ -375,12 +415,16 @@ The XML and JSON file are two commonly used formats for structuring and exchangi
 ## Interface 
 
 
-The goal of this project isn't to create a wonderful interface; it's optional. Your interface is very basic. On the first page, you can choose your two landmarks.
+The interface ins't  a requimen, but for a better user expérience it always greatful to have one. We will develop this one in HTML, and tailwind CSS to create somethigs simple but more attractive as a simple termninal interface. 
+
+Just here a figma mockup of the web page : 
+
+In this first page the goal is simple, enter our two landmarks to execute our research. 
+
 
 After this, you only need to submit. On another page, you get the result: a simple design displaying the time needed to move between these two landmarks.
 
 
-NEED TO BE UPDATE, AND ADD IMAGES
 
 
 
@@ -402,8 +446,7 @@ NEED TO BE UPDATE, AND ADD IMAGES
 | Product | Price | Link |
 | --  | -- | -- |
 |  Design  | 0 | Made by us |
-|   |  | |
-|   |  | |
+
 
 
 ## User Side
@@ -469,7 +512,7 @@ NEED TO BE UPDATE, AND ADD IMAGES
   <tbody>
     <tr>
       <td rowspan="7">
-        <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?cs=srgb&dl=pexels-danxavier-1239291.jpg&fm=jpg" alt="Traveler Sarah" width="1000" height="250" style="object-fit: cover;"/>
+        <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?cs=srgb&dl=pexels-danxavier-1239291.jpg&fm=jpg" alt="Traveler Sarah" width="1000" height="200" style="object-fit: cover;"/>
       </td>
       <td><strong>Name</strong></td>
       <td>Sarah Johnson</td>
@@ -611,4 +654,9 @@ We believe these changes will make a real difference in how people use our softw
 
 # Conclusion
 
-""
+This project is primarily focused on technical implementation, with design as a secondary element aimed at enhancing the user experience. The customer's requirements are diverse and extensive, requiring thorough validation at every stage of development.
+Undertaking a project of this scale is ambitious, so we have to approach each phase carefully, following our established organization and development protocols. Our main priority is to deliver a functional system that integrates both the data verifier and the REST API. We also aim to create a user interface to enhance the overall experience, but this is a complementary objective rather than a fundamental requirement.
+By maintaining this methodical approach and responding to specific customer needs, we aim to guarantee the quality and reliability of the final system.
+
+---
+
