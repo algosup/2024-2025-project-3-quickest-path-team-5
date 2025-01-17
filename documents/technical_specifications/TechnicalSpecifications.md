@@ -30,7 +30,9 @@
       - [3.2.2 A\*6 Algorithm](#322-a6-algorithm)
       - [3.2.3 Algorithm Selection Process](#323-algorithm-selection-process)
       - [3.2.4 Integration](#324-integration)
-    - [3.3 Data Flow](#33-data-flow)
+    - [3.3 Data Flow Overview](#33-data-flow-overview)
+      - [3.3.1 High-Level Data Flow Diagram](#331-high-level-data-flow-diagram)
+      - [3.3.2 Shortest Path Algorithm Execution Flow](#332-shortest-path-algorithm-execution-flow)
       - [Explanation:](#explanation)
     - [3.4 Flow Chart](#34-flow-chart)
       - [Explanation:](#explanation-1)
@@ -296,12 +298,15 @@ To complete this project, we employ two robust algorithms, **Dijkstra<sup>[5](#g
 #### 3.2.4 Integration  
 The system dynamically selects between Dijkstra<sup>[5](#glossary-5)</sup> and A\*<sup>[6](#glossary-6)</sup> based on the query complexity and time constraints. Both algorithms are implemented to handle the provided 24-million node<sup>[14](#glossary-14)</sup> dataset efficiently.  
 
-### 3.3 Data Flow
+### 3.3 Data Flow Overview
 
 Below is a high-level representation of the data flow in the system using a Mermaid<sup>[10](#glossary-10)</sup> diagram:  
 
+#### 3.3.1 High-Level Data Flow Diagram
+
 ```mermaid
 graph TD  
+  subgraph  
     A[Client Request] -->|REST API Call| B[Backend Server]  
     B -->|Validate Input| C[Input Validation Module]  
     C -->|Fetch Data| D[Graph Data Loader]  
@@ -310,7 +315,76 @@ graph TD
     F -->|Compute Path| G[Path Result Generator]  
     G -->|Format Response 'JSON or XML'| H[Response Formatter]  
     H -->|Return Response| I[Client]  
+  end
 ```
+
+#### 3.3.2 Shortest Path Algorithm Execution Flow
+
+```mermaid
+flowchart TD
+  A[Origin]
+  B[Get the shortest path]
+  C[Start a new thread]
+  D[Start a new thread]
+  E[Calculate the path using A*]
+	F[Calculate the path using Dijkstra]
+	G[End thread]
+	H[End thread]
+	I{Is A* done}
+	J[Wait A* end]
+	K{Is Dijkstra done}
+	L[End Dijkstra Thread]
+	M[Return Dijkstra Result]
+	N[Get random key points in the A* path]
+	O[Start new thread]
+	P[Calculate the path using Dijkstra]
+	Q[End thread]
+	R[Merge path into a single one]
+	S[Return complete path]
+	T{Is 1s elapsed}
+	U[Return A* path]
+
+	
+  subgraph  
+    A --> B
+    B --> C
+    B --> D
+
+    subgraph Thread 1
+      direction TB
+      C --> E
+      E --> G
+    end
+
+    subgraph Thread 2
+      direction TB
+      D --> F
+      F --> H
+    end
+
+    G --> I
+    H --> I
+    I -- No --> J
+    J --> K
+    I -- Yes --> K
+    K -- No --> T
+    K -- Yes --> M
+    T -- Yes --> U
+    T -- No --> L
+    L --> N
+    N --> O
+
+    subgraph Number of thread base on path length and computer resources
+      direction TB
+      O --> P
+      P --> Q
+    end
+
+    Q --> R
+    R --> S
+  end
+```
+
 
 #### Explanation:  
 1. **Client Request:** The user initiates a request through the REST API<sup>[2](#glossary-2)</sup>, specifying source and destination landmarks.  
