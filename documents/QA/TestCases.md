@@ -6,13 +6,13 @@ The purpose of this document is to regroup all of the different Test Cases creat
 
 ## Severity
 
-| Low | Can be tested at a latter date than specified |
+| Low | Can be tested at a later date than specified |
 | Medium | Important but not critical |
 | High | Critical, is to be tested ASAP |
 
 ## History
 
-You can find the detailled history of our tests on the [linked spreadsheet](https://docs.google.com/spreadsheets/d/1JB1lV4f822tu6zhfQbtrtQGsYIInJZw8AnJMDjYGYeo/edit?gid=0#gid=0).
+You can find the detailed history of our tests on the [linked spreadsheet](https://docs.google.com/spreadsheets/d/1JB1lV4f822tu6zhfQbtrtQGsYIInJZw8AnJMDjYGYeo/edit?gid=0#gid=0).
 
 ## Tests
 
@@ -20,12 +20,12 @@ You can find the detailled history of our tests on the [linked spreadsheet](http
 
 Test Template
 
-| Test ID |  |
+| Test ID |  |
 | --- | --- |
-| Description |  |
-| Steps |  |
-| Expected Result |  |
-| Severity |  |
+| Description |  |
+| Steps |  |
+| Expected Result |  |
+| Severity |  |
 
  -->
 
@@ -36,7 +36,7 @@ Test Template
 | Expected Result | - 1 <br> - 2 <br> - 18 <br> - 28 <br> - Time: 7971 |
 | Severity | Medium |
 
-> the path 1 to 28 will be referenced enceforth as *small test path*
+> Paths 1 to 28 will be referenced henceforth as *small test path*
 
 | Test ID | 02 |
 | --- | --- |
@@ -57,7 +57,7 @@ Test Template
 | Test ID | 04 |
 | --- | --- |
 | Description | Test response time with large test path |
-| Steps |1. Prepare a stopwatch <br> 2. Enter the large test path and start the stopwatch when starting the program <br> 3. Stop the stopwatch when the program stops  |
+| Steps |1. Prepare a stopwatch <br> 2. Enter the large test path and start the stopwatch when starting the program <br> 3. Stop the stopwatch when the program stops  |
 | Expected Result | Less than a second |
 | Severity | Medium |
 
@@ -78,21 +78,21 @@ Test Template
 | Test ID | 07 |
 | --- | --- |
 | Description | Test data verification: correct dataset |
-| Steps | 1. Using a correct dataset start the data verificaction process |
+| Steps | 1. Using a correct dataset start the data verification process |
 | Expected Result | No errors |
 | Severity | High |
 
 | Test ID | 08 |
 | --- | --- |
 | Description | Test data verification: connectivity problem |
-| Steps | 1. Using a dataset with two blocks start the data verication process |
+| Steps | 1. Using a dataset with two blocks starts the data verification process |
 | Expected Result | Error: Navigation Between Any Two Landmarks Impossible |
 | Severity | High |
 
 | Test ID | 09 |
 | --- | --- |
 | Description | Test data verification: dataset with loops |
-| Steps | 1. using a data set with loops start the verification process |
+| Steps | 1. Using a data set with loops to start the verification process |
 | Expected Result | Error: The Dataset Loops |
 | Severity | High |
 
@@ -113,7 +113,7 @@ Test Template
 | Test ID | 12 |
 | --- | --- |
 | Description | Test missing all Landmark |
-| Steps | 1. Try starting the software without entering any Landmark |
+| Steps | 1. Try starting the software without entering any Landmarks |
 | Expected Result | Error: No Landmarks |
 | Severity | Low |
 
