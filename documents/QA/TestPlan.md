@@ -41,7 +41,7 @@ These tests allow testing of all the functions of the software are working as in
 
 #### Test Cases
 
-To mesure the advancement of the project we will document the different Tests done during the project as Test Cases (Click on the following link to access all the [Test Cases](/documents/QA/TestCases.md)). Those tests are executed on the app.
+To mesure the advancement of the project we will document the different Tests done during the project as Test Cases (Click on the following link to access all the [Test Cases](/documents/QA/TestCases.md)). Those Tests will be focused on the data verificator as well as the REST API.
 
 All the Test Cases will be stored using the following format:
 
@@ -52,7 +52,11 @@ All the Test Cases will be stored using the following format:
 | Expected Result | The correct behavior |
 | Severity | Importance of the Test |
 
-> The Severity labels mirrors [GitHub Issues](#github-issues) labels: High, Medium, Low and Critical
+> The Severity labels mirrors [GitHub Issues](#github-issues) labels: High, Medium and Low
+
+##### Test Software
+
+In order to verify each Tests Case we created a program that generate datasets. The programe generate 800 random unique pairs of landmarks and their distance, and write them in a .csv file.
 
 #### Test History
 
@@ -110,7 +114,7 @@ The Template includes but is not limited to:
 
 - A label that specify the type of Issue and who does the Issue concerns
 - An assigned person responsible for fixing the Issue
-- A label that specify the severity of the Issue among: High, Medium, Low and Critical
+- A label that specify the severity of the Issue among: High, Medium and Low
 - A detailed description of the issue and the expected behaviour and if necessary a step by step description on how to reproduce the issue
 
 ##### GitHub Issues Labels
