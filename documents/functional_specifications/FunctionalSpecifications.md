@@ -1,5 +1,17 @@
 #  **Functional Specifications - 2024-2025-project-3-quickest-path-team-5**
 
+<div align="center">
+
+## **Title:** CAP (Cap Api Pathfinder) 
+
+
+![alt text](images/logo_quickest_path.png)
+
+
+</div>
+
+
+
 ---
 
 | Role | Name |
@@ -14,7 +26,7 @@
 
 ---
 
-### *Last Update on January 13th, 2025*
+### *Last Update on January 17th, 2025*
 
 
 <details>
@@ -22,11 +34,12 @@
 <summary>Table of Contents</summary>
 
 - [**Functional Specifications - 2024-2025-project-3-quickest-path-team-5**](#functional-specifications---2024-2025-project-3-quickest-path-team-5)
-    - [*Last Update on January 13th, 2025*](#last-update-on-january-13th-2025)
+  - [**Title:** CAP (Cap Api Pathfinder)](#title-cap-cap-api-pathfinder)
+    - [*Last Update on January 17th, 2025*](#last-update-on-january-17th-2025)
 - [Introduction](#introduction)
   - [Document Purpose](#document-purpose)
   - [Project Goal](#project-goal)
-  - [Project Rules](#project-rules)
+  - [Project Team Roles](#project-team-roles)
   - [Stakeholders](#stakeholders)
 - [Glossary](#glossary)
 - [Requirements](#requirements)
@@ -92,7 +105,7 @@ The aim of this document is to describe in detail the functionalities and expect
 
 The aim of the project is to create a high-performance software solution that calculates the quickest path between two landmarks in the United States. 
 
-## Project Rules 
+## Project Team Roles 
 
 As defined by the project owner, the team is arranged as follows:
 
@@ -144,7 +157,7 @@ As defined by the project owner, the team is arranged as follows:
 
 
 
-**SQL Database** 
+**SQL Dataset** 
 
 --- 
 
@@ -415,7 +428,7 @@ The XML and JSON file are two commonly used formats for structuring and exchangi
 ## Interface 
 
 
-The interface ins't  a requimen, but for a better user expérience it always greatful to have one. We will develop this one in HTML, and tailwind CSS to create somethigs simple but more attractive as a simple termninal interface. 
+The interface ins't  a requirement, but for a better user expérience it always greatful to have one. We will develop this one in HTML, and tailwind CSS to create somethigs simple but more attractive as a simple termninal interface. 
 
 Just here a figma mockup of the web page : 
 
