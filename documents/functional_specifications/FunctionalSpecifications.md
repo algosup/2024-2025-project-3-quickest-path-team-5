@@ -46,6 +46,9 @@
   - [Performance Goals](#performance-goals)
   - [Data Integrity Verification](#data-integrity-verification)
   - [Deliverables](#deliverables)
+- [Context](#context)
+  - [Personnas](#personnas)
+  - [Use Cases](#use-cases)
 - [Functional Requirements](#functional-requirements)
   - [Description](#description)
   - [APIs](#apis)
@@ -87,9 +90,6 @@
   - [Costs](#costs)
   - [User Side](#user-side)
   - [Maintainability](#maintainability)
-- [Context](#context)
-  - [Personnas](#personnas)
-  - [Use Cases](#use-cases)
 - [Risk](#risk)
   - [Competitive Landscape](#competitive-landscape)
   - [Product problem](#product-problem)
@@ -293,6 +293,127 @@ For this project all the deadlines for the customer are February 7th 2025. But o
 | Code | 07/01/2025  | [code](needs to be updated) |
 | Test Plan | 07/01/2025 | [qualityAssurance/Test-Plan.md](needs to be updated) | 
 | User Manual | 07/01/2025 | [User-Manual](needs to be updated) | 
+
+---
+
+# Context
+
+## Personnas
+<table>
+  <thead>
+    <tr>
+      <th><strong>Picture</strong></th>
+      <th><strong>Attribute</strong></th>
+      <th><strong>Details</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="5">
+        <img src="https://t4.ftcdn.net/jpg/03/96/16/79/360_F_396167959_aAhZiGlJoeXOBHivMvaO0Aloxvhg3eVT.jpg" alt="Business Traveler Tom" width="200" style="object-fit: cover;" />
+      </td>
+      <td><strong>Name</strong></td>
+      <td>Tom Smith</td>
+    </tr>
+    <tr>
+      <td><strong>Age</strong></td>
+      <td>30 - 40</td>
+    </tr>
+    <tr>
+      <td><strong>Occupation</strong></td>
+      <td>Business Traveler</td>
+    </tr>
+    <tr>
+      <td><strong>Skills</strong></td>
+      <td>Basic tech skills, frequent use of navigation apps</td>
+    </tr>
+    <tr>
+      <td><strong>Usage Scenario</strong></td>
+      <td>Tom uses the API to calculate the quickest routes between locations. It is integrated into his company's tools, helping him optimize travel time and generate automated mileage reimbursement reports.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Picture</strong></th>
+      <th><strong>Attribute</strong></th>
+      <th><strong>Details</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="5">
+        <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?cs=srgb&dl=pexels-danxavier-1239291.jpg&fm=jpg" alt="Logistics Manager Sarah" width="200" style="object-fit: cover;" />
+      </td>
+      <td><strong>Name</strong></td>
+      <td>Sarah Johnson</td>
+    </tr>
+    <tr>
+      <td><strong>Age</strong></td>
+      <td>25 - 35</td>
+    </tr>
+    <tr>
+      <td><strong>Occupation</strong></td>
+      <td>Logistics Planning Manager</td>
+    </tr>
+    <tr>
+      <td><strong>Skills</strong></td>
+      <td>Project management, logistics coordination, team leadership, data analysis</td>
+    </tr>
+    <tr>
+      <td><strong>Usage Scenario</strong></td>
+      <td>Sarah uses the API to calculate real-time optimal delivery routes for her drivers. She tracks distances and travel times to optimize costs and team performance.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Picture</strong></th>
+      <th><strong>Attribute</strong></th>
+      <th><strong>Details</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="5">
+        <img src="https://t4.ftcdn.net/jpg/05/99/07/69/360_F_599076934_L4nJ7MWjLgvmLUUXD6Y5VSFvQEFPSv6c.jpg" alt="Retiree Lucy" width="200" style="object-fit: cover;" />
+      </td>
+      <td><strong>Name</strong></td>
+      <td>Lucy Martinez</td>
+    </tr>
+    <tr>
+      <td><strong>Age</strong></td>
+      <td>60 - 80</td>
+    </tr>
+    <tr>
+      <td><strong>Occupation</strong></td>
+      <td>Retiree</td>
+    </tr>
+    <tr>
+      <td><strong>Skills</strong></td>
+      <td>Destination research, budgeting, travel planning</td>
+    </tr>
+    <tr>
+      <td><strong>Usage Scenario</strong></td>
+      <td>Lucy uses an application powered by the API to plan her vacations. She finds the fastest routes, calculates transportation costs, and adjusts her budget accordingly.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+## Use Cases
+
+| **User**             | **Action**                                      | **Expected Result**                       |
+|----------------------|-------------------------------------------------|-------------------------------------------|
+| Individual Customer  | Find the shortest path between two cities       | A list of steps with estimated time.      |
+| Logistics Company    | Plan a route for multiple vehicles              | An optimized schedule per vehicle.        |
+
 
 
 
@@ -637,127 +758,6 @@ After this, you only need to submit. On another page, you get the result: a simp
 
 ---
 
-# Context
-
-## Personnas
-
-
-<table>
-  <thead>
-    <tr>
-      <th><strong>Picture</strong></th>
-      <th><strong>Attribute</strong></th>
-      <th><strong>Details</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td rowspan="7">
-        <img src="https://t4.ftcdn.net/jpg/03/96/16/79/360_F_396167959_aAhZiGlJoeXOBHivMvaO0Aloxvhg3eVT.jpg" alt="Traveler Tom" width="1000" height="200" style="object-fit: cover;" />
-      </td>
-      <td><strong>Name</strong></td>
-      <td>Tom Smith</td>
-    </tr>
-    <tr>
-      <td><strong>Age</strong></td>
-      <td>30 - 40</td>
-    </tr>
-    <tr>
-      <td><strong>Occupation</strong></td>
-      <td>Business Traveler</td>
-    </tr>
-    <tr>
-      <td><strong>Skills</strong></td>
-      <td>Basic tech skills, regularly uses navigation apps</td>
-    </tr>
-    <tr>
-      <td><strong>Usage Scenario</strong></td>
-      <td>Tom opens the app to calculate the quickest route between New York and Los Angeles, seeking the shortest travel time while avoiding delays. He can then report the results to his company to calculate kilometers traveled and receive a gas reimbursement.</td>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <thead>
-    <tr>
-      <th><strong>Picture</strong></th>
-      <th><strong>Attribute</strong></th>
-      <th><strong>Details</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td rowspan="7">
-        <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?cs=srgb&dl=pexels-danxavier-1239291.jpg&fm=jpg" alt="Traveler Sarah" width="1000" height="200" style="object-fit: cover;"/>
-      </td>
-      <td><strong>Name</strong></td>
-      <td>Sarah Johnson</td>
-    </tr>
-    <tr>
-      <td><strong>Age</strong></td>
-      <td>25 - 35</td>
-    </tr>
-    <tr>
-      <td><strong>Occupation</strong></td>
-      <td>Delivery Planning Manager</td>
-    </tr>
-    <tr>
-      <td><strong>Skills</strong></td>
-      <td>Project management, logistics coordination, team leadership, data analysis</td>
-    </tr>
-    <tr>
-      <td><strong>Usage Scenario</strong></td>
-      <td>Sarah uses the app to plan the most efficient delivery routes for her team's drivers. She needs to calculate the fastest routes, avoid traffic, and ensure that deliveries are made on time. Additionally, Sarah tracks delivery times and distances for reporting to her logistics department and calculating transportation costs.</td>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <thead>
-    <tr>
-      <th><strong>Picture</strong></th>
-      <th><strong>Attribute</strong></th>
-      <th><strong>Details</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td rowspan="7">
-        <img src="https://t4.ftcdn.net/jpg/05/99/07/69/360_F_599076934_L4nJ7MWjLgvmLUUXD6Y5VSFvQEFPSv6c.jpg" alt="Vacation Planner Lucy" width="1000" height="250" style="object-fit: cover;" />
-      </td>
-      <td><strong>Name</strong></td>
-      <td>Lucy Martinez</td>
-    </tr>
-    <tr>
-      <td><strong>Age</strong></td>
-      <td>60 - 80</td>
-    </tr>
-    <tr>
-      <td><strong>Occupation</strong></td>
-      <td>Retired</td>
-    </tr>
-    <tr>
-      <td><strong>Skills</strong></td>
-      <td>Researching destinations, budgeting, planning activities, travel booking</td>
-    </tr>
-    <tr>
-      <td><strong>Usage Scenario</strong></td>
-      <td>Lucy uses the app to plan her upcoming vacation. She is looking for the best path to her destination, avoiding long drives. She also needs to calculate trip costs, including transportation, to stay within her budget.</td>
-    </tr>
-  </tbody>
-</table>
-
-
-## Use Cases
-
-| **User**             | **Action**                                      | **Expected Result**                       |
-|----------------------|-------------------------------------------------|-------------------------------------------|
-| Individual Customer  | Find the shortest path between two cities       | A list of steps with estimated time.      |
-| Logistics Company    | Plan a route for multiple vehicles              | An optimized schedule per vehicle.        |
-
-
-
----
 
 # Risk
 
