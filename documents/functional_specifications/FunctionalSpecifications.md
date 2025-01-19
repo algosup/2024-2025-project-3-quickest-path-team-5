@@ -48,6 +48,21 @@
   - [Deliverables](#deliverables)
 - [Functional Requirements](#functional-requirements)
   - [Description](#description)
+  - [APIs](#apis)
+    - [Quickest Path Retrieval](#quickest-path-retrieval)
+      - [Query Parameters:](#query-parameters)
+      - [Headers:](#headers)
+  - [Example Requests](#example-requests)
+    - [Request with Default Format:](#request-with-default-format)
+    - [Response Details](#response-details)
+  - [4xx Error Responses](#4xx-error-responses)
+    - [400 Missing Parameters](#400-missing-parameters)
+      - [Example JSON Response:](#example-json-response)
+    - [404 Destination Not Found](#404-destination-not-found)
+      - [Example JSON Response:](#example-json-response-1)
+  - [500 Error Responses (Server Errors)](#500-error-responses-server-errors)
+    - [500 Internal Server Error](#500-internal-server-error)
+      - [Example JSON Response:](#example-json-response-2)
   - [REST APIs](#rest-apis)
     - [Communication Between Different Systems](#communication-between-different-systems)
     - [Core Operations](#core-operations)
@@ -56,9 +71,8 @@
     - [Resource Access](#resource-access)
     - [Easy Integration](#easy-integration)
     - [Scalable Architecture](#scalable-architecture)
-  - [Data Checker](#data-checker)
+    - [Data Checker](#data-checker)
   - [STL](#stl)
-  - [Errors](#errors)
   - [Algorithm](#algorithm)
   - [Heuristic](#heuristic)
     - [Advantages:](#advantages)
@@ -297,6 +311,164 @@ Users simply provide the IDs of two landmarks as input, and the software calcula
 
 ![alt text](/documents/functional_specifications/images/logic_quickest_path.png)
 
+
+
+
+
+## APIs
+
+###  Quickest Path Retrieval
+
+| **Endpoint** | `/quickest-path`                                                                 |
+|--------------|----------------------------------------------------------------------------------|
+| **Method**   | `GET`                                                                            |
+| **Purpose**  | Calculates the quickest path between two specified landmarks in the USA, including step-by-step segments and the total time. |
+
+
+#### Query Parameters:
+
+| Parameter   | Description                                                                         | Required |
+|-------------|-------------------------------------------------------------------------------------|----------|
+| `source`    | The starting point                                                  | Yes      |
+| `destination` | The finish point                                             | Yes      |
+| `format`    | Specifies the response format. Supported values: `json` (default), `xml`            | No       |
+
+#### Headers:
+
+| Header     | Description                                                                            |
+|------------|----------------------------------------------------------------------------------------|
+| `Accept`   | Indicates the desired response format. Defaults to `application/json`.                |
+
+---
+
+## Example Requests
+
+### Request with Default Format:  
+
+<details>
+  <summary>Click to view request</summary>
+  
+  ```http
+  GET /quickest-path?source=1543&destination=7845 HTTP/1.1  
+  Host: api.example.com  
+  Accept: application/json
+  ```
+  
+</details>
+
+### Response Details
+
+|Status Code |	Description |
+|------------|--------------|
+|200 |	The request was successfully processed, and the response contains the data related to the quickest path calculation between the specified source and destination. |
+
+<details> 
+  <summary>Click to view example JSON response</summary>
+  <pre><code>
+  {
+        {
+            "distance": 1234,
+            "steps": [
+                {
+                    "segmentA": 12,
+                    "segmentB": 65,
+                    "distance": 1234
+                },
+                {
+                    "segmentA": 12,
+                    "segmentB": 65,
+                    "distance": 1234
+                },
+                {
+                    "segmentA": 12,
+                    "segmentB": 65,
+                    "distance": 1234
+                },
+                {
+                    "segmentA": 12,
+                    "segmentB": 65,
+                    "distance": 1234
+                }
+            ]
+        }
+  }
+
+  </code></pre>
+</details>
+
+
+<details> 
+<summary>Click to view example XML response</summary>
+<pre><code>
+&lt;response&gt;
+  &lt;distance&gt;1234&lt;/distance&gt;
+    &lt;steps&gt;
+        &lt;step&gt;
+            &lt;segmentA&gt;12&lt;/segmentA&gt;
+            &lt;segmentB&gt;65&lt;/segmentB&gt;
+            &lt;distance&gt;1234&lt;/distance&gt;
+        &lt;/step&gt;...       
+    &lt;/steps&gt;
+&lt;/response&gt;
+</code></pre>
+</details>
+
+
+`These are examples, the values do not correspond to actual values. ` 
+
+## 4xx Error Responses
+
+### 400 Missing Parameters
+| **Property**   | **Details**                                                                 |
+|-----------------|-----------------------------------------------------------------------------|
+| **Status Code** | `400 Bad Request`                                                          |
+| **Description** | Required query parameters are missing.                                     |
+
+#### Example JSON Response:
+```json
+{
+    "status": "error",
+    "code": "ERR400",
+    "message": "Missing required parameters: source, destination."
+}
+```
+
+### 404 Destination Not Found
+
+| **Property**   | **Details**                                                                 |
+|-----------------|-----------------------------------------------------------------------------|
+| **Status Code** | `404 Not Found`                                                            |
+| **Description** | One or both poitns are invalid or not present in the dataset.           |
+
+#### Example JSON Response:
+```json
+{
+    "status": "error",
+    "code": "ERR404",
+    "message": "Landmark not found in the dataset.",
+}
+```
+
+## 500 Error Responses (Server Errors)
+
+### 500 Internal Server Error
+
+| **Property**   | **Details**                                                                                       |
+|-----------------|---------------------------------------------------------------------------------------------------|
+| **Status Code** | `500 Internal Server Error`                                                                       |
+| **Description** | An unexpected error occurred on the server while processing the request. This could be due to a system failure, database issues, or other unforeseen errors. |
+
+#### Example JSON Response:
+```json
+{
+    "status": "error",
+    "code": "ERR500",
+    "message": "An internal server error occurred. Please try again later."
+}
+
+```
+
+
 ## REST APIs
 
 A REST API enables data exchange between different systems using HTTP protocol. This approach, based on REST principles, has become widespread due to its simplicity and effectiveness.
@@ -335,22 +507,13 @@ With standard formats like JSON or XML, connecting a REST API to other services 
 REST APIs scale easily thanks to their clean architecture and smart use of HTTP protocol.
 This streamlined approach makes REST APIs the backbone of modern web development, enabling robust and flexible system interactions while maintaining simplicity in implementation.
 
-## Data Checker
+### Data Checker
 
 The goal is to ensure that each node is linked at least to another node, meaning that there is no node that is "alone or lost". It deserves to verify the integrity of data to be sure that we can have a solution for nodes. After this we can is the REST APi to classify data.
 
 ## STL
 
 STL is a powerful collection of C++ template classes and functions that provide programming fundamentals like data structures, algorithms, and iterators. It's a core part of the C++ Standard Library that makes programming easier and more efficient.
-
-
-
-## Errors 
-
-- 200
-- 202
-- 404
-- 400
 
 
 ## Algorithm
@@ -672,4 +835,7 @@ Undertaking a project of this scale is ambitious, so we have to approach each ph
 By maintaining this methodical approach and responding to specific customer needs, we aim to guarantee the quality and reliability of the final system.
 
 ---
+
+
+
 
