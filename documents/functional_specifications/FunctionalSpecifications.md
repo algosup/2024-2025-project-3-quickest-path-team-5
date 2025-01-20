@@ -2,7 +2,7 @@
 
 # Functional Specifications - Project Quickest Path
 
-## **Title:** CAP (Cap Api Pathfinder) 
+## **Title:** CAP (Cap Api Pathfinder)
 
 **Author:** Robin GOUMY
 
@@ -27,7 +27,6 @@
 ---
 
 ### *Last Update on January 20th, 2025*
-
 
 <details>
 
@@ -54,23 +53,23 @@
     - [Data Checker](#data-checker)
     - [APIs](#apis)
       - [Quickest Path Retrieval](#quickest-path-retrieval)
-        - [Query Parameters:](#query-parameters)
-        - [Headers:](#headers)
+        - [Query Parameters](#query-parameters)
+        - [Headers](#headers)
     - [Example Requests](#example-requests)
       - [Request with Default Format:](#request-with-default-format)
       - [Response Details](#response-details)
     - [4xx Error Responses](#4xx-error-responses)
       - [400 Missing Parameters](#400-missing-parameters)
-        - [Example JSON Response:](#example-json-response)
+        - [Example 1 JSON Response](#example-1-json-response)
       - [404 Destination Not Found](#404-destination-not-found)
-        - [Example JSON Response:](#example-json-response-1)
+        - [Example 2 JSON Response](#example-2-json-response)
     - [500 Error Responses (Server Errors)](#500-error-responses-server-errors)
-- [500 Internal Server Error](#500-internal-server-error)
-        - [Example JSON Response:](#example-json-response-2)
+      - [500 Internal Server Error](#500-internal-server-error)
+        - [Example 3 JSON Response](#example-3-json-response)
     - [Algorithm and Data Processing](#algorithm-and-data-processing)
       - [Heuristic Approach](#heuristic-approach)
-      - [Advantages:](#advantages)
-      - [Disadvantages:](#disadvantages)
+      - [Advantages](#advantages)
+      - [Disadvantages](#disadvantages)
       - [Input Data](#input-data)
       - [Output](#output)
     - [User Interface](#user-interface)
@@ -86,24 +85,21 @@
     - [Risk Management Plan](#risk-management-plan)
   - [Future Improvements](#future-improvements)
 
-
 </details>
 
+---
 
---- 
-
-## Introduction 
+## Introduction
 
 ### Document Purpose
 
 The aim of this document is to describe in detail the functionalities and expected behavior of the software, to ensure a common understanding between all stakeholders (all team members, customers, and others).
   
+### Project Goal
 
-### Project Goal 
+The aim of the project is to create a high-performance software solution that calculates the quickest path between two landmarks in the United States.
 
-The aim of the project is to create a high-performance software solution that calculates the quickest path between two landmarks in the United States. 
-
-### Project Team Roles 
+### Project Team Roles
 
 As defined by the project owner, the team is arranged as follows:
 
@@ -116,8 +112,8 @@ As defined by the project owner, the team is arranged as follows:
 | **Quality Assurance** | Tests all functionalities to identify bugs and issues.<br>Documents bugs and issues.<br>Writes the test plan.<br>Verifies fixes are implemented correctly. |
 | **Technical Writer**  | Creates and maintains user manuals, technical documentation, and guides.<br>Works with engineers to understand and document features.<br>Ensures documentation is clear, concise, and user-friendly. |
 
-
 ### Stakeholders
+
 | Name           | Occupation                  | Links                          |
 |----------------|-----------------------------|--------------------------------|
 | Franck JEANNIN | Client (ALGOSUP's director) | [Website](https://algosup.com) |
@@ -151,9 +147,7 @@ As defined by the project owner, the team is arranged as follows:
 | **UI**                    | User Interface - What users see and interact with in software, like buttons and menus.     |
 | **XML**                   | Extensible Markup Language - A flexible format for structuring and exchanging data.         |
 
-
---- 
-
+---
 
 ## Requirements
 
@@ -163,26 +157,25 @@ The requirements are the conditions that must be fulfilled to meet the school's 
 
 <br>
 
-
-<table> 
-  <thead> 
-    <tr> 
-      <th>Category</th> 
-      <th>Details</th> 
-    </tr> 
-  </thead> 
-  <tbody> 
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr> 
       <td><strong>Programming Language</strong></td> 
       <td>The project must be implemented in <strong>C++</strong> to achieve optimal performance.</td>
-    </tr> 
+    </tr>
     <tr> 
       <td rowspan="4"><strong>REST API</strong></td>
       <td>A REST API must be developed to expose the software's functionality via an HTTP server (localhost).</td>
-    </tr> 
+    </tr>
     <tr> 
       <td><strong>Endpoint:</strong> A single GET request to calculate the quickest path.</td>
-    </tr> 
+    </tr>
     <tr> 
       <td><strong>Input:</strong> Source and destination landmark IDs.</td>
     </tr>
@@ -201,83 +194,80 @@ The requirements are the conditions that must be fulfilled to meet the school's 
       <td><strong>Algorithm Complexity</strong></td> 
       <td>Use <strong>Big O notation</strong> to document the time and space complexity of key algorithms.</td>
     </tr>
-    <tr> 
+    <tr>
       <td><strong>Test Suite</strong></td>
       <td> A comprehensive test suite is required to validate: <ul> <li>Correctness of outputs.</li> <li>Compliance with the <strong>10% approximation rule</strong>.</li> <li>General performance goals.</li> </ul> </td>
     </tr>
-    <tr> 
+    <tr>
       <td><strong>Data Validation Tool</strong></td> 
       <td>A utility must verify the integrity of the dataset before use, ensuring its structure and validity.</td>
     </tr>
   </tbody>
 </table>
 
-
 ### Performance Goals
+
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr> 
+      <td><strong>Response Time</strong></td>
+      <td>The API must respond to all queries within <strong>1 second</strong> on a typical laptop.</td> 
+    </tr>
+    <tr> 
+      <td><strong>Accuracy</strong></td> 
+      <td> The algorithm may prioritize <strong>speed over precision</strong> by using heuristics. <br> <strong>Rule:</strong> The returned path should not exceed the shortest path duration by more than <strong>10%</strong>.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### Data Integrity Verification
 
 <table> 
   <thead> 
     <tr> 
       <th>Category</th>
-      <th>Details</th> 
-    </tr> 
-  </thead> 
+      <th>Details</th>
+    </tr>
+  </thead>
   <tbody> 
     <tr> 
-      <td><strong>Response Time</strong></td> 
-      <td>The API must respond to all queries within <strong>1 second</strong> on a typical laptop.</td> 
-    </tr> 
-    <tr> 
-      <td><strong>Accuracy</strong></td> 
-      <td> The algorithm may prioritize <strong>speed over precision</strong> by using heuristics. <br> <strong>Rule:</strong> The returned path should not exceed the shortest path duration by more than <strong>10%</strong>. 
-      </td>
-    </tr> 
-  </tbody> 
-</table>
-
-
-### Data Integrity Verification                           
-
-<table> 
-  <thead> 
-    <tr> 
-      <th>Category</th> 
-      <th>Details</th> 
-    </tr> 
-  </thead> 
-  <tbody> 
-    <tr> 
-      <td><strong>Graph Validation</strong></td> 
-      <td>Validate that the dataset forms a <strong>Directed Acyclic Graph (DAG)</strong> and is free of loops.</td> 
+      <td><strong>Graph Validation</strong></td>
+      <td>Validate that the dataset forms a <strong>Directed Acyclic Graph (DAG)</strong> and is free of loops.</td>
     </tr> 
     <tr> 
       <td><strong>Connectivity Check</strong></td> 
       <td>Ensure the graph is <strong>fully connected</strong>, allowing navigation between any two landmarks.</td>
-    </tr> 
+    </tr>
     <tr>
       <td><strong>Programming Language Flexibility</strong></td> 
-      <td>A language other than C++ may be used for this validation, as performance is not critical in these tasks.</td> 
+      <td>A language other than C++ may be used for this validation, as performance is not critical in these tasks.</td>
     </tr>
-  </tbody> 
+  </tbody>
 </table>
 
 ### Deliverables
 
-For this project all the deadlines for the customer are February 7th 2025. But our Project Manager decided to impose his own deadlines. 
+For this project all the deadlines for the customer are February 7th 2025. But our Project Manager decided to impose his own deadlines.
 
 | Name | Deadline | Link |
 | --  | -- | -- |
 | Functional Specifications Document  | 20/01/2025 | [functionalSpecifications.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/functional_specifications/FunctionalSpecifications.md) |
 | Technical Specifications Document  | 27/01/2024 | [technicalSpecifications.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/technical_specifications/TechnicalSpecifications.md) |
 | Code | 07/01/2025  | [code](needs to be updated) |
-| Test Plan | 07/01/2025 | [TestPlan.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/QA/TestPlan.md) | 
+| Test Plan | 07/01/2025 | [TestPlan.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/QA/TestPlan.md) |
 | Test Cases | 07/01/2025 | [TestPlan.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/QA/TestCases.md) |
-| User Manual | 07/01/2025 | [User-Manual]([needs to be updated](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/Manual/usermanuel.md)) | 
+| User Manual | 07/01/2025 | [User-Manual]([needs to be updated](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/Manual/usermanuel.md)) |
 
 ---
 
 ## Context
-
 
 ### Personnas
 
@@ -361,8 +351,6 @@ The API is designed to be implemented into existing software solutions rather th
 | Supply Chain Manager | Coordinate deliveries across multiple regions using logistics software | A comprehensive route map segmented by region and time, available within their current logistics tool. |
 | Travel Enthusiast    | Plan an efficient multi-stop journey using a travel planning app | A detailed itinerary with travel times and distances for each stop, accessible in their preferred travel app. |
 
-
-
 ---
 
 ## Functional Requirements
@@ -375,18 +363,16 @@ This project involves developing a software solution in C++ to determine the qui
 
 Users simply provide the IDs of two landmarks as input, and the software calculates and returns the quickest path, including travel time and an ordered list of landmarks along the route. Unlike a GPS, this software does not track real-time location but focuses on providing pre-calculated routes between fixed landmarks.
 
-
 ### Data Checker
-
 
 <br>
 
-The data checker is a crucial tool for ensuring that the data is correct, reliable and adapted to the algorithm used, thus avoiding errors later on in the program. 
+The data checker is a crucial tool for ensuring that the data is correct, reliable and adapted to the algorithm used, thus avoiding errors later on in the program.
 For example, it checks that there are no infinite loops or duplicate nodes. It also checks that all nodes are present, that there is a possible route for all of them, i.e. that they are related, that the data type is usable and complete for each node, stop and time.
 
 <br>
 
-This algorithm will be implemented in C, as it is a high-performance language at this level, enabling a certain level of precision and efficiency to be achieved. 
+This algorithm will be implemented in C, as it is a high-performance language at this level, enabling a certain level of precision and efficiency to be achieved.
 
 <br>
 
@@ -405,7 +391,7 @@ An API is a set of rules and protocols that allows different software applicatio
 
 <br>
 
-####  Quickest Path Retrieval
+#### Quickest Path Retrieval
 
 | **Endpoint** | `/quickest-path`                                                                 |
 |--------------|----------------------------------------------------------------------------------|
@@ -413,7 +399,7 @@ An API is a set of rules and protocols that allows different software applicatio
 | **Purpose**  | Calculates the quickest path between two specified landmarks in the USA, including step-by-step segments and the total time. |
 
 
-##### Query Parameters:
+##### Query Parameters
 
 | Parameter   | Description                                                                         | Required |
 |-------------|-------------------------------------------------------------------------------------|----------|
@@ -421,7 +407,7 @@ An API is a set of rules and protocols that allows different software applicatio
 | `destination` | The finish point                                                                  | Yes      |
 | `format`    | Specifies the response format. Supported values: `json`, `xml`                      | No       |
 
-##### Headers:
+##### Headers
 
 | Header     | Description                                                                            |
 |------------|----------------------------------------------------------------------------------------|
@@ -446,9 +432,9 @@ An API is a set of rules and protocols that allows different software applicatio
 
 #### Response Details
 
-|Status Code |	Description |
+|Status Code |Description |
 |------------|--------------|
-|200 |	The request was successfully processed, and the response contains the data related to the quickest path calculation between the specified source and destination. |
+|200 |The request was successfully processed, and the response contains the data related to the quickest path calculation between the specified source and destination. |
 
 <details> 
   <summary>Click to view example JSON response</summary>
@@ -469,7 +455,6 @@ An API is a set of rules and protocols that allows different software applicatio
   </code></pre>
 </details>
 
-
 <details> 
 <summary>Click to view example XML response</summary>
 <pre><code>
@@ -480,24 +465,25 @@ An API is a set of rules and protocols that allows different software applicatio
             &lt;segmentA&gt;12&lt;/segmentA&gt;
             &lt;segmentB&gt;65&lt;/segmentB&gt;
             &lt;distance&gt;1234&lt;/distance&gt;
-        &lt;/step&gt;...       
+        &lt;/step&gt;...
     &lt;/steps&gt;
 &lt;/response&gt;
 </code></pre>
 </details>
 
-
-`These are examples, the values do not correspond to actual values. ` 
+>These are examples, the values do not correspond to actual values.
 
 ### 4xx Error Responses
 
 #### 400 Missing Parameters
+
 | **Property**   | **Details**                                                                 |
 |-----------------|-----------------------------------------------------------------------------|
 | **Status Code** | `400 Bad Request`                                                          |
 | **Description** | Required query parameters are missing.                                     |
 
-##### Example JSON Response:
+##### Example 1 JSON Response
+
 ```json
 {
     "status": "error",
@@ -511,9 +497,10 @@ An API is a set of rules and protocols that allows different software applicatio
 | **Property**   | **Details**                                                                 |
 |-----------------|-----------------------------------------------------------------------------|
 | **Status Code** | `404 Not Found`                                                            |
-| **Description** | One or both poitns are invalid or not present in the dataset.           |
+| **Description** | One or both points are invalid or not present in the dataset.           |
 
-##### Example JSON Response:
+##### Example 2 JSON Response
+
 ```json
 {
     "status": "error",
@@ -524,14 +511,15 @@ An API is a set of rules and protocols that allows different software applicatio
 
 ### 500 Error Responses (Server Errors)
 
-# 500 Internal Server Error
+#### 500 Internal Server Error
 
 | **Property**   | **Details**                                                                                       |
 |-----------------|---------------------------------------------------------------------------------------------------|
 | **Status Code** | `500 Internal Server Error`                                                                       |
-| **Description** | An unexpected error occurred on the server while processing the request. This could be due to a system failure, database issues, or other unforeseen errors. |
+| **Description** | An unexpected error has occurred on the server while processing the request. This may be due to system failure, database problems or other unforeseen errors. |
 
-##### Example JSON Response:
+##### Example 3 JSON Response
+
 ```json
 {
     "status": "error",
@@ -541,22 +529,19 @@ An API is a set of rules and protocols that allows different software applicatio
 
 ```
 
-
 ### Algorithm and Data Processing
-
 
 #### Heuristic Approach
 
 To ensure fast computations, a heuristic (e.g., Euclidean distance) is used to estimate travel costs between two points.
 
-#### Advantages:
+#### Advantages
 
 - Reduces computation time.
   
 - Useful for complex or large spaces.
 
-
-#### Disadvantages:
+#### Disadvantages
 
 - May not guarantee an optimal solution.
 
@@ -571,15 +556,11 @@ Input data is provided in a CSV file containing 24 million nodes with the follow
 |  7  | 8 | 5822 |
 |  10  | 9 | 7211 |
 
-
-`This is an example, the values do not correspond to the actual values.  `  
-
+>This is an example, the values do not correspond to the actual values.  
 
 ![alt text](/documents/functional_specifications/images/example_path.png)
 
 <img src="https://imgs.search.brave.com/ZFe7uZ2kdFa_0_6VMQVId4dmkqiexWxnulfp402f_Hk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vd3d3Lm1l/dGhvZGVtYXRocy5m/ci9ncmFwaGVfZGlq/a3N0cmEyLmpwZz93/PTQ3NCZzc2w9MQ" width="400" height="200">
-
-  
 
 This data is represented as a mathematical graph where:
 
@@ -588,31 +569,28 @@ This data is represented as a mathematical graph where:
 - Weights represent travel times between nodes.
   
 #### Output
+
 The algorithm returns:
 
 - Total travel time.
   
 - An ordered list of landmarks on the optimal path.
 
-
 ### User Interface
-Although optional, a simple web interface will be developed using HTML and Tailwind CSS to improve user experience.
 
-Mockup made on Figma : 
+Although optional, a simple web interface will be developed using HTML and Tailwind CSS to improve user experience.
 
 Home Page: Allows the user to input two landmarks.
 
 ![alt text](images/figma_cap_main_page.png)
 
-
 Result Page: Displays the total travel time and the landmarks along the route.
 
-Alternatively, you can download the complete file with all the directions from point A to point B. 
+Alternatively, you can download the complete file with all the directions from point A to point B.
 
 ![alt text](<images/figma_cap_ next_page.png>)
 
 ### Acceptance Criteria
-
 
 | **Criterion**           | **Description**                                                    |
 |-------------------------|--------------------------------------------------------------------|
@@ -620,8 +598,7 @@ Alternatively, you can download the complete file with all the directions from p
 | Result accuracy         | The calculated path should not exceed a 10% approximation.         |
 | Robustness              | The API must continue to function under simultaneous requests.     |
 
-
---- 
+---
 
 ## Non-Functional Requirements
 
@@ -637,22 +614,21 @@ Alternatively, you can download the complete file with all the directions from p
 
 ### User Side
 
- - Accessible via smartphones, tablets, and desktops.
- - Requires an internet connection.
+- Accessible via smartphones, tablets, and desktops.
+- Requires an internet connection.
 
 ### Maintainability
 
- - Clearly commented and documented code.
- - Comprehensive testing and version control.
+- Clearly commented and documented code.
+- Comprehensive testing and version control.
 
 ---
-
 
 ## Risk
 
 ### Competitive Landscape
 
-Today's market is highly competitive, with many powerful and advanced companies : 
+Today's market is highly competitive, with many powerful and advanced companies.
 
 - **Google Maps Platform**: Offers precise, real-time route optimization for various transportation modes. Strong integration with Google services but costly for smaller businesses.  
 - **Mapbox**: Known for customization and flexibility, popular with developers. Limited advanced features compared to Google.  
@@ -662,14 +638,11 @@ Today's market is highly competitive, with many powerful and advanced companies 
 
 In any project, no issue should ever be taken lightly, as even seemingly minor problems can lead to significant time losses and disrupt progress. It is essential to approach every detail with attention and care to minimize risks and ensure a smooth workflow. Proactive problem-solving and vigilance are key to avoiding unnecessary setbacks and maintaining the project's momentum.
 
-### Data 
+### Data
 
 Compliance with the General Data Protection Regulation (GDPR) is crucial in developing software that interacts with users, ensuring personal data protection and privacy. By adhering to these standards, developers not only ensure legal compliance but also build user trust. The GDPR requires transparent data collection, storage, and processing practices, giving users control over their personal information, which is essential for the acceptance of digital technologies.
 
 To kown more about it : [RGPD License](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation)
-
-
-
 
 ### Risk Management Plan
 
@@ -687,11 +660,11 @@ To kown more about it : [RGPD License](https://en.wikipedia.org/wiki/General_Dat
   - Enhanced routes: More landmarks and live traffic data for better route accuracy.
   - Detailed map info: Road quality, speed zones, and weather conditions.
   
--  User Interface (UI)
-   - Interactive maps: Zoom in/out for street-level or overview view.
-   - Smart settings: Remembers travel preferences (e.g., toll-avoider, highway enthusiast).
-   - Mobile optimization: Seamless mobile experience like the desktop version.
-   - Accessibility: Features supporting screen readers.
+- User Interface
+  - Interactive maps: Zoom in/out for street-level or overview view.
+  - Smart settings: Remembers travel preferences (e.g., toll-avoider, highway enthusiast).
+  - Mobile optimization: Seamless mobile experience like the desktop version.
+  - Accessibility: Features supporting screen readers.
   
 - Efficiency and Optimization
   - Machine learning: Predict and suggest better routes based on travel patterns.
@@ -699,18 +672,9 @@ To kown more about it : [RGPD License](https://en.wikipedia.org/wiki/General_Dat
   - Optimized data: Faster performance with efficient data grouping.
   - Advanced computing: Speeding up complex calculations.
   
--  Additional Features
-   - Offline support: Full functionality without a signal.
-   - Global language options: Tailored for international users.
-   - App integration: Sync with calendar and other apps.
+- Additional Features
+  - Offline support: Full functionality without a signal.
+  - Global language options: Tailored for international users.
+  - App integration: Sync with calendar and other apps.
   
-
 We believe these changes will make a real difference in how people use our software, whether they're daily commuters or occasional travelers.
-
---- 
-
-
-
-
-
-
