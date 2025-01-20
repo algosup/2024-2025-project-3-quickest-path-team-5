@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include "graphLib.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -16,14 +17,12 @@ extern "C"
 #endif
 
 /*!
-    \brief Write a mermaid node in a file
+    \brief Write a mermaid file from a graph
     \param filename The name of the file to write
-    \param point1 The first point
-    \param point2 The second point
-    \param distance The distance between the two points
-    \return True if the file was written, false otherwise
+    \param graph The graph to write
+    \return True if all went well, false otherwise
 */
-bool writeMermaidNode(const char *filename, const char *point1, const char *point2, uint32_t distance) ;
+bool writeMermaidFile(const char *filename, graph_t* graph);
 
 #ifdef __cplusplus
 }

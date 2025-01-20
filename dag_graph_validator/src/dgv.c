@@ -13,10 +13,43 @@
 #include <sys/resource.h> // For memory usage tracking
 
 int main(void) {
+    char* defaultFilePath = FILE_PATH;
+    char* defaultMermaidFile = MERMAID_FILE;
+    bool isExtracted = false;
+
+    // Ask the user for the file path
+    printf("Enter the path to the dataset file (default: %s): ", defaultFilePath);
+    char input[1024];
+    fgets(input, sizeof(input), stdin);
+    if (input[0] != '\n') {
+        input[strcspn(input, "\n")] = 0; // Remove the newline character
+        defaultFilePath = input;
+    }
+
     if(!checkFileExists(FILE_PATH)) {
         fprintf(stderr, "File not found: %s\n", FILE_PATH);
         exit(EXIT_FAILURE);
     }
+
+
+        // Ask user if they want to extract the graph to a Mermaid file
+    printf("Do you want to extract the graph to a Mermaid file? (y/n): ");
+    fgets(input, sizeof(input), stdin);
+    if (input[0] == 'y') {
+        isExtracted = true;
+    }
+
+    if (isExtracted) {
+        // Ask the user for the mermaid file path
+        printf("Enter the path to the mermaid file (default: %s): ", defaultMermaidFile);
+        fgets(input, sizeof(input), stdin);
+        if (input[0] != '\n') {
+            input[strcspn(input, "\n")] = 0; // Remove the newline character
+            defaultMermaidFile = input;
+        }
+    }
+
+    
 
     struct rusage usage;
     graph_t* graph = createGraph();
@@ -52,6 +85,20 @@ int main(void) {
     printf("Time spent checking for connectivity: %f seconds\n", time_spent);
     memUsage = (float)(usage.ru_maxrss / (1024.0f * 1024.0f)); // Convert to MB
     printf("Memory usage: %d MB\n\n", (int)memUsage);
+
+    if (isExtracted) {
+        begin = clock();    
+        if (writeMermaidFile(MERMAID_FILE, graph)) {
+            printf("Mermaid file written successfully.\n");
+        } else {
+            fprintf(stderr, "Failed to write the Mermaid file.\n");
+        }
+        end = clock();
+        time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+        printf("Time spent writing the Mermaid file: %f seconds\n", time_spent);
+        memUsage = (float)(usage.ru_maxrss / (1024.0f * 1024.0f)); // Convert to MB
+        printf("Memory usage: %d MB\n\n", (int)memUsage);
+    }
 
     freeGraph(graph);
 
