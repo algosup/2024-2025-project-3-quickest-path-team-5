@@ -8,162 +8,101 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <stdbool.h>
+#include <stdint.h>
 
-/*!
-    \typedef Link
-    \brief A struct representing a link between two nodes
-*/
-typedef struct Link
-{
-    struct Node *node;
-    uint32_t distance;
-} LinkType;
 
-/*!
-    \typedef Node
-    \brief A struct representing a node and its links in a graph
-*/
-typedef struct Node
-{
+#define HASH_MAP_SIZE 30000000
+
+typedef struct Node {
     uint32_t id;
-    size_t num_links;
-    LinkType *parents;
-    LinkType *childs;
-    bool visited;
-    int discovery_time, finish_time;
-} NodeType;
+    struct Node* next;
+    struct Edge* head;
+} node_t;
 
-/*!
-    \typedef Graph
-    \brief A struct representing a graph
-*/
-typedef struct Graph
-{
-    size_t num_nodes;
-    NodeType **nodes;
-    NodeType **node_lookup;
-    bool is_directed;
-    bool is_weighted;
-    size_t max_degree;
-} GraphType;
+typedef struct Edge {
+    node_t* self;
+    uint32_t distance;
+    struct Edge* next;
+} edge_t;
+
+typedef struct Graph {
+    uint32_t numNodes;
+    node_t* head;
+    node_t* nodeMap[HASH_MAP_SIZE]; // Hash map for quick node lookup
+} graph_t;
+
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
-    /*!
-        \brief Create a graph
-        \param self The graph to create
-    */
-    void graphCreate(GraphType *self);
+/*!
+    \brief Hash function for the graph
+    \param id The id to hash
+    \return The hashed id
+*/
+uint32_t hash(uint32_t id);
 
-    /*!
-        \brief Destroy a graph
-        \param self The graph to destroy
-    */
-    void graphDestroy(GraphType *self);
+/*!
+    \brief Create a graph
+    \return A pointer to the graph
+*/
+graph_t* createGraph(void);
 
-    /*!
-        \brief Tell if a graph is empty
-        \param self The graph to check
-        \return True if the graph is empty, false otherwise
-    */
-    bool graphEmpty(const GraphType *self);
+/*!
+    \brief Add an edge to the graph
+    \param graph The graph to add the edge to
+    \param from The starting node
+    \param to The ending node
+    \param distance The distance between the nodes
+    \return True if the edge was added, false otherwise
+*/
+bool addEdge(graph_t* graph, uint32_t from, uint32_t to, uint32_t distance);
 
-    /*!
-        \brief Get the number of nodes in the graph
-        \param self The graph to check
-        \return The number of nodes in the graph
-    */
-    size_t graphSize(const GraphType *self);
+/*!
+    \brief Detect a cycle in the graph
+    \param node The node to check
+    \param visited The visited nodes
+    \return True if a cycle is detected, false otherwise
+*/
+bool dfsCheckDAG(node_t* node, uint8_t* visited);
 
-    /*!
-        \brief Tell if a graph contains a node
-        \param self The graph to check
-        \param id The id of the node to look for
-        \return True if the graph contains the node, false otherwise
-    */
-    bool graphContains(const GraphType *self, uint32_t id);
+/*!
+    \brief Check if the graph is a Directed Acyclic Graph (DAG)
+    \param graph The graph to check
+    \return True if the graph is a DAG, false otherwise
+*/
+bool isDAG(graph_t* graph);
 
+/*!
+    \brief Depth-first search
+    \param node The node to start the search from
+    \param visited The visited nodes
+    \param idToIndex The mapping of node id to index
+    \return True if the search was successful, false otherwise
+*/
+bool dfs(node_t* node, bool* visited, uint32_t* idToIndex);
 
-    /*!
-        \brief Tell if a link exists between two nodes
-        \param self The graph to check
-        \param id1 The id of the first node
-        \param id2 The id of the second node
-        \return True if the link exists, false otherwise
-    */
-    bool linkExist(GraphType *self, uint32_t id1, uint32_t id2);
+/*!
+    \brief Check if all nodes are connected
+    \param graph The graph to check
+    \return True if all nodes are connected, false otherwise
+*/
+bool areAllNodesAccessible(graph_t* graph);
 
-    /*!
-        \brief Create a node in the graph
-        \param self The graph to create the node in
-        \param id The id of the node to create
-        \return True if the node was created, false otherwise
-    */
-    bool graphCreateNode(GraphType *self, uint32_t id);
+/*!
+    \brief Print the graph
+    \param graph The graph to print
+*/
+void printGraph(graph_t* graph);
 
-    /*!
-        \brief Create a link between two nodes in the graph
-        \param self The graph to create the link in
-        \param parentId The id of the parent node
-        \param id The id of the node to link to
-        \param distance The distance between the two nodes
-        \return True if the link was created, false otherwise
-    */
-    bool createLink(GraphType *self, uint32_t parentId, uint32_t id, uint32_t distance);
-
-    /*!
-        \brief Remove a node from the graph
-        \param self The graph to remove the node from
-        \param id The id of the node to remove
-        \return True if the node was removed, false otherwise
-    */
-    bool graphRemoveNode(GraphType *self, uint32_t id);
-
-    /*!
-        \brief Remove a link between two nodes in the graph
-        \param self The graph to remove the link from
-        \param parentId The id of the parent node
-        \param id The id of the node to unlink
-        \return True if the link was removed, false otherwise
-    */
-    bool removeLink(GraphType *self, uint32_t parentId, uint32_t id);
-
-    /*!
-        \brief Get the degree of a node in the graph
-        \param self The graph to check
-        \param id The id of the node
-        \param max_nodes The maximum number of nodes in the graph
-        \return The degree of the node
-    */
-    bool dfsCheckLoop(NodeType *node, bool *visited, bool *recStack, size_t max_nodes);
-
-    /*!
-        \brief Check if the graph has a loop
-        \param graph The graph to check
-        \return True if the graph has a loop, false otherwise
-    */
-    bool hasLoop(GraphType *graph);
-
-    /*!
-        \brief Get the degree of a node in the graph
-        \param self The graph to check
-        \param id The id of the node
-        \param max_nodes The maximum number of nodes in the graph
-        \return The degree of the node
-    */
-    void dfsReachable(NodeType *node, bool *visited, size_t max_nodes);
-
-    /*!
-        \brief Check if all nodes are reachable
-        \param graph The graph to check
-        \return True if all nodes are reachable, false otherwise
-    */
-    bool areAllNodesReachable(GraphType *graph);
+/*!
+    \brief Free the graph
+    \param graph The graph to free
+*/
+void freeGraph(graph_t* graph);
 
 #ifdef __cplusplus
 }

@@ -6,280 +6,210 @@
 
 #include "graphLib.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
+#define UNVISITED 0
+#define VISITING  1
+#define VISITED   2
 
-void graphCreate(GraphType *self) {
-    self->num_nodes = 0;
-    self->nodes = NULL;
-    self->node_lookup = NULL;
-    self->is_directed = false;
-    self->is_weighted = false;
-    self->max_degree = 0;
+graph_t* createGraph(void) {
+    graph_t* graph = (graph_t*)malloc(sizeof(graph_t));
+    if (!graph) {
+        return NULL;
+    }
+    graph->numNodes = 0;
+    graph->head = NULL;
+    return graph;
 }
 
-void graphDestroy(GraphType *self) {
-    for (size_t i = 0; i < self->num_nodes; ++i) {
-        free(self->nodes[i]->parents);
-        free(self->nodes[i]->childs);
-        free(self->nodes[i]);
-    }
-    free(self->nodes);
-    free(self->node_lookup);
-    self->num_nodes = 0;
-    self->nodes = NULL;
-    self->node_lookup = NULL;
+uint32_t hash(uint32_t id) {
+    return id % HASH_MAP_SIZE;
 }
 
-bool graphEmpty(const GraphType *self) {
-    return self->num_nodes == 0;
-}
+bool addEdge(graph_t* graph, uint32_t from, uint32_t to, uint32_t distance) {
+    uint32_t fromHash = hash(from);
+    uint32_t toHash = hash(to);
 
-size_t graphSize(const GraphType *self) {
-    return self->num_nodes;
-}
+    node_t* fromNode = graph->nodeMap[fromHash];
+    node_t* toNode = graph->nodeMap[toHash];
 
-bool graphContains(const GraphType *self, uint32_t id) {
-    for (size_t i = 0; i < self->num_nodes; ++i) {
-        if (self->nodes[i]->id == id) {
-            return true;
-        }
+    while (fromNode != NULL && fromNode->id != from) {
+        fromNode = fromNode->next;
     }
-    return false;
-}
-
-bool linkExist(GraphType *self, uint32_t id1, uint32_t id2) {
-    for (size_t i = 0; i < self->num_nodes; ++i) {
-        if (self->nodes[i]->id == id1) {
-            for (size_t j = 0; j < self->nodes[i]->num_links; ++j) {
-                if (self->nodes[i]->childs[j].node->id == id2) {
-                    return true;
-                }
-            }
-        }
-    }
-    return false;
-}
-
-bool graphCreateNode(GraphType *self, uint32_t id) {
-    if (graphContains(self, id)) {
-        return false;
+    while (toNode != NULL && toNode->id != to) {
+        toNode = toNode->next;
     }
 
-    NodeType *new_node = (NodeType *)malloc(sizeof(NodeType));
-    if (!new_node) {
-        return false;
-    }
-
-    new_node->id = id;
-    new_node->num_links = 0;
-    new_node->parents = NULL;
-    new_node->childs = NULL;
-    new_node->visited = false;
-    new_node->discovery_time = 0;
-    new_node->finish_time = 0;
-
-    self->nodes = (NodeType **)realloc(self->nodes, (self->num_nodes + 1) * sizeof(NodeType *));
-    self->node_lookup = (NodeType **)realloc(self->node_lookup, (self->num_nodes + 1) * sizeof(NodeType *));
-
-    if (!self->nodes || !self->node_lookup) {
-        free(new_node);
-        return false;
-    }
-
-    self->nodes[self->num_nodes] = new_node;
-    self->node_lookup[self->num_nodes] = new_node;
-    self->num_nodes++;
-
-    return true;
-}
-
-bool createLink(GraphType *self, uint32_t parentId, uint32_t id, uint32_t distance) {
-    NodeType *parent = NULL;
-    NodeType *child = NULL;
-
-    for (size_t i = 0; i < self->num_nodes; ++i) {
-        if (self->nodes[i]->id == parentId) {
-            parent = self->nodes[i];
-        }
-        if (self->nodes[i]->id == id) {
-            child = self->nodes[i];
-        }
-    }
-
-    if (!parent || !child) {
-        return false;
-    }
-
-    parent->childs = (LinkType *)realloc(parent->childs, (parent->num_links + 1) * sizeof(LinkType));
-    if (!parent->childs) {
-        return false;
-    }
-
-    parent->childs[parent->num_links].node = child;
-    parent->childs[parent->num_links].distance = distance;
-    parent->num_links++;
-
-    if (!self->is_directed) {
-        child->parents = (LinkType *)realloc(child->parents, (child->num_links + 1) * sizeof(LinkType));
-        if (!child->parents) {
+    if (fromNode == NULL) {
+        fromNode = (node_t*)malloc(sizeof(node_t));
+        if (!fromNode) {
             return false;
         }
+        fromNode->id = from;
+        fromNode->head = NULL;
+        fromNode->next = graph->nodeMap[fromHash];
+        graph->nodeMap[fromHash] = fromNode;
 
-        child->parents[child->num_links].node = parent;
-        child->parents[child->num_links].distance = distance;
-        child->num_links++;
+        fromNode->next = graph->head;
+        graph->head = fromNode;
+        graph->numNodes++;
+    }
+
+    if (toNode == NULL) {
+        toNode = (node_t*)malloc(sizeof(node_t));
+        if (!toNode) {
+            return false;
+        }
+        toNode->id = to;
+        toNode->head = NULL;
+        toNode->next = graph->nodeMap[toHash];
+        graph->nodeMap[toHash] = toNode;
+
+        toNode->next = graph->head;
+        graph->head = toNode;
+        graph->numNodes++;
+    }
+
+    edge_t* edge = (edge_t*)malloc(sizeof(edge_t));
+    if (!edge) {
+        return false;
+    }
+    edge->self = toNode;
+    edge->distance = distance;
+    edge->next = fromNode->head;
+    fromNode->head = edge;
+
+    return true;
+}
+
+bool dfsCheckDAG(node_t* node, uint8_t* visited) {
+    if (visited[node->id] == VISITING) {
+        return false;
+    }
+    if (visited[node->id] == VISITED) {
+        return true;
+    }
+
+    visited[node->id] = VISITING;
+
+    edge_t* edge = node->head;
+    while (edge) {
+        if (!dfsCheckDAG(edge->self, visited)) {
+            return false;
+        }
+        edge = edge->next;
+    }
+
+    visited[node->id] = VISITED;
+    return true;
+}
+
+bool isDAG(graph_t* graph) {
+    if (!graph || !graph->head) {
+        return true;
+    }
+
+    uint8_t* visited = (uint8_t*)calloc(graph->numNodes, sizeof(uint8_t));
+    if (!visited) {
+        perror("Failed to allocate memory for visited array");
+        exit(EXIT_FAILURE);
+    }
+
+    node_t* current = graph->head;
+    while (current) {
+        if (visited[current->id] == UNVISITED) {
+            if (!dfsCheckDAG(current, visited)) {
+                free(visited);
+                return false;
+            }
+        }
+        current = current->next;
+    }
+
+    free(visited);
+    return true;
+}
+
+bool dfs(node_t* node, bool* visited, uint32_t* idToIndex) {
+    if (visited[idToIndex[node->id]]) {
+        return false;
+    }
+
+    visited[idToIndex[node->id]] = true;
+
+    edge_t* edge = node->head;
+    while (edge) {
+        dfs(edge->self, visited, idToIndex);
+        edge = edge->next;
     }
 
     return true;
 }
 
-bool graphRemoveNode(GraphType *self, uint32_t id) {
-    for (size_t i = 0; i < self->num_nodes; ++i) {
-        if (self->nodes[i]->id == id) {
-            free(self->nodes[i]->parents);
-            free(self->nodes[i]->childs);
-            free(self->nodes[i]);
-
-            for (size_t j = i; j < self->num_nodes - 1; ++j) {
-                self->nodes[j] = self->nodes[j + 1];
-            }
-
-            self->num_nodes--;
-            self->nodes = (NodeType **)realloc(self->nodes, self->num_nodes * sizeof(NodeType *));
-            self->node_lookup = (NodeType **)realloc(self->node_lookup, self->num_nodes * sizeof(NodeType *));
-
-            return true;
-        }
-    }
-    return false;
-}
-
-bool removeLink(GraphType *self, uint32_t parentId, uint32_t id) {
-    NodeType *parent = NULL;
-
-    for (size_t i = 0; i < self->num_nodes; ++i) {
-        if (self->nodes[i]->id == parentId) {
-            parent = self->nodes[i];
-            break;
-        }
-    }
-
-    if (!parent) {
+bool areAllNodesAccessible(graph_t* graph) {
+    if (!graph || !graph->head) {
         return false;
     }
 
-    for (size_t i = 0; i < parent->num_links; ++i) {
-        if (parent->childs[i].node->id == id) {
-            for (size_t j = i; j < parent->num_links - 1; ++j) {
-                parent->childs[j] = parent->childs[j + 1];
-            }
-            parent->num_links--;
-            parent->childs = (LinkType *)realloc(parent->childs, parent->num_links * sizeof(LinkType));
-            return true;
-        }
+    bool* visited = (bool*)calloc(graph->numNodes, sizeof(bool));
+    if (!visited) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(EXIT_FAILURE);
     }
 
-    return false;
-}
-
-bool dfsCheckLoop(NodeType *node, bool *visited, bool *recStack, size_t max_nodes) {
-    if (node == NULL || node->id >= max_nodes) {
-        return false;
-    }
-
-    if (!visited[node->id]) {
-        visited[node->id] = true;
-        recStack[node->id] = true;
-
-        for (size_t i = 0; i < node->num_links; ++i) {
-            NodeType *child = node->childs[i].node;
-            if (child == NULL || child->id >= max_nodes) {
-                continue;
-            }
-            if (!visited[child->id] && dfsCheckLoop(child, visited, recStack, max_nodes)) {
-                return true;
-            } else if (recStack[child->id]) {
-                return true;
-            }
-        }
-    }
-    recStack[node->id] = false;
-    return false;
-}
-
-bool hasLoop(GraphType *graph) {
-    if (graph == NULL || graph->nodes == NULL || graph->num_nodes == 0) {
-        return false;
-    }
-
-    bool *visited = calloc(graph->num_nodes, sizeof(bool));
-    bool *recStack = calloc(graph->num_nodes, sizeof(bool));
-    if (visited == NULL || recStack == NULL) {
+    node_t* current = graph->head;
+    uint32_t index = 0;
+    uint32_t* idToIndex = (uint32_t*)malloc(graph->numNodes * sizeof(uint32_t));
+    if (!idToIndex) {
+        fprintf(stderr, "Memory allocation failed\n");
         free(visited);
-        free(recStack);
-        return false;
+        exit(EXIT_FAILURE);
     }
 
-    for (size_t i = 0; i < graph->num_nodes; ++i) {
-        if (graph->nodes[i] == NULL) {
-            continue;
-        }
-        if (!visited[i] && dfsCheckLoop(graph->nodes[i], visited, recStack, graph->num_nodes)) {
-            free(visited);
-            free(recStack);
-            return true;
-        }
+    while (current) {
+        idToIndex[current->id] = index++;
+        current = current->next;
     }
 
-    free(visited);
-    free(recStack);
-    return false;
-}
+    dfs(graph->head, visited, idToIndex);
 
-void dfsReachable(NodeType *node, bool *visited, size_t max_nodes) {
-    if (node == NULL || node->id >= max_nodes) {
-        return;
-    }
-
-    visited[node->id] = true;
-    for (size_t i = 0; i < node->num_links; ++i) {
-        NodeType *child = node->childs[i].node;
-        if (child != NULL && child->id < max_nodes && !visited[child->id]) {
-            dfsReachable(child, visited, max_nodes);
-        }
-    }
-}
-
-bool areAllNodesReachable(GraphType *graph) {
-    if (graph == NULL || graph->nodes == NULL || graph->num_nodes == 0) {
-        return false;
-    }
-
-    bool *visited = calloc(graph->num_nodes, sizeof(bool));
-    if (visited == NULL) {
-        return false;
-    }
-
-    for (size_t i = 0; i < graph->num_nodes; ++i) {
-        if (graph->nodes[i] != NULL) {
-            dfsReachable(graph->nodes[i], visited, graph->num_nodes);
+    bool allAccessible = true;
+    for (uint32_t i = 0; i < graph->numNodes; i++) {
+        if (!visited[i]) {
+            allAccessible = false;
             break;
         }
     }
 
-    for (size_t i = 0; i < graph->num_nodes; ++i) {
-        if (graph->nodes[i] != NULL && !visited[graph->nodes[i]->id]) {
-            printf("Node %u is not reachable\n", graph->nodes[i]->id); // Debugging log
-            free(visited);
-            return false;
-        }
-    }
-
     free(visited);
-    return true;
+    free(idToIndex);
+
+    return allAccessible;
+}
+void printGraph(graph_t* graph){
+    node_t* current = graph->head;
+    while (current) {
+        printf("Node %u: ", current->id);
+        edge_t* edge = current->head;
+        while (edge) {
+            printf("\t->%u", edge->self->id);
+            edge = edge->next;
+        }
+        printf("\n");
+        current = current->next;
+    }
 }
 
-
+void freeGraph(graph_t* graph) {
+    node_t* current = graph->head;
+    while (current) {
+        edge_t* edge = current->head;
+        while (edge) {
+            edge_t* next = edge->next;
+            free(edge);
+            edge = next;
+        }
+        node_t* next = current->next;
+        free(current);
+        current = next;
+    }
+    free(graph);
+}

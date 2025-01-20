@@ -6,13 +6,6 @@
 
 #include "csv_reader.h"
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdbool.h>
-
-#define CHUNCK_SIZE 64
-
 bool checkFileExists(const char *filename)
 {
     FILE *file = fopen(filename, "r");
@@ -24,21 +17,38 @@ bool checkFileExists(const char *filename)
     return false;
 }
 
-bool readFileLine(FILE *file , LineType *line){
-    char chunck[CHUNCK_SIZE];
-    char* token;
 
-    fgets(chunck, CHUNCK_SIZE, file);
-    if (feof(file))
-    {
-        return false;
+void readDataset(graph_t* graph, const char* filename) {
+    printf("Reading dataset from file: %s\n", filename);
+
+    FILE* file = fopen(filename, "r");
+    if (!file) {
+        perror("Failed to open file");
+        exit(EXIT_FAILURE);
     }
 
-    token = strtok(chunck, ",");
-    line->id = token;
-    token = strtok(NULL, ",");
-    line->destId = token;
-    token = strtok(NULL, ",");
-    line->distance = strtoul(token, NULL, 10);
-    return true;
+    char buffer[1024]; // Buffer for reading lines
+    uint32_t pointA, pointB, distance;
+    size_t lineCount = 0;
+
+    while (fgets(buffer, sizeof(buffer), file)) {
+        if (sscanf(buffer, "%u, %u, %u", &pointA, &pointB, &distance) != 3) {
+            fprintf(stderr, "Malformed line at %zu: %s\n", lineCount + 1, buffer);
+            continue;
+        }
+
+        if (!addEdge(graph, pointA, pointB, distance)) {
+            fprintf(stderr, "Error: Memory allocation failed at line %zu\n", lineCount + 1);
+            fclose(file);
+            exit(EXIT_FAILURE);
+        }
+
+        lineCount++;
+    }
+
+    fclose(file);
+    printf("Dataset read successfully. Total lines processed: %zu\n", lineCount);
 }
+
+
+

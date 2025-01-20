@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#include "graphLib.h"
 
 typedef struct line
 {
@@ -35,7 +36,7 @@ bool checkFileExists(const char *filename);
     \param line the line to read
     \return A boolean indicating if the line was read
 */
-bool readFileLine(FILE *file , LineType *line);
+void readDataset(graph_t* graph, const char* filename);
 
 #ifdef __cplusplus
 }

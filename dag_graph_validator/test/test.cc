@@ -1,14 +1,8 @@
 /*!
     \file
-    \brief Thie file contains the tests for all DAG graph validator functions
+    \brief This file contains the tests for all DAG graph validator functions
     \authors CHARLES Rémy, CARON Maxime
 */
-
-#include <cassert>
-#include <cstdlib>
-#include <cstring>
-#include <array>
-#include <ctime>
 
 #include "gtest/gtest.h"
 #include "graphLib.h"
@@ -16,151 +10,102 @@
 #define BIG_SIZE 10000
 
 /***********************************************************************
- * Control Test
- ***********************************************************************/
-
-TEST(ExampleTest, Example)
-{
-  ASSERT_EQ(1, 1);
-}
-
-/***********************************************************************
  * Graph Test
  ***********************************************************************/
 
-#include <gtest/gtest.h>
-#include "graphLib.h"
-
-// Test graph creation and destruction
-TEST(GraphTest, GraphInitialization) {
-    GraphType graph;
-    graphCreate(&graph);
-
-    EXPECT_EQ(graph.num_nodes, static_cast<size_t>(0)) << "Graph should start with no nodes.";
-    EXPECT_EQ(graph.nodes, nullptr) << "Nodes pointer should be null initially.";
-    EXPECT_EQ(graph.node_lookup, nullptr) << "Node lookup pointer should be null initially.";
-    EXPECT_FALSE(graph.is_directed) << "Graph should be undirected by default.";
-    EXPECT_FALSE(graph.is_weighted) << "Graph should be unweighted by default.";
-    EXPECT_EQ(graph.max_degree, static_cast<size_t>(0)) << "Graph should have max degree of 0 initially.";
-
-    graphDestroy(&graph);
+bool insertNodesSmallAmount(graph_t* graph) {
+    for (uint32_t i = 0; i < 10; ++i) {
+        if (!addEdge(graph, i, i+1, 1)) {
+            return false;
+        }
+    }
+    return true;
 }
 
-// Test graphEmpty function
-TEST(GraphTest, EmptyGraph) {
-    GraphType graph;
-    graphCreate(&graph);
-    EXPECT_TRUE(graphEmpty(&graph)) << "Graph should be empty initially.";
-    graphDestroy(&graph);
+bool insertNodesLargeAmount(graph_t* graph) {
+    for (uint32_t i = 0; i < BIG_SIZE; ++i) {
+        if (!addEdge(graph, i, i+1, 1)) {
+            return false;
+        }
+    }
+    return true;
 }
 
-// Test adding a node
-TEST(GraphTest, AddNode) {
-    GraphType graph;
-    graphCreate(&graph);
-
-    uint32_t nodeId = 1;
-    EXPECT_TRUE(graphCreateNode(&graph, nodeId)) << "Node creation should succeed.";
-    EXPECT_EQ(graph.num_nodes, 1) << "Graph should have one node.";
-    EXPECT_TRUE(graphContains(&graph, nodeId)) << "Graph should contain the added node.";
-
-    graphDestroy(&graph);
+TEST(GraphTest, CreateGraph) {
+    graph_t* graph = createGraph();
+    ASSERT_NE(graph, nullptr);
+    freeGraph(graph);
 }
 
-// Test adding a link
-TEST(GraphTest, AddLink) {
-    GraphType graph;
-    graphCreate(&graph);
-
-    uint32_t nodeId1 = 1, nodeId2 = 2;
-    graphCreateNode(&graph, nodeId1);
-    graphCreateNode(&graph, nodeId2);
-
-    EXPECT_TRUE(createLink(&graph, nodeId1, nodeId2, 10)) << "Link creation should succeed.";
-    EXPECT_TRUE(linkExist(&graph, nodeId1, nodeId2)) << "Link should exist between the nodes.";
-
-    graphDestroy(&graph);
+TEST(GraphTest, AddEdge) {
+    graph_t* graph = createGraph();
+    ASSERT_NE(graph, nullptr);
+    ASSERT_TRUE(addEdge(graph, 1, 2, 1));
+    freeGraph(graph);
 }
 
-// Test removing a node
-TEST(GraphTest, RemoveNode) {
-    GraphType graph;
-    graphCreate(&graph);
-
-    uint32_t nodeId = 1;
-    graphCreateNode(&graph, nodeId);
-
-    EXPECT_TRUE(graphRemoveNode(&graph, nodeId)) << "Node removal should succeed.";
-    EXPECT_FALSE(graphContains(&graph, nodeId)) << "Graph should not contain the removed node.";
-
-    graphDestroy(&graph);
+TEST(GraphTest, AddEdgeSmallAmount) {
+    graph_t* graph = createGraph();
+    ASSERT_NE(graph, nullptr);
+    ASSERT_TRUE(insertNodesSmallAmount(graph));
+    freeGraph(graph);
 }
 
-// Test removing a link
-TEST(GraphTest, RemoveLink) {
-    GraphType graph;
-    graphCreate(&graph);
-
-    uint32_t nodeId1 = 1, nodeId2 = 2;
-    graphCreateNode(&graph, nodeId1);
-    graphCreateNode(&graph, nodeId2);
-    createLink(&graph, nodeId1, nodeId2, 10);
-
-    EXPECT_TRUE(removeLink(&graph, nodeId1, nodeId2)) << "Link removal should succeed.";
-    EXPECT_FALSE(linkExist(&graph, nodeId1, nodeId2)) << "Link should not exist after removal.";
-
-    graphDestroy(&graph);
+TEST(GraphTest, AddEdgeLargeAmount) {
+    graph_t* graph = createGraph();
+    ASSERT_NE(graph, nullptr);
+    ASSERT_TRUE(insertNodesLargeAmount(graph));
+    freeGraph(graph);
 }
 
-// Test graph loop detection
-TEST(GraphTest, DetectLoop) {
-    GraphType graph;
-    graphCreate(&graph);
+/***********************************************************************
+ * Cycle Test
+ ***********************************************************************/
 
-    uint32_t nodeId1 = 1, nodeId2 = 2;
-    graphCreateNode(&graph, nodeId1);
-    graphCreateNode(&graph, nodeId2);
-    createLink(&graph, nodeId1, nodeId2, 10);
-    createLink(&graph, nodeId2, nodeId1, 10); // Creates a loop
-
-    EXPECT_TRUE(hasLoop(&graph)) << "Graph should detect a loop.";
-
-    graphDestroy(&graph);
+TEST(CycleTest, NoCycle) {
+    graph_t* graph = createGraph();
+    ASSERT_NE(graph, nullptr);
+    ASSERT_TRUE(insertNodesSmallAmount(graph));
+    ASSERT_TRUE(isDAG(graph));
+    freeGraph(graph);
 }
 
-// Test checking if all nodes are reachable
-TEST(GraphTest, AllNodesReachable) {
-    GraphType graph;
-    graphCreate(&graph);
-
-    uint32_t nodeId1 = 1, nodeId2 = 2;
-    graphCreateNode(&graph, nodeId1);
-    graphCreateNode(&graph, nodeId2);
-    createLink(&graph, nodeId1, nodeId2, 10);
-
-    EXPECT_TRUE(areAllNodesReachable(&graph)) << "All nodes should be reachable.";
-
-    graphDestroy(&graph);
+TEST(CycleTest, CycleExists) {
+    graph_t* graph = createGraph();
+    ASSERT_NE(graph, nullptr);
+    ASSERT_TRUE(insertNodesSmallAmount(graph));
+    ASSERT_TRUE(addEdge(graph, 10, 0, 1)); // Creating a cycle
+    ASSERT_FALSE(isDAG(graph));
+    freeGraph(graph);
 }
 
-// Test graph with unreachable node
-TEST(GraphTest, UnreachableNode) {
-    GraphType graph;
-    graphCreate(&graph);
+/***********************************************************************
+ * Connectivity Test
+ ***********************************************************************/
 
-    uint32_t nodeId1 = 1, nodeId2 = 2;
-    graphCreateNode(&graph, nodeId1);
-    graphCreateNode(&graph, nodeId2); // No link between nodeId1 and nodeId2
-
-    EXPECT_FALSE(areAllNodesReachable(&graph)) << "Graph should detect an unreachable node.";
-
-    graphDestroy(&graph);
+TEST(ConnectivityTest, AllNodesConnected) {
+    graph_t* graph = createGraph();
+    ASSERT_NE(graph, nullptr);
+    ASSERT_TRUE(insertNodesSmallAmount(graph));
+    addEdge(graph, 10, 0, 1);
+    ASSERT_TRUE(areAllNodesAccessible(graph));
+    freeGraph(graph);
 }
 
+TEST(ConnectivityTest, NotAllNodesConnected) {
+    graph_t* graph = createGraph();
+    ASSERT_NE(graph, nullptr);
+    ASSERT_TRUE(insertNodesSmallAmount(graph));
+    ASSERT_TRUE(addEdge(graph, 11, 20, 1));
+    ASSERT_FALSE(areAllNodesAccessible(graph));
+    freeGraph(graph);
+}
 
+/***********************************************************************
+ * Run all tests
+ ***********************************************************************/
 
-int main(int argc, char *argv[])
-{
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }

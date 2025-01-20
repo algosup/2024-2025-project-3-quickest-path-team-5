@@ -10,116 +10,50 @@
 
 #define FILE_PATH "../../data/USA-roads.csv"
 #define MERMAID_FILE "../../data/USA-roads.txt"
+#include <sys/resource.h> // For memory usage tracking
 
-int main(void)
-{
-    printf("Verify that file %s exists\n", FILE_PATH);
-
-    // Start measuring execution time
-    clock_t start_time = clock();
-
-    // Check if the file exists
-    if (checkFileExists(FILE_PATH))
-    {
-        printf("File exists\n");
-    }
-    else
-    {
-        printf("File does not exist\n");
-        return 1;
+int main(void) {
+    if(!checkFileExists(FILE_PATH)) {
+        fprintf(stderr, "File not found: %s\n", FILE_PATH);
+        exit(EXIT_FAILURE);
     }
 
-    FILE *file = fopen(FILE_PATH, "r");
-    if (!file)
-    {
-        printf("Error: could not open file %s\n", FILE_PATH);
-        return 1;
+    struct rusage usage;
+    graph_t* graph = createGraph();
+    clock_t begin = clock();    
+    readDataset(graph, FILE_PATH);
+    clock_t end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    printf("Time spent reading the dataset: %f seconds\n", time_spent);
+    getrusage(RUSAGE_SELF, &usage);
+    float memUsage = (float)(usage.ru_maxrss / (1024.0f * 1024.0f)); // Convert to MB
+    printf("Memory usage: %d MB\n\n", (int)memUsage);
+
+    begin = clock();    
+    if (isDAG(graph)) {
+        printf("The graph is a Directed Acyclic Graph (DAG).\n");
+    } else {
+        printf("The graph is not a DAG.\n");
     }
+    end = clock();
+    time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    printf("Time spent checking for cycles: %f seconds\n", time_spent);
+    memUsage = (float)(usage.ru_maxrss / (1024.0f * 1024.0f)); // Convert to MB
+    printf("Memory usage: %d MB\n\n", (int)memUsage);
 
-    // Initialize the graph
-    GraphType graph;
-    graphCreate(&graph);
-
-    LineType *line = malloc(sizeof(LineType));
-    while (readFileLine(file, line)) // Assumes `readFileLine` returns true on success
-    {
-        if (line->id == NULL || line->destId == NULL)
-        {
-            continue; // Skip invalid lines
-        }
-
-        // Convert IDs to integers
-        uint32_t id = strtoul(line->id, NULL, 10);
-        uint32_t destId = strtoul(line->destId, NULL, 10);
-
-        // Add nodes if they do not exist
-        if (!graphContains(&graph, id))
-        {
-            if (!graphCreateNode(&graph, id))
-            {
-                printf("Error: Failed to create node with ID %u\n", id);
-                fclose(file);
-                graphDestroy(&graph);
-                return 1;
-            }
-        }
-
-        if (!graphContains(&graph, destId))
-        {
-            if (!graphCreateNode(&graph, destId))
-            {
-                printf("Error: Failed to create node with ID %u\n", destId);
-                fclose(file);
-                graphDestroy(&graph);
-                return 1;
-            }
-        }
-
-        // Create a link between the nodes
-        if (!createLink(&graph, id, destId, line->distance))
-        {
-            printf("Error: Failed to create link between %u and %u\n", id, destId);
-            fclose(file);
-            graphDestroy(&graph);
-            return 1;
-        }
-
-        // reset line
-        line->id = NULL;
-        line->destId = NULL;
-        line->distance = 0;
+    begin = clock();    
+    if (areAllNodesAccessible(graph)) {
+        printf("All nodes are connected.\n");
+    } else {
+        printf("Not all nodes are connected.\n");
     }
-    free(line);
-    fclose(file);
+    end = clock();
+    time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    printf("Time spent checking for connectivity: %f seconds\n", time_spent);
+    memUsage = (float)(usage.ru_maxrss / (1024.0f * 1024.0f)); // Convert to MB
+    printf("Memory usage: %d MB\n\n", (int)memUsage);
 
-    // Check if the graph is empty
-    if (graphEmpty(&graph))
-    {
-        printf("Graph is empty\n");
-        graphDestroy(&graph);
-        return 1;
-    }
-
-    bool has_loop = hasLoop(&graph);
-    bool all_reachable = areAllNodesReachable(&graph);
-
-    // Display results
-    printf("Graph has %sloop\n", has_loop ? "a " : "no ");
-    printf("All nodes are %sreachable\n", all_reachable ? "" : "not ");
-
-    // End measuring execution time
-    clock_t end_time = clock();
-    double time_taken = (double)(end_time - start_time) / CLOCKS_PER_SEC;
-
-    // Summary
-    printf("\n=== Summary ===\n");
-    printf("Graph Analysis Results:\n");
-    printf("- Loop: %s\n", has_loop ? "Yes" : "No");
-    printf("- All Nodes Reachable: %s\n", all_reachable ? "Yes" : "No");
-    printf("Execution Time: %.2f seconds\n", time_taken);
-
-    // Destroy the graph to free resources
-    graphDestroy(&graph);
+    freeGraph(graph);
 
     return 0;
 }
