@@ -278,8 +278,9 @@ For this project all the deadlines for the customer are February 7th 2025. But o
 | Functional Specifications Document  | 20/01/2025 | [functionalSpecifications.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/functional_specifications/FunctionalSpecifications.md) |
 | Technical Specifications Document  | 27/01/2024 | [technicalSpecifications.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/technical_specifications/TechnicalSpecifications.md) |
 | Code | 07/01/2025  | [code](needs to be updated) |
-| Test Plan | 07/01/2025 | [qualityAssurance/Test-Plan.md](needs to be updated) | 
-| User Manual | 07/01/2025 | [User-Manual](needs to be updated) | 
+| Test Plan | 07/01/2025 | [TestPlan.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/QA/TestPlan.md) | 
+| Test Cases | 07/01/2025 | [TestPlan.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/QA/TestCases.md) |
+| User Manual | 07/01/2025 | [User-Manual]([needs to be updated](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/Manual/usermanuel.md)) | 
 
 ---
 
@@ -438,7 +439,7 @@ This algorithm will be implemented in C, as it is a high-performance language at
 
 ## APIs
 
-An API (Application Programming Interface) is a set of rules and protocols that allows different software applications to communicate and share data with each other. It defines how requests and responses should be formatted, enabling developers to interact with external services or integrate functionalities without needing to understand their internal workings.
+An API is a set of rules and protocols that allows different software applications to communicate and share data with each other. It defines how requests and responses should be formatted, enabling developers to interact with external services or integrate functionalities without needing to understand their internal workings.
 
 <br>
 
