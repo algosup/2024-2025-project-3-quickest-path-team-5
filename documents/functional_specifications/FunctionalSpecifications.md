@@ -81,7 +81,7 @@
   - [Risk](#risk)
     - [Competitive Landscape](#competitive-landscape)
     - [Product problem](#product-problem)
-    - [Data](#data)
+    - [Data Security](#data-security)
     - [Risk Management Plan](#risk-management-plan)
   - [Future Improvements](#future-improvements)
 
@@ -118,11 +118,10 @@ As defined by the project owner, the team is arranged as follows:
 |----------------|-----------------------------|--------------------------------|
 | Franck JEANNIN | Client (ALGOSUP's director) | [Website](https://algosup.com) |
 
-
 ### Glossary
 
-| Term                  | Definition                                                                                  |
-|-----------------------|--------------------------------------------------------------------------------------------|
+| Term                      | Definition                                                                                 |
+|---------------------------|--------------------------------------------------------------------------------------------|
 | **Algorithm**             | A set of clear steps to solve a problem or complete a task, like sorting or searching.     |
 | **API**                   | Application Programming Interface - Rules allowing software to communicate with each other.|
 | **Approximation**         | A method to find a good-enough answer when exact solutions are too hard or slow.           |
@@ -145,7 +144,34 @@ As defined by the project owner, the team is arranged as follows:
 | **STL**                   | Standard Template Library - C++ tools for containers and algorithms.                       |
 | **Test Plan**             | A document describing what, when, and how to test in software.                             |
 | **UI**                    | User Interface - What users see and interact with in software, like buttons and menus.     |
-| **XML**                   | Extensible Markup Language - A flexible format for structuring and exchanging data.         |
+| **XML**                   | Extensible Markup Language - A flexible format for structuring and exchanging data.        |
+            
+| Term              | Definition                                                                                                             |
+|-------------------|------------------------------------------------------------------------------------------------------------------------|
+| **Algorithm**     | A set of clear steps to solve a problem or complete a task, like sorting or searching.                                 |
+| **API**           | Application Programming Interface - Rules allowing software to communicate with each other.                            |
+| **Approximation** | A method to find a good-enough answer when exact solutions are too hard or slow.                                       |
+| **Big O Notation**| Describes how an algorithm's speed changes with input size, like O(n) or O(n²).                                        |
+| **C++**           | A powerful programming language used for games, system software, and fast applications.                                |
+| **CSV**           | Comma-Separated Values - A simple text format for storing data in tables.                                              |
+| **DAG**           | Directed Acyclic Graph - A graph with one-way links and no loops, useful in many systems.                              |
+| **Data Structure**| A way to organize and store data for quick access, like arrays or trees.                                               |
+| **Directed Edge** | A one-way connection between two points in a graph.                                                                    |
+| **Frameworks**    | Pre-built tools or libraries to speed up development, like React or Django.                                            |
+| **GDPR**          | General Data Protection Regulation - EU law for protecting personal data and privacy.                                  |
+| **Graph**         | A collection of points (nodes) connected by lines (edges), like social networks.                                       |
+| **Graph Connectivity** | The degree to which nodes in a graph are linked to each other.                                                    |
+| **Heuristics**    | Quick methods for solving problems, often based on experience.                                                         |
+| **JSON**          | JavaScript Object Notation - A simple format for exchanging data, easier than XML.                                     |
+| **Localhost**     | Refers to your own computer acting as a server, usually at 127.0.0.1.                                                  |
+| **Machine Learning** | Tech that helps computers learn and improve without being explicitly programmed.                                    |
+| **OSRM**          | Open Source Routing Machine - An open-source, high-performance routing engine for calculating routes on road networks. |
+| **REST**          | Representational State Transfer - A way to build scalable, reliable web services.                                      |
+| **SQL Dataset**   | Data organized in tables, often managed with Structured Query Language (SQL).                                          |
+| **STL**           | Standard Template Library - C++ tools for containers and algorithms.                                                   |
+| **Test Plan**     | A document describing what, when, and how to test in software.                                                         |
+| **UI**            | User Interface - What users see and interact with in software, like buttons and menus.                                 |
+| **XML**           | Extensible Markup Language - A flexible format for structuring and exchanging data.                                    |
 
 ---
 
@@ -153,7 +179,9 @@ As defined by the project owner, the team is arranged as follows:
 
 <br>
 
-The requirements are the conditions that must be fulfilled to meet the school's objectives. These represent the core functionalities we need to implement before the deadline. Any additional features developed beyond these requirements will be considered a bonus and add extra value to our work.
+The requirements are the conditions that must be fulfilled to meet the school's objectives.
+These represent the core functionalities we need to implement before the deadline.
+Any additional features developed beyond these requirements will be considered a bonus and add extra value to our work.
 
 <br>
 
@@ -357,7 +385,8 @@ The API is designed to be implemented into existing software solutions rather th
 
 ### Description
 
-This project involves developing a software solution in C++ to determine the quickest path between two landmarks in the United States, such as Los Angeles and New York. The goal is to design an algorithm capable of calculating the optimal route efficiently, ensuring results are delivered in under one second.
+This project involves developing a software solution in C++ to determine the quickest path between two landmarks in the United States, such as Los Angeles and New York.
+The goal is to design an algorithm capable of calculating the optimal route efficiently, ensuring results are delivered in under one second.
 
 <br>
 
@@ -368,7 +397,8 @@ Users simply provide the IDs of two landmarks as input, and the software calcula
 <br>
 
 The data checker is a crucial tool for ensuring that the data is correct, reliable and adapted to the algorithm used, thus avoiding errors later on in the program.
-For example, it checks that there are no infinite loops or duplicate nodes. It also checks that all nodes are present, that there is a possible route for all of them, i.e. that they are related, that the data type is usable and complete for each node, stop and time.
+For example, it checks that there are no infinite loops or duplicate nodes.
+It also checks that all nodes are present, that there is a possible route for all of them, i.e. that they are related, that the data type is usable and complete for each node, stop and time.
 
 <br>
 
@@ -383,7 +413,8 @@ This algorithm will be implemented in C, as it is a high-performance language at
 
 ### APIs
 
-An API is a set of rules and protocols that allows different software applications to communicate and share data with each other. It defines how requests and responses should be formatted, enabling developers to interact with external services or integrate functionalities without needing to understand their internal workings.
+An API is a set of rules and protocols that allows different software applications to communicate and share data with each other.
+It defines how requests and responses should be formatted, enabling developers to interact with external services or integrate functionalities without needing to understand their internal workings.
 
 <br>
 
@@ -549,7 +580,6 @@ To ensure fast computations, a heuristic (e.g., Euclidean distance) is used to e
 
 Input data is provided in a CSV file containing 24 million nodes with the following structure:
 
-
 | Point A | Point B | Travel Time |
 | --  | -- | -- |
 |  6  | 5 | 359 |
@@ -562,7 +592,7 @@ Input data is provided in a CSV file containing 24 million nodes with the follow
 
 <img src="https://imgs.search.brave.com/ZFe7uZ2kdFa_0_6VMQVId4dmkqiexWxnulfp402f_Hk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vd3d3Lm1l/dGhvZGVtYXRocy5m/ci9ncmFwaGVfZGlq/a3N0cmEyLmpwZz93/PTQ3NCZzc2w9MQ" width="400" height="200">
 
-This data is represented as a mathematical graph where:
+The preceding images represent a mathematical graph where:
 
 - Nodes represent landmarks.
 - Edges represent connections between landmarks.
@@ -586,7 +616,7 @@ Home Page: Allows the user to input two landmarks.
 
 Result Page: Displays the total travel time and the landmarks along the route.
 
-Alternatively, you can download the complete file with all the directions from point A to point B.
+You can also download the complete file with all directions from Landmark A to Landmark B in XML or JSON format.
 
 ![alt text](<images/figma_cap_ next_page.png>)
 
@@ -596,7 +626,7 @@ Alternatively, you can download the complete file with all the directions from p
 |-------------------------|--------------------------------------------------------------------|
 | Response time           | The API must respond in less than 1 second for all requests.       |
 | Result accuracy         | The calculated path should not exceed a 10% approximation.         |
-| Robustness              | The API must continue to function under simultaneous requests.     |
+| Scalability             | The API must continue to function under simultaneous requests.     |
 
 ---
 
@@ -604,13 +634,7 @@ Alternatively, you can download the complete file with all the directions from p
 
 ### Costs
 
-| Product | Price | Link |
-| --  | -- | -- |
-|  Design  | 0 | Made by us |
-|  Visual Studio Code  | 0 | Free to use |
-|  Figma  | 0 | Free to use |
-|  Canva | 0 | Free to use |
-|  GitHub | 0 | Free to use |
+There is no cost for this project.
 
 ### User Side
 
@@ -632,15 +656,18 @@ Today's market is highly competitive, with many powerful and advanced companies.
 
 - **Google Maps Platform**: Offers precise, real-time route optimization for various transportation modes. Strong integration with Google services but costly for smaller businesses.  
 - **Mapbox**: Known for customization and flexibility, popular with developers. Limited advanced features compared to Google.  
-- **OpenStreetMap (OSM)**: A free, community-driven option with customizable tools like OSRM. Less precise in certain areas.
+- **OpenStreetMap (OSM)**: A free, community-driven option with customizable tools like OSRM. Less precise in certain areas. OSRM is widely used in mapping, navigation, and logistics applications.
 
 ### Product problem
 
-In any project, no issue should ever be taken lightly, as even seemingly minor problems can lead to significant time losses and disrupt progress. It is essential to approach every detail with attention and care to minimize risks and ensure a smooth workflow. Proactive problem-solving and vigilance are key to avoiding unnecessary setbacks and maintaining the project's momentum.
+In any project, no issue should ever be taken lightly, as even seemingly minor problems can lead to significant time losses and disrupt progress.
+It is essential to approach every detail with attention and care to minimize risks and ensure a smooth workflow. Proactive problem-solving and vigilance are key to avoiding unnecessary setbacks and maintaining the project's momentum.
 
-### Data
+### Data Security
 
-Compliance with the General Data Protection Regulation (GDPR) is crucial in developing software that interacts with users, ensuring personal data protection and privacy. By adhering to these standards, developers not only ensure legal compliance but also build user trust. The GDPR requires transparent data collection, storage, and processing practices, giving users control over their personal information, which is essential for the acceptance of digital technologies.
+Compliance with the General Data Protection Regulation (GDPR) is crucial in developing software that interacts with users, ensuring personal data protection and privacy.
+By adhering to these standards, developers not only ensure legal compliance but also build user trust.
+The GDPR requires transparent data collection, storage, and processing practices, giving users control over their personal information, which is essential for the acceptance of digital technologies.
 
 To kown more about it : [RGPD License](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation)
 
