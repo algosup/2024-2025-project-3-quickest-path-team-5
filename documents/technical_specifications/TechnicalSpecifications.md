@@ -264,7 +264,7 @@ The system architecture is designed to ensure seamless functionality, high perfo
 
 ### 3.2 Pathfinding Algorithms 
 
-To complete this project, we employ two robust algorithms, **Dijkstra<sup>[5](#glossary-5)</sup>'s Algorithm**, to balance fast runtime and accuracy in pathfinding<sup>[4](#glossary-4)</sup>[.][3]  
+To complete this project, we employ a robust algorithms, **Dijkstra<sup>[5](#glossary-5)</sup>'s Algorithm**, to balance fast runtime and accuracy in pathfinding<sup>[4](#glossary-4)</sup>[.][3]  
 
 #### 3.2.1 Dijkstra's Algorithm  
 - **Purpose:**  
@@ -316,7 +316,7 @@ graph TD
 3. **Graph Data Loader:**  
    - If the input is valid, the **Graph Data Loader** retrieves the relevant **graph<sup>[8](#glossary-8)</sup> data** (nodes<sup>[14](#glossary-14)</sup> and edges<sup>[15](#glossary-15)</sup>) from the dataset and loads it into memory[.][3] This data will be used in the next steps to compute the shortest path[.][3]
 4. **Dijkstra's Algorithm Execution:**  
-   - The **Dijkstra's algorithm** to compute the shortest path[.][3] The algorithm calculates the minimal path by evaluating the edges<sup>[15](#glossary-15)</sup> and nodes<sup>[14](#glossary-14)</sup> of the graph based on their weights (distances or costs)[.][3]
+   - The **Dijkstra's algorithm** calculates the minimal path by evaluating the edges<sup>[15](#glossary-15)</sup> and nodes<sup>[14](#glossary-14)</sup> of the graph based on their weights (distances or costs)[.][3]
 5. **Path Result Generator:**  
    - Once the algorithm completes, the **Path Result Generator** processes the results[.][3] It converts the raw output (a list of nodes<sup>[14](#glossary-14)</sup> in the shortest path, including distances) into a structured format that can be easily understood by the client[.][3]
 6. **Response Formatter:**  
@@ -516,7 +516,7 @@ The project will follow the Agile methodology, with development broken down into
 
 | Category                            | Tools/Technologies used                                                                                                          |
 | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Data Checking Application           | C<sup>99</sup> to keep a fast runtime but using a mastered language of our software engineer[.][3]                               |
+| Data Checking Application           | C<sup>99</sup> to keep a fast runtime, and using a mastered language of our software engineer[.][3]                               |
 | REST API<sup>[2](#glossary-2)</sup> | C++<sup>17</sup> to keep a fast runtime and not using to many unnecessary language keeping the project easily maintainable[.][3] |
 | Response Format                     | JSON<sup>[16](#glossary-16)</sup> but we want to implement the possibility to get XML<sup>[17](#glossary-17)</sup> also          |
 | Version Control                     | Git with GitHub[.][3]                                                                                                            |
