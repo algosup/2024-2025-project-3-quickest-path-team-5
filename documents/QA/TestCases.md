@@ -20,16 +20,41 @@ You can find the detailed history of our tests on the [linked spreadsheet](https
 
 Test Template
 
-| Test ID |  |
+| Test ID |  |
 | --- | --- |
-| Description |  |
-| Steps |  |
-| Expected Result |  |
-| Severity |  |
+| Description |  |
+| Steps |  |
+| Expected Result |  |
+| Severity |  |
 
  -->
 
-| Test ID | 01 |
+### Data Verification
+
+| Test ID | 001 |
+| --- | --- |
+| Description | Test Correct dataset |
+| Steps | 1. Using a correct dataset start the data verification process |
+| Expected Result | No errors |
+| Severity | High |
+
+| Test ID | 002 |
+| --- | --- |
+| Description | Test Connectivity problem |
+| Steps | 1. Using a dataset with two blocks starts the data verification process |
+| Expected Result | Error: Navigation Between Any Two Landmarks Impossible |
+| Severity | High |
+
+| Test ID | 003 |
+| --- | --- |
+| Description | Test Dataset with loops |
+| Steps | 1. Using a data set with loops to start the verification process |
+| Expected Result | Error: The Dataset Loops |
+| Severity | High |
+
+### API
+
+| Test ID | 101 |
 | --- | --- |
 | Description | Test a simple path |
 | Steps | 1. For the first Landmark enter: **1** <br> 2. For the second Landmark enter: **28** |
@@ -38,7 +63,7 @@ Test Template
 
 > Paths 1 to 28 will be referenced henceforth as *small test path*
 
-| Test ID | 02 |
+| Test ID | 102 |
 | --- | --- |
 | Description | Test a complex path |
 | Steps | 1. For the first Landmark enter: **22,320,316** <br> For the second Landmark enter: **4,890,697** |
@@ -47,93 +72,79 @@ Test Template
 
 > The path 22,320,316 to 4,890,697 wil be referenced enceforth as *large test path*
 
-| Test ID | 03 |
+| Test ID | 103 |
 | --- | --- |
 | Description | Test response time with small test path |
 | Steps | 1. Prepare a stopwatch <br> 2. Enter the small test path and start the stopwatch when starting the program <br> 3. Stop the stopwatch when the program stops |
 | Expected Result | Less than a second |
 | Severity | Medium |
 
-| Test ID | 04 |
+| Test ID | 104 |
 | --- | --- |
 | Description | Test response time with large test path |
 | Steps |1. Prepare a stopwatch <br> 2. Enter the large test path and start the stopwatch when starting the program <br> 3. Stop the stopwatch when the program stops  |
 | Expected Result | Less than a second |
 | Severity | Medium |
 
-| Test ID | 05 |
+| Test ID | 105 |
 | --- | --- |
 | Description | Test path exist |
 | Steps | 1. Generate a path using two random numbers <br> 2. Follow the path in the CSV file and compare with the result |
 | Expected Result | The path exist |
 | Severity | Low |
 
-| Test ID | 06 |
+| Test ID | 106 |
 | --- | --- |
 | Description | Test time is correct |
 | Steps | 1. Use the path from 05 <br> 2. Follow the path in the CSV file and compare with the result |
 | Expected Result | The time is correct |
 | Severity | Low |
 
-| Test ID | 07 |
-| --- | --- |
-| Description | Test data verification: correct dataset |
-| Steps | 1. Using a correct dataset start the data verification process |
-| Expected Result | No errors |
-| Severity | High |
-
-| Test ID | 08 |
-| --- | --- |
-| Description | Test data verification: connectivity problem |
-| Steps | 1. Using a dataset with two blocks starts the data verification process |
-| Expected Result | Error: Navigation Between Any Two Landmarks Impossible |
-| Severity | High |
-
-| Test ID | 09 |
-| --- | --- |
-| Description | Test data verification: dataset with loops |
-| Steps | 1. Using a data set with loops to start the verification process |
-| Expected Result | Error: The Dataset Loops |
-| Severity | High |
-
-| Test ID | 10 |
+| Test ID | 107 |
 | --- | --- |
 | Description | Test non-existing path |
 | Steps | 1. For the first Landmark enter: **0** <br> 2. For the second Landmark enter: **387462**|
 | Expected Result | Error: Invalid Landmark |
 | Severity | Low |
 
-| Test ID | 11 |
+| Test ID | 108 |
 | --- | --- |
 | Description | Test missing one Landmark |
 | Steps | 1. For the first Landmark enter: **1** <br> 2. For the second Landmark enter nothing |
 | Expected Result | Error: Missing One Landmark |
 | Severity | Low |
 
-| Test ID | 12 |
+| Test ID | 109 |
 | --- | --- |
 | Description | Test missing all Landmark |
 | Steps | 1. Try starting the software without entering any Landmarks |
 | Expected Result | Error: No Landmarks |
 | Severity | Low |
 
-| Test ID | 13 |
+| Test ID | 110 |
 | --- | --- |
 | Description | Test identical Landmark |
 | Steps | 1. For the first Landmark enter: **1** <br> 2. For the second Landmark enter: **1** |
 | Expected Result | Error: Identical Landmark |
 | Severity | Low |
 
-| Test ID | 14 |
+| Test ID | 111 |
 | --- | --- |
 | Description | Test strings as Landmark |
 | Steps | 1. For the first Landmark enter **1** <br> 2. For the second Landmark enter: **New York** |
 | Expected Result | Error: Invalid Landmark |
 | Severity | Low |
 
-| Test ID | 15 |
+| Test ID | 112 |
 | --- | --- |
 | Description | Test symbols as Landmark |
 | Steps | 1. For the first Landmark enter **1** <br> 2. For the second Landmark enter: **#%$$¤** |
 | Expected Result | Error: Invalid Landmark |
 | Severity | Low |
+
+| Test ID | 113 |
+| --- | --- |
+| Description | Test Download |
+| Steps | 1. Run the large test path 2. Click on the Download button |
+| Expected Result | A .csv file with all the steps has been downloaded |
+| Severity | Medium |

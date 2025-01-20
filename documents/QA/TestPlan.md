@@ -1,5 +1,31 @@
 # Test Plan
 
+<details>
+<summary>Table of Content</summary>
+
+- [Purpose](#purpose)
+- [Testing](#testing)
+  - [Strategies](#strategies)
+  - [Smoke Testing](#smoke-testing)
+  - [Unit Tests](#unit-tests)
+  - [Feature Testing](#feature-testing)
+    - [Test Cases](#test-cases)
+      - [Test Software](#test-software)
+    - [Test History](#test-history)
+- [External Tools](#external-tools)
+  - [Google Test](#google-test)
+  - [GitHub Actions / Issues](#github-actions--issues)
+    - [GitHub Actions](#github-actions)
+    - [Self-Hosted Runner](#self-hosted-runner)
+    - [GitHub Issues](#github-issues)
+    - [GitHub Issues Labels](#github-issues-labels)
+- [Test Criteria](#test-criteria)
+  - [Entry Criteria](#entry-criteria)
+  - [Suspension Criteria](#suspension-criteria)
+  - [Exit Criteria](#exit-criteria)
+
+</details>
+
 ## Purpose
 
 This document defines and accounts for the different testing strategies that will be employed throughout the project, as well as links to the results of those strategies.
@@ -11,7 +37,8 @@ See the Technical Specifications for a detailed account of the project's technic
 
 ## Testing
 
-Tests assert the different functionalities of a project as well as the quality of the software. They provide feedback on the state and quality of the software and can be used to measure the advancement of a project.
+Tests assert the different functionalities of a project as well as the quality of the software.
+They provide feedback on the state and quality of the software and can be used to measure the advancement of a project.
 
 ### Strategies
 
@@ -23,7 +50,8 @@ Here is a list of the different testing strategies that will be put into place t
 
 ### Smoke Testing
 
-Smoke Testing, Build Verification Testing, or Confidence Testing, is a software testing method that is used to determine if a new software build is for the next testing phase. This testing method determines if the most crucial functions of a program work but does not delve into finer details.
+Smoke Testing, Build Verification Testing, or Confidence Testing, is a software testing method that is used to determine if a new software build is for the next testing phase.
+This testing method determines if the most crucial functions of a program work but does not delve into finer details.
 
 The Smoke Testing strategy will be used to verify that:
 
@@ -32,7 +60,8 @@ The Smoke Testing strategy will be used to verify that:
 
 ### Unit Tests
 
-Unit Tests are blocks of code that verify the accuracy of a smaller, isolated block of application code, typically a function or method. These tests are written by the Software Engineers and are run regularly. In our case, they are run automatically every time we merge on the main branch.
+Unit Tests are blocks of code that verify the accuracy of a smaller, isolated block of application code, typically a function or method.
+These tests are written by the Software Engineers and are run regularly. In our case, they are run automatically every time we merge on the main branch.
 
 ### Feature Testing
 
@@ -56,7 +85,8 @@ All the Test Cases will be stored using the following format:
 
 ##### Test Software
 
-In order to verify each test case we created a program that generates datasets. The program generates 800 random unique pairs of landmarks and their distance and writes them in a .csv file.
+In order to verify each test case we created a program that generates datasets.
+The program generates 800 random unique pairs of landmarks and their distance and writes them in a .csv file.
 
 #### Test History
 
@@ -109,7 +139,8 @@ GitHub Issues allow users to create/manage issues to find and track problems tha
 - Documentation Mistakes
 - Missing Features
 
-A GitHub Issue Template is put at the disposition of the team members and must be filled when creating an Issue. Failure to comply will result in the Issue being deleted.
+A GitHub Issue Template is put at the disposition of the team members and must be filled when creating an Issue.
+Failure to comply will result in the Issue being deleted.
 The Template includes but is not limited to:
 
 - A label that specifies the type of Issue and who the Issue concerns
