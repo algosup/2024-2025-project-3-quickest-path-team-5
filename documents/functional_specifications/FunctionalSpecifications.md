@@ -10,10 +10,7 @@
 
 ![alt text](images/logo_quickest_path.png)
 
-
 </div>
-
-
 
 ---
 
@@ -39,60 +36,59 @@
 - [Functional Specifications - Project Quickest Path](#functional-specifications---project-quickest-path)
   - [**Title:** CAP (Cap Api Pathfinder)](#title-cap-cap-api-pathfinder)
     - [*Last Update on January 20th, 2025*](#last-update-on-january-20th-2025)
-- [Introduction](#introduction)
-  - [Document Purpose](#document-purpose)
-  - [Project Goal](#project-goal)
-  - [Project Team Roles](#project-team-roles)
-  - [Stakeholders](#stakeholders)
-- [Glossary](#glossary)
-- [Requirements](#requirements)
-  - [Performance Goals](#performance-goals)
-  - [Data Integrity Verification](#data-integrity-verification)
-  - [Deliverables](#deliverables)
-- [Context](#context)
-  - [Personnas](#personnas)
-  - [Use Cases](#use-cases)
-- [Functional Requirements](#functional-requirements)
-  - [Description](#description)
-  - [Data Checker](#data-checker)
-  - [APIs](#apis)
-    - [Quickest Path Retrieval](#quickest-path-retrieval)
-      - [Query Parameters:](#query-parameters)
-      - [Headers:](#headers)
-  - [Example Requests](#example-requests)
-    - [Request with Default Format:](#request-with-default-format)
-    - [Response Details](#response-details)
-  - [4xx Error Responses](#4xx-error-responses)
-    - [400 Missing Parameters](#400-missing-parameters)
-      - [Example JSON Response:](#example-json-response)
-    - [404 Destination Not Found](#404-destination-not-found)
-      - [Example JSON Response:](#example-json-response-1)
-  - [500 Error Responses (Server Errors)](#500-error-responses-server-errors)
-    - [500 Internal Server Error](#500-internal-server-error)
-      - [Example JSON Response:](#example-json-response-2)
-  - [Algorithm and Data Processing](#algorithm-and-data-processing)
-    - [Heuristic Approach](#heuristic-approach)
-    - [Advantages:](#advantages)
-    - [Disadvantages:](#disadvantages)
-    - [Input Data](#input-data)
-    - [Output](#output)
-  - [User Interface](#user-interface)
-  - [Acceptance Criteria](#acceptance-criteria)
-- [Non-Functional Requirements](#non-functional-requirements)
-  - [Costs](#costs)
-  - [User Side](#user-side)
-  - [Maintainability](#maintainability)
-- [Risk](#risk)
-  - [Competitive Landscape](#competitive-landscape)
-  - [Product problem](#product-problem)
-  - [Data](#data)
-  - [Risk Management Plan](#risk-management-plan)
-- [Future Improvements](#future-improvements)
-  - [Precision](#precision)
-  - [User Interface (UI)](#user-interface-ui)
-  - [Efficiency and Optimization](#efficiency-and-optimization)
-  - [Additional Features](#additional-features)
-- [Conclusion](#conclusion)
+  - [Introduction](#introduction)
+    - [Document Purpose](#document-purpose)
+    - [Project Goal](#project-goal)
+    - [Project Team Roles](#project-team-roles)
+    - [Stakeholders](#stakeholders)
+    - [Glossary](#glossary)
+  - [Requirements](#requirements)
+    - [Performance Goals](#performance-goals)
+    - [Data Integrity Verification](#data-integrity-verification)
+    - [Deliverables](#deliverables)
+  - [Context](#context)
+    - [Personnas](#personnas)
+    - [Use Cases](#use-cases)
+  - [Functional Requirements](#functional-requirements)
+    - [Description](#description)
+    - [Data Checker](#data-checker)
+    - [APIs](#apis)
+      - [Quickest Path Retrieval](#quickest-path-retrieval)
+        - [Query Parameters:](#query-parameters)
+        - [Headers:](#headers)
+    - [Example Requests](#example-requests)
+      - [Request with Default Format:](#request-with-default-format)
+      - [Response Details](#response-details)
+    - [4xx Error Responses](#4xx-error-responses)
+      - [400 Missing Parameters](#400-missing-parameters)
+        - [Example JSON Response:](#example-json-response)
+      - [404 Destination Not Found](#404-destination-not-found)
+        - [Example JSON Response:](#example-json-response-1)
+    - [500 Error Responses (Server Errors)](#500-error-responses-server-errors)
+- [500 Internal Server Error](#500-internal-server-error)
+        - [Example JSON Response:](#example-json-response-2)
+    - [Algorithm and Data Processing](#algorithm-and-data-processing)
+      - [Heuristic Approach](#heuristic-approach)
+      - [Advantages:](#advantages)
+      - [Disadvantages:](#disadvantages)
+      - [Input Data](#input-data)
+      - [Output](#output)
+    - [User Interface](#user-interface)
+    - [Acceptance Criteria](#acceptance-criteria)
+  - [Non-Functional Requirements](#non-functional-requirements)
+    - [Costs](#costs)
+    - [User Side](#user-side)
+    - [Maintainability](#maintainability)
+  - [Risk](#risk)
+    - [Competitive Landscape](#competitive-landscape)
+    - [Product problem](#product-problem)
+    - [Data](#data)
+    - [Risk Management Plan](#risk-management-plan)
+  - [Future Improvements](#future-improvements)
+    - [Precision](#precision)
+    - [User Interface](#user-interface-1)
+    - [Efficiency and Optimization](#efficiency-and-optimization)
+    - [Additional Features](#additional-features)
 
 
 </details>
@@ -100,18 +96,18 @@
 
 --- 
 
-# Introduction 
+## Introduction 
 
-## Document Purpose
+### Document Purpose
 
 The aim of this document is to describe in detail the functionalities and expected behavior of the software, to ensure a common understanding between all stakeholders (all team members, customers, and others).
   
 
-## Project Goal 
+### Project Goal 
 
 The aim of the project is to create a high-performance software solution that calculates the quickest path between two landmarks in the United States. 
 
-## Project Team Roles 
+### Project Team Roles 
 
 As defined by the project owner, the team is arranged as follows:
 
@@ -125,13 +121,13 @@ As defined by the project owner, the team is arranged as follows:
 | **Technical Writer**  | Creates and maintains user manuals, technical documentation, and guides.<br>Works with engineers to understand and document features.<br>Ensures documentation is clear, concise, and user-friendly. |
 
 
-## Stakeholders
+### Stakeholders
 | Name           | Occupation                  | Links                          |
 |----------------|-----------------------------|--------------------------------|
 | Franck JEANNIN | Client (ALGOSUP's director) | [Website](https://algosup.com) |
 
 
-# Glossary
+### Glossary
 
 | Term                  | Definition                                                                                  |
 |-----------------------|--------------------------------------------------------------------------------------------|
@@ -163,7 +159,7 @@ As defined by the project owner, the team is arranged as follows:
 --- 
 
 
-# Requirements
+## Requirements
 
 <br>
 
@@ -221,7 +217,7 @@ The requirements are the conditions that must be fulfilled to meet the school's 
 </table>
 
 
-## Performance Goals
+### Performance Goals
 
 <table> 
   <thead> 
@@ -244,7 +240,7 @@ The requirements are the conditions that must be fulfilled to meet the school's 
 </table>
 
 
-## Data Integrity Verification                           
+### Data Integrity Verification                           
 
 <table> 
   <thead> 
@@ -269,7 +265,7 @@ The requirements are the conditions that must be fulfilled to meet the school's 
   </tbody> 
 </table>
 
-## Deliverables
+### Deliverables
 
 For this project all the deadlines for the customer are February 7th 2025. But our Project Manager decided to impose his own deadlines. 
 
@@ -284,9 +280,9 @@ For this project all the deadlines for the customer are February 7th 2025. But o
 
 ---
 
-# Context
+## Context
 
-## Personnas
+### Personnas
 <table>
   <thead>
     <tr>
@@ -393,13 +389,12 @@ For this project all the deadlines for the customer are February 7th 2025. But o
 </table>
 
 
-## Use Cases
+### Use Cases
 
 The API is designed to be implemented into existing software solutions rather than functioning as a standalone application. It provides seamless integration capabilities to enhance the functionality of third-party platforms.
 
 | **User**             | **Action**                                      | **Expected Result**                       |
 |----------------------|-------------------------------------------------|-------------------------------------------|
-| Sales Representative | Compare multiple route options for client visits within their CRM system | A prioritized list of routes based on time efficiency integrated directly into their existing CRM. |
 | Supply Chain Manager | Coordinate deliveries across multiple regions using logistics software | A comprehensive route map segmented by region and time, available within their current logistics tool. |
 | Travel Enthusiast    | Plan an efficient multi-stop journey using a travel planning app | A detailed itinerary with travel times and distances for each stop, accessible in their preferred travel app. |
 
@@ -407,9 +402,9 @@ The API is designed to be implemented into existing software solutions rather th
 
 ---
 
-# Functional Requirements
+## Functional Requirements
 
-## Description
+### Description
 
 This project involves developing a software solution in C++ to determine the quickest path between two landmarks in the United States, such as Los Angeles and New York. The goal is to design an algorithm capable of calculating the optimal route efficiently, ensuring results are delivered in under one second.
 
@@ -418,7 +413,7 @@ This project involves developing a software solution in C++ to determine the qui
 Users simply provide the IDs of two landmarks as input, and the software calculates and returns the quickest path, including travel time and an ordered list of landmarks along the route. Unlike a GPS, this software does not track real-time location but focuses on providing pre-calculated routes between fixed landmarks.
 
 
-## Data Checker
+### Data Checker
 
 
 <br>
@@ -437,7 +432,7 @@ This algorithm will be implemented in C, as it is a high-performance language at
 
 <br>
 
-## APIs
+### APIs
 
 An API is a set of rules and protocols that allows different software applications to communicate and share data with each other. It defines how requests and responses should be formatted, enabling developers to interact with external services or integrate functionalities without needing to understand their internal workings.
 
@@ -447,7 +442,7 @@ An API is a set of rules and protocols that allows different software applicatio
 
 <br>
 
-###  Quickest Path Retrieval
+####  Quickest Path Retrieval
 
 | **Endpoint** | `/quickest-path`                                                                 |
 |--------------|----------------------------------------------------------------------------------|
@@ -455,7 +450,7 @@ An API is a set of rules and protocols that allows different software applicatio
 | **Purpose**  | Calculates the quickest path between two specified landmarks in the USA, including step-by-step segments and the total time. |
 
 
-#### Query Parameters:
+##### Query Parameters:
 
 | Parameter   | Description                                                                         | Required |
 |-------------|-------------------------------------------------------------------------------------|----------|
@@ -463,7 +458,7 @@ An API is a set of rules and protocols that allows different software applicatio
 | `destination` | The finish point                                                                  | Yes      |
 | `format`    | Specifies the response format. Supported values: `json`, `xml`                      | No       |
 
-#### Headers:
+##### Headers:
 
 | Header     | Description                                                                            |
 |------------|----------------------------------------------------------------------------------------|
@@ -471,9 +466,9 @@ An API is a set of rules and protocols that allows different software applicatio
 
 ---
 
-## Example Requests
+### Example Requests
 
-### Request with Default Format:  
+#### Request with Default Format:  
 
 <details>
   <summary>Click to view request</summary>
@@ -486,7 +481,7 @@ An API is a set of rules and protocols that allows different software applicatio
   
 </details>
 
-### Response Details
+#### Response Details
 
 |Status Code |	Description |
 |------------|--------------|
@@ -503,22 +498,7 @@ An API is a set of rules and protocols that allows different software applicatio
                     "segmentA": 12,
                     "segmentB": 65,
                     "distance": 1234
-                },
-                {
-                    "segmentA": 12,
-                    "segmentB": 65,
-                    "distance": 1234
-                },
-                {
-                    "segmentA": 12,
-                    "segmentB": 65,
-                    "distance": 1234
-                },
-                {
-                    "segmentA": 12,
-                    "segmentB": 65,
-                    "distance": 1234
-                }
+                }...
             ]
         }
   }
@@ -546,15 +526,15 @@ An API is a set of rules and protocols that allows different software applicatio
 
 `These are examples, the values do not correspond to actual values. ` 
 
-## 4xx Error Responses
+### 4xx Error Responses
 
-### 400 Missing Parameters
+#### 400 Missing Parameters
 | **Property**   | **Details**                                                                 |
 |-----------------|-----------------------------------------------------------------------------|
 | **Status Code** | `400 Bad Request`                                                          |
 | **Description** | Required query parameters are missing.                                     |
 
-#### Example JSON Response:
+##### Example JSON Response:
 ```json
 {
     "status": "error",
@@ -563,14 +543,14 @@ An API is a set of rules and protocols that allows different software applicatio
 }
 ```
 
-### 404 Destination Not Found
+#### 404 Destination Not Found
 
 | **Property**   | **Details**                                                                 |
 |-----------------|-----------------------------------------------------------------------------|
 | **Status Code** | `404 Not Found`                                                            |
 | **Description** | One or both poitns are invalid or not present in the dataset.           |
 
-#### Example JSON Response:
+##### Example JSON Response:
 ```json
 {
     "status": "error",
@@ -579,16 +559,16 @@ An API is a set of rules and protocols that allows different software applicatio
 }
 ```
 
-## 500 Error Responses (Server Errors)
+### 500 Error Responses (Server Errors)
 
-### 500 Internal Server Error
+# 500 Internal Server Error
 
 | **Property**   | **Details**                                                                                       |
 |-----------------|---------------------------------------------------------------------------------------------------|
 | **Status Code** | `500 Internal Server Error`                                                                       |
 | **Description** | An unexpected error occurred on the server while processing the request. This could be due to a system failure, database issues, or other unforeseen errors. |
 
-#### Example JSON Response:
+##### Example JSON Response:
 ```json
 {
     "status": "error",
@@ -599,25 +579,25 @@ An API is a set of rules and protocols that allows different software applicatio
 ```
 
 
-## Algorithm and Data Processing
+### Algorithm and Data Processing
 
 
-### Heuristic Approach
+#### Heuristic Approach
 
 To ensure fast computations, a heuristic (e.g., Euclidean distance) is used to estimate travel costs between two points.
 
-### Advantages:
+#### Advantages:
 
 - Reduces computation time.
   
 - Useful for complex or large spaces.
 
 
-### Disadvantages:
+#### Disadvantages:
 
 - May not guarantee an optimal solution.
 
-### Input Data
+#### Input Data
 
 Input data is provided in a CSV file containing 24 million nodes with the following structure:
 
@@ -644,7 +624,7 @@ This data is represented as a mathematical graph where:
 - Edges represent connections between landmarks.
 - Weights represent travel times between nodes.
   
-### Output
+#### Output
 The algorithm returns:
 
 - Total travel time.
@@ -652,7 +632,7 @@ The algorithm returns:
 - An ordered list of landmarks on the optimal path.
 
 
-## User Interface
+### User Interface
 Although optional, a simple web interface will be developed using HTML and Tailwind CSS to improve user experience.
 
 Mockup made on Figma : 
@@ -668,7 +648,7 @@ Alternatively, you can download the complete file with all the directions from p
 
 ![alt text](<images/figma_cap_ next_page.png>)
 
-## Acceptance Criteria
+### Acceptance Criteria
 
 
 | **Criterion**           | **Description**                                                    |
@@ -680,9 +660,9 @@ Alternatively, you can download the complete file with all the directions from p
 
 --- 
 
-# Non-Functional Requirements
+## Non-Functional Requirements
 
-## Costs
+### Costs
 
 | Product | Price | Link |
 | --  | -- | -- |
@@ -692,12 +672,12 @@ Alternatively, you can download the complete file with all the directions from p
 |  Canva | 0 | Free to use |
 |  GitHub | 0 | Free to use |
 
-## User Side
+### User Side
 
  - Accessible via smartphones, tablets, and desktops.
  - Requires an internet connection.
 
-## Maintainability
+### Maintainability
 
  - Clearly commented and documented code.
  - Comprehensive testing and version control.
@@ -705,9 +685,9 @@ Alternatively, you can download the complete file with all the directions from p
 ---
 
 
-# Risk
+## Risk
 
-## Competitive Landscape
+### Competitive Landscape
 
 Today's market is highly competitive, with many powerful and advanced companies : 
 
@@ -715,11 +695,11 @@ Today's market is highly competitive, with many powerful and advanced companies 
 - **Mapbox**: Known for customization and flexibility, popular with developers. Limited advanced features compared to Google.  
 - **OpenStreetMap (OSM)**: A free, community-driven option with customizable tools like OSRM. Less precise in certain areas.
 
-## Product problem
+### Product problem
 
 In any project, no issue should ever be taken lightly, as even seemingly minor problems can lead to significant time losses and disrupt progress. It is essential to approach every detail with attention and care to minimize risks and ensure a smooth workflow. Proactive problem-solving and vigilance are key to avoiding unnecessary setbacks and maintaining the project's momentum.
 
-## Data 
+### Data 
 
 Compliance with the General Data Protection Regulation (GDPR) is crucial in developing software that interacts with users, ensuring personal data protection and privacy. By adhering to these standards, developers not only ensure legal compliance but also build user trust. The GDPR requires transparent data collection, storage, and processing practices, giving users control over their personal information, which is essential for the acceptance of digital technologies.
 
@@ -728,7 +708,7 @@ To kown more about it : [RGPD License](https://en.wikipedia.org/wiki/General_Dat
 
 
 
-## Risk Management Plan
+### Risk Management Plan
 
 | **Risk**                 | **Impact**        | **Probability** | **Mitigation Plan**                                                                    |
 |--------------------------|-------------------|-----------------|----------------------------------------------------------------------------------------|  
@@ -738,13 +718,13 @@ To kown more about it : [RGPD License](https://en.wikipedia.org/wiki/General_Dat
 
 ---
 
-# Future Improvements
+## Future Improvements
 
-## Precision
+### Precision
 
 Over the past months, our team has found that adding more landmarks and routes makes a big difference in accuracy. When we include live traffic data, our system can calculate much better routes. We're also excited about improving our maps with detailed information about road quality, speed zones, and current weather conditions - exactly what drivers need.
 
-## User Interface (UI)
+### User Interface
 
 Feedback from users has shown the need for a more user-friendly interface. Here's what we're working on:
 
@@ -753,7 +733,7 @@ Feedback from users has shown the need for a more user-friendly interface. Here'
 - A proper mobile experience that works as smoothly as the desktop version
 - Built-in features that make the app work well for everyone, including users who rely on screen readers
 
-## Efficiency and Optimization
+### Efficiency and Optimization
 
 Our engineering team is exploring some fascinating applications of machine learning:
 
@@ -762,7 +742,7 @@ Our engineering team is exploring some fascinating applications of machine learn
 - Clever ways to group location data that make everything run faster
 - Using advanced computing systems to handle complex calculations more quickly
 
-## Additional Features
+### Additional Features
 
 Beyond the core improvements, we're also developing:
 
@@ -774,14 +754,6 @@ We believe these changes will make a real difference in how people use our softw
 
 --- 
 
-# Conclusion
-
-This project is primarily focused on technical implementation, with design as a secondary element aimed at enhancing the user experience. The customer's requirements are diverse and extensive, requiring thorough validation at every stage of development.
-Undertaking a project of this scale is ambitious, so we have to approach each phase carefully, following our established organization and development protocols. Our main priority is to deliver a functional system that integrates both the data verifier and the REST API. We also aim to create a user interface to enhance the overall experience, but this is a complementary objective rather than a fundamental requirement.
-By maintaining this methodical approach and responding to specific customer needs, we aim to guarantee the quality and reliability of the final system.
-
-
----
 
 
 
