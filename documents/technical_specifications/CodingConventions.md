@@ -5,119 +5,140 @@
 
 - [Coding Conventions](#coding-conventions)
   - [C](#c)
-    - [Naming Conventions](#naming-conventions)
-      - [1. Variable Names](#1-variable-names)
-      - [2. Constant Names](#2-constant-names)
-      - [3. Function Names](#3-function-names)
-      - [4. Struct and Enum Names](#4-struct-and-enum-names)
-    - [Code Structure and Formatting](#code-structure-and-formatting)
-      - [1. Indentation](#1-indentation)
-      - [2. Line Length](#2-line-length)
-    - [Code Comments](#code-comments)
-      - [1. Single-Line Comments](#1-single-line-comments)
-      - [2. Multi-Line Comments](#2-multi-line-comments)
-      - [3. Documenting Function Parameters and Return Values](#3-documenting-function-parameters-and-return-values)
-      - [4. Documenting Pointer Parameters](#4-documenting-pointer-parameters)
-      - [5. Documenting Complex Parameters and Structures](#5-documenting-complex-parameters-and-structures)
-      - [6. Documenting Return Types](#6-documenting-return-types)
-    - [Function Design](#function-design)
-      - [1. Single Responsibility](#1-single-responsibility)
-      - [2. Function Length](#2-function-length)
-    - [Error Handling](#error-handling)
-      - [1. Return Codes](#1-return-codes)
-    - [Memory Management](#memory-management)
-      - [1. Free Allocated Memory](#1-free-allocated-memory)
-    - [File Organization](#file-organization)
-      - [1. Header Files](#1-header-files)
-    - [Preprocessor Directives](#preprocessor-directives)
-      - [1. Include Guards](#1-include-guards)
+    - [Naming Conventions (C)](#naming-conventions-c)
+      - [1. Variable Names (C)](#1-variable-names-c)
+      - [2. Constant Names (C)](#2-constant-names-c)
+      - [3. Function Names (C)](#3-function-names-c)
+      - [4. Struct and Enum Names (C)](#4-struct-and-enum-names-c)
+    - [Code Structure and Formatting (C)](#code-structure-and-formatting-c)
+      - [1. Indentation (C)](#1-indentation-c)
+      - [2. Line Length (C)](#2-line-length-c)
+    - [Code Comments (C)](#code-comments-c)
+      - [1. Single-Line Comments (C)](#1-single-line-comments-c)
+      - [2. Multi-Line Comments (C)](#2-multi-line-comments-c)
+      - [3. Documenting Function Parameters and Return Values (C)](#3-documenting-function-parameters-and-return-values-c)
+      - [4. Documenting Pointer Parameters (C)](#4-documenting-pointer-parameters-c)
+      - [5. Documenting Complex Parameters and Structures (C)](#5-documenting-complex-parameters-and-structures-c)
+      - [6. Documenting Return Types (C)](#6-documenting-return-types-c)
+    - [Function Design (C)](#function-design-c)
+      - [1. Single Responsibility (C)](#1-single-responsibility-c)
+      - [2. Function Length (C)](#2-function-length-c)
+    - [Error Handling (C)](#error-handling-c)
+      - [1. Return Codes (C)](#1-return-codes-c)
+    - [Memory Management (C)](#memory-management-c)
+      - [1. Free Allocated Memory (C)](#1-free-allocated-memory-c)
+    - [File Organization (C)](#file-organization-c)
+      - [1. Header Files (C)](#1-header-files-c)
+    - [Preprocessor Directives (C)](#preprocessor-directives-c)
+      - [1. Include Guards (C)](#1-include-guards-c)
   - [C++](#c-1)
-    - [Naming Conventions](#naming-conventions-1)
-      - [1. Variables](#1-variables)
-      - [2. Constants](#2-constants)
-      - [3. Classes](#3-classes)
-      - [4. Functions](#4-functions)
-    - [Code Formatting](#code-formatting)
-      - [1. Indentation](#1-indentation-1)
-      - [2. Line Length](#2-line-length-1)
-      - [3. Braces](#3-braces)
-    - [Comments](#comments)
-      - [1. Single-Line Comments](#1-single-line-comments-1)
-      - [2. Multi-Line Comments](#2-multi-line-comments-1)
-      - [3. Documenting Function Parameters and Return Values](#3-documenting-function-parameters-and-return-values-1)
-      - [4. Documenting Classes and Methods](#4-documenting-classes-and-methods)
-      - [5. Documenting Pointer and Reference Parameters](#5-documenting-pointer-and-reference-parameters)
-      - [6. Documenting Templates and Overloaded Functions](#6-documenting-templates-and-overloaded-functions)
-      - [7. Documenting Complex Functions](#7-documenting-complex-functions)
-    - [Error Handling](#error-handling-1)
-      - [1. Use Exceptions](#1-use-exceptions)
-      - [2. Avoid Catch-All Blocks](#2-avoid-catch-all-blocks)
-    - [Code Structure](#code-structure)
-      - [1. Single Responsibility Principle](#1-single-responsibility-principle)
-      - [2. Avoid Magic Numbers](#2-avoid-magic-numbers)
-    - [Memory Management](#memory-management-1)
-      - [1. Use Smart Pointers](#1-use-smart-pointers)
-      - [2. Avoid Memory Leaks](#2-avoid-memory-leaks)
-    - [Use of Standard Library](#use-of-standard-library)
-      - [1. Prefer STL Containers](#1-prefer-stl-containers)
-      - [2. Avoid Reimplementing Algorithms](#2-avoid-reimplementing-algorithms)
-    - [Object-Oriented Design](#object-oriented-design)
-      - [1. Use Access Modifiers](#1-use-access-modifiers)
-
+    - [Naming Conventions (C++)](#naming-conventions-c-1)
+      - [1. Variables (C++)](#1-variables-c)
+      - [2. Constants (C++)](#2-constants-c)
+      - [3. Classes (C++)](#3-classes-c)
+      - [4. Functions (C++)](#4-functions-c)
+    - [Code Formatting (C++)](#code-formatting-c)
+      - [1. Indentation (C++)](#1-indentation-c-1)
+      - [2. Line Length (C++)](#2-line-length-c-1)
+      - [3. Braces (C++)](#3-braces-c)
+    - [Comments (C++)](#comments-c)
+      - [1. Single-Line Comments (C++)](#1-single-line-comments-c-1)
+      - [2. Multi-Line Comments (C++)](#2-multi-line-comments-c-1)
+      - [3. Documenting Function Parameters and Return Values (C++)](#3-documenting-function-parameters-and-return-values-c-1)
+      - [4. Documenting Classes and Methods (C++)](#4-documenting-classes-and-methods-c)
+      - [5. Documenting Pointer and Reference Parameters (C++)](#5-documenting-pointer-and-reference-parameters-c)
+      - [6. Documenting Templates and Overloaded Functions (C++)](#6-documenting-templates-and-overloaded-functions-c)
+      - [7. Documenting Complex Functions (C++)](#7-documenting-complex-functions-c)
+    - [Error Handling (C++)](#error-handling-c-1)
+      - [1. Use Exceptions (C++)](#1-use-exceptions-c)
+      - [2. Avoid Catch-All Blocks (C++)](#2-avoid-catch-all-blocks-c)
+    - [Code Structure (C++)](#code-structure-c)
+      - [1. Single Responsibility Principle (C++)](#1-single-responsibility-principle-c)
+      - [2. Avoid Magic Numbers (C++)](#2-avoid-magic-numbers-c)
+    - [Memory Management (C++)](#memory-management-c-1)
+      - [1. Use Smart Pointers (C++)](#1-use-smart-pointers-c)
+      - [2. Avoid Memory Leaks (C++)](#2-avoid-memory-leaks-c)
+    - [Use of Standard Library (C++)](#use-of-standard-library-c)
+      - [1. Prefer STL Containers (C++)](#1-prefer-stl-containers-c)
+      - [2. Avoid Reimplementing Algorithms (C++)](#2-avoid-reimplementing-algorithms-c)
+    - [Object-Oriented Design (C++)](#object-oriented-design-c)
+      - [1. Use Access Modifiers (C++)](#1-use-access-modifiers-c)
 
 </details>
 
 ## C
 
-### Naming Conventions
-#### 1. Variable Names
+### Naming Conventions (C)
+
+#### 1. Variable Names (C)
 
 >[!TIP]
+>
 >- `Good Practice:` Use descriptive and meaningful names with snake_case for clarity.
+>
 >```c
 >int total_items;
 >float item_price;
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Avoid single-character or ambiguous names.
+>
 >```c
 >int x;
 >float p;
 >```
 
-#### 2. Constant Names
+#### 2. Constant Names (C)
 
 >[!TIP]
+>
 >- `Good Practice:` Use uppercase letters with underscores (UPPER_SNAKE_CASE).
+>
 >```c
 >#define MAX_BUFFER_SIZE 1024
 >```
 
+<br>
+
 >[!CAUTION]
+.
+>
 >- `Bad Practice:` Avoid using lowercase or non-descriptive names.
+>
 >```c
 >#define maxBuffer 1024
 >```
 
-#### 3. Function Names
+#### 3. Function Names (C)
 
 >[!TIP]
+>
 >- `Good Practice:` Use descriptive names with camelCase consistently.
+>
 >```c
 >int calculate_sum(int a, int b);
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Avoid cryptic or overly generic names.
+>
 >```c
 >int doStuff(int a, int b);
 >```
 
-#### 4. Struct and Enum Names
+#### 4. Struct and Enum Names (C)
 
 >[!TIP]
+>
 >- `Good Practice:` Use PascalCase for struct and enum names.
+>
 >```c
 >typedef struct Person {
 >    char name[50];
@@ -125,8 +146,12 @@
 >} Person;
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Avoid lowercase or overly long names.
+>
 >```c
 >typedef struct person {
 >    char name[50];
@@ -134,62 +159,84 @@
 >} person_struct_type_long;
 >```
 
-### Code Structure and Formatting
-#### 1. Indentation
+### Code Structure and Formatting (C)
+
+#### 1. Indentation (C)
 
 >[!TIP]
+>
 >- `Good Practice:` Use consistent indentation, such as 4 spaces per level.
+>
 >```c
 >if (x > 0) {
 >    printf("Positive number\n");
 >}
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Mixing spaces and tabs, or inconsistent levels of indentation.
+>
 >```c
 >if (x > 0) {
 >printf("Positive number\n");
 >  }
 >```
 
-#### 2. Line Length
+#### 2. Line Length (C)
 
 >[!TIP]
+>
 >- `Good Practice:` Keep lines under 80 characters.
+>
 >```c
 >if (x > 0) {
 >    printf("This is a positive number.\n");
 >}
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Write overly long lines that reduce readability.
+>
 >```c
 >if (x > 0) { printf("This is a positive number. Really, it's positive, not negative.\n"); }
 >```
 
-### Code Comments
-#### 1. Single-Line Comments
+### Code Comments (C)
+
+#### 1. Single-Line Comments (C)
 
 >[!TIP]
+>
 >- `Good Practice:` Use // for short, clear comments.
+>
 >```c
 >// Calculate the sum of two numbers
 >int sum = a + b;
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Avoid irrelevant or excessive comments.
+>
 >```c
 >// This is a comment that doesn't say anything meaningful
 >int sum = a + b; // adding numbers
 >```
 
-#### 2. Multi-Line Comments
+#### 2. Multi-Line Comments (C)
 
 >[!TIP]
->- `Good Practice:` Use /* */ for detailed explanations.
+>
+>- `Good Practice:` Use /**/ for detailed explanations.
+>
 >```c
 >/*
 > * Function: calculate_sum
@@ -203,8 +250,12 @@
 >}
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Use excessive comments or forget to update outdated comments.
+>
 >```c
 >/*
 > * This function calculates a product (outdated comment, incorrect).
@@ -214,11 +265,12 @@
 >}
 >```
 
-
-#### 3. Documenting Function Parameters and Return Values
+#### 3. Documenting Function Parameters and Return Values (C)
 
 >[!TIP]
+>
 >- `Good Practice:` Use Doxygen's \param and \return tags for precise descriptions.
+>
 >```c
 >/*
 > * \brief Adds two integers and returns the result.
@@ -234,8 +286,12 @@
 >}
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Vague or incomplete descriptions of parameters and return types.
+>
 >```c
 >/*
 > * Adds two numbers.
@@ -248,10 +304,12 @@
 >}
 >```
 
-#### 4. Documenting Pointer Parameters
+#### 4. Documenting Pointer Parameters (C)
 
 >[!TIP]
+>
 >- `Good Practice:` Clearly indicate the purpose of pointers.
+>
 >```c
 >/*
 > * \brief Updates the value of an integer through a pointer.
@@ -269,8 +327,12 @@
 >}
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Failing to specify the purpose of the pointer.
+>
 >```c
 >/*
 > * Updates a value.
@@ -284,10 +346,12 @@
 >}
 >```
 
-#### 5. Documenting Complex Parameters and Structures
+#### 5. Documenting Complex Parameters and Structures (C)
 
 >[!TIP]
+>
 >- `Good Practice:` Provide details about the structure fields.
+>
 >```c
 >/*
 > * \brief Initializes a 2D point with the specified coordinates.
@@ -310,8 +374,12 @@
 >}
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Leaving out details of the structure or failing to document it altogether.
+>
 >```c
 >/*
 > * Initializes a point.
@@ -332,10 +400,12 @@
 >}
 >```
 
-#### 6. Documenting Return Types
+#### 6. Documenting Return Types (C)
 
 >[!TIP]
+>
 >- `Good Practice:` Explicitly describe the return value.
+>
 >```c
 >/*
 > * \brief Divides two integers and returns the quotient.
@@ -352,8 +422,12 @@
 >}
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Avoiding edge cases or leaving the return value unexplained.
+>
 >```c
 >/*
 > * Divides two numbers.
@@ -369,18 +443,25 @@
 >}
 >```
 
-### Function Design
-#### 1. Single Responsibility
+### Function Design (C)
+
+#### 1. Single Responsibility (C)
 
 >[!TIP]
+>
 >- `Good Practice:` Each function should perform one task.
+>
 >```c
 >void print_message();
 >int calculate_sum(int a, int b);
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Multi-purpose functions.
+>
 >```c
 >void do_all_the_things(int a, int b) {
 >    printf("Hello, World!\n");
@@ -389,18 +470,24 @@
 >}
 >```
 
-#### 2. Function Length
+#### 2. Function Length (C)
 
 >[!TIP]
+>
 >- `Good Practice:` Keep functions short and focused.
+>
 >```c
 >int calculate_sum(int a, int b) {
 >    return a + b;
 >}
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Excessively long functions.
+>
 >```c
 >int calculate_sum_and_print_message_and_log(int a, int b) {
 >    printf("Calculating...\n");
@@ -410,11 +497,14 @@
 >}
 >```
 
-### Error Handling
-#### 1. Return Codes
+### Error Handling (C)
+
+#### 1. Return Codes (C)
 
 >[!TIP]
+>
 >- `Good Practice:` Return error codes or meaningful values.
+>
 >```c
 >int open_file(const char *filename) {
 >    if (!filename) {
@@ -425,8 +515,12 @@
 >}
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Arbitrary return values.
+>
 >```c
 >int open_file(const char *filename) {
 >    // No error handling
@@ -435,29 +529,39 @@
 >}
 >```
 
-### Memory Management
-#### 1. Free Allocated Memory
+### Memory Management (C)
+
+#### 1. Free Allocated Memory (C)
 
 >[!TIP]
+>
 >- `Good Practice:` Free memory after use.
+>
 >```c
 >char *buffer = malloc(1024);
 >// Use the buffer...
 >free(buffer);
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Forget to free memory or double-free.
+>
 >```c
 >char *buffer = malloc(1024);
 >// Forgot to free memory (memory leak).
 >```
 
-### File Organization
-#### 1. Header Files
+### File Organization (C)
+
+#### 1. Header Files (C)
 
 >[!TIP]
+>
 >- `Good Practice:` Separate declarations in .h files and definitions in .c files.
+>
 >```c
 >// utils.h
 >#ifndef UTILS_H
@@ -474,8 +578,12 @@
 >}
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Place all code in a single file.
+>
 >```c
 >// utils.c
 >int calculate_sum(int a, int b) {
@@ -483,11 +591,14 @@
 >}
 >```
 
-### Preprocessor Directives
-#### 1. Include Guards
+### Preprocessor Directives (C)
+
+#### 1. Include Guards (C)
 
 >[!TIP]
+>
 >- `Good Practice:` Use include guards or #pragma once in header files.
+>
 >```c
 >#ifndef HEADER_FILE_H
 >#define HEADER_FILE_H
@@ -497,8 +608,12 @@
 >#endif // HEADER_FILE_H
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Missing include guards, leading to duplicate inclusion errors.
+>
 >```c
 >// Missing guards
 >// Leads to redefinition errors if included multiple times.
@@ -506,143 +621,199 @@
 
 ## C++
 
-### Naming Conventions
-#### 1. Variables
+### Naming Conventions (C++)
+
+#### 1. Variables (C++)
 
 >[!TIP]
+>
 >- `Good Practice:` Use camelCase for variables and descriptive names.
+>
 >```cpp
 >int employeeCount = 10;
 >float accountBalance = 1000.5;
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Use single letters or unclear abbreviations.
+>
 >```cpp
 >int x = 10;
 >float ab = 1000.5;
 >```
 
-#### 2. Constants
+#### 2. Constants (C++)
 
 >[!TIP]
+>
 >- `Good Practice:` Use UPPER_SNAKE_CASE for constants.
+>
 >```cpp
 >const int MAX_USERS = 100;
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Use lowercase or misleading names.
+>
 >```cpp
 >const int maxusers = 100;
 >```
-#### 3. Classes
+>
+#### 3. Classes (C++)
 
 >[!TIP]
+>
 >- `Good Practice:` Use PascalCase for class names.
+>
 >```cpp
 >class EmployeeDatabase {
 >    // ...
 >};
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Use lowercase or non-descriptive names.
+>
 >```cpp
 >class employeedatabase {
 >    // ...
 >};
 >```
-#### 4. Functions
+>
+
+#### 4. Functions (C++)
 
 >[!TIP]
+>
 >- `Good Practice:` Use camelCase and start with a verb.
+>
 >```cpp
 >void calculateSalary() {
 >    // ...
 >}
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Use non-descriptive or vague names.
+>
 >```cpp
 >void calc() {
 >    // ...
 >}
 >```
 
+### Code Formatting (C++)
 
-### Code Formatting
-#### 1. Indentation
+#### 1. Indentation (C++)
 
 >[!TIP]
+>
 >- `Good Practice:` Use consistent indentation (2 or 4 spaces).
+>
 >```cpp
 >void printMessage() {
 >    std::cout << "Hello, World!" << std::endl;
 >}
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Use inconsistent or mixed tabs and spaces.
+>
 >```cpp
 >void printMessage() {
 > std::cout << "Hello, World!" << std::endl;
 >}
 >```
 
-#### 2. Line Length
+#### 2. Line Length (C++)
 
 >[!TIP]
+>
 >- `Good Practice:` Limit lines to 80-100 characters.
+>
 >```cpp
 >std::cout << "This is a short and readable line." << std::endl;
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Write overly long lines.
+>
 >```cpp
 >std::cout << "This line is excessively long and will make the code hard to read in smaller editors or screens." << std::endl;
 >```
 
-#### 3. Braces
+#### 3. Braces (C++)
 
 >[!TIP]
+>
 >- `Good Practice:` Place braces on new lines (Allman style) or same line (K&R style), consistently.
+>
 >```cpp
 >if (x > 0) {
 >    std::cout << "Positive" << std::endl;
 >}
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Mix brace styles.
+>
 >```cpp
 >if (x > 0)
 >{
 >    std::cout << "Positive" << std::endl; }
 >```
-### Comments
-#### 1. Single-Line Comments
+>
+### Comments (C++)
+
+#### 1. Single-Line Comments (C++)
 
 >[!TIP]
+>
 > - `Good Practice:` Use `//` for short, clear comments.
+>
 >```cpp
 >// Calculate the sum of two numbers
 >int sum = a + b;
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Irrelevant or excessive comments.
+>
 >```cpp
 >// This is a comment that doesn't say anything meaningful
 >int sum = a + b; // adding numbers
 >```
 
-#### 2. Multi-Line Comments
+#### 2. Multi-Line Comments (C++)
 
 >[!TIP]
+>
 > - `Good Practice:` Use `/**/` for detailed explanations or blocks of comments.
+>
 >```cpp
 >/*
 > * Function: calculateSum
@@ -653,8 +824,12 @@
 >}
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Excessive or outdated comments.
+>
 >```cpp
 >/*
 > * This function calculates a product (outdated comment, incorrect).
@@ -664,10 +839,12 @@
 >}
 >```
 
-#### 3. Documenting Function Parameters and Return Values
+#### 3. Documenting Function Parameters and Return Values (C++)
 
 >[!TIP]
+>
 > - `Good Practice:` Use \param and \return to describe inputs and outputs.
+>
 >```cpp
 >/*
 > * \brief Adds two integers and returns the result.
@@ -683,8 +860,12 @@
 >}
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Vague or incomplete descriptions.
+>
 >```cpp
 >/*
 > * Adds two numbers.
@@ -697,10 +878,12 @@
 >}
 >```
 
-#### 4. Documenting Classes and Methods
+#### 4. Documenting Classes and Methods (C++)
 
 >[!TIP]
+>
 > - `Good Practice:` Always document class purposes and public methods.
+>
 >```cpp
 >/*
 > * \class Calculator
@@ -722,8 +905,12 @@
 >};
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Leaving class or method documentation incomplete.
+>
 >```cpp
 >/*
 > * Calculator class.
@@ -739,10 +926,12 @@
 >};
 >```
 
-#### 5. Documenting Pointer and Reference Parameters
+#### 5. Documenting Pointer and Reference Parameters (C++)
 
 >[!TIP]
+>
 > - `Good Practice:` Clearly indicate the purpose of pointers and references.
+>
 >```cpp
 >/*
 > * \brief Updates the value of an integer through a pointer.
@@ -760,8 +949,12 @@
 >}
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Ambiguous descriptions of pointer or reference usage.
+>
 >```cpp
 >/*
 > * Updates a value.
@@ -775,10 +968,12 @@
 >}
 >```
 
-#### 6. Documenting Templates and Overloaded Functions
+#### 6. Documenting Templates and Overloaded Functions (C++)
 
 >[!TIP]
+>
 > - `Good Practice:` Use detailed comments for template parameters.
+>
 >```cpp
 >/*
 > * \brief Swaps two values.
@@ -797,8 +992,12 @@
 >}
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Omitting documentation for template parameters.
+>
 >```cpp
 >/*
 > * Swaps two values.
@@ -811,10 +1010,12 @@
 >}
 >```
 
-#### 7. Documenting Complex Functions
+#### 7. Documenting Complex Functions (C++)
 
 >[!TIP]
+>
 > - `Good Practice:` Provide comprehensive descriptions for algorithms and expected behavior.
+>
 >```cpp
 >/*
 > * \brief Finds the greatest common divisor (GCD) of two numbers.
@@ -840,8 +1041,12 @@
 >}
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Skipping algorithm details or leaving parts undocumented.
+>
 >```cpp
 >/*
 > * Finds the GCD.
@@ -859,11 +1064,14 @@
 >}
 >```
 
-### Error Handling
-#### 1. Use Exceptions
+### Error Handling (C++)
+
+#### 1. Use Exceptions (C++)
 
 >[!TIP]
+>
 >- `Good Practice:` Use exceptions for error handling.
+>
 >```cpp
 >try {
 >    openFile("data.txt");
@@ -872,35 +1080,50 @@
 >}
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Use return codes or ignore errors.
+>
 >```cpp
 >if (!openFile("data.txt")) {
 >    std::cerr << "Error opening file" << std::endl;
 >}
 >```
-#### 2. Avoid Catch-All Blocks
+>
+#### 2. Avoid Catch-All Blocks (C++)
 
 >[!TIP]
+>
 >- `Good Practice:` Catch specific exceptions.
+>
 >```cpp
 >catch (const std::ios_base::failure& e) {
 >    std::cerr << "IO Error: " << e.what() << std::endl;
 >}
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Use general catch blocks excessively.
+>
 >```cpp
 >catch (...) {
 >    std::cerr << "Unknown Error" << std::endl;
 >}
 >```
-### Code Structure
-#### 1. Single Responsibility Principle
+>
+### Code Structure (C++)
+
+#### 1. Single Responsibility Principle (C++)
 
 >[!TIP]
+>
 >- `Good Practice:` Each function/class should have one responsibility.
+>
 >```cpp
 >class Employee {
 >    void updateSalary();
@@ -908,17 +1131,24 @@
 >};
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Overload functions/classes with multiple tasks.
+>
 >```cpp
 >class Employee {
 >    void updateSalaryAndTitle();
 >};
 >```
-#### 2. Avoid Magic Numbers
+>
+#### 2. Avoid Magic Numbers (C++)
 
 >[!TIP]
+>
 >- `Good Practice:` Use named constants instead of literals.
+>
 >```cpp
 >const int MAX_USERS = 100;
 >if (userCount > MAX_USERS) {
@@ -926,68 +1156,102 @@
 >}
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Use hard-coded numbers.
+>
 >```cpp
 >if (userCount > 100) {
 >    // ...
 >}
 >```
-### Memory Management
-#### 1. Use Smart Pointers
+>
+### Memory Management (C++)
+
+#### 1. Use Smart Pointers (C++)
 
 >[!TIP]
+>
 >- `Good Practice:` Use std::unique_ptr or std::shared_ptr.
+>
 >```cpp
 >std::unique_ptr<int> ptr = std::make_unique<int>(10);
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Use raw pointers unnecessarily.
+>
 >```cpp
 >int* ptr = new int(10);
 >delete ptr;
 >```
-#### 2. Avoid Memory Leaks
+>
+#### 2. Avoid Memory Leaks (C++)
 
 >[!TIP]
+>
 >- `Good Practice:` Free allocated memory properly.
+>
 >```cpp
 >{
 >    std::unique_ptr<int> ptr = std::make_unique<int>(10);
 >} // Memory automatically freed
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Forget to deallocate memory.
+>
 >```cpp
 >int* ptr = new int(10);
 >// Forgot to delete ptr!
 >```
-### Use of Standard Library
-#### 1. Prefer STL Containers
+>
+### Use of Standard Library (C++)
+
+#### 1. Prefer STL Containers (C++)
 
 >[!TIP]
+>
 >- `Good Practice:` Use std::vector, std::map, etc., instead of raw arrays or custom data structures.
+>
 >```cpp
 >std::vector<int> numbers = {1, 2, 3};
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Reimplement standard data structures.
+>
 >```cpp
 >int numbers[] = {1, 2, 3};
 >```
-#### 2. Avoid Reimplementing Algorithms
+>
+#### 2. Avoid Reimplementing Algorithms (C++)
 
 >[!TIP]
+>
 >- `Good Practice:` Use std::sort, std::find, etc.
+>
 >```cpp
 >std::sort(numbers.begin(), numbers.end());
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Write your own implementation for common algorithms.
+>
 >```cpp
 >for (int i = 0; i < n - 1; i++) {
 >    for (int j = 0; j < n - i - 1; j++) {
@@ -997,11 +1261,15 @@
 >    }
 >}
 >```
-### Object-Oriented Design
-#### 1. Use Access Modifiers
+>
+### Object-Oriented Design (C++)
+
+#### 1. Use Access Modifiers (C++)
 
 >[!TIP]
+>
 >- `Good Practice:` Encapsulate data using private and expose through public functions.
+>
 >```cpp
 >class Employee {
 >private:
@@ -1013,8 +1281,12 @@
 >};
 >```
 
+<br>
+
 >[!CAUTION]
+>
 >- `Bad Practice:` Expose internal data directly.
+>
 >```cpp
 >class Employee {
 >public:

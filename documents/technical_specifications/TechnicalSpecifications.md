@@ -29,7 +29,7 @@
       - [3.2.1 Dijkstra's Algorithm](#321-dijkstras-algorithm)
     - [3.3 Data Flow Overview](#33-data-flow-overview)
       - [3.3.1 High-Level Data Flow Diagram](#331-high-level-data-flow-diagram)
-      - [Explanation:](#explanation)
+      - [Explanation](#explanation)
       - [3.3.2 Shortest Path Algorithm Execution Flow](#332-shortest-path-algorithm-execution-flow)
   - [4. Detailed Design](#4-detailed-design)
     - [4.1 Backend Design](#41-backend-design)
@@ -55,7 +55,7 @@
     - [5.5 Target](#55-target)
       - [5.5.1 Desktop Platforms](#551-desktop-platforms)
       - [5.5.2 Web Server for REST API](#552-web-server-for-rest-api)
-    - [Notes:](#notes)
+    - [Notes](#notes)
   - [6. Testing](#6-testing)
     - [6.1 Testing Strategy](#61-testing-strategy)
     - [6.2 Tools](#62-tools)
@@ -70,7 +70,6 @@
   - [9. Glossary](#9-glossary)
 
 </details>
-
 
 ## Project Overview
 
@@ -111,8 +110,6 @@ This document is intended for the following audiences:
 
 ### 1.4 Convention
 
-
-
 #### 1.4.1 File tree and documents
 
 The naming conventions should be as follows:
@@ -138,11 +135,12 @@ Our coding conventions are aligned with the standard practices and guidelines re
 
 For this project, we have established a detailed set of coding conventions tailored to meet our specific requirements and promote collaboration across the team[.][3] These conventions cover aspects such as naming conventions, formatting rules, error handling, and use of language features[.][3]
 
-You can find the full coding convention guidelines in the [Coding Conventions document](CodingConventions.md "Coding Conventions")[.][3]
+You can find the full coding convention guidelines in the [Coding Conventions document](CodingConventions.md "Coding Conventions") [.][3]
 
 ##### Quick Reminder
 
 ###### C Naming
+
 [<img height="48px" width="48px" alt="Icone C" src="https://skillicons.dev/icons?i=c"/>][2]
 
 <hr>
@@ -155,6 +153,7 @@ You can find the full coding convention guidelines in the [Coding Conventions do
 | `Structs & Enums` | PascalCase       |
 
 ###### C++ Naming
+
 [<img height="48px" width="48px" alt="Icone C++" src="https://skillicons.dev/icons?i=cpp"/>][1]
 <hr>
 
@@ -238,7 +237,7 @@ You can find the full coding convention guidelines in the [Coding Conventions do
 
 ### 3.1 Overview  
 
-The system architecture is designed to ensure seamless functionality, high performance, and a user-friendly experience across all supported platforms[.][3] It consists of the following key components:   
+The system architecture is designed to ensure seamless functionality, high performance, and a user-friendly experience across all supported platforms[.][3] It consists of the following key components:
 
 - **Desktop Application (Data Checker)**  
   - **Technology**: Developed using [C][2] for its performance in handling **data integrity**<sup>[33](#glossary-33)</sup> checks[.][3]  
@@ -262,11 +261,12 @@ The system architecture is designed to ensure seamless functionality, high perfo
 - **Cross-Platform<sup>[19](#glossary-19)</sup> Support**: Desktop applications and the **REST API**<sup>[2](#glossary-2)</sup> are built to function seamlessly across Linux, Windows, and macOS[.][3]  
 - **Extensibility**: The system is designed to accommodate future enhancements, such as adding new endpoints, improving UI/UX, or integrating with external services[.][3]  
 
-### 3.2 Pathfinding Algorithms 
+### 3.2 Pathfinding Algorithms
 
 To complete this project, we employ a robust algorithms, **Dijkstra's Algorithm**<sup>[5](#glossary-5)</sup>, to balance fast runtime and accuracy in **pathfinding**<sup>[4](#glossary-4)</sup>[.][3]  
 
-#### 3.2.1 Dijkstra's Algorithm  
+#### 3.2.1 Dijkstra's Algorithm
+
 - **Purpose:**  
   Finds the shortest path between two landmarks in a **graph**<sup>[8](#glossary-8)</sup>[.][3]  
 - **Advantages:**  
@@ -307,16 +307,16 @@ graph TD
   end
 ```
 
-#### Explanation:  
+#### Explanation
 
 1. **Client Request:**  
    - The process begins when a client sends a **REST API**<sup>[2](#glossary-2)</sup> request to the `Backend Server`. The request contains the source and destination landmarks (**nodes**<sup>[14](#glossary-14)</sup>) for which the shortest path is required[.][3]
 2. **Input Validation Module:**  
-   - The `Backend Server` forwards the request to the `Input Validation Module`, which checks the validity of the input (e.g., valid IDs, non-empty input)[.][3] This involves verifying that the provided source and destination **nodes**<sup>[14](#glossary-14)</sup> exist and that the parameters are correctly formatted[.][3] If the input is valid, the system proceeds; otherwise, an error response is returned to the client[.][3]
+   - The `Backend Server` forwards the request to the `Input Validation Module`, which checks the validity of the input (e.g., valid IDs, non-empty input\)[.][3] This involves verifying that the provided source and destination **nodes**<sup>[14](#glossary-14)</sup> exist and that the parameters are correctly formatted[.][3] If the input is valid, the system proceeds; otherwise, an error response is returned to the client[.][3]
 3. **Graph Data Loader:**  
    - If the input is valid, the `Graph Data Loader` retrieves the relevant **graph<sup>[8](#glossary-8)</sup> data** (**nodes**<sup>[14](#glossary-14)</sup> and **edges**<sup>[15](#glossary-15)</sup>) from the dataset and loads it into memory[.][3] This data will be used in the next steps to compute the shortest path[.][3]
 4. **Dijkstra's Algorithm Execution:**  
-   - The **Dijkstra's algorithm**<sup>[5](#glossary-5)</sup> calculates the minimal path by evaluating the **edges**<sup>[15](#glossary-15)</sup> and **nodes**<sup>[14](#glossary-14)</sup> of the graph based on their weights (distances or costs)[.][3]
+   - The **Dijkstra's algorithm**<sup>[5](#glossary-5)</sup> calculates the minimal path by evaluating the **edges**<sup>[15](#glossary-15)</sup> and **nodes**<sup>[14](#glossary-14)</sup> of the graph based on their weights (distances or costs\)[.][3]
 5. **Path Result Generator:**  
    - Once the algorithm completes, the `Path Result Generator` processes the results[.][3] It converts the raw output (a list of **nodes**<sup>[14](#glossary-14)</sup> in the shortest path, including distances) into a structured format that can be easily understood by the client[.][3]
 6. **Response Formatter:**  
@@ -326,51 +326,50 @@ graph TD
 8. **Error Handling:**  
    - If at any point the input validation fails, the system will return an error response (using appropriate HTTP status codes), which will be received by the client[.][3]
 
-
 #### 3.3.2 Shortest Path Algorithm Execution Flow
 
 ```mermaid
 graph TD
-	A[Start]
-	B[Get the shortest path]
+  A[Start]
+  B[Get the shortest path]
   C[Start Dijkstra]
   D[Initialize distance array with infinity, set source distance to 0]
   E[Initialize priority queue with the source node]
-	F{Is priority queue empty?}
-	G[End Dijkstra]
-	H[Extract node with minimum distance from priority queue]
-	I{Is node visited?}
-	J[Mark node as visited]
-	K[For each neighbor of the current node]
-	L{Is the neighbor's tentative distance smaller?}
-	M[Update neighbor's distance in distance array]
-	N[Add neighbor to priority queue with updated distance]
-	O[Return the quickest path]
+  F{Is priority queue empty?}
+  G[End Dijkstra]
+  H[Extract node with minimum distance from priority queue]
+  I{Is node visited?}
+  J[Mark node as visited]
+  K[For each neighbor of the current node]
+  L{Is the neighbor's tentative distance smaller?}
+  M[Update neighbor's distance in distance array]
+  N[Add neighbor to priority queue with updated distance]
+  O[Return the quickest path]
 
-	subgraph  
-		A --> B
-		B --> C
-		
-		subgraph Dijkstra Algorithm
+  subgraph  
+    A --> B
+    B --> C
+    
+    subgraph Dijkstra Algorithm
 
-		    C --> D
-		    D --> E
-		    E --> F
-		    F -- Yes --> G
-		    F -- No --> H
-		    H --> I
-		    I -- Yes --> E
-		    I -- No --> J
-		    J --> K
-		    K --> L
-		    L -- Yes --> M
-		    M --> N
-		    L --> No --> K
-		    K --> H
-		end
-	
-		G --> O
-	end
+        C --> D
+        D --> E
+        E --> F
+        F -- Yes --> G
+        F -- No --> H
+        H --> I
+        I -- Yes --> E
+        I -- No --> J
+        J --> K
+        K --> L
+        L -- Yes --> M
+        M --> N
+        L --> No --> K
+        K --> H
+    end
+  
+    G --> O
+  end
 ```
 
 ## 4. Detailed Design
@@ -382,28 +381,33 @@ graph TD
 The backend is structured to handle multiple requests efficiently and securely[.][3] Key components include:
 
 #### 4.1.1. REST API Endpoint
+
 - **Purpose**: Provides access to the core functionality of the application through a single GET endpoint[.][3]  
 - **Input**: Accepts source and destination landmark IDs as query parameters[.][3]  
 - **Output**: Returns the travel time and the ordered list of landmarks in the shortest path in both `XML`<sup>[17](#glossary-17)</sup> and `JSON`<sup>[16](#glossary-16)</sup> formats[.][3]  
 - **Design**: Built using C++ for high performance, leveraging lightweight **HTTP**<sup>[11](#glossary-11)</sup> server libraries such as `Boost.Beast`, `cpp-httplib` or `Pistache`[.][3]
 
 #### 4.1.2. Request Handling Layer
+
 - **Purpose**: Parses incoming requests, validates inputs, and routes them to the appropriate modules[.][3]  
 - **Error Handling**: Ensures that invalid or incomplete requests return descriptive error messages (e.g., `400 Bad Request`)[.][3]  
 - **Concurrency<sup>[32](#glossary-32)</sup>**: Supports handling multiple requests simultaneously using **threading**<sup>[42](#glossary-42)</sup> or asynchronous techniques[.][3]
 
 #### 4.1.3. Pathfinding Engine
+
 - **Purpose**: Implements the core algorithm for finding the shortest path between two landmarks[.][3]  
 - **Algorithm**: Utilizes **Dijkstra**<sup>[5](#glossary-5)</sup>’s  algorithm for optimal precision and **DFS**<sup>[6](#glossary-6)</sup> for optimal performance[.][3]  
 - **Data Loading**: Reads the **graph**<sup>[8](#glossary-8)</sup> data (from `USA-roads.csv`) into memory during initialization to optimize query response times[.][3]  
 - **Performance Goals**: Ensures responses within 1 second for typical requests[.][3]
 
 #### 4.1.4. Data Validation Tool Integration
+
 - **Purpose**: Verifies the integrity of the **graph**<sup>[8](#glossary-8)</sup> data before it is loaded into memory[.][3]  
 - **Functionality**: Ensures that the dataset forms a fully connected **graph**<sup>[8](#glossary-8)</sup> and is free of loops[.][3]  
 - **Implementation**: Operates as a pre-processing step, run infrequently but essential for ensuring data accuracy[.][3]
 
 #### 4.1.5. Security Layer
+
 - **Purpose**: Protects the **REST API**<sup>[2](#glossary-2)</sup> from unauthorized access[.][3]  
 - **Implementation**:  
   - **API key-based**<sup>[21](#glossary-21)</sup> authentication for identifying and authorizing clients[.][3]  
@@ -411,16 +415,19 @@ The backend is structured to handle multiple requests efficiently and securely[.
   - **Rate limiting**<sup>[35](#glossary-35)</sup> to mitigate **DoS (Denial of Service**<sup>[52](#glossary-52)</sup>**)** attacks[.][3]
 
 #### 4.1.6. Response Serialization
+
 - **Purpose**: Converts the output of the **pathfinding**<sup>[4](#glossary-4)</sup> engine into the requested format (**XML**<sup>[17](#glossary-17)</sup> or **JSON**<sup>[16](#glossary-16)</sup>)[.][3]  
 - **Design**: Utilizes **lightweight serialization**<sup>[39](#glossary-39)</sup> libraries to minimize overhead while maintaining compatibility with modern REST standards[.][3]
 
 #### 4.1.7. Scalability Design
+
 - **Purpose**: Prepares the backend for increasing traffic and data loads[.][3]  
 - **Techniques**:  
   - **Modular architecture**<sup>[43](#glossary-43)</sup> to allow easy scaling of individual components[.][3]  
   - Potential integration with a **load balancer**<sup>[40](#glossary-40)</sup> for distributed deployments in production environments[.][3]
 
 #### 4.1.8. Testing and Monitoring
+
 - **Unit Testing<sup>[47](#glossary-47)</sup>**: Comprehensive test suite to validate the correctness of each backend component[.][3]  
 - **Performance Testing**: Ensures the API meets the 1-second response time requirement under normal conditions[.][3]  
 - **Logging and Monitoring**: Captures API usage and performance metrics to diagnose issues and optimize performance over time[.][3]
@@ -459,19 +466,22 @@ The application relies on a **weighted, undirected graph<sup>[8](#glossary-8)</s
 The **graph**<sup>[8](#glossary-8)</sup> will be implemented using the following data structures for optimal performance and **scalability**<sup>[28](#glossary-28)</sup>:
 
 1. **Adjacency List<sup>[29](#glossary-29)</sup>:**  
-   - Used for representing the **graph**<sup>[8](#glossary-8)</sup>[.][3] Each **node**<sup>[14](#glossary-14)</sup> maintains a list of its neighbors and associated weights (travel times)[.][3]  
+   - Used for representing the **graph**<sup>[8](#glossary-8)</sup>[.][3] Each **node**<sup>[14](#glossary-14)</sup> maintains a list of its neighbors and associated weights (travel times\)[.][3]  
    - Efficient for sparse graphs, as it minimizes memory usage[.][3]
 
-   **Example:**  
+   **Example:**
+
    ```text
     Node A: [(B, 5), (C, 10)]  
     Node B: [(A, 5), (C, 3)]  
     Node C: [(A, 10), (B, 3)]
    ```  
+
 2. **Hash Map<sup>[34](#glossary-34)</sup> for Node<sup>[14](#glossary-14)</sup> Lookup:**
    - A hash map<sup>[34](#glossary-34)</sup> (or dictionary) is used for fast lookup of **nodes**<sup>[14](#glossary-14)</sup> by their landmark IDs[.][3]
 
    **Example:**
+
     ```cpp
     std::unordered_map<int, std::vector<std::pair<int, int>>> graph;
     Priority Queue (for Pathfinding):
@@ -482,10 +492,13 @@ The **graph**<sup>[8](#glossary-8)</sup> will be implemented using the following
    - Typically implemented as a min-heap[.][3]
 
    **Example:**
+
     ```cpp
     std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<>> minHeap;
     ```
+
 #### 4.3.4 Data Integrity Validation
+
 To ensure the correctness of the **graph structure**<sup>[8](#glossary-8)</sup>, the following validation steps are performed during the data import phase:
 
 1. **Self-Loop Check:**
@@ -501,8 +514,8 @@ To ensure the correctness of the **graph structure**<sup>[8](#glossary-8)</sup>,
    - Ensure bidirectionality of all **edges**<sup>[15](#glossary-15)</sup> (e.g., if `A -> B` exists, `B -> A` must also exist with the same weight)[.][3]
 
 #### 4.3.5 Usage in Pathfinding
-The weighted, undirected **graph**<sup>[8](#glossary-8)</sup> is optimized for algorithms like **Dijkstra<sup>[5](#glossary-5)</sup>** to calculate the shortest path efficiently[.][3] This algorithm leverage the graph structure and **priority queue**<sup>[30](#glossary-30)</sup> to balance performance and memory usage, ensuring the application meets its response time requirements[.][3]
 
+The weighted, undirected **graph**<sup>[8](#glossary-8)</sup> is optimized for algorithms like **Dijkstra<sup>[5](#glossary-5)</sup>** to calculate the shortest path efficiently[.][3] This algorithm leverage the graph structure and **priority queue**<sup>[30](#glossary-30)</sup> to balance performance and memory usage, ensuring the application meets its response time requirements[.][3]
 
 ## 5. Development Approach
 
@@ -558,7 +571,8 @@ We decided to target the following platforms for compatibility, performance, and
 
 ---
 
-### Notes:
+### Notes
+
 1. **macOS Targeting:**  
    - **macOS 14 (Sequoia)** is the primary target version for this project[.][3]  
    - **macOS 13 (Ventura)** and **macOS 12 (Monterey)** are supported, systems running earlier versions may still work but are not officially supported[.][3]
@@ -610,7 +624,7 @@ Since the application is designed for local use (on a local server), the securit
 
 - **Data Integrity<sup>[33](#glossary-33)</sup>:**
   - We use a **CSV file** as the primary data source (which contains **nodes**<sup>[14](#glossary-14)</sup> and connections)[.][3] **Data integrity**<sup>[33](#glossary-33)</sup> checks can be implemented to ensure that the **CSV**<sup>[9](#glossary-9)</sup> file is properly formatted and that there are no data inconsistencies[.][3]
-  - We will validate the **CSV**<sup>[9](#glossary-9)</sup> file’s integrity before uploading it on the live server to ensure that it is not corrupted, and we will also validate that it meets the expected structure (i.e., a **DAG** with no loops)[.][3]
+  - We will validate the **CSV**<sup>[9](#glossary-9)</sup> file’s integrity before uploading it on the live server to ensure that it is not corrupted, and we will also validate that it meets the expected structure (i.e., a **DAG** with no loops\)[.][3]
 
 - **API Security:**
   - Since we are not implementing a user authentication system (e.g., no login or registration), there is no need to secure API endpoints with authentication tokens for this local version[.][3]
@@ -623,7 +637,7 @@ Since the application is designed for local use (on a local server), the securit
   - Since the **CSV**<sup>[9](#glossary-9)</sup> file may contain geographic or landmark data, if any sensitive data were to be involved (in future versions), we would ensure compliance with GDPR, including user consent, data deletion, and data protection procedures[.][3]
 
 - **Data Breach Notification:**
-  - There is no personally identifiable information (PII) being processed or stored in this system[.][3] However, if sensitive data were to be added in the future, we would establish a process to notify users in case of any data breaches (as per GDPR guidelines)[.][3]
+  - There is no personally identifiable information (PII) being processed or stored in this system[.][3] However, if sensitive data were to be added in the future, we would establish a process to notify users in case of any data breaches (as per GDPR guidelines\)[.][3]
 
 - **Other Regulations:**
   - The current version of the system is not handling sensitive personal data, so no other regulations like **HIPAA** or **CCPA** apply[.][3] However, should the project evolve to handle user data in the future, compliance with these and other data protection regulations would be enforced[.][3]
@@ -653,7 +667,6 @@ Since the application is designed for local use (on a local server), the securit
 
 - **Environment Configuration:**
   - We ensure that the development and deployment environment is configured securely[.][3] Since this application will be running on localhost, it is essential to properly configure any local servers and ensure they are only accessible from authorized machines[.][3]
-
 
 ## 9. Glossary
 
@@ -703,11 +716,8 @@ Since the application is designed for local use (on a local server), the securit
 | <p id="glossary-50">50</p> | Buffer Overflow                                                              | A situation where a program writes more data to a buffer than it can hold, potentially leading to unexpected behavior or security vulnerabilities.                                                                                                                                       |
 | <p id="glossary-52">52</p> | Denial of Service (DoS) Attacks                                              | A type of cyberattack where the attacker attempts to make a machine or network resource unavailable to its intended users by overwhelming it with requests.                                                                                                                              |
 
-
 <!-- LINKS -->
 [1]: https://en.wikipedia.org/wiki/C%2B%2B "C++ Wikipedia"
 [2]: https://en.wikipedia.org/wiki/C_(programming_language) "C Wikipedia"
 [3]: https://www.youtube.com/watch?v=tas0O586t80 "Program in C"
-[4]: https://en.wikipedia.org/wiki/JSON "JSON Wikipedia"
-[5]: https://en.wikipedia.org/wiki/XML "XML Wikipedia"
 [6]: https://en.wikipedia.org/wiki/Time_complexity#Logarithmic_time "Logarithmic time Wikipedia"
