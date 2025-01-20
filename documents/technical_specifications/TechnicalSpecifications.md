@@ -18,35 +18,35 @@
   - [2. System Requirements](#2-system-requirements)
     - [2.1 Functional Requirements](#21-functional-requirements)
       - [2.1.1 Data Checker](#211-data-checker)
-      - [2.1.2 REST API2](#212-rest-api2)
+      - [2.1.2 REST API](#212-rest-api)
     - [2.2 Non-Functional Requirements](#22-non-functional-requirements)
       - [2.2.1 Data Checker](#221-data-checker)
-      - [2.2.2 REST API2](#222-rest-api2)
+      - [2.2.2 REST API](#222-rest-api)
   - [3. System Architecture](#3-system-architecture)
     - [3.1 Overview](#31-overview)
       - [3.1.1 Key Design Considerations](#311-key-design-considerations)
-    - [3.2 Pathfinding4 Algorithms](#32-pathfinding4-algorithms)
-      - [3.2.1 Dijkstra5's Algorithm](#321-dijkstra5s-algorithm)
+    - [3.2 Pathfinding Algorithms](#32-pathfinding-algorithms)
+      - [3.2.1 Dijkstra's Algorithm](#321-dijkstras-algorithm)
     - [3.3 Data Flow Overview](#33-data-flow-overview)
       - [3.3.1 High-Level Data Flow Diagram](#331-high-level-data-flow-diagram)
       - [Explanation:](#explanation)
       - [3.3.2 Shortest Path Algorithm Execution Flow](#332-shortest-path-algorithm-execution-flow)
   - [4. Detailed Design](#4-detailed-design)
     - [4.1 Backend Design](#41-backend-design)
-      - [4.1.1. REST API2 Endpoint](#411-rest-api2-endpoint)
+      - [4.1.1. REST API Endpoint](#411-rest-api-endpoint)
       - [4.1.2. Request Handling Layer](#412-request-handling-layer)
-      - [4.1.3. Pathfinding4 Engine](#413-pathfinding4-engine)
+      - [4.1.3. Pathfinding Engine](#413-pathfinding-engine)
       - [4.1.4. Data Validation Tool Integration](#414-data-validation-tool-integration)
       - [4.1.5. Security Layer](#415-security-layer)
-      - [4.1.6. Response Serialization39](#416-response-serialization39)
-      - [4.1.7. Scalability28 Design](#417-scalability28-design)
+      - [4.1.6. Response Serialization](#416-response-serialization)
+      - [4.1.7. Scalability Design](#417-scalability-design)
       - [4.1.8. Testing and Monitoring](#418-testing-and-monitoring)
     - [4.3 Data Structure](#43-data-structure)
       - [4.3.1 Graph Characteristics](#431-graph-characteristics)
       - [4.3.2 Graph Properties](#432-graph-properties)
       - [4.3.3 Data Representation](#433-data-representation)
-      - [4.3.4 Data Integrity33 Validation](#434-data-integrity33-validation)
-    - [4.3.5 Usage in Pathfinding4](#435-usage-in-pathfinding4)
+      - [4.3.4 Data Integrity Validation](#434-data-integrity-validation)
+      - [4.3.5 Usage in Pathfinding](#435-usage-in-pathfinding)
   - [5. Development Approach](#5-development-approach)
     - [5.1 Methodology](#51-methodology)
     - [5.2 Tools and Technologies](#52-tools-and-technologies)
@@ -54,7 +54,7 @@
     - [5.4 Software](#54-software)
     - [5.5 Target](#55-target)
       - [5.5.1 Desktop Platforms](#551-desktop-platforms)
-      - [5.5.2 Web Server for REST API2](#552-web-server-for-rest-api2)
+      - [5.5.2 Web Server for REST API](#552-web-server-for-rest-api)
     - [Notes:](#notes)
   - [6. Testing](#6-testing)
     - [6.1 Testing Strategy](#61-testing-strategy)
@@ -189,7 +189,7 @@ You can find the full coding convention guidelines in the [Coding Conventions do
 - **Algorithm Complexity**  
   - The data validation algorithm used for checks, such as graph<sup>[8](#glossary-8)</sup> validation and connectivity, will operate with a time complexity<sup>[13](#glossary-13)</sup> of **[O(log n)][6]** for most operations, ensuring efficient processing of large datasets[.][3]
 
-#### 2.1.2 REST API<sup>[2](#glossary-2)</sup>  
+#### 2.1.2 REST API  
 
 - **Endpoint for Shortest Path Calculation**  
   - Provide an endpoint that accepts input parameters (e.g., start point, end point) and returns the shortest path, including intermediate steps and estimated travel times[.][3]  
@@ -214,7 +214,7 @@ You can find the full coding convention guidelines in the [Coding Conventions do
 - **Performance**  
   - The application should process CSV<sup>[9](#glossary-9)</sup> files and provide error feedback within **1 second** for standard datasets[.][3]  
 
-#### 2.2.2 REST API<sup>[2](#glossary-2)</sup>  
+#### 2.2.2 REST API
 
 - **Performance**  
   - The REST API<sup>[2](#glossary-2)</sup> should respond to requests within 200ms under normal conditions and support high throughput[.][3]  
@@ -262,11 +262,11 @@ The system architecture is designed to ensure seamless functionality, high perfo
 - **Cross-Platform<sup>[19](#glossary-19)</sup> Support**: Desktop applications and the REST API<sup>[2](#glossary-2)</sup> are built to function seamlessly across Linux, Windows, and macOS[.][3]  
 - **Extensibility**: The system is designed to accommodate future enhancements, such as adding new endpoints, improving UI/UX, or integrating with external services[.][3]  
 
-### 3.2 Pathfinding<sup>[4](#glossary-4)</sup> Algorithms 
+### 3.2 Pathfinding Algorithms 
 
 To complete this project, we employ two robust algorithms, **Dijkstra<sup>[5](#glossary-5)</sup>'s Algorithm**, to balance fast runtime and accuracy in pathfinding<sup>[4](#glossary-4)</sup>[.][3]  
 
-#### 3.2.1 Dijkstra<sup>[5](#glossary-5)</sup>'s Algorithm  
+#### 3.2.1 Dijkstra's Algorithm  
 - **Purpose:**  
   Finds the shortest path between two landmarks in a graph<sup>[8](#glossary-8)</sup>[.][3]  
 - **Advantages:**  
@@ -381,7 +381,7 @@ graph TD
 
 The backend is structured to handle multiple requests efficiently and securely[.][3] Key components include:
 
-#### 4.1.1. REST API<sup>[2](#glossary-2)</sup> Endpoint
+#### 4.1.1. REST API Endpoint
 - **Purpose**: Provides access to the core functionality of the application through a single GET endpoint[.][3]  
 - **Input**: Accepts source and destination landmark IDs as query parameters[.][3]  
 - **Output**: Returns the travel time and the ordered list of landmarks in the shortest path in both `XML`<sup>[17](#glossary-17)</sup> and `JSON`<sup>[16](#glossary-16)</sup> formats[.][3]  
@@ -392,7 +392,7 @@ The backend is structured to handle multiple requests efficiently and securely[.
 - **Error Handling**: Ensures that invalid or incomplete requests return descriptive error messages (e.g., `400 Bad Request`)[.][3]  
 - **Concurrency<sup>[32](#glossary-32)</sup>**: Supports handling multiple requests simultaneously using threading<sup>[42](#glossary-42)</sup> or asynchronous techniques[.][3]
 
-#### 4.1.3. Pathfinding<sup>[4](#glossary-4)</sup> Engine
+#### 4.1.3. Pathfinding Engine
 - **Purpose**: Implements the core algorithm for finding the shortest path between two landmarks[.][3]  
 - **Algorithm**: Utilizes Dijkstra<sup>[5](#glossary-5)</sup>’s  algorithm for optimal precision and DFS<sup>[6](#glossary-6)</sup> for optimal performance[.][3]  
 - **Data Loading**: Reads the graph<sup>[8](#glossary-8)</sup> data (from `USA-roads.csv`) into memory during initialization to optimize query response times[.][3]  
@@ -410,11 +410,11 @@ The backend is structured to handle multiple requests efficiently and securely[.
   - Input sanitization<sup>[41](#glossary-41)</sup> to prevent injection attacks[.][3]  
   - Rate limiting<sup>[35](#glossary-35)</sup> to mitigate DoS (Denial of Service<sup>[52](#glossary-52)</sup>) attacks[.][3]
 
-#### 4.1.6. Response Serialization<sup>[39](#glossary-39)</sup>
+#### 4.1.6. Response Serialization
 - **Purpose**: Converts the output of the pathfinding<sup>[4](#glossary-4)</sup> engine into the requested format (XML<sup>[17](#glossary-17)</sup> or JSON<sup>[16](#glossary-16)</sup>)[.][3]  
 - **Design**: Utilizes lightweight serialization<sup>[39](#glossary-39)</sup> libraries to minimize overhead while maintaining compatibility with modern REST standards[.][3]
 
-#### 4.1.7. Scalability<sup>[28](#glossary-28)</sup> Design
+#### 4.1.7. Scalability Design
 - **Purpose**: Prepares the backend for increasing traffic and data loads[.][3]  
 - **Techniques**:  
   - Modular architecture<sup>[43](#glossary-43)</sup> to allow easy scaling of individual components[.][3]  
@@ -485,7 +485,7 @@ The graph<sup>[8](#glossary-8)</sup> will be implemented using the following dat
     ```cpp
     std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<>> minHeap;
     ```
-#### 4.3.4 Data Integrity<sup>[33](#glossary-33)</sup> Validation
+#### 4.3.4 Data Integrity Validation
 To ensure the correctness of the graph structure<sup>[8](#glossary-8)</sup>, the following validation steps are performed during the data import phase:
 
 1. **Self-Loop Check:**
@@ -500,7 +500,7 @@ To ensure the correctness of the graph structure<sup>[8](#glossary-8)</sup>, the
 4. **Symmetry Check:**
    - Ensure bidirectionality of all edges<sup>[15](#glossary-15)</sup> (e.g., if `A -> B` exists, `B -> A` must also exist with the same weight)[.][3]
 
-### 4.3.5 Usage in Pathfinding<sup>[4](#glossary-4)</sup>
+#### 4.3.5 Usage in Pathfinding
 The weighted, undirected graph<sup>[8](#glossary-8)</sup> is optimized for algorithms like **Dijkstra<sup>[5](#glossary-5)</sup>** to calculate the shortest path efficiently[.][3] This algorithm leverage the graph structure and priority queue<sup>[30](#glossary-30)</sup> to balance performance and memory usage, ensuring the application meets its response time requirements[.][3]
 
 
@@ -549,7 +549,7 @@ We decided to target the following platforms for compatibility, performance, and
 | **Windows** | Windows 10 and later                           | Covers the largest user base, with extended support for performance and compatibility[.][3]          |
 | **macOS**   | macOS 14 (Sequoia) and later                   | Targets devices capable of running modern macOS features and supporting your development tools[.][3] |
 
-#### 5.5.2 Web Server for REST API<sup>[2](#glossary-2)</sup>
+#### 5.5.2 Web Server for REST API
 
 | Server Type                                   | Supported Platforms      | Rationale                                                                                                     |
 | --------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------- |
