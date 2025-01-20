@@ -51,6 +51,7 @@
   - [Use Cases](#use-cases)
 - [Functional Requirements](#functional-requirements)
   - [Description](#description)
+  - [Data Checker](#data-checker)
   - [APIs](#apis)
     - [Quickest Path Retrieval](#quickest-path-retrieval)
       - [Query Parameters:](#query-parameters)
@@ -66,25 +67,13 @@
   - [500 Error Responses (Server Errors)](#500-error-responses-server-errors)
     - [500 Internal Server Error](#500-internal-server-error)
       - [Example JSON Response:](#example-json-response-2)
-  - [REST APIs](#rest-apis)
-    - [Communication Between Different Systems](#communication-between-different-systems)
-    - [Core Operations](#core-operations)
-    - [Client-Server Independence](#client-server-independence)
-    - [Statelessness](#statelessness)
-    - [Resource Access](#resource-access)
-    - [Easy Integration](#easy-integration)
-    - [Scalable Architecture](#scalable-architecture)
-    - [Data Checker](#data-checker)
-  - [STL](#stl)
-  - [Algorithm](#algorithm)
-  - [Heuristic](#heuristic)
+  - [Algorithm and Data Processing](#algorithm-and-data-processing)
+    - [Heuristic Approach](#heuristic-approach)
     - [Advantages:](#advantages)
     - [Disadvantages:](#disadvantages)
-    - [Input](#input)
-  - [Output](#output)
-  - [Graph](#graph)
-  - [Compatibility](#compatibility)
-  - [Interface](#interface)
+    - [Input Data](#input-data)
+    - [Output](#output)
+  - [User Interface](#user-interface)
   - [Acceptance Criteria](#acceptance-criteria)
 - [Non-Functional Requirements](#non-functional-requirements)
   - [Costs](#costs)
@@ -148,7 +137,6 @@ As defined by the project owner, the team is arranged as follows:
 | **API** | Application Programming Interface - A set of rules and tools that allow different software applications to communicate with each other. Think of it as a waiter taking orders between the kitchen (server) and customers (clients). |
 | **Approximation** | A practical approach to finding a good-enough answer when exact solutions are too complex or time-consuming. Often used in real-world engineering and scientific calculations. |
 | **Big O Notation** | A mathematical way to describe how an algorithm's performance changes as its input size grows. Written like O(n) or O(n²), it helps developers choose the right algorithm for their needs. |
-| **Heuristics** | Heuristics are problem-solving techniques or shortcuts that help find quick, approximate solutions instead of perfect ones. They're often used when time or resources are limited, like guessing a route on a map by following major roads. | 
 | **C++** | A powerful programming language that builds upon C, offering both high-level and low-level programming features. Popular in game development, system software, and performance-critical applications. |
 | **CSV** | Comma-Separated Values - A simple file format that stores tabular data as plain text, with values separated by commas. Widely used for data exchange between spreadsheets and databases. |
 | **DAG** | Directed Acyclic Graph - A graph structure where connections flow in one direction and never form loops. Essential in task scheduling, build systems, and data processing pipelines. |
@@ -169,8 +157,7 @@ As defined by the project owner, the team is arranged as follows:
 | **UI** | User Interface - All the elements users see and interact with in a software application, from buttons to menus. |
 | **XML** | Extensible Markup Language - A versatile way to structure data using custom tags, often used in configuration files and data exchange. |
 
-
-
+**Graph Connectivity**
 **SQL Dataset** 
 
 --- 
@@ -405,17 +392,12 @@ For this project all the deadlines for the customer are February 7th 2025. But o
 </table>
 
 
-
-
 ## Use Cases
 
 | **User**             | **Action**                                      | **Expected Result**                       |
 |----------------------|-------------------------------------------------|-------------------------------------------|
 | Individual Customer  | Find the shortest path between two cities       | A list of steps with estimated time.      |
 | Logistics Company    | Plan a route for multiple vehicles              | An optimized schedule per vehicle.        |
-
-
-
 
 
 ---
@@ -429,14 +411,21 @@ This project involves developing a software solution in C++ to determine the qui
 Users simply provide the IDs of two landmarks as input, and the software calculates and returns the quickest path, including travel time and an ordered list of landmarks along the route. Unlike a GPS, this software does not track real-time location but focuses on providing pre-calculated routes between fixed landmarks.
 
 
-
-![alt text](/documents/functional_specifications/images/logic_quickest_path.png)
-
+## Data Checker
 
 
+The data checker is a crucial tool for ensuring that the data is correct, reliable and adapted to the algorithm used, thus avoiding errors later on in the program. 
+For example, it checks that there are no infinite loops or duplicate nodes. It also checks that all nodes are present, that there is a possible route for all of them, i.e. that they are related, that the data type is usable and complete for each node, stop and time.
+
+![alt text](/documents/functional_specifications/images/logic_quickest_path.png)  
+
+
+This algorithm will be implemented in C, as it is a high-performance language at this level, enabling a certain level of precision and efficiency to be achieved. 
 
 
 ## APIs
+
+![alt text](/documents/functional_specifications/images/Input_output_system.png)
 
 ###  Quickest Path Retrieval
 
@@ -450,9 +439,9 @@ Users simply provide the IDs of two landmarks as input, and the software calcula
 
 | Parameter   | Description                                                                         | Required |
 |-------------|-------------------------------------------------------------------------------------|----------|
-| `source`    | The starting point                                                  | Yes      |
-| `destination` | The finish point                                             | Yes      |
-| `format`    | Specifies the response format. Supported values: `json` (default), `xml`            | No       |
+| `source`    | The starting point                                                                  | Yes      |
+| `destination` | The finish point                                                                  | Yes      |
+| `format`    | Specifies the response format. Supported values: `json`, `xml`                      | No       |
 
 #### Headers:
 
@@ -590,142 +579,73 @@ Users simply provide the IDs of two landmarks as input, and the software calcula
 ```
 
 
-## REST APIs
-
-A REST API enables data exchange between different systems using HTTP protocol. This approach, based on REST principles, has become widespread due to its simplicity and effectiveness.
-
-### Communication Between Different Systems
-
-REST APIs bridge various technologies. For instance, a JavaScript web app can easily communicate with a Python backend and SQL database.
-
-### Core Operations
-
-REST APIs leverage standard HTTP methods:
-
-- GET to read data
-- POST to create
-- PUT to update
-- DELETE to remove
-
-### Client-Server Independence
-
-The client (browser, mobile app...) and server can evolve separately, as long as they follow the API conventions.
-
-### Statelessness
-
-Each request contains everything needed for processing. No need to remember previous requests, which greatly simplifies things.
-
-### Resource Access
-
-REST APIs provide access to data and functionality without diving into source code.
-
-### Easy Integration
-
-With standard formats like JSON or XML, connecting a REST API to other services becomes straightforward.
-
-### Scalable Architecture
-
-REST APIs scale easily thanks to their clean architecture and smart use of HTTP protocol.
-This streamlined approach makes REST APIs the backbone of modern web development, enabling robust and flexible system interactions while maintaining simplicity in implementation.
-
-### Data Checker
-
-The goal is to ensure that each node is linked at least to another node, meaning that there is no node that is "alone or lost". It deserves to verify the integrity of data to be sure that we can have a solution for nodes. After this we can is the REST APi to classify data.
-
-## STL
-
-STL is a powerful collection of C++ template classes and functions that provide programming fundamentals like data structures, algorithms, and iterators. It's a core part of the C++ Standard Library that makes programming easier and more efficient.
+## Algorithm and Data Processing
 
 
-## Algorithm
+### Heuristic Approach
 
-
-![alt text](/documents/functional_specifications/images/Input_output_system.png)
-
-## Heuristic 
-
-To prioritize speed over precision, we will use heuristics. 
-
-In pathfinding, a heuristic function estimates the cost to reach the goal from a given node. For instance, the straight-line distance (Euclidean distance) between two points is often used as a heuristic.
+To ensure fast computations, a heuristic (e.g., Euclidean distance) is used to estimate travel costs between two points.
 
 ### Advantages:
 
 - Reduces computation time.
-- Makes decision-making feasible in large or complex spaces.
-- Often provides "good enough" solutions for practical purposes.
+  
+- Useful for complex or large spaces.
+
 
 ### Disadvantages:
 
-- Does not guarantee the optimal solution.
-- May lead to errors or biases (e.g., in human reasoning or non-optimal algorithm performance).
+- May not guarantee an optimal solution.
 
-### Input 
+### Input Data
 
-The Client sent us a list of landmarks, tesource and the destination in a CSV file. This one represent 24 million nodes. 
-
-This file is the input of our algorithm. The goal is to classify all this data to finaly find the quickest path.  
-
-The CSV file is a excel looks like this : 
+Input data is provided in a CSV file containing 24 million nodes with the following structure:
 
 
-| Point A   | Point B   | Travel Time |
-|-----------|-----------|-------------|
-| 6         | 5         | 359         |
-| 7         | 8         | 5822        |
-| 10        | 9         | 7211        |
-| 11        | 12        | 6217        |
-| 14        | 13        | 20          |
-| 14        | 15        | 2194        |
-| 12        | 16        | 34871       |
-| 14        | 17        | 3782        |
-| 2         | 18        | 1639        |
-| 19        | 16        | 40717       |
-| 20        | 21        | 1022        |
+| Point A | Point B | Travel Time |
+| --  | -- | -- |
+|  6  | 5 | 359 |
+|  7  | 8 | 5822 |
+|  10  | 9 | 7211 |
+
 
 `This is an example, the values do not correspond to the actual values.  `  
 
 
 ![alt text](/documents/functional_specifications/images/example_path.png)
 
-The third information is the time, this is an important data to the algorithm, essential to find the quickest path.
+<img src="https://imgs.search.brave.com/ZFe7uZ2kdFa_0_6VMQVId4dmkqiexWxnulfp402f_Hk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vd3d3Lm1l/dGhvZGVtYXRocy5m/ci9ncmFwaGVfZGlq/a3N0cmEyLmpwZz93/PTQ3NCZzc2w9MQ" width="400" height="200">
 
-## Output 
+  
 
-The result of our algorithm should be the ordered list of landmarks on the path and the travel time for each of them.
+This data is represented as a mathematical graph where:
 
+- Nodes represent landmarks.
+- Edges represent connections between landmarks.
+- Weights represent travel times between nodes.
+  
+### Output
+The algorithm returns:
 
-## Graph
-
-We can represent the CSV file as a graph in mathematics. There are nodes, which represent landmarks, edges, which are the connections between nodes, and weights, which represent the distances between the nodes.
-
-Here an example of a graph in mathematics : 
-
-<br>
-
-<img src="https://imgs.search.brave.com/ZFe7uZ2kdFa_0_6VMQVId4dmkqiexWxnulfp402f_Hk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vd3d3Lm1l/dGhvZGVtYXRocy5m/ci9ncmFwaGVfZGlq/a3N0cmEyLmpwZz93/PTQ3NCZzc2w9MQ" width="600" height="300"> 
-
-
-## Compatibility
-
-The XML and JSON file are two commonly used formats for structuring and exchanging data, each with its own advantages and disadvantages. Here's a comparison of the two formats.
-
-## Interface 
+- Total travel time.
+  
+- An ordered list of landmarks on the optimal path.
 
 
-The interface ins't  a requirement, but for a better user expérience it always greatful to have one. We will develop this one in HTML, and tailwind CSS to create somethigs simple but more attractive as a simple termninal interface. 
+## User Interface
+Although optional, a simple web interface will be developed using HTML and Tailwind CSS to improve user experience.
 
-Just here a figma mockup of the web page : 
+Mockup made on Figma : 
 
-In this first page the goal is simple, enter our two landmarks to execute our research. 
+Home Page: Allows the user to input two landmarks.
 
-
-After this, you only need to submit. On another page, you get the result: a simple design displaying the time needed to move between these two landmarks.
-
+Result Page: Displays the total travel time and the landmarks along the route.
 
 
 
 
 ## Acceptance Criteria
+
 
 | **Criterion**           | **Description**                                                    |
 |-------------------------|--------------------------------------------------------------------|
@@ -834,7 +754,9 @@ This project is primarily focused on technical implementation, with design as a 
 Undertaking a project of this scale is ambitious, so we have to approach each phase carefully, following our established organization and development protocols. Our main priority is to deliver a functional system that integrates both the data verifier and the REST API. We also aim to create a user interface to enhance the overall experience, but this is a complementary objective rather than a fundamental requirement.
 By maintaining this methodical approach and responding to specific customer needs, we aim to guarantee the quality and reliability of the final system.
 
+
 ---
+
 
 
 
