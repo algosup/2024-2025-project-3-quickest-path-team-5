@@ -309,13 +309,22 @@ graph TD
 
 #### Explanation:  
 
-1. **Client Request:** The user initiates a request through the REST API<sup>[2](#glossary-2)</sup>, specifying source and destination landmarks[.][3]  
-2. **Input Validation Module:** Ensures the request parameters are valid (e.g., valid IDs, non-empty input)[.][3]  
-3. **Graph Data Loader:** Loads graph<sup>[8](#glossary-8)</sup> data from the dataset into memory for processing[.][3]  
-4. **Algorithm Execution:** Executes the selected algorithm to compute the shortest path[.][3]  
-5. **Path Result Generator:** Converts raw algorithm results into meaningful data[.][3]  
-6. **Response Formatter:** Formats the response in JSON<sup>[16](#glossary-16)</sup> or XML<sup>[17](#glossary-17)</sup> as requested by the client[.][3]  
-7. **Client Response:** Sends the formatted data back to the client[.][3]  
+1. **Client Request:**  
+   - The process begins when a **client** sends a **REST API**<sup>[2](#glossary-2)</sup> request to the **Backend Server**. The request contains the source and destination landmarks (nodes) for which the shortest path is required[.][3]
+2. **Input Validation Module:**  
+   - The **Backend Server** forwards the request to the **Input Validation Module**, which checks the validity of the input (e.g., valid IDs, non-empty input)[.][3] This involves verifying that the provided source and destination nodes exist and that the parameters are correctly formatted[.][3] If the input is valid, the system proceeds; otherwise, an error response is returned to the client[.][3]
+3. **Graph Data Loader:**  
+   - If the input is valid, the **Graph Data Loader** retrieves the relevant **graph<sup>[8](#glossary-8)</sup> data** (nodes and edges) from the dataset and loads it into memory[.][3] This data will be used in the next steps to compute the shortest path[.][3]
+4. **Dijkstra's Algorithm Execution:**  
+   - The **Dijkstra's algorithm** to compute the shortest path[.][3] The algorithm calculates the minimal path by evaluating the edges and nodes of the graph based on their weights (distances or costs)[.][3]
+5. **Path Result Generator:**  
+   - Once the algorithm completes, the **Path Result Generator** processes the results[.][3] It converts the raw output (a list of nodes in the shortest path, including distances) into a structured format that can be easily understood by the client[.][3]
+6. **Response Formatter:**  
+   - The **Response Formatter** takes the processed data and formats it according to the client's request (either **JSON**<sup>[16](#glossary-16)</sup> or **XML**<sup>[17](#glossary-17)</sup>)[.][3] This ensures that the output is compatible with the client's expected format[.][3]
+7. **Client Response:**  
+   - Finally, the **Backend Server** sends the formatted response back to the **client**, which contains the shortest path from the source to the destination, including details like travel times or distances between intermediate nodes[.][3]
+8. **Error Handling:**  
+   - If at any point the input validation fails, the system will return an error response (using appropriate HTTP status codes), which will be received by the client[.][3]
 
 
 #### 3.3.2 Shortest Path Algorithm Execution Flow
