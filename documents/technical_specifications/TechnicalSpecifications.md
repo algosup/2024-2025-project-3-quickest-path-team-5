@@ -82,11 +82,11 @@ The application is designed to determine the shortest path from Point A to Point
 
 ### 1.1 Purpose
 
-The purpose of this document is to define the technical specifications for developing the pathfinding<sup>[4](#glossary-4)</sup> application. It offers a detailed overview of the system's requirements, architecture, core functionalities, and the development methodology to be followed[.][3]
+The purpose of this document is to define the technical specifications for developing the **pathfinding**<sup>[4](#glossary-4)</sup> application. It offers a detailed overview of the system's requirements, architecture, core functionalities, and the development methodology to be followed[.][3]
 
 ### 1.2 Scope
 
-The project encompasses the following key components, each tailored for cross-platform<sup>[19](#glossary-19)</sup> compatibility and developed using industry-standard technologies:
+The project encompasses the following key components, each tailored for **cross-platform**<sup>[19](#glossary-19)</sup> compatibility and developed using industry-standard technologies:
 
 1. **Data Checker**
    - **Name:** `DAC (Data Analyzer for CAP)`
@@ -97,7 +97,7 @@ The project encompasses the following key components, each tailored for cross-pl
    - **Name:** `CAP (Cap API Pathfinder)`
    - **Type:** Web API
    - **Technology:** Developed in [C++][1]
-   - **Supported Platforms:** Platform-agnostic<sup>[3](#glossary-3)</sup>
+   - **Supported Platforms:** **Platform-agnostic**<sup>[3](#glossary-3)</sup>
 
 ### 1.3 Audience
 
@@ -174,20 +174,20 @@ You can find the full coding convention guidelines in the [Coding Conventions do
 #### 2.1.1 Data Checker  
 
 - **CSV<sup>[9](#glossary-9)</sup> File Import**  
-  - Users should be able to import a CSV<sup>[9](#glossary-9)</sup> file into the application for validation[.][3] Supported formats should be clearly documented, and the system should reject invalid files with detailed feedback[.][3]  
+  - Users should be able to import a **CSV**<sup>[9](#glossary-9)</sup> file into the application for validation[.][3] Supported formats should be clearly documented, and the system should reject invalid files with detailed feedback[.][3]  
 
 - **Error Reporting**  
-  - The application will display detailed error messages in the terminal, including row and column numbers, to help users identify and correct issues in the CSV<sup>[9](#glossary-9)</sup> file[.][3]  
+  - The application will display detailed error messages in the terminal, including row and column numbers, to help users identify and correct issues in the **CSV**<sup>[9](#glossary-9)</sup> file[.][3]  
 
 - **Visual Representation of Linked Nodes<sup>[14](#glossary-14)</sup>**  
-  - The application will generate a visual diagram displaying each node<sup>[14](#glossary-14)</sup> and its connections, using color-coded indicators for errors or anomalies in the data[.][3]  
+  - The application will generate a visual diagram displaying each **node**<sup>[14](#glossary-14)</sup> and its connections, using color-coded indicators for errors or anomalies in the data[.][3]  
 
 - **Node<sup>[14](#glossary-14)</sup> and Connection Validation**  
-  - The application will verify the integrity of the imported data, ensuring all nodes<sup>[14](#glossary-14)</sup> and connections are valid and consistent with the required format[.][3]  
+  - The application will verify the integrity of the imported data, ensuring all **nodes**<sup>[14](#glossary-14)</sup> and connections are valid and consistent with the required format[.][3]  
 
 <!-- TODO: Modify depending of software engineers implemented algo -->
 - **Algorithm Complexity**  
-  - The data validation algorithm used for checks, such as graph<sup>[8](#glossary-8)</sup> validation and connectivity, will operate with a time complexity<sup>[13](#glossary-13)</sup> of **[O(log n)][6]** for most operations, ensuring efficient processing of large datasets[.][3]
+  - The data validation algorithm used for checks, such as **graph**<sup>[8](#glossary-8)</sup> validation and connectivity, will operate with a **time complexity**<sup>[13](#glossary-13)</sup> of **[O(log n)][6]** for most operations, ensuring efficient processing of large datasets[.][3]
 
 #### 2.1.2 REST API  
 
@@ -195,10 +195,10 @@ You can find the full coding convention guidelines in the [Coding Conventions do
   - Provide an endpoint that accepts input parameters (e.g., start point, end point) and returns the shortest path, including intermediate steps and estimated travel times[.][3]  
 
 - **Error Handling and Status Codes**  
-  - Ensure all API endpoints return appropriate HTTP<sup>[11](#glossary-11)</sup> status codes and detailed error messages for invalid requests or server errors[.][3]  
+  - Ensure all API endpoints return appropriate **HTTP**<sup>[11](#glossary-11)</sup> status codes and detailed error messages for invalid requests or server errors[.][3]  
 
 - **Authentication and Authorization**  
-  - Secure the API using authentication (e.g., OAuth<sup>[20](#glossary-20)</sup> 2.0, API keys<sup>[21](#glossary-21)</sup>) and enforce role-based access control<sup>[24](#glossary-24)</sup> to restrict sensitive operations[.][3]
+  - Secure the API using authentication (e.g., **OAuth**<sup>[20](#glossary-20)</sup> 2.0, **API keys**<sup>[21](#glossary-21)</sup>) and enforce **role-based access control**<sup>[24](#glossary-24)</sup> to restrict sensitive operations[.][3]
 
 ### 2.2 Non-Functional Requirements  
 
@@ -212,25 +212,25 @@ You can find the full coding convention guidelines in the [Coding Conventions do
   - A help section or documentation link should be accessible from the interface for troubleshooting[.][3]  
 
 - **Performance**  
-  - The application should process CSV<sup>[9](#glossary-9)</sup> files and provide error feedback within **1 second** for standard datasets[.][3]  
+  - The application should process **CSV**<sup>[9](#glossary-9)</sup> files and provide error feedback within **1 second** for standard datasets[.][3]  
 
 #### 2.2.2 REST API
 
 - **Performance**  
-  - The REST API<sup>[2](#glossary-2)</sup> should respond to requests within 200ms under normal conditions and support high throughput[.][3]  
+  - The **REST API**<sup>[2](#glossary-2)</sup> should respond to requests within 200ms under normal conditions and support high throughput[.][3]  
 
 - **Scalability<sup>[28](#glossary-28)</sup>**  
   - The backend should be designed to scale horizontally to handle a growing number of concurrent users efficiently[.][3]  
 
 - **Compatibility**  
-  - The REST API<sup>[2](#glossary-2)</sup> should be platform-agnostic<sup>[3](#glossary-3)</sup> and deployable on any server environment that supports the required C++ runtime and dependencies[.][3]  
+  - The **REST API**<sup>[2](#glossary-2)</sup> should be **platform-agnostic**<sup>[3](#glossary-3)</sup> and deployable on any server environment that supports the required C++ runtime and dependencies[.][3]  
 
 - **Security**  
   - All endpoints should enforce authentication and authorization protocols to protect sensitive data[.][3]  
   - The deployed version of the API must adhere to industry-standard practices such as HTTPS for secure communication[.][3]  
 
 - **Documentation**  
-  - Comprehensive API documentation<sup>[23](#glossary-23)</sup> must be provided, including endpoint details, example requests/responses, and error codes[.][3]
+  - Comprehensive **API documentation**<sup>[23](#glossary-23)</sup> must be provided, including endpoint details, example requests/responses, and error codes[.][3]
 
 ## 3. System Architecture
 
@@ -241,39 +241,39 @@ You can find the full coding convention guidelines in the [Coding Conventions do
 The system architecture is designed to ensure seamless functionality, high performance, and a user-friendly experience across all supported platforms[.][3] It consists of the following key components:   
 
 - **Desktop Application (Data Checker)**  
-  - **Technology**: Developed using [C][2] for its performance in handling data integrity<sup>[33](#glossary-33)</sup> checks[.][3]  
-  - **Purpose**: A utility application used to validate the integrity of the dataset (e.g., CSV<sup>[9](#glossary-9)</sup> file) by verifying graph<sup>[8](#glossary-8)</sup> properties such as connectivity and absence of loops[.][3]  
+  - **Technology**: Developed using [C][2] for its performance in handling **data integrity**<sup>[33](#glossary-33)</sup> checks[.][3]  
+  - **Purpose**: A utility application used to validate the integrity of the dataset (e.g., **CSV**<sup>[9](#glossary-9)</sup> file) by verifying **graph**<sup>[8](#glossary-8)</sup> properties such as connectivity and absence of loops[.][3]  
   - **Supported Platforms**: Compatible with Linux, Windows, and macOS[.][3]  
 
 - **REST API<sup>[2](#glossary-2)</sup>**  
-  - **Technology**: Developed using [C++][1] to ensure platform-agnostic<sup>[3](#glossary-3)</sup> deployment[.][3]  
-  - **Purpose**: Exposes core functionality through an HTTP<sup>[11](#glossary-11)</sup> server, providing endpoints for calculating shortest paths, managing data, and retrieving results in multiple formats (e.g., JSON<sup>[16](#glossary-16)</sup> or XML<sup>[17](#glossary-17)</sup>)[.][3]  
+  - **Technology**: Developed using [C++][1] to ensure **platform-agnostic**<sup>[3](#glossary-3)</sup> deployment[.][3]  
+  - **Purpose**: Exposes core functionality through an **HTTP**<sup>[11](#glossary-11)</sup> server, providing endpoints for calculating shortest paths, managing data, and retrieving results in multiple formats (e.g., **JSON**<sup>[16](#glossary-16)</sup> or **XML**<sup>[17](#glossary-17)</sup>)[.][3]  
   - **Compatibility**: Designed to be deployable on any server environment that supports the required C++ runtime[.][3]  
 
 - **Authentication Service**  
-  - **Technology**: Integrated with the REST API<sup>[2](#glossary-2)</sup>, potentially using industry-standard authentication methods (e.g., OAuth<sup>[20](#glossary-20)</sup> 2.0, API keys<sup>[21](#glossary-21)</sup>)[.][3]  
-  - **Purpose**: Ensures secure access to the REST API<sup>[2](#glossary-2)</sup> by validating user credentials and managing authorization[.][3]  
-  - **Scalability<sup>[28](#glossary-28)</sup>**: Supports role-based access control<sup>[24](#glossary-24)</sup> for future scalability<sup>[28](#glossary-28)</sup> and extended functionality[.][3]  
+  - **Technology**: Integrated with the **REST API**<sup>[2](#glossary-2)</sup>, potentially using industry-standard authentication methods (e.g., **OAuth**<sup>[20](#glossary-20)</sup> 2.0, **API keys**<sup>[21](#glossary-21)</sup>)[.][3]  
+  - **Purpose**: Ensures secure access to the **REST API**<sup>[2](#glossary-2)</sup> by validating user credentials and managing authorization[.][3]  
+  - **Scalability<sup>[28](#glossary-28)</sup>**: Supports **role-based access control**<sup>[24](#glossary-24)</sup> for future **scalability**<sup>[28](#glossary-28)</sup> and extended functionality[.][3]  
 
 #### 3.1.1 Key Design Considerations
 
 - **Modular Design<sup>[27](#glossary-27)</sup>**: Each component is designed to operate independently, ensuring maintainability and ease of updates[.][3]  
 - **High Performance**: The architecture prioritizes efficiency to handle large datasets and complex computations within the defined performance constraints[.][3]  
-- **Cross-Platform<sup>[19](#glossary-19)</sup> Support**: Desktop applications and the REST API<sup>[2](#glossary-2)</sup> are built to function seamlessly across Linux, Windows, and macOS[.][3]  
+- **Cross-Platform<sup>[19](#glossary-19)</sup> Support**: Desktop applications and the **REST API**<sup>[2](#glossary-2)</sup> are built to function seamlessly across Linux, Windows, and macOS[.][3]  
 - **Extensibility**: The system is designed to accommodate future enhancements, such as adding new endpoints, improving UI/UX, or integrating with external services[.][3]  
 
 ### 3.2 Pathfinding Algorithms 
 
-To complete this project, we employ a robust algorithms, **Dijkstra<sup>[5](#glossary-5)</sup>'s Algorithm**, to balance fast runtime and accuracy in pathfinding<sup>[4](#glossary-4)</sup>[.][3]  
+To complete this project, we employ a robust algorithms, **Dijkstra's Algorithm**<sup>[5](#glossary-5)</sup>, to balance fast runtime and accuracy in **pathfinding**<sup>[4](#glossary-4)</sup>[.][3]  
 
 #### 3.2.1 Dijkstra's Algorithm  
 - **Purpose:**  
-  Finds the shortest path between two landmarks in a graph<sup>[8](#glossary-8)</sup>[.][3]  
+  Finds the shortest path between two landmarks in a **graph**<sup>[8](#glossary-8)</sup>[.][3]  
 - **Advantages:**  
   - Guarantees the shortest path[.][3]  
-  - Works well when all edge<sup>[15](#glossary-15)</sup> weights are non-negative[.][3]  
+  - Works well when all **edge**<sup>[15](#glossary-15)</sup> weights are non-negative[.][3]  
 - **Usage in the Project:**  
-  Dijkstra<sup>[5](#glossary-5)</sup>'s algorithm is used for cases where simplicity and guaranteed accuracy are prioritized over speed[.][3]  
+  **Dijkstra's algorithm**<sup>[5](#glossary-5)</sup> is used for cases where simplicity and guaranteed accuracy are prioritized over speed[.][3]  
 
 ### 3.3 Data Flow Overview
 
@@ -310,19 +310,19 @@ graph TD
 #### Explanation:  
 
 1. **Client Request:**  
-   - The process begins when a **client** sends a **REST API**<sup>[2](#glossary-2)</sup> request to the **Backend Server**. The request contains the source and destination landmarks (nodes<sup>[14](#glossary-14)</sup>) for which the shortest path is required[.][3]
+   - The process begins when a client sends a **REST API**<sup>[2](#glossary-2)</sup> request to the `Backend Server`. The request contains the source and destination landmarks (**nodes**<sup>[14](#glossary-14)</sup>) for which the shortest path is required[.][3]
 2. **Input Validation Module:**  
-   - The **Backend Server** forwards the request to the **Input Validation Module**, which checks the validity of the input (e.g., valid IDs, non-empty input)[.][3] This involves verifying that the provided source and destination nodes<sup>[14](#glossary-14)</sup> exist and that the parameters are correctly formatted[.][3] If the input is valid, the system proceeds; otherwise, an error response is returned to the client[.][3]
+   - The `Backend Server` forwards the request to the `Input Validation Module`, which checks the validity of the input (e.g., valid IDs, non-empty input)[.][3] This involves verifying that the provided source and destination **nodes**<sup>[14](#glossary-14)</sup> exist and that the parameters are correctly formatted[.][3] If the input is valid, the system proceeds; otherwise, an error response is returned to the client[.][3]
 3. **Graph Data Loader:**  
-   - If the input is valid, the **Graph Data Loader** retrieves the relevant **graph<sup>[8](#glossary-8)</sup> data** (nodes<sup>[14](#glossary-14)</sup> and edges<sup>[15](#glossary-15)</sup>) from the dataset and loads it into memory[.][3] This data will be used in the next steps to compute the shortest path[.][3]
+   - If the input is valid, the `Graph Data Loader` retrieves the relevant **graph<sup>[8](#glossary-8)</sup> data** (**nodes**<sup>[14](#glossary-14)</sup> and **edges**<sup>[15](#glossary-15)</sup>) from the dataset and loads it into memory[.][3] This data will be used in the next steps to compute the shortest path[.][3]
 4. **Dijkstra's Algorithm Execution:**  
-   - The **Dijkstra's algorithm** calculates the minimal path by evaluating the edges<sup>[15](#glossary-15)</sup> and nodes<sup>[14](#glossary-14)</sup> of the graph based on their weights (distances or costs)[.][3]
+   - The **Dijkstra's algorithm**<sup>[5](#glossary-5)</sup> calculates the minimal path by evaluating the **edges**<sup>[15](#glossary-15)</sup> and **nodes**<sup>[14](#glossary-14)</sup> of the graph based on their weights (distances or costs)[.][3]
 5. **Path Result Generator:**  
-   - Once the algorithm completes, the **Path Result Generator** processes the results[.][3] It converts the raw output (a list of nodes<sup>[14](#glossary-14)</sup> in the shortest path, including distances) into a structured format that can be easily understood by the client[.][3]
+   - Once the algorithm completes, the `Path Result Generator` processes the results[.][3] It converts the raw output (a list of **nodes**<sup>[14](#glossary-14)</sup> in the shortest path, including distances) into a structured format that can be easily understood by the client[.][3]
 6. **Response Formatter:**  
-   - The **Response Formatter** takes the processed data and formats it according to the client's request (either **JSON**<sup>[16](#glossary-16)</sup> or **XML**<sup>[17](#glossary-17)</sup>)[.][3] This ensures that the output is compatible with the client's expected format[.][3]
+   - The `Response Formatter` takes the processed data and formats it according to the client's request (either **JSON**<sup>[16](#glossary-16)</sup> or **XML**<sup>[17](#glossary-17)</sup>)[.][3] This ensures that the output is compatible with the client's expected format[.][3]
 7. **Client Response:**  
-   - Finally, the **Backend Server** sends the formatted response back to the **client**, which contains the shortest path from the source to the destination, including details like travel times or distances between intermediate nodes<sup>[14](#glossary-14)</sup>[.][3]
+   - Finally, the `Backend Server` sends the formatted response back to the client, which contains the shortest path from the source to the destination, including details like travel times or distances between intermediate **nodes**<sup>[14](#glossary-14)</sup>[.][3]
 8. **Error Handling:**  
    - If at any point the input validation fails, the system will return an error response (using appropriate HTTP status codes), which will be received by the client[.][3]
 
@@ -385,40 +385,40 @@ The backend is structured to handle multiple requests efficiently and securely[.
 - **Purpose**: Provides access to the core functionality of the application through a single GET endpoint[.][3]  
 - **Input**: Accepts source and destination landmark IDs as query parameters[.][3]  
 - **Output**: Returns the travel time and the ordered list of landmarks in the shortest path in both `XML`<sup>[17](#glossary-17)</sup> and `JSON`<sup>[16](#glossary-16)</sup> formats[.][3]  
-- **Design**: Built using C++ for high performance, leveraging lightweight HTTP<sup>[11](#glossary-11)</sup> server libraries such as `Boost.Beast`, `cpp-httplib` or `Pistache`[.][3]
+- **Design**: Built using C++ for high performance, leveraging lightweight **HTTP**<sup>[11](#glossary-11)</sup> server libraries such as `Boost.Beast`, `cpp-httplib` or `Pistache`[.][3]
 
 #### 4.1.2. Request Handling Layer
 - **Purpose**: Parses incoming requests, validates inputs, and routes them to the appropriate modules[.][3]  
 - **Error Handling**: Ensures that invalid or incomplete requests return descriptive error messages (e.g., `400 Bad Request`)[.][3]  
-- **Concurrency<sup>[32](#glossary-32)</sup>**: Supports handling multiple requests simultaneously using threading<sup>[42](#glossary-42)</sup> or asynchronous techniques[.][3]
+- **Concurrency<sup>[32](#glossary-32)</sup>**: Supports handling multiple requests simultaneously using **threading**<sup>[42](#glossary-42)</sup> or asynchronous techniques[.][3]
 
 #### 4.1.3. Pathfinding Engine
 - **Purpose**: Implements the core algorithm for finding the shortest path between two landmarks[.][3]  
-- **Algorithm**: Utilizes Dijkstra<sup>[5](#glossary-5)</sup>’s  algorithm for optimal precision and DFS<sup>[6](#glossary-6)</sup> for optimal performance[.][3]  
-- **Data Loading**: Reads the graph<sup>[8](#glossary-8)</sup> data (from `USA-roads.csv`) into memory during initialization to optimize query response times[.][3]  
+- **Algorithm**: Utilizes **Dijkstra**<sup>[5](#glossary-5)</sup>’s  algorithm for optimal precision and **DFS**<sup>[6](#glossary-6)</sup> for optimal performance[.][3]  
+- **Data Loading**: Reads the **graph**<sup>[8](#glossary-8)</sup> data (from `USA-roads.csv`) into memory during initialization to optimize query response times[.][3]  
 - **Performance Goals**: Ensures responses within 1 second for typical requests[.][3]
 
 #### 4.1.4. Data Validation Tool Integration
-- **Purpose**: Verifies the integrity of the graph<sup>[8](#glossary-8)</sup> data before it is loaded into memory[.][3]  
-- **Functionality**: Ensures that the dataset forms a fully connected graph<sup>[8](#glossary-8)</sup> and is free of loops[.][3]  
+- **Purpose**: Verifies the integrity of the **graph**<sup>[8](#glossary-8)</sup> data before it is loaded into memory[.][3]  
+- **Functionality**: Ensures that the dataset forms a fully connected **graph**<sup>[8](#glossary-8)</sup> and is free of loops[.][3]  
 - **Implementation**: Operates as a pre-processing step, run infrequently but essential for ensuring data accuracy[.][3]
 
 #### 4.1.5. Security Layer
-- **Purpose**: Protects the REST API<sup>[2](#glossary-2)</sup> from unauthorized access[.][3]  
+- **Purpose**: Protects the **REST API**<sup>[2](#glossary-2)</sup> from unauthorized access[.][3]  
 - **Implementation**:  
-  - API key-based<sup>[21](#glossary-21)</sup> authentication for identifying and authorizing clients[.][3]  
-  - Input sanitization<sup>[41](#glossary-41)</sup> to prevent injection attacks[.][3]  
-  - Rate limiting<sup>[35](#glossary-35)</sup> to mitigate DoS (Denial of Service<sup>[52](#glossary-52)</sup>) attacks[.][3]
+  - **API key-based**<sup>[21](#glossary-21)</sup> authentication for identifying and authorizing clients[.][3]  
+  - **Input sanitization**<sup>[41](#glossary-41)</sup> to prevent injection attacks[.][3]  
+  - **Rate limiting**<sup>[35](#glossary-35)</sup> to mitigate **DoS (Denial of Service**<sup>[52](#glossary-52)</sup>**)** attacks[.][3]
 
 #### 4.1.6. Response Serialization
-- **Purpose**: Converts the output of the pathfinding<sup>[4](#glossary-4)</sup> engine into the requested format (XML<sup>[17](#glossary-17)</sup> or JSON<sup>[16](#glossary-16)</sup>)[.][3]  
-- **Design**: Utilizes lightweight serialization<sup>[39](#glossary-39)</sup> libraries to minimize overhead while maintaining compatibility with modern REST standards[.][3]
+- **Purpose**: Converts the output of the **pathfinding**<sup>[4](#glossary-4)</sup> engine into the requested format (**XML**<sup>[17](#glossary-17)</sup> or **JSON**<sup>[16](#glossary-16)</sup>)[.][3]  
+- **Design**: Utilizes **lightweight serialization**<sup>[39](#glossary-39)</sup> libraries to minimize overhead while maintaining compatibility with modern REST standards[.][3]
 
 #### 4.1.7. Scalability Design
 - **Purpose**: Prepares the backend for increasing traffic and data loads[.][3]  
 - **Techniques**:  
-  - Modular architecture<sup>[43](#glossary-43)</sup> to allow easy scaling of individual components[.][3]  
-  - Potential integration with a load balancer<sup>[40](#glossary-40)</sup> for distributed deployments in production environments[.][3]
+  - **Modular architecture**<sup>[43](#glossary-43)</sup> to allow easy scaling of individual components[.][3]  
+  - Potential integration with a **load balancer**<sup>[40](#glossary-40)</sup> for distributed deployments in production environments[.][3]
 
 #### 4.1.8. Testing and Monitoring
 - **Unit Testing<sup>[47](#glossary-47)</sup>**: Comprehensive test suite to validate the correctness of each backend component[.][3]  
@@ -427,39 +427,39 @@ The backend is structured to handle multiple requests efficiently and securely[.
 
 ### 4.3 Data Structure
 
-The application relies on a **weighted, undirected graph<sup>[8](#glossary-8)</sup>** to model the road network of landmarks and travel times[.][3] This graph structure serves as the foundation for implementing efficient pathfinding<sup>[4](#glossary-4)</sup> algorithms and ensuring accurate results within the defined performance constraints[.][3]
+The application relies on a **weighted, undirected graph<sup>[8](#glossary-8)</sup>** to model the road network of landmarks and travel times[.][3] This graph structure serves as the foundation for implementing efficient **pathfinding**<sup>[4](#glossary-4)</sup> algorithms and ensuring accurate results within the defined performance constraints[.][3]
 
 #### 4.3.1 Graph Characteristics
 
 - **Nodes<sup>[14](#glossary-14)</sup> (Vertices<sup>[18](#glossary-18)</sup>):**  
-  Represent landmarks in the road network[.][3] Each node<sup>[14](#glossary-14)</sup> is uniquely identified by a landmark ID[.][3]
+  Represent landmarks in the road network[.][3] Each **node**<sup>[14](#glossary-14)</sup> is uniquely identified by a landmark ID[.][3]
 
 - **Edges<sup>[15](#glossary-15)</sup>:**  
-  Represent bidirectional roads connecting two landmarks[.][3] Each edge<sup>[15](#glossary-15)</sup> has a weight, which corresponds to the travel time between the two connected landmarks[.][3]
+  Represent bidirectional roads connecting two landmarks[.][3] Each **edge**<sup>[15](#glossary-15)</sup> has a weight, which corresponds to the travel time between the two connected landmarks[.][3]
 
 - **Weights:**  
-  Edge<sup>[15](#glossary-15)</sup> weights are integer values representing travel time in an unspecified unit[.][3] Lower weights indicate shorter travel times[.][3]
+  **Edge**<sup>[15](#glossary-15)</sup> weights are integer values representing travel time in an unspecified unit[.][3] Lower weights indicate shorter travel times[.][3]
 
 #### 4.3.2 Graph Properties
 
 - **Weighted:**  
-  Each edge<sup>[15](#glossary-15)</sup> has a numerical value (weight) representing travel time[.][3]
+  Each **edge**<sup>[15](#glossary-15)</sup> has a numerical value (weight) representing travel time[.][3]
 
 - **Undirected:**  
-  Roads are bidirectional[.][3] If an edge<sup>[15](#glossary-15)</sup> exists from landmark A to landmark B, the reverse is also true[.][3]
+  Roads are bidirectional[.][3] If an **edge**<sup>[15](#glossary-15)</sup> exists from landmark A to landmark B, the reverse is also true[.][3]
 
 - **Cyclic:**  
-  The graph<sup>[8](#glossary-8)</sup> inherently contains cycles, as multiple paths often connect landmarks[.][3]
+  The **graph**<sup>[8](#glossary-8)</sup> inherently contains cycles, as multiple paths often connect landmarks[.][3]
 
 - **Sparse Graph:**  
-  Since real-world road networks are typically sparse (many fewer edges<sup>[15](#glossary-15)</sup> than the maximum possible), efficient data structures are used to optimize memory and runtime performance[.][3]
+  Since real-world road networks are typically sparse (many fewer **edges**<sup>[15](#glossary-15)</sup> than the maximum possible), efficient data structures are used to optimize memory and runtime performance[.][3]
 
 #### 4.3.3 Data Representation
 
-The graph<sup>[8](#glossary-8)</sup> will be implemented using the following data structures for optimal performance and scalability<sup>[28](#glossary-28)</sup>:
+The **graph**<sup>[8](#glossary-8)</sup> will be implemented using the following data structures for optimal performance and **scalability**<sup>[28](#glossary-28)</sup>:
 
 1. **Adjacency List<sup>[29](#glossary-29)</sup>:**  
-   - Used for representing the graph<sup>[8](#glossary-8)</sup>[.][3] Each node<sup>[14](#glossary-14)</sup> maintains a list of its neighbors and associated weights (travel times)[.][3]  
+   - Used for representing the **graph**<sup>[8](#glossary-8)</sup>[.][3] Each **node**<sup>[14](#glossary-14)</sup> maintains a list of its neighbors and associated weights (travel times)[.][3]  
    - Efficient for sparse graphs, as it minimizes memory usage[.][3]
 
    **Example:**  
@@ -469,7 +469,7 @@ The graph<sup>[8](#glossary-8)</sup> will be implemented using the following dat
     Node C: [(A, 10), (B, 3)]
    ```  
 2. **Hash Map<sup>[34](#glossary-34)</sup> for Node<sup>[14](#glossary-14)</sup> Lookup:**
-   - A hash map<sup>[34](#glossary-34)</sup> (or dictionary) is used for fast lookup of nodes<sup>[14](#glossary-14)</sup> by their landmark IDs[.][3]
+   - A hash map<sup>[34](#glossary-34)</sup> (or dictionary) is used for fast lookup of **nodes**<sup>[14](#glossary-14)</sup> by their landmark IDs[.][3]
 
    **Example:**
     ```cpp
@@ -478,7 +478,7 @@ The graph<sup>[8](#glossary-8)</sup> will be implemented using the following dat
     ```
 
 3. **Priority Queue<sup>[30](#glossary-30)</sup> (for Pathfinding<sup>[4](#glossary-4)</sup>):**
-   - Utilized in algorithms like Dijkstra<sup>[5](#glossary-5)</sup> to efficiently retrieve the next node<sup>[14](#glossary-14)</sup> with the shortest travel time[.][3]
+   - Utilized in algorithms like **Dijkstra**<sup>[5](#glossary-5)</sup> to efficiently retrieve the next **node**<sup>[14](#glossary-14)</sup> with the shortest travel time[.][3]
    - Typically implemented as a min-heap[.][3]
 
    **Example:**
@@ -486,22 +486,22 @@ The graph<sup>[8](#glossary-8)</sup> will be implemented using the following dat
     std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<>> minHeap;
     ```
 #### 4.3.4 Data Integrity Validation
-To ensure the correctness of the graph structure<sup>[8](#glossary-8)</sup>, the following validation steps are performed during the data import phase:
+To ensure the correctness of the **graph structure**<sup>[8](#glossary-8)</sup>, the following validation steps are performed during the data import phase:
 
 1. **Self-Loop Check:**
-   - Ensure no edge<sup>[15](#glossary-15)</sup> connects a node<sup>[14](#glossary-14)</sup> to itself (e.g., `A -> A`)[.][3]
+   - Ensure no **edge**<sup>[15](#glossary-15)</sup> connects a **node**<sup>[14](#glossary-14)</sup> to itself (e.g., `A -> A`)[.][3]
 
 2. **Duplicate Edge<sup>[15](#glossary-15)</sup> Check:**
-   - Verify that no duplicate edges<sup>[15](#glossary-15)</sup> exist between two nodes<sup>[14](#glossary-14)</sup> with differing weights[.][3]
+   - Verify that no duplicate **edges**<sup>[15](#glossary-15)</sup> exist between two **nodes**<sup>[14](#glossary-14)</sup> with differing weights[.][3]
 
 3. **Connectivity Check:**
-   - Confirm the graph<sup>[8](#glossary-8)</sup> is fully connected, ensuring all nodes<sup>[14](#glossary-14)</sup> are reachable from any other node<sup>[14](#glossary-14)</sup>[.][3]
+   - Confirm the **graph**<sup>[8](#glossary-8)</sup> is fully connected, ensuring all **nodes**<sup>[14](#glossary-14)</sup> are reachable from any other **node**<sup>[14](#glossary-14)</sup>[.][3]
 
 4. **Symmetry Check:**
-   - Ensure bidirectionality of all edges<sup>[15](#glossary-15)</sup> (e.g., if `A -> B` exists, `B -> A` must also exist with the same weight)[.][3]
+   - Ensure bidirectionality of all **edges**<sup>[15](#glossary-15)</sup> (e.g., if `A -> B` exists, `B -> A` must also exist with the same weight)[.][3]
 
 #### 4.3.5 Usage in Pathfinding
-The weighted, undirected graph<sup>[8](#glossary-8)</sup> is optimized for algorithms like **Dijkstra<sup>[5](#glossary-5)</sup>** to calculate the shortest path efficiently[.][3] This algorithm leverage the graph structure and priority queue<sup>[30](#glossary-30)</sup> to balance performance and memory usage, ensuring the application meets its response time requirements[.][3]
+The weighted, undirected **graph**<sup>[8](#glossary-8)</sup> is optimized for algorithms like **Dijkstra<sup>[5](#glossary-5)</sup>** to calculate the shortest path efficiently[.][3] This algorithm leverage the graph structure and **priority queue**<sup>[30](#glossary-30)</sup> to balance performance and memory usage, ensuring the application meets its response time requirements[.][3]
 
 
 ## 5. Development Approach
@@ -514,13 +514,13 @@ The project will follow the Agile methodology, with development broken down into
 
 ### 5.2 Tools and Technologies
 
-| Category                            | Tools/Technologies used                                                                                                          |
-| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Data Checking Application           | C<sup>99</sup> to keep a fast runtime, and using a mastered language of our software engineer[.][3]                               |
-| REST API<sup>[2](#glossary-2)</sup> | C++<sup>17</sup> to keep a fast runtime and not using to many unnecessary language keeping the project easily maintainable[.][3] |
-| Response Format                     | JSON<sup>[16](#glossary-16)</sup> but we want to implement the possibility to get XML<sup>[17](#glossary-17)</sup> also          |
-| Version Control                     | Git with GitHub[.][3]                                                                                                            |
-| CI/CD<sup>[1](#glossary-1)</sup>    | GitHub Actions for continuous integration and deployment[.][3]                                                                   |
+| Category                                | Tools/Technologies used                                                                                                          |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Data Checking Application               | C<sup>99</sup> to keep a fast runtime, and using a mastered language of our software engineer[.][3]                              |
+| **REST API**<sup>[2](#glossary-2)</sup> | C++<sup>17</sup> to keep a fast runtime and not using to many unnecessary language keeping the project easily maintainable[.][3] |
+| Response Format                         | **JSON**<sup>[16](#glossary-16)</sup> but we want to implement the possibility to get **XML**<sup>[17](#glossary-17)</sup> also  |
+| Version Control                         | Git with GitHub[.][3]                                                                                                            |
+| **CI/CD**<sup>[1](#glossary-1)</sup>    | GitHub Actions for continuous integration and deployment[.][3]                                                                   |
 
 ### 5.3 Libraries used
 
@@ -551,10 +551,10 @@ We decided to target the following platforms for compatibility, performance, and
 
 #### 5.5.2 Web Server for REST API
 
-| Server Type                                   | Supported Platforms      | Rationale                                                                                                     |
-| --------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------- |
-| **HTTP<sup>[11](#glossary-11)</sup> Servers** | Linux, Windows, macOS    | Platform-agnostic<sup>[3](#glossary-3)</sup> support ensures flexibility for deployment and development[.][3] |
-| **Localhost**                                 | Development environments | Simplifies testing and debugging during the development phase[.][3]                                           |
+| Server Type                                   | Supported Platforms      | Rationale                                                                                                         |
+| --------------------------------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| **HTTP<sup>[11](#glossary-11)</sup> Servers** | Linux, Windows, macOS    | **Platform-agnostic**<sup>[3](#glossary-3)</sup> support ensures flexibility for deployment and development[.][3] |
+| **Localhost**                                 | Development environments | Simplifies testing and debugging during the development phase[.][3]                                               |
 
 ---
 
@@ -565,7 +565,7 @@ We decided to target the following platforms for compatibility, performance, and
 
 2. **Cross-Platform<sup>[19](#glossary-19)</sup> Compatibility:**  
    - By leveraging C++ and standardized libraries, the project ensures a seamless experience across major desktop platforms[.][3]  
-   - The REST API<sup>[2](#glossary-2)</sup> is developed to work with any platform hosting an HTTP<sup>[11](#glossary-11)</sup> server capable of supporting the required runtime[.][3]
+   - The **REST API**<sup>[2](#glossary-2)</sup> is developed to work with any platform hosting an **HTTP**<sup>[11](#glossary-11)</sup> server capable of supporting the required runtime[.][3]
 
 ## 6. Testing
 
@@ -573,16 +573,16 @@ We decided to target the following platforms for compatibility, performance, and
 
 ### 6.1 Testing Strategy
 
-Unit Testing<sup>[47](#glossary-47)</sup>: For individual components and functions[.][3]
-Integration Testing<sup>[48](#glossary-48)</sup>: To ensure different parts of the application work together[.][3]
-System Testing<sup>[49](#glossary-49)</sup>: To test the complete system as a whole[.][3]
+**Unit Testing**<sup>[47](#glossary-47)</sup>: For individual components and functions[.][3]
+**Integration Testing**<sup>[48](#glossary-48)</sup>: To ensure different parts of the application work together[.][3]
+**System Testing**<sup>[49](#glossary-49)</sup>: To test the complete system as a whole[.][3]
 
 The detailed testing strategy can be seen in the test plan: [HERE](QA/TestPlan.md)
 
 ### 6.2 Tools
 
-Unit Testing<sup>[47](#glossary-47)</sup>: Wrote by our Quality Assurance team and ran with googleTest[.][3]
-CI/CD<sup>[1](#glossary-1)</sup> Testing: Automated testing using GitHub Actions[.][3]
+**Unit Testing**<sup>[47](#glossary-47)</sup>: Wrote by our Quality Assurance team and ran with googleTest[.][3]
+**CI/CD**<sup>[1](#glossary-1)</sup> Testing: Automated testing using GitHub Actions[.][3]
 
 ## 7. Deployment
 
@@ -605,12 +605,12 @@ Since the application is designed for local use (on a local server), the securit
 
 - **Encryption:**
   - Communication between the client and server will be done over **HTTP<sup>[11](#glossary-11)</sup>** since the system operates in a localhost environment[.][3]
-  - Although we will not implement HTTPS or SSL<sup>[12](#glossary-12)</sup> for localhost, it's highly recommended that in production environments (if the project is moved to the internet), **HTTPS** and **SSL<sup>[12](#glossary-12)</sup>/TLS** encryption will be enabled to secure the data transmitted between the client and server[.][3]
-  - Since the application doesn’t store user data, encryption is not necessary for data at rest[.][3] The only data that exists is the CSV<sup>[9](#glossary-9)</sup> file, which is stored on the server[.][3]
+  - Although we will not implement HTTPS or **SSL**<sup>[12](#glossary-12)</sup> for localhost, it's highly recommended that in production environments (if the project is moved to the internet), HTTPS and **SSL<sup>[12](#glossary-12)</sup>/TLS** encryption will be enabled to secure the data transmitted between the client and server[.][3]
+  - Since the application doesn’t store user data, encryption is not necessary for data at rest[.][3] The only data that exists is the **CSV**<sup>[9](#glossary-9)</sup> file, which is stored on the server[.][3]
 
 - **Data Integrity<sup>[33](#glossary-33)</sup>:**
-  - We use a **CSV file** as the primary data source (which contains nodes<sup>[14](#glossary-14)</sup> and connections)[.][3] Data integrity<sup>[33](#glossary-33)</sup> checks can be implemented to ensure that the CSV<sup>[9](#glossary-9)</sup> file is properly formatted and that there are no data inconsistencies[.][3]
-  - We will validate the CSV<sup>[9](#glossary-9)</sup> file’s integrity before uploading it on the live server to ensure that it is not corrupted, and we will also validate that it meets the expected structure (i.e., a **DAG** with no loops)[.][3]
+  - We use a **CSV file** as the primary data source (which contains **nodes**<sup>[14](#glossary-14)</sup> and connections)[.][3] **Data integrity**<sup>[33](#glossary-33)</sup> checks can be implemented to ensure that the **CSV**<sup>[9](#glossary-9)</sup> file is properly formatted and that there are no data inconsistencies[.][3]
+  - We will validate the **CSV**<sup>[9](#glossary-9)</sup> file’s integrity before uploading it on the live server to ensure that it is not corrupted, and we will also validate that it meets the expected structure (i.e., a **DAG** with no loops)[.][3]
 
 - **API Security:**
   - Since we are not implementing a user authentication system (e.g., no login or registration), there is no need to secure API endpoints with authentication tokens for this local version[.][3]
@@ -619,8 +619,8 @@ Since the application is designed for local use (on a local server), the securit
 ### 8.2 Compliance
 
 - **GDPR (General Data Protection Regulation):**
-  - The application does not collect or store personal data from users[.][3] As the only data involved is the CSV<sup>[9](#glossary-9)</sup> file, there are no concerns regarding the collection of personal information[.][3]
-  - Since the CSV<sup>[9](#glossary-9)</sup> file may contain geographic or landmark data, if any sensitive data were to be involved (in future versions), we would ensure compliance with GDPR, including user consent, data deletion, and data protection procedures[.][3]
+  - The application does not collect or store personal data from users[.][3] As the only data involved is the **CSV**<sup>[9](#glossary-9)</sup> file, there are no concerns regarding the collection of personal information[.][3]
+  - Since the **CSV**<sup>[9](#glossary-9)</sup> file may contain geographic or landmark data, if any sensitive data were to be involved (in future versions), we would ensure compliance with GDPR, including user consent, data deletion, and data protection procedures[.][3]
 
 - **Data Breach Notification:**
   - There is no personally identifiable information (PII) being processed or stored in this system[.][3] However, if sensitive data were to be added in the future, we would establish a process to notify users in case of any data breaches (as per GDPR guidelines)[.][3]
@@ -631,22 +631,22 @@ Since the application is designed for local use (on a local server), the securit
 ### 8.3 Security Best Practices
 
 - **CSV File Validation:**
-  - We perform data validation checks on the CSV<sup>[9](#glossary-9)</sup> file to ensure that it contains valid and consistent data before it's processed by the application[.][3] This step helps prevent errors caused by malformed data[.][3]
-  - The application will verify that the CSV<sup>[9](#glossary-9)</sup> file adheres to the expected format: **Landmark_A_ID, Landmark_B_ID, Time**[.][3] It will also check that the graph<sup>[8](#glossary-8)</sup> is valid, meaning it is a **Directed Acyclic Graph (DAG)** with no loops[.][3]
+  - We perform data validation checks on the **CSV**<sup>[9](#glossary-9)</sup> file to ensure that it contains valid and consistent data before it's processed by the application[.][3] This step helps prevent errors caused by malformed data[.][3]
+  - The application will verify that the **CSV**<sup>[9](#glossary-9)</sup> file adheres to the expected format: **Landmark_A_ID, Landmark_B_ID, Time**[.][3] It will also check that the **graph**<sup>[8](#glossary-8)</sup> is valid, meaning it is a **Directed Acyclic Graph (DAG)** with no loops[.][3]
 
 - **Localhost Environment Security:**
   - Since the system is running on localhost, it’s assumed that access is restricted to the local machine or local network[.][3]
   - We recommend ensuring that only authorized personnel can access the local server during testing and development[.][3] This can be done by restricting server access to local IP addresses (127.0.0.1) and using firewalls if necessary[.][3]
   
 - **Data Storage:**
-  - As the application does not store personal data, no sensitive information needs to be protected[.][3] However, for the CSV<sup>[9](#glossary-9)</sup> file stored on the server, it is important to restrict access to prevent unauthorized modifications to the file[.][3]
-  - We recommend using file system permissions to restrict access to the server where the CSV<sup>[9](#glossary-9)</sup> file is stored[.][3]
+  - As the application does not store personal data, no sensitive information needs to be protected[.][3] However, for the **CSV**<sup>[9](#glossary-9)</sup> file stored on the server, it is important to restrict access to prevent unauthorized modifications to the file[.][3]
+  - We recommend using file system permissions to restrict access to the server where the **CSV**<sup>[9](#glossary-9)</sup> file is stored[.][3]
 
 ### 8.4 Secure Development Practices
 
 - **Code Review and Secure Coding:**
-  - We follow secure coding practices to prevent vulnerabilities such as buffer overflows<sup>[50](#glossary-50)</sup>, code injection, and other common vulnerabilities[.][3] Any code changes are reviewed to ensure adherence to security standards[.][3]
-  - Proper **input validation** is implemented to prevent issues when processing data from the CSV<sup>[9](#glossary-9)</sup> file[.][3]
+  - We follow secure coding practices to prevent vulnerabilities such as **buffer overflows**<sup>[50](#glossary-50)</sup>, code injection, and other common vulnerabilities[.][3] Any code changes are reviewed to ensure adherence to security standards[.][3]
+  - Proper **input validation** is implemented to prevent issues when processing data from the **CSV**<sup>[9](#glossary-9)</sup> file[.][3]
 
 - **Regular Updates:**
   - We will ensure that the system, especially the server environment, is regularly updated with security patches to minimize the risk of exploits[.][3]
