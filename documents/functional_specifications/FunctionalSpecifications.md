@@ -85,10 +85,6 @@
     - [Data](#data)
     - [Risk Management Plan](#risk-management-plan)
   - [Future Improvements](#future-improvements)
-    - [Precision](#precision)
-    - [User Interface](#user-interface-1)
-    - [Efficiency and Optimization](#efficiency-and-optimization)
-    - [Additional Features](#additional-features)
 
 
 </details>
@@ -282,7 +278,9 @@ For this project all the deadlines for the customer are February 7th 2025. But o
 
 ## Context
 
+
 ### Personnas
+
 <table>
   <thead>
     <tr>
@@ -305,41 +303,6 @@ For this project all the deadlines for the customer are February 7th 2025. But o
     </tr>
     <tr>
       <td><strong>Occupation</strong></td>
-      <td>Business Traveler</td>
-    </tr>
-    <tr>
-      <td><strong>Skills</strong></td>
-      <td>Basic tech skills, frequent use of navigation apps</td>
-    </tr>
-    <tr>
-      <td><strong>Usage Scenario</strong></td>
-      <td>Tom uses the API to calculate the quickest routes between locations. It is integrated into his company's tools, helping him optimize travel time and generate automated mileage reimbursement reports.</td>
-    </tr>
-  </tbody>
-</table>
-
-<table>
-  <thead>
-    <tr>
-      <th><strong>Picture</strong></th>
-      <th><strong>Attribute</strong></th>
-      <th><strong>Details</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td rowspan="5">
-        <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?cs=srgb&dl=pexels-danxavier-1239291.jpg&fm=jpg" alt="Logistics Manager Sarah" width="200" style="object-fit: cover;" />
-      </td>
-      <td><strong>Name</strong></td>
-      <td>Sarah Johnson</td>
-    </tr>
-    <tr>
-      <td><strong>Age</strong></td>
-      <td>25 - 35</td>
-    </tr>
-    <tr>
-      <td><strong>Occupation</strong></td>
       <td>Logistics Planning Manager</td>
     </tr>
     <tr>
@@ -348,7 +311,7 @@ For this project all the deadlines for the customer are February 7th 2025. But o
     </tr>
     <tr>
       <td><strong>Usage Scenario</strong></td>
-      <td>Sarah uses the API to calculate real-time optimal delivery routes for her drivers. She tracks distances and travel times to optimize costs and team performance.</td>
+      <td>Tom uses the API to calculate real-time optimal delivery routes for his drivers. he tracks distances and travel times to optimize costs and team performance.</td>
     </tr>
   </tbody>
 </table>
@@ -720,35 +683,27 @@ To kown more about it : [RGPD License](https://en.wikipedia.org/wiki/General_Dat
 
 ## Future Improvements
 
-### Precision
-
-Over the past months, our team has found that adding more landmarks and routes makes a big difference in accuracy. When we include live traffic data, our system can calculate much better routes. We're also excited about improving our maps with detailed information about road quality, speed zones, and current weather conditions - exactly what drivers need.
-
-### User Interface
-
-Feedback from users has shown the need for a more user-friendly interface. Here's what we're working on:
-
-- Maps you can actually interact with: zoom in close to street level or zoom out for the big picture view
-- Smart settings that remember how you like to travel - whether you're a toll-avoider or a highway enthusiast
-- A proper mobile experience that works as smoothly as the desktop version
-- Built-in features that make the app work well for everyone, including users who rely on screen readers
-
-### Efficiency and Optimization
-
-Our engineering team is exploring some fascinating applications of machine learning:
-
-- Learning from travel patterns to suggest better routes before you even ask
-- Smart rerouting that kicks in automatically when traffic gets bad
-- Clever ways to group location data that make everything run faster
-- Using advanced computing systems to handle complex calculations more quickly
-
-### Additional Features
-
-Beyond the core improvements, we're also developing:
-
-- Full offline support, because you can't always count on having a signal
-- Language options that make sense for our global user base
-- Smart integration with your calendar and other apps you use daily
+- Precision
+  - Enhanced routes: More landmarks and live traffic data for better route accuracy.
+  - Detailed map info: Road quality, speed zones, and weather conditions.
+  
+-  User Interface (UI)
+   - Interactive maps: Zoom in/out for street-level or overview view.
+   - Smart settings: Remembers travel preferences (e.g., toll-avoider, highway enthusiast).
+   - Mobile optimization: Seamless mobile experience like the desktop version.
+   - Accessibility: Features supporting screen readers.
+  
+- Efficiency and Optimization
+  - Machine learning: Predict and suggest better routes based on travel patterns.
+  - Smart rerouting: Automatic updates when traffic worsens.
+  - Optimized data: Faster performance with efficient data grouping.
+  - Advanced computing: Speeding up complex calculations.
+  
+-  Additional Features
+   - Offline support: Full functionality without a signal.
+   - Global language options: Tailored for international users.
+   - App integration: Sync with calendar and other apps.
+  
 
 We believe these changes will make a real difference in how people use our software, whether they're daily commuters or occasional travelers.
 
