@@ -19,14 +19,14 @@
 
 ## RACI
 
-| **Project Activities**               | **Program Manager** | **Tech Lead** | **Software Engineers** | **QA Engineer** | **Technical Writer** |
+| **Project Activities**                 | **Program Manager** | **Tech Lead** | **Software Engineers** | **QA Engineer** | **Technical Writer** |
 |----------------------------------------|--------------------|---------------|-----------------------|----------------|---------------------|
 | **Project Planning & Management**      | R                  | C             | I                     | I              | I                   |
 | **Functional Specification**           | R                  | C             | I                     | C              | A                   |
 | **Technical Specification**            | I                  | R             | A                     | C              | I                   |
 | **Code Implementation**                | I                  | R             | A                     | C              | I                   |
 | **Data Structure Development**         | I                  | R             | A                     | C              | I                   |
-| **Pathfinding Algorithm Implementation** | I                  | R             | A                     | C              | I                   |
+| **Pathfinding Algorithm Implementation** | I                | R             | A                     | C              | I                   |
 | **API Design & Development**           | C                  | R             | A                     | C              | I                   |
 | **Testing and Quality Assurance**      | C                  | C             | R                     | A              | I                   |
 | **Performance Optimization**           | I                  | R             | A                     | C              | I                   |
