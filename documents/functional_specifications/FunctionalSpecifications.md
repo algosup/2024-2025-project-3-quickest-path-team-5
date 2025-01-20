@@ -115,13 +115,14 @@ The aim of the project is to create a high-performance software solution that ca
 
 As defined by the project owner, the team is arranged as follows:
 
-| Role               | Description                                                                                     |
-|--------------------|-------------------------------------------------------------------------------------------------|
-| **Project Manager**  | Responsible for organization, planning, and budgeting.<br>Keeps the team motivated.           |
-| **Program Manager**  | Ensures the project meets expectations.<br> In charge of design. <br> Writes the Functional Specifications. |
-| **Tech Lead**        | Makes technical decisions for the project.<br>Translates Functional Specifications into Technical Specifications.<br>Performs code reviews. |
-| **Software Engineer**| Writes code.<br>Creates documentation.<br>Participates in technical design.                   |
-| **Quality Assurance**| Tests all functionalities to identify bugs and issues.<br>Documents bugs and issues.<br>Writes the test plan.<br>Verifies fixes are implemented correctly. |
+| Role                 | Description                                                                                       |
+|----------------------|---------------------------------------------------------------------------------------------------|
+| **Project Manager**   | Responsible for organization, planning, and budgeting.<br>Keeps the team motivated.               |
+| **Program Manager**   | Ensures the project meets expectations.<br>In charge of design.<br>Writes the Functional Specifications. |
+| **Tech Lead**         | Makes technical decisions for the project.<br>Translates Functional Specifications into Technical Specifications.<br>Performs code reviews. |
+| **Software Engineer** | Writes code.<br>Creates documentation.<br>Participates in technical design.                       |
+| **Quality Assurance** | Tests all functionalities to identify bugs and issues.<br>Documents bugs and issues.<br>Writes the test plan.<br>Verifies fixes are implemented correctly. |
+| **Technical Writer**  | Creates and maintains user manuals, technical documentation, and guides.<br>Works with engineers to understand and document features.<br>Ensures documentation is clear, concise, and user-friendly. |
 
 
 ## Stakeholders
@@ -132,36 +133,32 @@ As defined by the project owner, the team is arranged as follows:
 
 # Glossary
 
-<br>
+| Term                  | Definition                                                                                  |
+|-----------------------|--------------------------------------------------------------------------------------------|
+| **Algorithm**             | A set of clear steps to solve a problem or complete a task, like sorting or searching.     |
+| **API**                   | Application Programming Interface - Rules allowing software to communicate with each other.|
+| **Approximation**         | A method to find a good-enough answer when exact solutions are too hard or slow.           |
+| **Big O Notation**        | Describes how an algorithm's speed changes with input size, like O(n) or O(n²).            |
+| **C++**                   | A powerful programming language used for games, system software, and fast applications.    |
+| **CSV**                   | Comma-Separated Values - A simple text format for storing data in tables.                  |
+| **DAG**                   | Directed Acyclic Graph - A graph with one-way links and no loops, useful in many systems.  |
+| **Data Structure**        | A way to organize and store data for quick access, like arrays or trees.                   |
+| **Directed Edge**         | A one-way connection between two points in a graph.                                        |
+| **Frameworks**            | Pre-built tools or libraries to speed up development, like React or Django.                |
+| **GDPR**                  | General Data Protection Regulation - EU law for protecting personal data and privacy.      |
+| **Graph**                 | A collection of points (nodes) connected by lines (edges), like social networks.           |
+| **Graph Connectivity**    | The degree to which nodes in a graph are linked to each other.                             |
+| **Heuristics**            | Quick methods for solving problems, often based on experience.                             |
+| **JSON**                  | JavaScript Object Notation - A simple format for exchanging data, easier than XML.         |
+| **Localhost**             | Refers to your own computer acting as a server, usually at 127.0.0.1.                      |
+| **Machine Learning**      | Tech that helps computers learn and improve without being explicitly programmed.           |
+| **REST**                  | Representational State Transfer - A way to build scalable, reliable web services.          |
+| **SQL Dataset**           | Data organized in tables, often managed with Structured Query Language (SQL).              |
+| **STL**                   | Standard Template Library - C++ tools for containers and algorithms.                       |
+| **Test Plan**             | A document describing what, when, and how to test in software.                             |
+| **UI**                    | User Interface - What users see and interact with in software, like buttons and menus.     |
+| **XML**                   | Extensible Markup Language - A flexible format for structuring and exchanging data.         |
 
-| Term | Definition |
-|------|------------|
-| **Algorithm** | A clear set of steps or instructions designed to solve a specific problem or complete a task. Common examples include sorting methods and search procedures. |
-| **API** | Application Programming Interface - A set of rules and tools that allow different software applications to communicate with each other. Think of it as a waiter taking orders between the kitchen (server) and customers (clients). |
-| **Approximation** | A practical approach to finding a good-enough answer when exact solutions are too complex or time-consuming. Often used in real-world engineering and scientific calculations. |
-| **Big O Notation** | A mathematical way to describe how an algorithm's performance changes as its input size grows. Written like O(n) or O(n²), it helps developers choose the right algorithm for their needs. |
-| **C++** | A powerful programming language that builds upon C, offering both high-level and low-level programming features. Popular in game development, system software, and performance-critical applications. |
-| **CSV** | Comma-Separated Values - A simple file format that stores tabular data as plain text, with values separated by commas. Widely used for data exchange between spreadsheets and databases. |
-| **DAG** | Directed Acyclic Graph - A graph structure where connections flow in one direction and never form loops. Essential in task scheduling, build systems, and data processing pipelines. |
-| **Data Structure** | A way to organize, manage, and store data to allow efficient access and modification. Common examples include arrays, lists, and trees. |
-| **Directed Edge** | In graph theory, a connection between two points that flows in one specific direction, like a one-way street between locations. |
-| **Frameworks** | Ready-to-use software packages that provide standard functionality for faster development. Examples include React for web development or Django for Python. |
-| **GDPR** | General Data Protection Regulation - A comprehensive European law that sets strict standards for personal data protection and privacy rights. |
-| **Graph** | A collection of points (nodes) connected by lines (edges), used to represent relationships between items. Think of a social network or road map. |
-| **Heuristics** | Problem-solving methods that favor quick, practical solutions over perfect answers. Like taking shortcuts based on experience. |
-| **Interface** | The meeting point between different systems or between users and machines. Like a car's dashboard connecting driver and engine. |
-| **JSON** | JavaScript Object Notation - A human-readable format for sending data between servers and web applications. Simpler than XML. |
-| **Localhost** | A reference to your own computer when it's acting as a server, typically accessed at address 127.0.0.1. Useful for testing. |
-| **Machine Learning** | Technology that enables computers to learn from experience and improve their performance without explicit programming. |
-| **Parallel Computing** | Running multiple calculations at the same time by splitting tasks across different processors or computers. |
-| **REST** | Representational State Transfer - A set of principles for building web services that are simple, scalable, and reliable. |
-| **STL** | Standard Template Library - A powerful C++ toolkit providing common programming tools like containers and algorithms. |
-| **Test Plan** | A detailed document mapping out how software will be tested, including what to test, when to test, and how to test it. |
-| **UI** | User Interface - All the elements users see and interact with in a software application, from buttons to menus. |
-| **XML** | Extensible Markup Language - A versatile way to structure data using custom tags, often used in configuration files and data exchange. |
-
-**Graph Connectivity**
-**SQL Dataset** 
 
 --- 
 
@@ -692,6 +689,7 @@ Alternatively, you can download the complete file with all the directions from p
 |  Visual Studio Code  | 0 | Free to use |
 |  Figma  | 0 | Free to use |
 |  Canva | 0 | Free to use |
+|  GitHub | 0 | Free to use |
 
 ## User Side
 
