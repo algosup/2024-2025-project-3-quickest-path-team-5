@@ -1,9 +1,12 @@
-#  **Functional Specifications - 2024-2025-project-3-quickest-path-team-5**
-
 <div align="center">
+
+# Functional Specifications - Project Quickest Path
 
 ## **Title:** CAP (Cap Api Pathfinder) 
 
+**Author:** Robin GOUMY
+
+**Team:**  5
 
 ![alt text](images/logo_quickest_path.png)
 
@@ -26,16 +29,16 @@
 
 ---
 
-### *Last Update on January 17th, 2025*
+### *Last Update on January 20th, 2025*
 
 
 <details>
 
 <summary>Table of Contents</summary>
 
-- [**Functional Specifications - 2024-2025-project-3-quickest-path-team-5**](#functional-specifications---2024-2025-project-3-quickest-path-team-5)
+- [Functional Specifications - Project Quickest Path](#functional-specifications---project-quickest-path)
   - [**Title:** CAP (Cap Api Pathfinder)](#title-cap-cap-api-pathfinder)
-    - [*Last Update on January 17th, 2025*](#last-update-on-january-17th-2025)
+    - [*Last Update on January 20th, 2025*](#last-update-on-january-20th-2025)
 - [Introduction](#introduction)
   - [Document Purpose](#document-purpose)
   - [Project Goal](#project-goal)
@@ -408,24 +411,39 @@ For this project all the deadlines for the customer are February 7th 2025. But o
 
 This project involves developing a software solution in C++ to determine the quickest path between two landmarks in the United States, such as Los Angeles and New York. The goal is to design an algorithm capable of calculating the optimal route efficiently, ensuring results are delivered in under one second.
 
+<br>
+
 Users simply provide the IDs of two landmarks as input, and the software calculates and returns the quickest path, including travel time and an ordered list of landmarks along the route. Unlike a GPS, this software does not track real-time location but focuses on providing pre-calculated routes between fixed landmarks.
 
 
 ## Data Checker
 
 
+<br>
+
 The data checker is a crucial tool for ensuring that the data is correct, reliable and adapted to the algorithm used, thus avoiding errors later on in the program. 
 For example, it checks that there are no infinite loops or duplicate nodes. It also checks that all nodes are present, that there is a possible route for all of them, i.e. that they are related, that the data type is usable and complete for each node, stop and time.
+
+<br>
+
+This algorithm will be implemented in C, as it is a high-performance language at this level, enabling a certain level of precision and efficiency to be achieved. 
+
+<br>
 
 ![alt text](/documents/functional_specifications/images/logic_quickest_path.png)  
 
 
-This algorithm will be implemented in C, as it is a high-performance language at this level, enabling a certain level of precision and efficiency to be achieved. 
-
+<br>
 
 ## APIs
 
-![alt text](/documents/functional_specifications/images/Input_output_system.png)
+An API (Application Programming Interface) is a set of rules and protocols that allows different software applications to communicate and share data with each other. It defines how requests and responses should be formatted, enabling developers to interact with external services or integrate functionalities without needing to understand their internal workings.
+
+<br>
+
+![alt text](images/Input_output_system.png)
+
+<br>
 
 ###  Quickest Path Retrieval
 
@@ -639,10 +657,14 @@ Mockup made on Figma :
 
 Home Page: Allows the user to input two landmarks.
 
+![alt text](images/figma_cap_main_page.png)
+
+
 Result Page: Displays the total travel time and the landmarks along the route.
 
+Alternatively, you can download the complete file with all the directions from point A to point B. 
 
-
+![alt text](<images/figma_cap_ next_page.png>)
 
 ## Acceptance Criteria
 
@@ -663,8 +685,9 @@ Result Page: Displays the total travel time and the landmarks along the route.
 | Product | Price | Link |
 | --  | -- | -- |
 |  Design  | 0 | Made by us |
-
-
+|  Visual Studio Code  | 0 | Free to use |
+|  Figma  | 0 | Free to use |
+|  Canva | 0 | Free to use |
 
 ## User Side
 
