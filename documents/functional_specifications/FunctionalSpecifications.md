@@ -397,10 +397,14 @@ For this project all the deadlines for the customer are February 7th 2025. But o
 
 ## Use Cases
 
+The API is designed to be implemented into existing software solutions rather than functioning as a standalone application. It provides seamless integration capabilities to enhance the functionality of third-party platforms.
+
 | **User**             | **Action**                                      | **Expected Result**                       |
 |----------------------|-------------------------------------------------|-------------------------------------------|
-| Individual Customer  | Find the shortest path between two cities       | A list of steps with estimated time.      |
-| Logistics Company    | Plan a route for multiple vehicles              | An optimized schedule per vehicle.        |
+| Sales Representative | Compare multiple route options for client visits within their CRM system | A prioritized list of routes based on time efficiency integrated directly into their existing CRM. |
+| Supply Chain Manager | Coordinate deliveries across multiple regions using logistics software | A comprehensive route map segmented by region and time, available within their current logistics tool. |
+| Travel Enthusiast    | Plan an efficient multi-stop journey using a travel planning app | A detailed itinerary with travel times and distances for each stop, accessible in their preferred travel app. |
+
 
 
 ---
