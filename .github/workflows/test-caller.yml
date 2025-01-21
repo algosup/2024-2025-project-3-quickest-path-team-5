@@ -30,7 +30,6 @@ jobs:
             - name: Getting Google Test
               run: |
                     echo "Getting Google Test"
-                    rmdir /s /q googletest
                     git clone https://github.com/google/googletest.git
             - name: Update software requirements
               run: |
