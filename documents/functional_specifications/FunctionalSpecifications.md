@@ -58,14 +58,6 @@
     - [Example Requests](#example-requests)
       - [Request with Default Format:](#request-with-default-format)
       - [Response Details](#response-details)
-    - [4xx Error Responses](#4xx-error-responses)
-      - [400 Missing Parameters](#400-missing-parameters)
-        - [Example 1 JSON Response](#example-1-json-response)
-      - [404 Destination Not Found](#404-destination-not-found)
-        - [Example 2 JSON Response](#example-2-json-response)
-    - [500 Error Responses (Server Errors)](#500-error-responses-server-errors)
-      - [500 Internal Server Error](#500-internal-server-error)
-        - [Example 3 JSON Response](#example-3-json-response)
     - [Algorithm and Data Processing](#algorithm-and-data-processing)
       - [Heuristic Approach](#heuristic-approach)
       - [Advantages](#advantages)
@@ -478,61 +470,15 @@ It defines how requests and responses should be formatted, enabling developers t
 
 >These are examples, the values do not correspond to actual values.
 
-### 4xx Error Responses
 
-#### 400 Missing Parameters
 
-| **Property**   | **Details**                                                                 |
-|-----------------|-----------------------------------------------------------------------------|
-| **Status Code** | `400 Bad Request`                                                          |
-| **Description** | Required query parameters are missing.                                     |
+| **Error**                    | **Status Code**         | **Description**                                                                                                                                         | 
+|------------------------------|-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **400 Missing Parameters**    | `400 Bad Request`       | This means required query parameters are missing. For example, a request may not include the "source" or "destination" parameters.                     | 
+| **404 Destination Not Found** | `404 Not Found`         | This occurs when one or both points (source or destination) are not found in the dataset or are invalid.                                                |
+| **500 Internal Server Error** | `500 Internal Server Error` | This indicates an unexpected error occurred on the server while processing the request. This can be due to system failure, database issues, or other unforeseen errors. |
 
-##### Example 1 JSON Response
 
-```json
-{
-    "status": "error",
-    "code": "ERR400",
-    "message": "Missing required parameters: source, destination."
-}
-```
-
-#### 404 Destination Not Found
-
-| **Property**   | **Details**                                                                 |
-|-----------------|-----------------------------------------------------------------------------|
-| **Status Code** | `404 Not Found`                                                            |
-| **Description** | One or both points are invalid or not present in the dataset.           |
-
-##### Example 2 JSON Response
-
-```json
-{
-    "status": "error",
-    "code": "ERR404",
-    "message": "Landmark not found in the dataset.",
-}
-```
-
-### 500 Error Responses (Server Errors)
-
-#### 500 Internal Server Error
-
-| **Property**   | **Details**                                                                                       |
-|-----------------|---------------------------------------------------------------------------------------------------|
-| **Status Code** | `500 Internal Server Error`                                                                       |
-| **Description** | An unexpected error has occurred on the server while processing the request. This may be due to system failure, database problems or other unforeseen errors. |
-
-##### Example 3 JSON Response
-
-```json
-{
-    "status": "error",
-    "code": "ERR500",
-    "message": "An internal server error occurred. Please try again later."
-}
-
-```
 
 ### Algorithm and Data Processing
 
@@ -561,16 +507,6 @@ Input data is provided in a CSV file containing 24 million nodes with the follow
 |  10  | 9 | 7211 |
 
 >This is an example, the values do not correspond to the actual values.  
-
-![alt text](/documents/functional_specifications/images/example_path.png)
-
-<img src="https://imgs.search.brave.com/ZFe7uZ2kdFa_0_6VMQVId4dmkqiexWxnulfp402f_Hk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vd3d3Lm1l/dGhvZGVtYXRocy5m/ci9ncmFwaGVfZGlq/a3N0cmEyLmpwZz93/PTQ3NCZzc2w9MQ" width="400" height="200">
-
-The preceding images represent a mathematical graph where:
-
-- Nodes represent landmarks.
-- Edges represent connections between landmarks.
-- Weights represent travel times between nodes.
   
 #### Output
 
