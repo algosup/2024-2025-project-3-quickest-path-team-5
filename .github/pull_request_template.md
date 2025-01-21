@@ -32,3 +32,6 @@ Please include a summary of the change or which issue is fixed. If necessary lis
 - [ ] I have added tests that prove my fix is effective or that my feature works
 - [ ] New and existing unit tests pass locally with my changes
 
+## Remarks
+
+Please provide any additional information that you think is important or relevant.
