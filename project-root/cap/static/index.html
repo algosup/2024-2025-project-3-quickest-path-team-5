@@ -1,0 +1,148 @@
+<!-- HTML: Interface for the Quickest Path Finder -->
+<!--               file: index.html               -->
+<!--     brief: HTML file for the interface       -->
+<!--     authors: Rémy CHARLES, Maxime CARON      -->
+     
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAP</title>
+    <style>
+        /* CSS: Styling for the interface */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        main {
+            margin: 20px auto;
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input, select, button {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .response-section {
+            margin-top: 20px;
+        }
+
+        pre {
+            background: #f4f4f4;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CAP</h1>
+        <h2>The Quickest Path Finder</h2>
+    </header>
+    <main>
+        <section class="form-section">
+            <form id="api-form">
+                <label for="source">Source:</label>
+                <input type="text" id="source" name="source" placeholder="Enter the source ID" required>
+
+                <label for="destination">Destination:</label>
+                <input type="text" id="destination" name="destination" placeholder="Enter the destination ID" required>
+
+                <label for="format">Response Format:</label>
+                <select id="format" name="format" required>
+                    <option value="json">JSON</option>
+                    <option value="xml">XML</option>
+                </select>
+
+                <button type="submit">Find Path</button>
+            </form>
+        </section>
+        <section class="response-section">
+            <h2>Response</h2>
+            <pre id="response-output">Waiting for API response...</pre>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Quickest Path Project Team 5</p>
+    </footer>
+    <script>
+        // JavaScript: Handle form submission and API interaction
+        document.getElementById("api-form").addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            // Get input values
+            const source = document.getElementById("source").value;
+            const destination = document.getElementById("destination").value;
+            const format = document.getElementById("format").value;
+
+            try {
+                // Send API request
+                const response = await fetch("http://localhost:8080/shortest-path", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ source, destination, format })
+                });
+
+                // Handle the response
+                const text = await response.text();
+                document.getElementById("response-output").textContent = text;
+            } catch (error) {
+                // Handle errors
+                document.getElementById("response-output").textContent = `Error: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>

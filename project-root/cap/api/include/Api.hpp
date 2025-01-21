@@ -1,3 +1,9 @@
+/*!
+    \file Api.hpp
+    \brief API library
+    \authors CHARLES Rémy, CARON Maxime
+*/
+
 #ifndef API_H
 #define API_H
 
