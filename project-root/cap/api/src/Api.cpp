@@ -1,11 +1,10 @@
 /*!
-    \file gApi.cpp
+    \file Api.cpp
     \brief API Code source
     \authors CHARLES Rémy, CARON Maxime
 */
 
-#include "Api.hpp"
-#include <crow/app.h>
+#include "../include/Api.hpp"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -35,13 +34,9 @@ namespace api {
 
     // Set up API routes
     void setup_routes(crow::SimpleApp& app) {
-        // Health check route
-        CROW_ROUTE(app, "/")([]() {
-            return "API is running!";
-        });
 
         // Serve the consolidated HTML interface
-        CROW_ROUTE(app, "/interface")([]() {
+        CROW_ROUTE(app, "/")([]() {
             try {
                 std::string html_content = read_file("../cap/static/index.html"); // Adjust path as needed
                 crow::response res(html_content);

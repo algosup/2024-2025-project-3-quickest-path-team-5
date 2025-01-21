@@ -1,8 +1,8 @@
 <!-- HTML: Interface for the Quickest Path Finder -->
-<!--               file: index.html               -->
+<!--              file: index.html                -->
 <!--     brief: HTML file for the interface       -->
 <!--     authors: Rémy CHARLES, Maxime CARON      -->
-     
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,6 +110,7 @@
         <section class="response-section">
             <h2>Response</h2>
             <pre id="response-output">Waiting for API response...</pre>
+            <button id="download-btn" style="display: none;">Download File</button>
         </section>
     </main>
     <footer>
@@ -136,8 +137,25 @@
                 });
 
                 // Handle the response
-                const text = await response.text();
+                const blob = await response.blob();
+                const text = await blob.text();
+
+                // Display response in the output section
                 document.getElementById("response-output").textContent = text;
+
+                // Enable the download button
+                const downloadBtn = document.getElementById("download-btn");
+                downloadBtn.style.display = "block";
+
+                // Set up download button to download the file
+                const url = window.URL.createObjectURL(blob);
+                downloadBtn.onclick = () => {
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = `shortest-path.${format}`;
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                };
             } catch (error) {
                 // Handle errors
                 document.getElementById("response-output").textContent = `Error: ${error.message}`;
