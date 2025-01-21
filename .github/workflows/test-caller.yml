@@ -42,6 +42,7 @@ jobs:
                         cd Build
                         make
                         cd ..
+                        cd ..
                         echo "Build complete"
                         echo "Ready to run tests"
     test:
