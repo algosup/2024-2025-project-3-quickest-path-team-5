@@ -17,7 +17,6 @@ Edge::Edge(Node *self, uint32_t time)
 
 Edge::~Edge()
 {
-    cout << "Deleting edge " << this << endl;
     next = nullptr;
 }
 

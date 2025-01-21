@@ -19,12 +19,10 @@ Node::Node(uint32_t id)
 
 Node::~Node()
 {
-    cout << "Deleting node " << this << endl;
     Edge *current = head;
     while (current != nullptr)
     {
         Edge *nextEdge = current->getNext();
-        cout << "Deleting edge " << current << endl;
         delete current;
         current = nextEdge;
     }
