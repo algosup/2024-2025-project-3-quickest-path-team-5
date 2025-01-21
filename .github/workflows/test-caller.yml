@@ -37,6 +37,7 @@ jobs:
             - name: Build
               run: |
                         echo "Building the project"
+                        cd dag_graph_validator
                         cmake -S . -B Build
                         cd Build
                         make
