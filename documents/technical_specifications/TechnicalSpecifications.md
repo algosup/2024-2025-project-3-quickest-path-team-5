@@ -29,8 +29,11 @@
       - [3.2.1 Dijkstra's Algorithm](#321-dijkstras-algorithm)
     - [3.3 Data Flow Overview](#33-data-flow-overview)
       - [3.3.1 High-Level Data Flow Diagram](#331-high-level-data-flow-diagram)
-      - [Explanation](#explanation)
+        - [Explanation of the High-Level Data Flow Diagram](#explanation-of-the-high-level-data-flow-diagram)
       - [3.3.2 Shortest Path Algorithm Execution Flow](#332-shortest-path-algorithm-execution-flow)
+        - [Explanation of the Shortest Path Algorithm Execution Flow](#explanation-of-the-shortest-path-algorithm-execution-flow)
+      - [3.3.3 Fibonacci Heap Node Structure with Pointer Relationships](#333-fibonacci-heap-node-structure-with-pointer-relationships)
+        - [Explanation of the Fibonacci Heap Node Structure with Pointer Relationships](#explanation-of-the-fibonacci-heap-node-structure-with-pointer-relationships)
   - [4. Detailed Design](#4-detailed-design)
     - [4.1 Backend Design](#41-backend-design)
       - [4.1.1. REST API Endpoint](#411-rest-api-endpoint)
@@ -88,7 +91,7 @@ The purpose of this document is to define the technical specifications for devel
 The project encompasses the following key components, each tailored for **cross-platform**<sup>[19](#glossary-19)</sup> compatibility and developed using industry-standard technologies:
 
 1. **Data Checker**
-   - **Name:** `DAC (Data Analyzer for CAP)`
+   - **Name:** `DGV (Data Graph Validator)`
    - **Type:** Desktop Application
    - **Technology:** Developed in [C][2]
    - **Supported Platforms:** Linux, Windows, and macOS
@@ -157,12 +160,12 @@ You can find the full coding convention guidelines in the [Coding Conventions do
 [<img height="48px" width="48px" alt="Icone C++" src="https://skillicons.dev/icons?i=cpp"/>][1]
 <hr>
 
-| Type        | Convention       |
-| ----------- | ---------------- |
-| `Variables` | camelCase        |
-| `Constants` | UPPER_SNAKE_CASE |
-| `Functions` | camelCase        |
-| `Class`     | PascalCase       |
+| Type              | Convention       |
+| ----------------- | ---------------- |
+| `Variables`       | camelCase        |
+| `Constants`       | UPPER_SNAKE_CASE |
+| `Functions`       | camelCase        |
+| `Class & Structs` | PascalCase       |
 
 ## 2. System Requirements
 
@@ -184,7 +187,6 @@ You can find the full coding convention guidelines in the [Coding Conventions do
 - **Node<sup>[14](#glossary-14)</sup> and Connection Validation**  
   - The application will verify the integrity of the imported data, ensuring all **nodes**<sup>[14](#glossary-14)</sup> and connections are valid and consistent with the required format[.][3]  
 
-<!-- TODO: Modify depending of software engineers implemented algo -->
 - **Algorithm Complexity**  
   - The data validation algorithm used for checks, such as **graph**<sup>[8](#glossary-8)</sup> validation and connectivity, will operate with a **time complexity**<sup>[13](#glossary-13)</sup> of **[O(log n)][6]** for most operations, ensuring efficient processing of large datasets[.][3]
 
@@ -196,27 +198,24 @@ You can find the full coding convention guidelines in the [Coding Conventions do
 - **Error Handling and Status Codes**  
   - Ensure all API endpoints return appropriate **HTTP**<sup>[11](#glossary-11)</sup> status codes and detailed error messages for invalid requests or server errors[.][3]  
 
-- **Authentication and Authorization**  
-  - Secure the API using authentication (e.g., **OAuth**<sup>[20](#glossary-20)</sup> 2.0, **API keys**<sup>[21](#glossary-21)</sup>) and enforce **role-based access control**<sup>[24](#glossary-24)</sup> to restrict sensitive operations[.][3]
-
 ### 2.2 Non-Functional Requirements  
 
 #### 2.2.1 Data Checker  
 
 - **Compatibility**  
-  - The application should be compatible with Linux, Windows, and macOS, supporting version 12 and the latest releases of each operating system[.][3]  
+  - The application should be compatible with Linux, Windows, and macOS, supporting the latest releases of each operating system[.][3]  
 
 - **Usability**  
   - The interface should provide clear feedback during file imports and error highlighting to minimize user confusion[.][3]  
   - A help section or documentation link should be accessible from the interface for troubleshooting[.][3]  
 
 - **Performance**  
-  - The application should process **CSV**<sup>[9](#glossary-9)</sup> files and provide error feedback within **1 second** for standard datasets[.][3]  
+  - The application should process **CSV**<sup>[9](#glossary-9)</sup> files and provide error feedback and real time graph visual representation using **mermaid**<sup>[10](#glossary-10)</sup>[.][3]  
 
 #### 2.2.2 REST API
 
 - **Performance**  
-  - The **REST API**<sup>[2](#glossary-2)</sup> should respond to requests within 200ms under normal conditions and support high throughput[.][3]  
+  - The **REST API**<sup>[2](#glossary-2)</sup> should respond to requests within **1 second** under normal conditions and support high throughput[.][3]  
 
 - **Scalability<sup>[28](#glossary-28)</sup>**  
   - The backend should be designed to scale horizontally to handle a growing number of concurrent users efficiently[.][3]  
@@ -225,7 +224,6 @@ You can find the full coding convention guidelines in the [Coding Conventions do
   - The **REST API**<sup>[2](#glossary-2)</sup> should be **platform-agnostic**<sup>[3](#glossary-3)</sup> and deployable on any server environment that supports the required C++ runtime and dependencies[.][3]  
 
 - **Security**  
-  - All endpoints should enforce authentication and authorization protocols to protect sensitive data[.][3]  
   - The deployed version of the API must adhere to industry-standard practices such as HTTPS for secure communication[.][3]  
 
 - **Documentation**  
@@ -248,11 +246,6 @@ The system architecture is designed to ensure seamless functionality, high perfo
   - **Technology**: Developed using [C++][1] to ensure **platform-agnostic**<sup>[3](#glossary-3)</sup> deployment[.][3]  
   - **Purpose**: Exposes core functionality through an **HTTP**<sup>[11](#glossary-11)</sup> server, providing endpoints for calculating shortest paths, managing data, and retrieving results in multiple formats (e.g., **JSON**<sup>[16](#glossary-16)</sup> or **XML**<sup>[17](#glossary-17)</sup>)[.][3]  
   - **Compatibility**: Designed to be deployable on any server environment that supports the required C++ runtime[.][3]  
-
-- **Authentication Service**  
-  - **Technology**: Integrated with the **REST API**<sup>[2](#glossary-2)</sup>, potentially using industry-standard authentication methods (e.g., **OAuth**<sup>[20](#glossary-20)</sup> 2.0, **API keys**<sup>[21](#glossary-21)</sup>)[.][3]  
-  - **Purpose**: Ensures secure access to the **REST API**<sup>[2](#glossary-2)</sup> by validating user credentials and managing authorization[.][3]  
-  - **Scalability<sup>[28](#glossary-28)</sup>**: Supports **role-based access control**<sup>[24](#glossary-24)</sup> for future **scalability**<sup>[28](#glossary-28)</sup> and extended functionality[.][3]  
 
 #### 3.1.1 Key Design Considerations
 
@@ -307,7 +300,7 @@ graph TD
   end
 ```
 
-#### Explanation
+##### Explanation of the High-Level Data Flow Diagram
 
 1. **Client Request:**  
    - The process begins when a client sends a **REST API**<sup>[2](#glossary-2)</sup> request to the `Backend Server`. The request contains the source and destination landmarks (**nodes**<sup>[14](#glossary-14)</sup>) for which the shortest path is required[.][3]
@@ -366,11 +359,67 @@ graph TD
         M --> N
         L --> No --> K
         K --> H
+        N --> E
     end
   
     G --> O
   end
 ```
+
+##### Explanation of the Shortest Path Algorithm Execution Flow
+
+The following diagram illustrates the step-by-step execution of **Dijkstra's algorithm**<sup>[5](#glossary-5)</sup> for finding the shortest path between two **nodes**<sup>[14](#glossary-14)</sup> in a graph. Below is a detailed breakdown of each step in the process:
+
+1. **Start**  
+   The algorithm begins. This marks the initiation of the process to find the shortest path between the source **node**<sup>[14](#glossary-14)</sup> and the destination **node**<sup>[14](#glossary-14)</sup>.
+2. **Get the Shortest Path**  
+   This step represents the user or system requesting the shortest path. The algorithm will compute this path using Dijkstra's<sup>[5](#glossary-5)</sup> method.
+3. **Start Dijkstra<sup>[5](#glossary-5)</sup>**  
+   This step indicates the start of Dijkstra's algorithm<sup>[5](#glossary-5)</sup>, where it will calculate the shortest path by processing **nodes**<sup>[14](#glossary-14)</sup> in the graph.
+4. **Initialize Distance Array with Infinity, Set Source Distance to 0**  
+   - The algorithm initializes an array of distances, setting the distance for all **nodes**<sup>[14](#glossary-14)</sup> to `infinity (∞)` because their exact distances are unknown initially.
+   - The distance for the **source node**<sup>[14](#glossary-14)</sup> is set to 0 since the shortest path from the source to itself is always zero.
+5. **Initialize Priority Queue<sup>[30](#glossary-30)</sup> with the Source Node<sup>[14](#glossary-14)</sup>**  
+   - The algorithm initializes a **priority queue**<sup>[30](#glossary-30)</sup> (often implemented as a min-heap) and inserts the **source node**<sup>[14](#glossary-14)</sup> with a distance of 0.
+   - The priority queue<sup>[30](#glossary-30)</sup> ensures that the node<sup>[14](#glossary-14)</sup> with the smallest tentative distance is always processed first.
+6. **Is Priority Queue<sup>[30](#glossary-30)</sup> Empty?**  
+   - The algorithm checks if the **priority queue**<sup>[30](#glossary-30)</sup> is empty.
+     - `Yes`: If the queue is empty, it means all reachable nodes<sup>[14](#glossary-14)</sup> have been processed. The algorithm terminates here, and the shortest path is found.
+     - `No`: If the queue is not empty, the algorithm proceeds to process the next node<sup>[14](#glossary-14)</sup>.
+7. **Extract Node with Minimum Distance from Priority Queue<sup>[30](#glossary-30)</sup>**  
+   - The algorithm extracts the **node**<sup>[14](#glossary-14)</sup> `with the smallest distance` from the **priority queue**<sup>[30](#glossary-30)</sup>.
+   - This **node**<sup>[14](#glossary-14)</sup> is then marked as the current **node**<sup>[14](#glossary-14)</sup> being processed.
+8. **Is Node Visited?**  
+   - The algorithm checks if the current **node**<sup>[14](#glossary-14)</sup> has already been visited.
+     - `Yes`: If the **node**<sup>[14](#glossary-14)</sup> has been visited before, the algorithm skips processing it again and moves to the next **node**<sup>[14](#glossary-14)</sup> in the priority queue.
+     - `No`: If the **node**<sup>[14](#glossary-14)</sup> has not been visited, the algorithm proceeds to process the **node**<sup>[14](#glossary-14)</sup>.
+9. **Mark Node<sup>[14](#glossary-14)</sup> as Visited**  
+   - The **node**<sup>[14](#glossary-14)</sup> is marked as **visited** to avoid reprocessing it in future iterations.
+10. **For Each Neighbor of the Current Node<sup>[14](#glossary-14)</sup>**  
+    - The algorithm iterates over all neighbors of the current **node**<sup>[14](#glossary-14)</sup> to explore the shortest paths through them.
+11. **Is the Neighbor's Tentative Distance Smaller?**  
+    - For each neighbor, the algorithm checks if its `tentative distance` (current known distance) is smaller than the previously recorded distance.
+      - `Yes`: If the tentative distance is smaller, the algorithm updates the neighbor's distance in the distance array.
+      - `No`: If the neighbor's tentative distance is not smaller, no update is made, and the algorithm moves to the next neighbor.
+12. **Update Neighbor's Distance in Distance Array**  
+    - If the tentative distance for a neighbor is smaller than the recorded distance, the algorithm updates that neighbor's distance in the distance array.
+13. **Add Neighbor to Priority Queue<sup>[30](#glossary-30)</sup> with Updated Distance**  
+    - The updated neighbor is then added to the **priority queue**<sup>[30](#glossary-30)</sup> with its new, smaller tentative distance.
+14. **Return the Quickest Path**  
+    - Once all **nodes**<sup>[14](#glossary-14)</sup> have been processed and the **priority queue**<sup>[30](#glossary-30)</sup> is empty, the algorithm concludes, and the `shortest path` from the source **node**<sup>[14](#glossary-14)</sup> to the destination **node**<sup>[14](#glossary-14)</sup> is returned.
+
+#### 3.3.3 Fibonacci Heap Node Structure with Pointer Relationships
+
+![Fibonacci](./images/FibonacciHeap.png)
+
+##### Explanation of the Fibonacci Heap Node Structure with Pointer Relationships
+
+- `Half-headed arrows` are used for next and previous pointers.
+- `Half-headed full arrows` are used for child and parent pointers.
+- `Filled arrowheads` are used for next and child pointers.
+- `White arrowheads` are for previous and parent pointers.
+- `Note` that we synthesis child pointers to all the children of a node; in actuality, only one of these pointers is stored, since we can find sibling nodes.
+- `Marked nodes` are grey and hoepfully the minimum is obvious.
 
 ## 4. Detailed Design
 
@@ -409,8 +458,7 @@ The backend is structured to handle multiple requests efficiently and securely[.
 #### 4.1.5. Security Layer
 
 - **Purpose**: Protects the **REST API**<sup>[2](#glossary-2)</sup> from unauthorized access[.][3]  
-- **Implementation**:  
-  - **API key-based**<sup>[21](#glossary-21)</sup> authentication for identifying and authorizing clients[.][3]  
+- **Implementation**:
   - **Input sanitization**<sup>[41](#glossary-41)</sup> to prevent injection attacks[.][3]  
   - **Rate limiting**<sup>[35](#glossary-35)</sup> to mitigate **DoS (Denial of Service**<sup>[52](#glossary-52)</sup>**)** attacks[.][3]
 
@@ -537,11 +585,28 @@ The project will follow the Agile methodology, with development broken down into
 
 ### 5.3 Libraries used
 
-| C++ Library Name                | Version    | Description                                                                                                          | Links                                                           |
-| ------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| Standard Template Library (STL) | **C++11+** | Provides a collection of generic classes and functions, such as vectors, lists, stacks, queues, and algorithms[.][3] | [Reference](https://en.cppreference.com/w/cpp/standard_library) |
+| C++ Library Name                    | Full Name                             | Version    | Description                                                                                                            | Links                                                                  |
+| ----------------------------------- | ------------------------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| **Standard Template Library (STL)** | **C++ Standard Template Library**     | **C++11+** | Provides a collection of generic classes and functions, such as vectors, lists, stacks, queues, and algorithms[.][3]   | [Reference](https://en.cppreference.com/w/cpp/standard_library)        |
+| `iostream`                          | **Input/Output Stream Library**       | **C++98+** | Provides functionality for input and output operations, including `cin`, `cout`, and `cerr`[.][3]                      | [Reference](https://en.cppreference.com/w/cpp/io/iostream)             |
+| `fstream`                           | **File Stream Library**               | **C++98+** | Provides functionality for file input and output using streams like `ifstream`, `ofstream`, and `fstream`[.][3]        | [Reference](https://en.cppreference.com/w/cpp/io/fstream)              |
+| `stdexcept`                         | **Standard Exception Library**        | **C++98+** | Provides exception handling classes, including `std::runtime_error`, `std::invalid_argument`, and more[.][3]           | [Reference](https://en.cppreference.com/w/cpp/error/stdexcept)         |
+| `chrono`                            | **Time Library**                      | **C++11+** | Provides functionality for time measurement, durations, and clocks in C++[.][3]                                        | [Reference](https://en.cppreference.com/w/cpp/chrono)                  |
+| `iomanip`                           | **Input/Output Manipulation Library** | **C++98+** | Provides facilities for formatting input and output, including stream manipulators like `setw`, `setprecision`[.][3]   | [Reference](https://en.cppreference.com/w/cpp/io/iomanip)              |
+| `unordered_map`                     | **Unordered Map Library**             | **C++11+** | Provides an unordered associative container that uses hash tables, allowing fast lookup, insertion, and deletion[.][3] | [Reference](https://en.cppreference.com/w/cpp/container/unordered_map) |
+| `vector`                            | **Vector Library**                    | **C++98+** | Provides a dynamic array that can grow in size, supporting random access and efficient insertions and deletions[.][3]  | [Reference](https://en.cppreference.com/w/cpp/container/vector)        |
+| `string`                            | **String Library**                    | **C++98+** | Provides the `std::string` class to manipulate sequences of characters with dynamic sizing[.][3]                       | [Reference](https://en.cppreference.com/w/cpp/string/basic_string)     |
+| `utility`                           | **Utility Library**                   | **C++98+** | Provides general-purpose utility functions, including `std::pair`, `std::move`, and `std::swap`[.][3]                  | [Reference](https://en.cppreference.com/w/cpp/utility)                 |
 
-<!-- TODO: Add all used C++ libs and add a new table with C libs -->
+<!-- TODO: Add all used C++ libs from the REST API -->
+
+| C Library Name | Full Name                         | Version  | Description                                                                                                           | Links                                                      |
+| -------------- | --------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| `stdio.h`      | **Standard Input/Output Library** | **C89+** | Provides input and output functions, including file handling, standard input/output, and formatting[.][3]             | [Reference](https://en.cppreference.com/w/c/io/stdio)      |
+| `stdlib.h`     | **Standard Library**              | **C89+** | Provides functions for memory allocation, process control, conversions, and random number generation[.][3]            | [Reference](https://en.cppreference.com/w/c/io/stdlib)     |
+| `stdint.h`     | **Standard Integer Library**      | **C99+** | Defines macros for fixed-width integer types, such as `int32_t`, `int64_t`, and others for ensuring portability[.][3] | [Reference](https://en.cppreference.com/w/c/types/stdint)  |
+| `stdbool.h`    | **Standard Boolean Library**      | **C99+** | Defines macros for Boolean type (`bool`), with values `true` and `false`, in C[.][3]                                  | [Reference](https://en.cppreference.com/w/c/types/stdbool) |
+| `time.h`       | **Time Library**                  | **C89+** | Provides functions for manipulating date and time, such as `time()`, `localtime()`, and `strftime()`[.][3]            | [Reference](https://en.cppreference.com/w/c/chrono/time)   |
 
 ### 5.4 Software
 
@@ -626,10 +691,6 @@ Since the application is designed for local use (on a local server), the securit
   - We use a **CSV file** as the primary data source (which contains **nodes**<sup>[14](#glossary-14)</sup> and connections)[.][3] **Data integrity**<sup>[33](#glossary-33)</sup> checks can be implemented to ensure that the **CSV**<sup>[9](#glossary-9)</sup> file is properly formatted and that there are no data inconsistencies[.][3]
   - We will validate the **CSV**<sup>[9](#glossary-9)</sup> file’s integrity before uploading it on the live server to ensure that it is not corrupted, and we will also validate that it meets the expected structure (i.e., a **DAG** with no loops\)[.][3]
 
-- **API Security:**
-  - Since we are not implementing a user authentication system (e.g., no login or registration), there is no need to secure API endpoints with authentication tokens for this local version[.][3]
-  - For security purposes, if this application were to move to a public server or production environment, we would recommend using API tokens or another form of authentication (such as **OAuth<sup>[20](#glossary-20)</sup>** or **Bearer Tokens**) to secure access to the endpoints[.][3]
-
 ### 8.2 Compliance
 
 - **GDPR (General Data Protection Regulation):**
@@ -691,8 +752,6 @@ Since the application is designed for local use (on a local server), the securit
 | <p id="glossary-17">17</p> | XML (Extensible Markup Language)                                             | A markup language that defines rules for encoding documents in a format that is both human-readable and machine-readable.                                                                                                                                                                |
 | <p id="glossary-18">18</p> | Vertices (plural of vertex)                                                  | In discrete mathematics, and more specifically in graph theory, a vertex (plural vertices) or node is the fundamental unit of which graphs are formed.                                                                                                                                   |
 | <p id="glossary-19">19</p> | Cross-Platform                                                               | Refers to software that can run on multiple operating systems, such as Windows, macOS, and Linux.                                                                                                                                                                                        |
-| <p id="glossary-20">20</p> | OAuth                                                                        | A protocol for token-based authentication and authorization on the internet, allowing third-party services to exchange web resources on behalf of a user.                                                                                                                                |
-| <p id="glossary-21">21</p> | API Key                                                                      | A unique identifier used to authenticate a client when making API requests, ensuring secure communication between the client and the server.                                                                                                                                             |
 | <p id="glossary-23">23</p> | API Documentation                                                            | A reference guide that provides detailed information about an API’s endpoints, parameters, responses, and error codes, aiding developers in using the API.                                                                                                                               |
 | <p id="glossary-24">24</p> | Role-Based Access Control (RBAC)                                             | A method of restricting system access based on the roles assigned to users, ensuring that users have access only to the resources necessary for their roles.                                                                                                                             |
 | <p id="glossary-25">25</p> | Euclidean Distance                                                           | The straight-line distance between two points in Euclidean space, often used in pathfinding algorithms as a heuristic.                                                                                                                                                                   |
