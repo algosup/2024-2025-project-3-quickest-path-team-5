@@ -42,7 +42,6 @@ jobs:
                         cd build
                         make
                         cd ..
-                        ls
                         echo "Build complete"
                         echo "Ready to run tests"
     test:
@@ -52,7 +51,7 @@ jobs:
             - name: Run tests
               run: |
                     echo "Running tests"
-                    ls
+                    cd dag_graph_validator
                     cd bin
                     ./tests
                     echo "Tests complete"
