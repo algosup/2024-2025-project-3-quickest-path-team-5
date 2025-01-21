@@ -32,7 +32,14 @@
         - [Explanation of the High-Level Data Flow Diagram](#explanation-of-the-high-level-data-flow-diagram)
       - [3.3.2 Shortest Path Algorithm Execution Flow](#332-shortest-path-algorithm-execution-flow)
         - [Explanation of the Shortest Path Algorithm Execution Flow](#explanation-of-the-shortest-path-algorithm-execution-flow)
-      - [3.3.3 Fibonacci Heap Node Structure with Pointer Relationships](#333-fibonacci-heap-node-structure-with-pointer-relationships)
+          - [**Thread 1: Calculating Path from Point A to B**](#thread-1-calculating-path-from-point-a-to-b)
+          - [**Main Thread: Measuring Time**](#main-thread-measuring-time)
+          - [**Thread 2: Calculating Path from Point B to A**](#thread-2-calculating-path-from-point-b-to-a)
+          - [**Comparison of Paths:**](#comparison-of-paths)
+          - [Final Outcome](#final-outcome)
+      - [3.3.3 Dijkstra's Algorithm Execution Flow](#333-dijkstras-algorithm-execution-flow)
+        - [Explanation of the Dijkstra's Algorithm Execution Flow](#explanation-of-the-dijkstras-algorithm-execution-flow)
+      - [3.3.4 Fibonacci Heap Node Structure with Pointer Relationships](#334-fibonacci-heap-node-structure-with-pointer-relationships)
         - [Explanation of the Fibonacci Heap Node Structure with Pointer Relationships](#explanation-of-the-fibonacci-heap-node-structure-with-pointer-relationships)
   - [4. Detailed Design](#4-detailed-design)
     - [4.1 Backend Design](#41-backend-design)
@@ -280,7 +287,7 @@ graph TD
   B[Backend Server] 
   C[Input Validation Module]
   D[Graph Data Loader]
-  F{Dijkstra}
+  F{Path Finding Algoritm}
   G[Path Result Generator]
   H[Response Formatter]
   I[Client]
@@ -325,6 +332,171 @@ graph TD
 graph TD
   A[Start]
   B[Get the shortest path]
+  C[Create 3 Threads]
+
+  D[Start Thread]
+  E[Start Dijkstra from point A to B]
+  e[Wait dijkstra to finish]
+  F{Is the shortest path found?}
+  G[End All Threads]
+  H[Return the shortest path]
+
+  I[Start Thread]
+  J[Start Dijkstra from point B to A]
+  j[Wait dijkstra to finish]
+  K{Is the shortest path found?}
+  L[End All Threads]
+  M[Flip the path, to convert it into A to B path]
+  m[Return the shortest path]
+
+
+  N[Start Thread]
+  O[Count the time]
+  P{Is time is greater or equal to 950ms?}
+  Q[End All Threads]
+  R{Is Thread 1 path is shorter than Thread 2 path?}
+
+
+  subgraph  
+    A --> B
+    B --> C
+    C --> D
+    C --> N
+    C --> I
+    
+    subgraph Thread 1
+      D --> E
+      E --> e
+      e --> F
+      F -- Yes --> G
+      F -- No --> e
+    end
+
+    subgraph Main Thread
+      N --> O
+      O --> P
+      P -- Yes --> Q
+      P -- No --> O
+    end
+
+    subgraph Thread 2
+      I --> J
+      J --> j
+      j --> K
+      K -- Yes --> L
+      K -- No --> j
+    end
+
+    Q --> R
+    G --> H
+    L --> M
+    R -- Yes --> H
+    R -- No --> M
+    M --> m
+
+  end
+```
+
+##### Explanation of the Shortest Path Algorithm Execution Flow
+
+This flowchart illustrates the execution of a shortest path algorithm using a **multithreading** approach, where three threads are employed to perform different tasks concurrently. The primary goal is to find the shortest path between two points, A and B, while also measuring the time taken and comparing the results.
+
+---
+
+1. **Start:**
+   - The process begins when the user requests to find the shortest path between two points, A and B.
+
+2. **Get the Shortest Path:**
+   - The system initiates the calculation for the shortest path and starts the process in parallel threads.
+
+3. **Create 3 Threads:**
+   - Three threads are created to perform different tasks concurrently:
+     1. **Thread 1**: Calculates the shortest path from point A to B using Dijkstra's algorithm.
+     2. **Thread 2**: Calculates the shortest path from point B to A using Dijkstra's algorithm.
+     3. **Main Thread**: Tracks the time taken and determines whether the process completes within a specified time.
+
+---
+
+###### **Thread 1: Calculating Path from Point A to B**
+
+1. **Start Thread 1:**
+   - The first thread starts executing.
+2. **Start Dijkstra from Point A to B:**
+   - Thread 1 runs Dijkstra's algorithm starting from point A to point B to find the shortest path.
+3. **Wait for Dijkstra to Finish:**
+   - The thread waits for the algorithm to finish computing the shortest path.
+4. **Is the Shortest Path Found?**
+   - If Dijkstra's algorithm finds a valid path, the thread ends; otherwise, it continues executing until a valid path is found.
+5. **End All Threads:**
+   - Once the path is found, Thread 1 completes, signaling the end of its task.
+6. **Return the Shortest Path:**
+   - The shortest path from point A to point B is returned by the thread.
+
+---
+
+###### **Main Thread: Measuring Time**
+
+1. **Start Main Thread:**
+    - The main thread begins execution and starts the time tracking process.
+
+2. **Count the Time:**
+    - The system starts counting the time taken for the pathfinding calculations.
+
+3. **Is Time Greater Than or Equal to 950ms?**
+    - The main thread monitors the time. If the time taken by the threads exceeds 950ms, the process is stopped and the threads are ended.
+
+4. **End All Threads:**
+    - If the time limit is reached, the main thread ends all active threads.
+
+---
+
+###### **Thread 2: Calculating Path from Point B to A**
+
+1. **Start Thread 2:**
+    - The second thread starts executing concurrently with the others.
+
+2. **Start Dijkstra from Point B to A:**
+    - Thread 2 runs Dijkstra's algorithm in reverse, from point B to point A.
+
+3. **Wait for Dijkstra to Finish:**
+    - Thread 2 waits for the Dijkstra algorithm to finish.
+
+4. **Is the Shortest Path Found?**
+    - Thread 2 checks whether it has found a valid path. If yes, it proceeds to the next step; otherwise, it waits until a valid path is found.
+
+5. **End All Threads:**
+    - Once the shortest path is found, the second thread completes its task.
+
+6. **Flip the Path**
+    - Since the user want each steps from A(starting point) to B(destination), the path is "flipped" to convert it from `B --> A` to `A --> B`.
+
+7. **Return the Shortest Path:**
+    - The shortest path from point A to point B is returned by Thread 2.
+
+---
+
+###### **Comparison of Paths:**
+
+1. **Compare Path Lengths:**
+    - After both threads (Thread 1 and Thread 2) have stopped, the system compares the paths found by the two threads.
+
+2. **Is Thread 1 Path Shorter Than Thread 2 Path?**
+    - If the path calculated by Thread 1 (A to B) is shorter than the path calculated by Thread 2 (B to A), the result from Thread 1 is selected.
+
+3. **Return the Shortest Path:**
+    - If Thread 1's path is shorter, it returns the path from A to B; otherwise, it returns Thread 2's the path from B to A.
+
+---
+
+###### Final Outcome
+
+- The system determines the shortest path by comparing the results of both threads and considers the time taken to ensure efficiency.
+- The shortest path is returned to the user, either from **A to B** or **B to A**, depending on the results of the comparison.
+
+#### 3.3.3 Dijkstra's Algorithm Execution Flow
+
+```mermaid
+graph TD
   C[Start Dijkstra]
   D[Initialize distance array with infinity, set source distance to 0]
   E[Initialize priority queue with the source node]
@@ -340,10 +512,6 @@ graph TD
   O[Return the quickest path]
 
   subgraph  
-    A --> B
-    B --> C
-    
-    subgraph Dijkstra Algorithm
 
         C --> D
         D --> E
@@ -360,55 +528,66 @@ graph TD
         L --> No --> K
         K --> H
         N --> E
+        G --> O
     end
-  
-    G --> O
-  end
 ```
 
-##### Explanation of the Shortest Path Algorithm Execution Flow
+##### Explanation of the Dijkstra's Algorithm Execution Flow
 
 The following diagram illustrates the step-by-step execution of **Dijkstra's algorithm**<sup>[5](#glossary-5)</sup> for finding the shortest path between two **nodes**<sup>[14](#glossary-14)</sup> in a graph. Below is a detailed breakdown of each step in the process:
 
+---
+
 1. **Start**  
    The algorithm begins. This marks the initiation of the process to find the shortest path between the source **node**<sup>[14](#glossary-14)</sup> and the destination **node**<sup>[14](#glossary-14)</sup>.
-2. **Get the Shortest Path**  
-   This step represents the user or system requesting the shortest path. The algorithm will compute this path using Dijkstra's<sup>[5](#glossary-5)</sup> method.
-3. **Start Dijkstra<sup>[5](#glossary-5)</sup>**  
-   This step indicates the start of Dijkstra's algorithm<sup>[5](#glossary-5)</sup>, where it will calculate the shortest path by processing **nodes**<sup>[14](#glossary-14)</sup> in the graph.
-4. **Initialize Distance Array with Infinity, Set Source Distance to 0**  
+
+2. **Initialize Distance Array with Infinity, Set Source Distance to 0**  
    - The algorithm initializes an array of distances, setting the distance for all **nodes**<sup>[14](#glossary-14)</sup> to `infinity (∞)` because their exact distances are unknown initially.
    - The distance for the **source node**<sup>[14](#glossary-14)</sup> is set to 0 since the shortest path from the source to itself is always zero.
-5. **Initialize Priority Queue<sup>[30](#glossary-30)</sup> with the Source Node<sup>[14](#glossary-14)</sup>**  
+
+3. **Initialize Priority Queue<sup>[30](#glossary-30)</sup> with the Source Node<sup>[14](#glossary-14)</sup>**  
    - The algorithm initializes a **priority queue**<sup>[30](#glossary-30)</sup> (often implemented as a min-heap) and inserts the **source node**<sup>[14](#glossary-14)</sup> with a distance of 0.
    - The priority queue<sup>[30](#glossary-30)</sup> ensures that the node<sup>[14](#glossary-14)</sup> with the smallest tentative distance is always processed first.
-6. **Is Priority Queue<sup>[30](#glossary-30)</sup> Empty?**  
+
+4. **Is Priority Queue<sup>[30](#glossary-30)</sup> Empty?**  
    - The algorithm checks if the **priority queue**<sup>[30](#glossary-30)</sup> is empty.
-     - `Yes`: If the queue is empty, it means all reachable nodes<sup>[14](#glossary-14)</sup> have been processed. The algorithm terminates here, and the shortest path is found.
-     - `No`: If the queue is not empty, the algorithm proceeds to process the next node<sup>[14](#glossary-14)</sup>.
-7. **Extract Node with Minimum Distance from Priority Queue<sup>[30](#glossary-30)</sup>**  
-   - The algorithm extracts the **node**<sup>[14](#glossary-14)</sup> `with the smallest distance` from the **priority queue**<sup>[30](#glossary-30)</sup>.
+     - **Yes**: If the queue is empty, it means all reachable nodes<sup>[14](#glossary-14)</sup> have been processed. The algorithm terminates here, and the shortest path is found.
+     - **No**: If the queue is not empty, the algorithm proceeds to process the next node<sup>[14](#glossary-14)</sup>.
+
+5. **Extract Node with Minimum Distance from Priority Queue<sup>[30](#glossary-30)</sup>**  
+   - The algorithm extracts the **node**<sup>[14](#glossary-14)</sup> with the smallest distance from the **priority queue**<sup>[30](#glossary-30)</sup>.
    - This **node**<sup>[14](#glossary-14)</sup> is then marked as the current **node**<sup>[14](#glossary-14)</sup> being processed.
-8. **Is Node Visited?**  
+
+6. **Is Node Visited?**  
    - The algorithm checks if the current **node**<sup>[14](#glossary-14)</sup> has already been visited.
-     - `Yes`: If the **node**<sup>[14](#glossary-14)</sup> has been visited before, the algorithm skips processing it again and moves to the next **node**<sup>[14](#glossary-14)</sup> in the priority queue.
-     - `No`: If the **node**<sup>[14](#glossary-14)</sup> has not been visited, the algorithm proceeds to process the **node**<sup>[14](#glossary-14)</sup>.
-9. **Mark Node<sup>[14](#glossary-14)</sup> as Visited**  
+     - **Yes**: If the **node**<sup>[14](#glossary-14)</sup> has been visited before, the algorithm skips processing it again and moves to the next **node**<sup>[14](#glossary-14)</sup> in the priority queue.
+     - **No**: If the **node**<sup>[14](#glossary-14)</sup> has not been visited, the algorithm proceeds to process the **node**<sup>[14](#glossary-14)</sup>.
+
+7. **Mark Node<sup>[14](#glossary-14)</sup> as Visited**  
    - The **node**<sup>[14](#glossary-14)</sup> is marked as **visited** to avoid reprocessing it in future iterations.
-10. **For Each Neighbor of the Current Node<sup>[14](#glossary-14)</sup>**  
-    - The algorithm iterates over all neighbors of the current **node**<sup>[14](#glossary-14)</sup> to explore the shortest paths through them.
-11. **Is the Neighbor's Tentative Distance Smaller?**  
-    - For each neighbor, the algorithm checks if its `tentative distance` (current known distance) is smaller than the previously recorded distance.
-      - `Yes`: If the tentative distance is smaller, the algorithm updates the neighbor's distance in the distance array.
-      - `No`: If the neighbor's tentative distance is not smaller, no update is made, and the algorithm moves to the next neighbor.
-12. **Update Neighbor's Distance in Distance Array**  
+
+8. **For Each Neighbor of the Current Node<sup>[14](#glossary-14)</sup>**  
+   - The algorithm iterates over all neighbors of the current **node**<sup>[14](#glossary-14)</sup> to explore the shortest paths through them.
+
+9. **Is the Neighbor's Tentative Distance Smaller?**  
+   - For each neighbor, the algorithm checks if its `tentative distance` (current known distance) is smaller than the previously recorded distance.
+     - **Yes**: If the tentative distance is smaller, the algorithm updates the neighbor's distance in the distance array.
+     - **No**: If the neighbor's tentative distance is not smaller, no update is made, and the algorithm moves to the next neighbor.
+
+10. **Update Neighbor's Distance in Distance Array**  
     - If the tentative distance for a neighbor is smaller than the recorded distance, the algorithm updates that neighbor's distance in the distance array.
-13. **Add Neighbor to Priority Queue<sup>[30](#glossary-30)</sup> with Updated Distance**  
+
+11. **Add Neighbor to Priority Queue<sup>[30](#glossary-30)</sup> with Updated Distance**  
     - The updated neighbor is then added to the **priority queue**<sup>[30](#glossary-30)</sup> with its new, smaller tentative distance.
-14. **Return the Quickest Path**  
+
+12. **Is Priority Queue Empty Again?**  
+    - The algorithm checks the priority queue again to determine if there are any more nodes to process.
+    - If the queue is not empty, it continues processing the remaining nodes until all reachable nodes are processed.
+
+13. **Return the Quickest Path**  
     - Once all **nodes**<sup>[14](#glossary-14)</sup> have been processed and the **priority queue**<sup>[30](#glossary-30)</sup> is empty, the algorithm concludes, and the `shortest path` from the source **node**<sup>[14](#glossary-14)</sup> to the destination **node**<sup>[14](#glossary-14)</sup> is returned.
 
-#### 3.3.3 Fibonacci Heap Node Structure with Pointer Relationships
+#### 3.3.4 Fibonacci Heap Node Structure with Pointer Relationships
 
 ![Fibonacci](./images/FibonacciHeap.png)
 
