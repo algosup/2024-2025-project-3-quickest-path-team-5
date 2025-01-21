@@ -4,18 +4,17 @@
   <img src="https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/functional-specifications/documents/functional_specifications/images/logo_quickest_path.png?raw=true" style="object-fit: cover; width: 30%; height: 30%;">
 </div>
 
-
 ## Team Members 🙋
 
 | Photo | Name | Role | Contact |
 |---|---|---|---|
-| <img src="https://avatars.githubusercontent.com/u/145991425?v=4" width="100" height="100"> | Project Manager | Habi CAILLEAU| [GitHub](https://github.com/habicll) \| [LinkedIn](https://www.linkedin.com/in/habi-cailleau-3b72b5293/) | 
-| <img src="https://avatars.githubusercontent.com/u/182214449?v=4" width="100" height="100"> | Program Manager | Robin GOUMY |[GitHub](https://github.com/RobinGOUMY) \| [LinkedIn](https://www.linkedin.com/in/robin-goumy-66452832a/) |
-| <img src="https://avatars.githubusercontent.com/u/145995367?v=4" width="100" height="100"> |  Tech Lead | Mathias GAGNEPAIN |[GitHub](https://github.com/MistzSoftware) \| [LinkedIn](https://www.linkedin.com/in/mathias-gagnepain-426a131b0/) |
-| <img src="https://avatars.githubusercontent.com/u/100137905?v=4" width="100" height="100">| Software Developer | Rémy CHARLES |[GitHub](https://github.com/RemyCHARLES) \| [LinkedIn](https://www.linkedin.com/in/r%C3%A9my-charles-2a8960232/) |
-| <img src="https://avatars.githubusercontent.com/u/145995231?v=4" width="100" height="100">| Software Developer | Maxime CARON |[GitHub](https://github.com/MaximeAlgosup) \| [LinkedIn](https://www.linkedin.com/in/maxime-caron-dev/) |
-| <img src="https://avatars.githubusercontent.com/u/114397870?v=4" width="100" height="100"> | Quality Assurance | Jason GROSSO |[GitHub](https://github.com/JasonGROSSO) \| [LinkedIn](https://www.linkedin.com/in/jason-grosso-847b39251/) |
-| <img src="https://avatars.githubusercontent.com/u/123485791?v=4" width="100" height="100"> | Technical Writer | Alexandre BOPP |[GitHub](https://github.com/Boppalex) \| [LinkedIn](https://www.linkedin.com/in/alexandre-bopp-682a97250/) |
+| <img src="https://avatars.githubusercontent.com/u/145991425?v=4" width="100" height="100"> | Project Manager | Habi CAILLEAU| [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/github_light_logo.png" width="20%" height="20%">](https://github.com/habicll) \| [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/linkedin_logo.png" width="20%" height="20%">](https://www.linkedin.com/in/habi-cailleau-3b72b5293/) | 
+| <img src="https://avatars.githubusercontent.com/u/182214449?v=4" width="100" height="100"> | Program Manager | Robin GOUMY |[<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/github_light_logo.png" width="20%" height="20%">](https://github.com/RobinGOUMY) \| [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/linkedin_logo.png" width="20%" height="20%">](https://www.linkedin.com/in/robin-goumy-66452832a/) |
+| <img src="https://avatars.githubusercontent.com/u/145995367?v=4" width="100" height="100"> |  Tech Lead | Mathias GAGNEPAIN |[<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/github_light_logo.png" width="20%" height="20%">](https://github.com/MistzSoftware) \| [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/linkedin_logo.png" width="20%" height="20%">](https://www.linkedin.com/in/mathias-gagnepain-426a131b0/) |
+| <img src="https://avatars.githubusercontent.com/u/100137905?v=4" width="100" height="100">| Software Engineer | Rémy CHARLES |[<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/github_light_logo.png" width="20%" height="20%">](https://github.com/RemyCHARLES) \| [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/linkedin_logo.png" width="20%" height="20%">](https://www.linkedin.com/in/r%C3%A9my-charles-2a8960232/) |
+| <img src="https://avatars.githubusercontent.com/u/145995231?v=4" width="100" height="100">| Software Engineer | Maxime CARON |[<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/github_light_logo.png" width="20%" height="20%">](https://github.com/MaximeAlgosup) \| [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/linkedin_logo.png" width="20%" height="20%">](https://www.linkedin.com/in/maxime-caron-dev/) |
+| <img src="https://avatars.githubusercontent.com/u/114397870?v=4" width="100" height="100"> | Quality Assurance | Jason GROSSO |[<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/github_light_logo.png" width="20%" height="20%">](https://github.com/JasonGROSSO) \| [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/linkedin_logo.png" width="20%" height="20%">](https://www.linkedin.com/in/jason-grosso-847b39251/) |
+| <img src="https://avatars.githubusercontent.com/u/123485791?v=4" width="100" height="100"> | Technical Writer | Alexandre BOPP |[<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/github_light_logo.png" width="20%" height="20%">](https://github.com/Boppalex) \| [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/linkedin_logo.png" width="20%" height="20%">](https://www.linkedin.com/in/alexandre-bopp-682a97250/) |
 
 ---
 
@@ -49,7 +48,7 @@ To learn more about [C++](https://en.wikipedia.org/wiki/C++), visit the link.
 ## How to Use the Software 🛠️
 
 1. Github(required):
-   - Open you terminal and clone our project:
+   - Open your terminal and clone the project:
      - git clone https://github.com/algosup/2024-2025-project-3-quickest-path-team-5
 
 2. Follow the steps below to build and run the project (with Cmake):
