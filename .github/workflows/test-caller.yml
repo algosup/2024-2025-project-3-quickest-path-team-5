@@ -39,9 +39,8 @@ jobs:
                         echo "Building the project"
                         cd dag_graph_validator
                         cmake -S . -B Build
-                        cd Build
+                        cd build
                         make
-                        cd ..
                         cd ..
                         echo "Build complete"
                         echo "Ready to run tests"
