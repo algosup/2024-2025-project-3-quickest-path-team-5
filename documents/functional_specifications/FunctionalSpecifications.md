@@ -120,32 +120,6 @@ As defined by the project owner, the team is arranged as follows:
 
 ### Glossary
 
-| Term                      | Definition                                                                                 |
-|---------------------------|--------------------------------------------------------------------------------------------|
-| **Algorithm**             | A set of clear steps to solve a problem or complete a task, like sorting or searching.     |
-| **API**                   | Application Programming Interface - Rules allowing software to communicate with each other.|
-| **Approximation**         | A method to find a good-enough answer when exact solutions are too hard or slow.           |
-| **Big O Notation**        | Describes how an algorithm's speed changes with input size, like O(n) or O(n²).            |
-| **C++**                   | A powerful programming language used for games, system software, and fast applications.    |
-| **CSV**                   | Comma-Separated Values - A simple text format for storing data in tables.                  |
-| **DAG**                   | Directed Acyclic Graph - A graph with one-way links and no loops, useful in many systems.  |
-| **Data Structure**        | A way to organize and store data for quick access, like arrays or trees.                   |
-| **Directed Edge**         | A one-way connection between two points in a graph.                                        |
-| **Frameworks**            | Pre-built tools or libraries to speed up development, like React or Django.                |
-| **GDPR**                  | General Data Protection Regulation - EU law for protecting personal data and privacy.      |
-| **Graph**                 | A collection of points (nodes) connected by lines (edges), like social networks.           |
-| **Graph Connectivity**    | The degree to which nodes in a graph are linked to each other.                             |
-| **Heuristics**            | Quick methods for solving problems, often based on experience.                             |
-| **JSON**                  | JavaScript Object Notation - A simple format for exchanging data, easier than XML.         |
-| **Localhost**             | Refers to your own computer acting as a server, usually at 127.0.0.1.                      |
-| **Machine Learning**      | Tech that helps computers learn and improve without being explicitly programmed.           |
-| **REST**                  | Representational State Transfer - A way to build scalable, reliable web services.          |
-| **SQL Dataset**           | Data organized in tables, often managed with Structured Query Language (SQL).              |
-| **STL**                   | Standard Template Library - C++ tools for containers and algorithms.                       |
-| **Test Plan**             | A document describing what, when, and how to test in software.                             |
-| **UI**                    | User Interface - What users see and interact with in software, like buttons and menus.     |
-| **XML**                   | Extensible Markup Language - A flexible format for structuring and exchanging data.        |
-            
 | Term              | Definition                                                                                                             |
 |-------------------|------------------------------------------------------------------------------------------------------------------------|
 | **Algorithm**     | A set of clear steps to solve a problem or complete a task, like sorting or searching.                                 |
@@ -702,6 +676,5 @@ To kown more about it : [RGPD License](https://en.wikipedia.org/wiki/General_Dat
 - Additional Features
   - Offline support: Full functionality without a signal.
   - Global language options: Tailored for international users.
-  - App integration: Sync with calendar and other apps.
   
 We believe these changes will make a real difference in how people use our software, whether they're daily commuters or occasional travelers.
