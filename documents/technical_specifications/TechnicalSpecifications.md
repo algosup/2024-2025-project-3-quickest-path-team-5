@@ -502,7 +502,7 @@ The following Mermaid<sup>[10](#glossary-10)</sup> diagram illustrates the **gra
 - **Thread 2 Path**: Calculated from **B** *(node 30)* **to A** *(node 2)*(red arrows)
 
 ```mermaid
-  graph LR
+  graph TD
 
   %% Nodes
     0((0))
@@ -543,6 +543,7 @@ The following Mermaid<sup>[10](#glossary-10)</sup> diagram illustrates the **gra
     35((35))
     36((36))
 
+subgraph  
   %% Edges
   0 <== 1 ==> 1
   1 <== 9 ==> 5
@@ -589,6 +590,7 @@ The following Mermaid<sup>[10](#glossary-10)</sup> diagram illustrates the **gra
 
   %% Thread 2 path
   30 --> 31 --> 32 --> 24 --> 25 --> 18 --> 17 --> 11 --> 12 --> 6 --> 2
+end
 
   %% Styling
   style 2 fill:green,stroke:#FFF;
