@@ -19,6 +19,7 @@ class Node {
     private:
         uint32_t id;
         Edge* head;
+        uint32_t numEdges;
         Node* next;
 
     public:
@@ -63,6 +64,22 @@ class Node {
             \param head Pointer to the new head of the edge list
         */
         void setHead(Edge* head);
+
+        /*!
+            \brief Increment the number of edges
+        */
+        void incrementNumEdges();
+
+        /*!
+            \brief Decrement the number of edges
+        */
+        void decrementNumEdges();
+
+        /*!
+            \brief Get the number of edges
+            \return The number of edges
+        */
+        uint32_t getNumEdges() const;
 
         /*!
             \brief Deleted copy constructor to prevent unintended shallow copies

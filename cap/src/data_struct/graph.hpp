@@ -8,6 +8,7 @@
 
 #include <cstdint>
 #include <cstring> 
+#include <iostream>
 #include "node.hpp"
 
 #define HASH_MAP_SIZE 30000000 // Maximal number of nodes in the graph
@@ -15,10 +16,12 @@
 /*!
     \class Graph
     \brief Represents a graph with nodes, edges, and a hash map for quick access.
+    \remark The graph isn't oriented, so adding an edge from A to B will also add an edge from B to A.
 */
 class Graph {
     private:
         uint32_t numNodes;
+        long long numEdges;
         Node* head;
         Node* nodeMap[HASH_MAP_SIZE];
 
@@ -40,6 +43,12 @@ class Graph {
             \return The number of nodes in the graph
         */
         uint32_t getNumNodes() const;
+
+        /*!
+            \brief Get the edges of the graph
+            \return The number of edges in the graph
+        */
+        long long getNumEdges() const;
 
         /*!
             \brief Get the head node of the graph
@@ -74,7 +83,7 @@ class Graph {
         void setNodeMap(uint32_t index, Node* node);
 
         /*!
-            \brief Add an edge to the graph
+            \brief Add an edge to the graph (in fact 2 edges, one for each node)
             \param from The starting node ID
             \param to The ending node ID
             \param distance The distance between the nodes

@@ -3,6 +3,7 @@
     \brief The file for the Edge class implementation
     \authors CHARLES Rémy, CARON Maxime
 */
+#include <iostream>
 #include "edge.hpp"
 
 using namespace std;
@@ -16,13 +17,8 @@ Edge::Edge(Node *self, uint32_t time)
 
 Edge::~Edge()
 {
-    Edge *current = next;
-    while (current)
-    {
-        Edge *nextEdge = current->getNext();
-        delete current;
-        current = nextEdge;
-    }
+    cout << "Deleting edge " << this << endl;
+    next = nullptr;
 }
 
 Node *Edge::getSelf() const

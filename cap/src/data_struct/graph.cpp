@@ -8,23 +8,30 @@
 
 using namespace std;
 
-Graph::Graph() : numNodes(0), head(nullptr) {
+Graph::Graph() : numNodes(0), numEdges(0), head(nullptr) {
     std::memset(nodeMap, 0, sizeof(nodeMap)); // Initialize the hash map to nullptr
 }
 
-Graph::~Graph() {
+Graph::~Graph()
+{
+    cout << "Deleting graph" << endl;
     Node* current = head;
     while (current) {
         Node* nextNode = current->getNext();
+        cout << "Deleting node " << current << endl;
         delete current;
         current = nextNode;
     }
 }
 
-
 uint32_t Graph::getNumNodes() const
 {
     return this->numNodes;
+}
+
+long long Graph::getNumEdges() const
+{
+    return this->numEdges;
 }
 
 Node* Graph::getHead() const
@@ -75,9 +82,23 @@ bool Graph::addEdge(uint32_t from, uint32_t to, uint32_t distance){
         this->numNodes++;
     }
 
-    Edge* edge = new Edge(toNode, distance);
-    edge->setNext(fromNode->getHead());
-    fromNode->setHead(edge);
+    Edge* edge0 = new Edge(toNode, distance);
+    edge0->setNext(fromNode->getHead());
+    fromNode->setHead(edge0);
+    fromNode->incrementNumEdges();
+    this->numEdges++;
+
+    fromNode->setNext(this->head);
+
+    // New edge for the other node
+    Edge* edge1 = new Edge(fromNode, distance);
+    edge1->setNext(toNode->getHead());
+    toNode->setHead(edge1);
+    toNode->incrementNumEdges();
+    this->numEdges++;
+
+    toNode->setNext(fromNode);
+    this->head = toNode;
 
     return true;
 }

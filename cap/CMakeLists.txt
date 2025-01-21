@@ -43,7 +43,7 @@ target_link_libraries(tests
 
 target_compile_options(tests
   PRIVATE
-    -Wall -Wextra -pedantic -g -O2
+  -fsanitize=address -Wall -Wextra -pedantic -g -O2
 )
 
 set_target_properties(tests
@@ -75,7 +75,7 @@ target_link_libraries(cap
 
 target_compile_options(cap
   PRIVATE
-    -Wall -Wextra -pedantic -g -O2
+  -fsanitize=address -Wall -Wextra -pedantic -g -O2
 )
 
 set_target_properties(cap

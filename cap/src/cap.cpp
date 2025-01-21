@@ -41,7 +41,7 @@ int main()
     cout << "Time spent reading the dataset: " << time_spent << " seconds" << endl;
     getrusage(RUSAGE_SELF, &usage);
     float memUsage = (float)(usage.ru_maxrss / (1024.0f * 1024.0f)); // Convert to MB
-    cout << "Memory usage: " << (int)memUsage << " MB" << endl;
+    cout << "Memory usage: " << (int)memUsage << " MB for: " << graph->getNumNodes() << " nodes and " << graph->getNumEdges() << " edges" << endl;
 
     graph->~Graph();
 
