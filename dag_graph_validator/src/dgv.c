@@ -17,7 +17,6 @@ int main(void) {
     char* defaultMermaidFile = MERMAID_FILE;
     bool isExtracted = false;
 
-    // Ask the user for the file path
     printf("Enter the path to the dataset file (default: %s): ", defaultFilePath);
     char input[1024];
     fgets(input, sizeof(input), stdin);
@@ -32,7 +31,6 @@ int main(void) {
     }
 
 
-        // Ask user if they want to extract the graph to a Mermaid file
     printf("Do you want to extract the graph to a Mermaid file? (y/n): ");
     fgets(input, sizeof(input), stdin);
     if (input[0] == 'y') {
@@ -40,8 +38,7 @@ int main(void) {
     }
 
     if (isExtracted) {
-        // Ask the user for the mermaid file path
-        printf("Enter the path to the mermaid file (default: %s): ", defaultMermaidFile);
+]        printf("Enter the path to the mermaid file (default: %s): ", defaultMermaidFile);
         fgets(input, sizeof(input), stdin);
         if (input[0] != '\n') {
             input[strcspn(input, "\n")] = 0; // Remove the newline character
