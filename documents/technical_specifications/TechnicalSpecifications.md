@@ -37,6 +37,7 @@
           - [**Thread 2: Calculating Path from Point B to A**](#thread-2-calculating-path-from-point-b-to-a)
           - [**Comparison of Paths:**](#comparison-of-paths)
           - [Final Outcome](#final-outcome)
+        - [Result Visualization](#result-visualization)
       - [3.3.3 Dijkstra's Algorithm Execution Flow](#333-dijkstras-algorithm-execution-flow)
         - [Explanation of the Dijkstra's Algorithm Execution Flow](#explanation-of-the-dijkstras-algorithm-execution-flow)
       - [3.3.4 Fibonacci Heap Node Structure with Pointer Relationships](#334-fibonacci-heap-node-structure-with-pointer-relationships)
@@ -492,6 +493,122 @@ This flowchart illustrates the execution of a shortest path algorithm using a **
 
 - The system determines the shortest path by comparing the results of both threads<sup>[42](#glossary-42)</sup> and considers the time taken to ensure efficiency[.][3]
 - The shortest path is returned to the user, either from **A to B** or **B to A**, depending on the results of the comparison[.][3]
+
+##### Result Visualization
+
+The following Mermaid<sup>[10](#glossary-10)</sup> diagram illustrates the **graph**<sup>[8](#glossary-8)</sup> structure and the paths calculated by each thread<sup>[42](#glossary-42)</sup>:
+  
+- **Thread 1 Path**: Calculated from **A** *(node 2)* **to B** *(node 30)*(green arrows)
+- **Thread 2 Path**: Calculated from **B** *(node 30)* **to A** *(node 2)*(red arrows)
+
+```mermaid
+  graph LR
+
+  %% Nodes
+    0((0))
+    1((1))
+    2((2))
+    3((3))
+    4((4))
+    5((5))
+    6((6))
+    7((7))
+    8((8))
+    9((9))
+    10((10))
+    11((11))
+    12((12))
+    13((13))
+    14((14))
+    15((15))
+    16((16))
+    17((17))
+    18((18))
+    19((19))
+    20((20))
+    21((21))
+    22((22))
+    23((23))
+    24((24))
+    25((25))
+    26((26))
+    27((27))
+    28((28))
+    29((29))
+    30((30))
+    31((31))
+    32((32))
+    33((33))
+    34((34))
+    35((35))
+    36((36))
+
+  %% Edges
+  0 <== 1 ==> 1
+  1 <== 9 ==> 5
+  5 <== 13 ==> 11
+  11 <== 6 ==> 17
+  11 <== 5 ==> 12
+  12 <== 4 ==> 6
+  6 <== 2 ==> 2
+  12 <== 13 ==> 7
+  12 <== 19 ==> 19
+  7 <== 9 ==> 13
+  13 <== 12 ==> 14
+  14 <== 4 ==> 20
+  20 <== 4 ==> 27
+  27 <== 2 ==> 21
+  21 <== 7 ==> 15
+  15 <== 30 ==> 8
+  8 <== 2 ==> 9
+  8 <== 5 ==> 3
+  19 <== 3 ==> 18
+  17 <== 12 ==> 18
+  17 <== 12 ==> 10
+  10 <== 8 ==> 4
+  10 <== 5 ==> 16
+  16 <== 7 ==> 34
+  18 <== 2 ==> 25
+  25 <== 4 ==> 24
+  25 <== 5 ==> 29
+  24 <== 9 ==> 32
+  32 <== 3 ==> 33
+  32 <== 7 ==> 31
+  32 <== 2 ==> 34
+  31 <== 2 ==> 29
+  29 <== 5 ==> 26
+  29 <== 3 ==> 28
+  31 <== 1 ==> 30
+  34 <== 1 ==> 23
+  23 <== 7 ==> 22
+  23 <== 9 ==> 36
+  23 <== 4 ==> 35
+
+  %% Thread 1 path
+  2 --> 6 --> 12 --> 19 --> 18 --> 25 --> 29 --> 31 --> 30
+
+  %% Thread 2 path
+  30 --> 31 --> 32 --> 24 --> 25 --> 18 --> 17 --> 11 --> 12 --> 6 --> 2
+
+  %% Styling
+  style 2 fill:green,stroke:#FFF;
+  style 30 fill:red,stroke:#FFF;
+
+  linkStyle 39,40,41,42,43,44,45,46 stroke-width:2px,fill:none,stroke:green;
+  linkStyle 47,48,49,50,51,52,53,54,55,56 stroke-width:2px,fill:none,stroke:red;
+```
+
+> [!IMPORTANT]
+>
+> - `2(green node)` is considered in this exemple as the `starting point(A)`
+> - `30(red node)` is considered in this exemple as the `destination(B)`
+>
+> In this exemple, we assume the algorithm took less than 950ms to find the shortest path from `A` to `B` but if it was the case we can clearly understand why it's important to compare both shortest path found at the stopping of the thread:
+>
+> - `Thread 1` path as a weight(total length) of `38`
+> - `Thread 2` path as a weight(total length) of `52`
+>
+> By comparing both paths, we can clearly see and return the shortest path calculated overall.
 
 #### 3.3.3 Dijkstra's Algorithm Execution Flow
 
