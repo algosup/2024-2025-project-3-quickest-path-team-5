@@ -414,11 +414,11 @@ The following diagram illustrates the step-by-step execution of **Dijkstra's alg
 
 ##### Explanation of the Fibonacci Heap Node Structure with Pointer Relationships
 
-- `Half-headed arrows` are used for next and previous pointers.
-- `Half-headed full arrows` are used for child and parent pointers.
-- `Filled arrowheads` are used for next and child pointers.
-- `White arrowheads` are for previous and parent pointers.
-- `Note` that we synthesis child pointers to all the children of a node; in actuality, only one of these pointers is stored, since we can find sibling nodes.
+- `Half-headed arrows` are used for next and previous pointers<sup>[36](#glossary-36)</sup>.
+- `Half-headed full arrows` are used for child and parent pointers<sup>[36](#glossary-36)</sup>.
+- `Filled arrowheads` are used for next and child pointers<sup>[36](#glossary-36)</sup>.
+- `White arrowheads` are for previous and parent pointers<sup>[36](#glossary-36)</sup>.
+- `Note` that we synthesis child pointers<sup>[36](#glossary-36)</sup> to all the children of a node; in actuality, only one of these pointers<sup>[36](#glossary-36)</sup> is stored, since we can find sibling nodes.
 - `Marked nodes` are grey and hoepfully the minimum is obvious.
 
 ## 4. Detailed Design
@@ -786,6 +786,8 @@ Since the application is designed for local use (on a local server), the securit
 | <p id="glossary-33">33</p> | Data Integrity                                                               | The accuracy, consistency, and reliability of data throughout its lifecycle, ensuring that it is not corrupted or altered incorrectly.                                                                                                                                                                                              |
 | <p id="glossary-34">34</p> | Hash Map (Dictionary)                                                        | A data structure that stores key-value pairs, allowing for fast retrieval of values based on their corresponding keys.                                                                                                                                                                                                              |
 | <p id="glossary-35">35</p> | Rate Limiting                                                                | A technique used to control the amount of incoming requests to a system in a given time period, helping to prevent overloads or abuse.                                                                                                                                                                                              |
+| <p id="glossary-36">36</p> | Pointer                                                               | In computer science, a pointer is an object in many programming languages that stores a memory address. This can be that of another value located in computer memory, or in some cases, that of memory-mapped computer hardware.|
+
 | <p id="glossary-39">39</p> | Serialization                                                                | The process of converting an object into a format (like JSON or XML) that can be easily stored or transmitted and later reconstructed.                                                                                                                                                                                              |
 | <p id="glossary-40">40</p> | Load Balancer                                                                | A system or tool used to distribute incoming network traffic across multiple servers, improving performance and reliability.                                                                                                                                                                                                        |
 | <p id="glossary-41">41</p> | Input Sanitization                                                           | The process of cleaning user inputs to ensure they do not contain malicious code or invalid data, helping to prevent security vulnerabilities like SQL injection.                                                                                                                                                                   |
