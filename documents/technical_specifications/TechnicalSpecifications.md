@@ -39,7 +39,7 @@
       - [4.1.1. REST API Endpoint](#411-rest-api-endpoint)
       - [4.1.2. Request Handling Layer](#412-request-handling-layer)
       - [4.1.3. Pathfinding Engine](#413-pathfinding-engine)
-      - [4.1.4. Data Validation Tool Integration](#414-data-validation-tool-integration)
+      - [4.1.4. Data Validation Tool](#414-data-validation-tool)
       - [4.1.5. Security Layer](#415-security-layer)
       - [4.1.6. Response Serialization](#416-response-serialization)
       - [4.1.7. Scalability Design](#417-scalability-design)
@@ -210,7 +210,7 @@ You can find the full coding convention guidelines in the [Coding Conventions do
   - A help section or documentation link should be accessible from the interface for troubleshooting[.][3]  
 
 - **Performance**  
-  - The application should process **CSV**<sup>[9](#glossary-9)</sup> files and provide error feedback and real time graph visual representation using **mermaid**<sup>[10](#glossary-10)</sup>[.][3]  
+  - The application should process **CSV**<sup>[9](#glossary-9)</sup> files and provide error feedback and graph visual representation using **mermaid**<sup>[10](#glossary-10)</sup>[.][3]  
 
 #### 2.2.2 REST API
 
@@ -224,7 +224,7 @@ You can find the full coding convention guidelines in the [Coding Conventions do
   - The **REST API**<sup>[2](#glossary-2)</sup> should be **platform-agnostic**<sup>[3](#glossary-3)</sup> and deployable on any server environment that supports the required C++ runtime and dependencies[.][3]  
 
 - **Security**  
-  - The deployed version of the API must adhere to industry-standard practices such as HTTPS for secure communication[.][3]  
+  - The **deployed version** of the API must adhere to industry-standard practices such as HTTPS for secure communication[.][3]  
 
 - **Documentation**  
   - Comprehensive **API documentation**<sup>[23](#glossary-23)</sup> must be provided, including endpoint details, example requests/responses, and error codes[.][3]
@@ -433,8 +433,9 @@ The backend is structured to handle multiple requests efficiently and securely[.
 
 - **Purpose**: Provides access to the core functionality of the application through a single GET endpoint[.][3]  
 - **Input**: Accepts source and destination landmark IDs as query parameters[.][3]  
-- **Output**: Returns the travel time and the ordered list of landmarks in the shortest path in both `XML`<sup>[17](#glossary-17)</sup> and `JSON`<sup>[16](#glossary-16)</sup> formats[.][3]  
+- **Output**: Returns the travel time and the ordered list of landmarks in the shortest path in `XML`<sup>[17](#glossary-17)</sup> or `JSON`<sup>[16](#glossary-16)</sup> formats[.][3]  
 - **Design**: Built using C++ for high performance, leveraging lightweight **HTTP**<sup>[11](#glossary-11)</sup> server libraries such as `Boost.Beast`, `cpp-httplib` or `Pistache`[.][3]
+<!-- TODO: Change it if using another library like crow -->
 
 #### 4.1.2. Request Handling Layer
 
@@ -445,15 +446,15 @@ The backend is structured to handle multiple requests efficiently and securely[.
 #### 4.1.3. Pathfinding Engine
 
 - **Purpose**: Implements the core algorithm for finding the shortest path between two landmarks[.][3]  
-- **Algorithm**: Utilizes **Dijkstra**<sup>[5](#glossary-5)</sup>’s  algorithm for optimal precision and **DFS**<sup>[6](#glossary-6)</sup> for optimal performance[.][3]  
+- **Algorithm**: Utilizes **Dijkstra**<sup>[5](#glossary-5)</sup>’s  algorithm for optimal precision using **DFS**<sup>[6](#glossary-6)</sup> and **Fibonacci Heap**<sup>[22](#glossary-22)</sup> (**priority queue**<sup>[30](#glossary-30)</sup>) for optimal performance[.][3]  
 - **Data Loading**: Reads the **graph**<sup>[8](#glossary-8)</sup> data (from `USA-roads.csv`) into memory during initialization to optimize query response times[.][3]  
 - **Performance Goals**: Ensures responses within 1 second for typical requests[.][3]
 
-#### 4.1.4. Data Validation Tool Integration
+#### 4.1.4. Data Validation Tool
 
-- **Purpose**: Verifies the integrity of the **graph**<sup>[8](#glossary-8)</sup> data before it is loaded into memory[.][3]  
+- **Purpose**: Verifies the integrity of the **graph**<sup>[8](#glossary-8)</sup> data before it is loaded into the server's memory[.][3]  
 - **Functionality**: Ensures that the dataset forms a fully connected **graph**<sup>[8](#glossary-8)</sup> and is free of loops[.][3]  
-- **Implementation**: Operates as a pre-processing step, run infrequently but essential for ensuring data accuracy[.][3]
+- **Implementation**: Operates independently from the API, but higly recommanded before uploading a **CSV**<sup>[9](#glossary-9)</sup> on the server[.][3]
 
 #### 4.1.5. Security Layer
 
@@ -465,7 +466,7 @@ The backend is structured to handle multiple requests efficiently and securely[.
 #### 4.1.6. Response Serialization
 
 - **Purpose**: Converts the output of the **pathfinding**<sup>[4](#glossary-4)</sup> engine into the requested format (**XML**<sup>[17](#glossary-17)</sup> or **JSON**<sup>[16](#glossary-16)</sup>)[.][3]  
-- **Design**: Utilizes **lightweight serialization**<sup>[39](#glossary-39)</sup> libraries to minimize overhead while maintaining compatibility with modern REST standards[.][3]
+- **Design**: Utilizes **lightweight serialization**<sup>[39](#glossary-39)</sup> implementation to minimize overhead while maintaining compatibility with modern REST standards[.][3]
 
 #### 4.1.7. Scalability Design
 
@@ -555,8 +556,22 @@ To ensure the correctness of the **graph structure**<sup>[8](#glossary-8)</sup>,
 2. **Duplicate Edge<sup>[15](#glossary-15)</sup> Check:**
    - Verify that no duplicate **edges**<sup>[15](#glossary-15)</sup> exist between two **nodes**<sup>[14](#glossary-14)</sup> with differing weights[.][3]
 
+      > [!NOTE]
+      > Exemple of a duplicate edge:
+      >
+      >![Duplicate Edge Exemple](./images/DuplicateEdge.png)
+
 3. **Connectivity Check:**
    - Confirm the **graph**<sup>[8](#glossary-8)</sup> is fully connected, ensuring all **nodes**<sup>[14](#glossary-14)</sup> are reachable from any other **node**<sup>[14](#glossary-14)</sup>[.][3]
+
+      > [!NOTE]
+      > Exemple of a non-connected graph:
+      >
+      >```mermaid
+      >graph LR
+      > A((A)) --> B((B))
+      > B --> C((C))
+      > D((D))
 
 4. **Symmetry Check:**
    - Ensure bidirectionality of all **edges**<sup>[15](#glossary-15)</sup> (e.g., if `A -> B` exists, `B -> A` must also exist with the same weight)[.][3]
@@ -575,13 +590,13 @@ The project will follow the Agile methodology, with development broken down into
 
 ### 5.2 Tools and Technologies
 
-| Category                                | Tools/Technologies used                                                                                                          |
-| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Data Checking Application               | C<sup>99</sup> to keep a fast runtime, and using a mastered language of our software engineer[.][3]                              |
-| **REST API**<sup>[2](#glossary-2)</sup> | C++<sup>17</sup> to keep a fast runtime and not using to many unnecessary language keeping the project easily maintainable[.][3] |
-| Response Format                         | **JSON**<sup>[16](#glossary-16)</sup> but we want to implement the possibility to get **XML**<sup>[17](#glossary-17)</sup> also  |
-| Version Control                         | Git with GitHub[.][3]                                                                                                            |
-| **CI/CD**<sup>[1](#glossary-1)</sup>    | GitHub Actions for continuous integration and deployment[.][3]                                                                   |
+| Category                                | Tools/Technologies used                                                                                                                                                           |
+| --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Data Checking Application               | C<sup>99</sup> to keep a fast runtime, and using a mastered language of our software engineer[.][3]                                                                               |
+| **REST API**<sup>[2](#glossary-2)</sup> | C++<sup>17</sup> to keep a fast runtime and not using to many unnecessary language keeping the project easily maintainable[.][3]                                                  |
+| Response Format                         | **JSON**<sup>[16](#glossary-16)</sup> or **XML**<sup>[17](#glossary-17)</sup> depending of which format is passed as parameter (`Default:` **JSON**<sup>[16](#glossary-16)</sup>) |
+| Version Control                         | **Git**<sup>[31](#glossary-31)</sup> with **GitHub**<sup>[51](#glossary-51)</sup>[.][3]                                                                                                                                                     |
+| **CI/CD**<sup>[1](#glossary-1)</sup>    | **GitHub**<sup>[51](#glossary-51)</sup> Actions for continuous integration and deployment[.][3]                                                                                                                |
 
 ### 5.3 Libraries used
 
@@ -627,6 +642,9 @@ We decided to target the following platforms for compatibility, performance, and
 | **Windows** | Windows 10 and later                           | Covers the largest user base, with extended support for performance and compatibility[.][3]          |
 | **macOS**   | macOS 14 (Sequoia) and later                   | Targets devices capable of running modern macOS features and supporting your development tools[.][3] |
 
+> [!NOTE]
+>Older versions of the supported platforms may work but are not officially supported[.][3]
+
 #### 5.5.2 Web Server for REST API
 
 | Server Type                                   | Supported Platforms      | Rationale                                                                                                         |
@@ -652,16 +670,16 @@ We decided to target the following platforms for compatibility, performance, and
 
 ### 6.1 Testing Strategy
 
-**Unit Testing**<sup>[47](#glossary-47)</sup>: For individual components and functions[.][3]
-**Integration Testing**<sup>[48](#glossary-48)</sup>: To ensure different parts of the application work together[.][3]
-**System Testing**<sup>[49](#glossary-49)</sup>: To test the complete system as a whole[.][3]
+- **Unit Testing**<sup>[47](#glossary-47)</sup>: For individual components and functions[.][3]
+- **Integration Testing**<sup>[48](#glossary-48)</sup>: To ensure different parts of the application work together[.][3]
+- **System Testing**<sup>[49](#glossary-49)</sup>: To test the complete system as a whole[.][3]
 
 The detailed testing strategy can be seen in the test plan: [HERE](QA/TestPlan.md)
 
 ### 6.2 Tools
 
-**Unit Testing**<sup>[47](#glossary-47)</sup>: Wrote by our Quality Assurance team and ran with googleTest[.][3]
-**CI/CD**<sup>[1](#glossary-1)</sup> Testing: Automated testing using GitHub Actions[.][3]
+- **Unit Testing**<sup>[47](#glossary-47)</sup>: Wrote by our Software Engineer team and/or Quality Assurance team and ran with googleTest following [test cases](QA/TestCases.md) [.][3]
+- **CI/CD**<sup>[1](#glossary-1)</sup> Testing: Automated testing using GitHub<sup>[51](#glossary-51)</sup> Actions[.][3]
 
 ## 7. Deployment
 
@@ -669,8 +687,8 @@ The detailed testing strategy can be seen in the test plan: [HERE](QA/TestPlan.m
 
 ### 7.1 Deployment Pipeline
 
-Staging Environment: For pre-production testing[.][3]
-Production Environment: For the live application[.][3]
+- `Staging Environment:` For pre-production testing[.][3]
+- `Production Environment:` For the live application[.][3]
 
 ### 7.2 Maintenance
 
@@ -684,12 +702,12 @@ Since the application is designed for local use (on a local server), the securit
 
 - **Encryption:**
   - Communication between the client and server will be done over **HTTP<sup>[11](#glossary-11)</sup>** since the system operates in a localhost environment[.][3]
-  - Although we will not implement HTTPS or **SSL**<sup>[12](#glossary-12)</sup> for localhost, it's highly recommended that in production environments (if the project is moved to the internet), HTTPS and **SSL<sup>[12](#glossary-12)</sup>/TLS** encryption will be enabled to secure the data transmitted between the client and server[.][3]
+  - Although we will not implement HTTPS or **SSL**<sup>[12](#glossary-12)</sup> for localhost, it's highly recommended that in production environments (if the project is moved to the internet) to secure the data transmitted between the client and server[.][3]
   - Since the application doesn’t store user data, encryption is not necessary for data at rest[.][3] The only data that exists is the **CSV**<sup>[9](#glossary-9)</sup> file, which is stored on the server[.][3]
 
 - **Data Integrity<sup>[33](#glossary-33)</sup>:**
-  - We use a **CSV file** as the primary data source (which contains **nodes**<sup>[14](#glossary-14)</sup> and connections)[.][3] **Data integrity**<sup>[33](#glossary-33)</sup> checks can be implemented to ensure that the **CSV**<sup>[9](#glossary-9)</sup> file is properly formatted and that there are no data inconsistencies[.][3]
-  - We will validate the **CSV**<sup>[9](#glossary-9)</sup> file’s integrity before uploading it on the live server to ensure that it is not corrupted, and we will also validate that it meets the expected structure (i.e., a **DAG** with no loops\)[.][3]
+  - We use a **CSV<sup>[9](#glossary-9)</sup> file** as the primary data source (which contains **nodes**<sup>[14](#glossary-14)</sup> and connections)[.][3] **Data integrity**<sup>[33](#glossary-33)</sup> checks can be implemented to ensure that the **CSV**<sup>[9](#glossary-9)</sup> file is properly formatted and that there are no data inconsistencies[.][3]
+  - We will validate the **CSV**<sup>[9](#glossary-9)</sup> file’s integrity before uploading it on the live server to ensure that it is not corrupted, and we will also validate that it meets the expected structure (i.e., a **DAG**<sup>[21](#glossary-21)</sup> with no loops\)[.][3]
 
 ### 8.2 Compliance
 
@@ -701,13 +719,13 @@ Since the application is designed for local use (on a local server), the securit
   - There is no personally identifiable information (PII) being processed or stored in this system[.][3] However, if sensitive data were to be added in the future, we would establish a process to notify users in case of any data breaches (as per GDPR guidelines\)[.][3]
 
 - **Other Regulations:**
-  - The current version of the system is not handling sensitive personal data, so no other regulations like **HIPAA** or **CCPA** apply[.][3] However, should the project evolve to handle user data in the future, compliance with these and other data protection regulations would be enforced[.][3]
+  - The current version of the system is not handling sensitive personal data, so no other regulations like **CCPA**<sup>[20](#glossary-20)</sup> apply[.][3] However, should the project evolve to handle user data in the future, compliance with these and other data protection regulations would be enforced[.][3]
 
 ### 8.3 Security Best Practices
 
-- **CSV File Validation:**
+- **CSV<sup>[9](#glossary-9)</sup> File Validation:**
   - We perform data validation checks on the **CSV**<sup>[9](#glossary-9)</sup> file to ensure that it contains valid and consistent data before it's processed by the application[.][3] This step helps prevent errors caused by malformed data[.][3]
-  - The application will verify that the **CSV**<sup>[9](#glossary-9)</sup> file adheres to the expected format: **Landmark_A_ID, Landmark_B_ID, Time**[.][3] It will also check that the **graph**<sup>[8](#glossary-8)</sup> is valid, meaning it is a **Directed Acyclic Graph (DAG)** with no loops[.][3]
+  - The application will verify that the **CSV**<sup>[9](#glossary-9)</sup> file adheres to the expected format: **Landmark_A_ID, Landmark_B_ID, Time**[.][3] It will also check that the **graph**<sup>[8](#glossary-8)</sup> is valid, meaning it is a **Directed Acyclic Graph (DAG)**<sup>[21](#glossary-21)</sup> with no loops[.][3]
 
 - **Localhost Environment Security:**
   - Since the system is running on localhost, it’s assumed that access is restricted to the local machine or local network[.][3]
@@ -731,49 +749,54 @@ Since the application is designed for local use (on a local server), the securit
 
 ## 9. Glossary
 
-| Id                         | Term                                                                         | Definition                                                                                                                                                                                                                                                                               |
-| -------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <p id="glossary-1">1</p>   | CI/CD (Continuous Integration/Continuous Deployment)                         | Practices that automate the integration of code changes (CI) and deployment of applications (CD) to ensure reliable, fast software delivery.                                                                                                                                             |
-| <p id="glossary-2">2</p>   | REST API (Representational State Transfer Application Programming Interface) | A set of rules for building and interacting with web services that allow clients to communicate with the server over HTTP using methods like GET, POST, PUT, DELETE.                                                                                                                     |
-| <p id="glossary-3">3</p>   | Platform agnostic                                                            | Platform agnostic refers to software, applications, or services designed to operate across various operating systems, device types, web browsers, or other foundational technologies.                                                                                                    |
-| <p id="glossary-4">4</p>   | Pathfinding                                                                  | Pathfinding refers to the process of finding the shortest or most efficient route between two points in a map or network.                                                                                                                                                                |
-| <p id="glossary-5">5</p>   | Dijkstra's Algorithm                                                         | A well-known algorithm used to find the shortest paths between nodes in a graph, ensuring that the shortest path is found from a starting node to all other nodes in a weighted graph.                                                                                                   |
-| <p id="glossary-6">6</p>   | DFS (Depth First Search)                                                     | Depth-first search (DFS) is an algorithm for traversing or searching tree or graph data structures. The algorithm starts at the root node (selecting some arbitrary node as the root node in the case of a graph) and explores as far as possible along each branch before backtracking. |
-| <p id="glossary-7">7</p>   | Heuristic                                                                    | A problem-solving approach that uses practical methods or shortcuts to produce a solution that is not guaranteed to be optimal but is sufficient for the immediate goal.                                                                                                                 |
-| <p id="glossary-8">8</p>   | Graph Data Structure                                                         | A collection of nodes (or vertices) and edges that connect pairs of nodes, used to represent networks such as road maps, social connections, or communication systems.                                                                                                                   |
-| <p id="glossary-9">9</p>   | CSV (Comma-Separated Values)                                                 | A file format used to store tabular data, where each line represents a row, and each value is separated by a comma.                                                                                                                                                                      |
-| <p id="glossary-10">10</p> | Mermaid                                                                      | JavaScript based diagramming and charting tool that renders Markdown-inspired text definitions to create and modify diagrams dynamically.                                                                                                                                                |
-| <p id="glossary-11">11</p> | HTTP (Hypertext Transfer Protocol)                                           | A protocol used for transferring data over the web, enabling the communication between a client (such as a web browser) and a server.                                                                                                                                                    |
-| <p id="glossary-12">12</p> | SSL (Secure Sockets Layer)                                                   | A security protocol that establishes an encrypted link between a web server and a browser, ensuring secure data transfer over the internet.                                                                                                                                              |
-| <p id="glossary-13">13</p> | Time Complexity (O(log n))                                                   | A way of expressing the efficiency of an algorithm, indicating how the time to run the algorithm increases as the size of the input grows.                                                                                                                                               |
-| <p id="glossary-14">14</p> | Node                                                                         | A fundamental unit in a graph, typically representing an entity, such as a location in a pathfinding algorithm.                                                                                                                                                                          |
-| <p id="glossary-15">15</p> | Edge                                                                         | A connection between two nodes in a graph, often with an associated weight that represents the cost or distance between the nodes.                                                                                                                                                       |
-| <p id="glossary-16">16</p> | JSON (JavaScript Object Notation)                                            | A lightweight data-interchange format used for transmitting data in a human-readable form, typically between a server and a client.                                                                                                                                                      |
-| <p id="glossary-17">17</p> | XML (Extensible Markup Language)                                             | A markup language that defines rules for encoding documents in a format that is both human-readable and machine-readable.                                                                                                                                                                |
-| <p id="glossary-18">18</p> | Vertices (plural of vertex)                                                  | In discrete mathematics, and more specifically in graph theory, a vertex (plural vertices) or node is the fundamental unit of which graphs are formed.                                                                                                                                   |
-| <p id="glossary-19">19</p> | Cross-Platform                                                               | Refers to software that can run on multiple operating systems, such as Windows, macOS, and Linux.                                                                                                                                                                                        |
-| <p id="glossary-23">23</p> | API Documentation                                                            | A reference guide that provides detailed information about an API’s endpoints, parameters, responses, and error codes, aiding developers in using the API.                                                                                                                               |
-| <p id="glossary-24">24</p> | Role-Based Access Control (RBAC)                                             | A method of restricting system access based on the roles assigned to users, ensuring that users have access only to the resources necessary for their roles.                                                                                                                             |
-| <p id="glossary-25">25</p> | Euclidean Distance                                                           | The straight-line distance between two points in Euclidean space, often used in pathfinding algorithms as a heuristic.                                                                                                                                                                   |
-| <p id="glossary-26">26</p> | Manhattan Distance                                                           | A type of distance measurement used in pathfinding that calculates the distance between two points by only moving along grid lines (i.e., horizontal and vertical).                                                                                                                      |
-| <p id="glossary-27">27</p> | Modular Design                                                               | A software design approach that splits a system into separate, self-contained modules, each responsible for a specific functionality, making the system easier to maintain and extend.                                                                                                   |
-| <p id="glossary-28">28</p> | Scalability                                                                  | The capability of a system to handle a growing amount of work or to accommodate growth, especially in terms of system capacity, number of users, or data volume.                                                                                                                         |
-| <p id="glossary-29">29</p> | Adjacency List                                                               | A way of representing a graph, where each node points to a list of all other nodes it is directly connected to by edges.                                                                                                                                                                 |
-| <p id="glossary-30">30</p> | Priority Queue (Min-Heap)                                                    | A data structure that allows efficient retrieval of the element with the highest or lowest priority. A min-heap ensures that the smallest element is always at the top.                                                                                                                  |
-| <p id="glossary-32">32</p> | Concurrency                                                                  | The ability of a system to handle multiple tasks or requests at the same time, often used to improve performance in multi-threaded applications.                                                                                                                                         |
-| <p id="glossary-33">33</p> | Data Integrity                                                               | The accuracy, consistency, and reliability of data throughout its lifecycle, ensuring that it is not corrupted or altered incorrectly.                                                                                                                                                   |
-| <p id="glossary-34">34</p> | Hash Map (Dictionary)                                                        | A data structure that stores key-value pairs, allowing for fast retrieval of values based on their corresponding keys.                                                                                                                                                                   |
-| <p id="glossary-35">35</p> | Rate Limiting                                                                | A technique used to control the amount of incoming requests to a system in a given time period, helping to prevent overloads or abuse.                                                                                                                                                   |
-| <p id="glossary-39">39</p> | Serialization                                                                | The process of converting an object into a format (like JSON or XML) that can be easily stored or transmitted and later reconstructed.                                                                                                                                                   |
-| <p id="glossary-40">40</p> | Load Balancer                                                                | A system or tool used to distribute incoming network traffic across multiple servers, improving performance and reliability.                                                                                                                                                             |
-| <p id="glossary-41">41</p> | Input Sanitization                                                           | The process of cleaning user inputs to ensure they do not contain malicious code or invalid data, helping to prevent security vulnerabilities like SQL injection.                                                                                                                        |
-| <p id="glossary-42">42</p> | Threading                                                                    | A method of executing multiple parts of a program simultaneously in different threads, helping improve the efficiency and performance of multi-core processors.                                                                                                                          |
-| <p id="glossary-43">43</p> | Modular Architecture                                                         | A design approach that divides a system into smaller, self-contained components, making it easier to scale, maintain, and improve individual parts of the system.                                                                                                                        |
-| <p id="glossary-47">47</p> | Unit Testing                                                                 | A software testing method where individual components or functions are tested in isolation to verify their correctness.                                                                                                                                                                  |
-| <p id="glossary-48">48</p> | Integration Testing                                                          | Testing the combination of multiple components of the system to ensure they work together as expected.                                                                                                                                                                                   |
-| <p id="glossary-49">49</p> | System Testing                                                               | Testing the complete and integrated system to verify that it functions as a whole and meets the project requirements.                                                                                                                                                                    |
-| <p id="glossary-50">50</p> | Buffer Overflow                                                              | A situation where a program writes more data to a buffer than it can hold, potentially leading to unexpected behavior or security vulnerabilities.                                                                                                                                       |
-| <p id="glossary-52">52</p> | Denial of Service (DoS) Attacks                                              | A type of cyberattack where the attacker attempts to make a machine or network resource unavailable to its intended users by overwhelming it with requests.                                                                                                                              |
+| Id                         | Term                                                                         | Definition                                                                                                                                                                                                                                                                                                                          |
+| -------------------------- | ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <p id="glossary-1">1</p>   | CI/CD (Continuous Integration/Continuous Deployment)                         | Practices that automate the integration of code changes (CI) and deployment of applications (CD) to ensure reliable, fast software delivery.                                                                                                                                                                                        |
+| <p id="glossary-2">2</p>   | REST API (Representational State Transfer Application Programming Interface) | A set of rules for building and interacting with web services that allow clients to communicate with the server over HTTP using methods like GET, POST, PUT, DELETE.                                                                                                                                                                |
+| <p id="glossary-3">3</p>   | Platform agnostic                                                            | Platform agnostic refers to software, applications, or services designed to operate across various operating systems, device types, web browsers, or other foundational technologies.                                                                                                                                               |
+| <p id="glossary-4">4</p>   | Pathfinding                                                                  | Pathfinding refers to the process of finding the shortest or most efficient route between two points in a map or network.                                                                                                                                                                                                           |
+| <p id="glossary-5">5</p>   | Dijkstra's Algorithm                                                         | A well-known algorithm used to find the shortest paths between nodes in a graph, ensuring that the shortest path is found from a starting node to all other nodes in a weighted graph.                                                                                                                                              |
+| <p id="glossary-6">6</p>   | DFS (Depth First Search)                                                     | Depth-first search (DFS) is an algorithm for traversing or searching tree or graph data structures. The algorithm starts at the root node (selecting some arbitrary node as the root node in the case of a graph) and explores as far as possible along each branch before backtracking.                                            |
+| <p id="glossary-7">7</p>   | Heuristic                                                                    | A problem-solving approach that uses practical methods or shortcuts to produce a solution that is not guaranteed to be optimal but is sufficient for the immediate goal.                                                                                                                                                            |
+| <p id="glossary-8">8</p>   | Graph Data Structure                                                         | A collection of nodes (or vertices) and edges that connect pairs of nodes, used to represent networks such as road maps, social connections, or communication systems.                                                                                                                                                              |
+| <p id="glossary-9">9</p>   | CSV (Comma-Separated Values)                                                 | A file format used to store tabular data, where each line represents a row, and each value is separated by a comma.                                                                                                                                                                                                                 |
+| <p id="glossary-10">10</p> | Mermaid                                                                      | JavaScript based diagramming and charting tool that renders Markdown-inspired text definitions to create and modify diagrams dynamically.                                                                                                                                                                                           |
+| <p id="glossary-11">11</p> | HTTP (Hypertext Transfer Protocol)                                           | A protocol used for transferring data over the web, enabling the communication between a client (such as a web browser) and a server.                                                                                                                                                                                               |
+| <p id="glossary-12">12</p> | SSL (Secure Sockets Layer)                                                   | A security protocol that establishes an encrypted link between a web server and a browser, ensuring secure data transfer over the internet.                                                                                                                                                                                         |
+| <p id="glossary-13">13</p> | Time Complexity (O(log n))                                                   | A way of expressing the efficiency of an algorithm, indicating how the time to run the algorithm increases as the size of the input grows.                                                                                                                                                                                          |
+| <p id="glossary-14">14</p> | Node                                                                         | A fundamental unit in a graph, typically representing an entity, such as a location in a pathfinding algorithm.                                                                                                                                                                                                                     |
+| <p id="glossary-15">15</p> | Edge                                                                         | A connection between two nodes in a graph, often with an associated weight that represents the cost or distance between the nodes.                                                                                                                                                                                                  |
+| <p id="glossary-16">16</p> | JSON (JavaScript Object Notation)                                            | A lightweight data-interchange format used for transmitting data in a human-readable form, typically between a server and a client.                                                                                                                                                                                                 |
+| <p id="glossary-17">17</p> | XML (Extensible Markup Language)                                             | A markup language that defines rules for encoding documents in a format that is both human-readable and machine-readable.                                                                                                                                                                                                           |
+| <p id="glossary-18">18</p> | Vertices (plural of vertex)                                                  | In discrete mathematics, and more specifically in graph theory, a vertex (plural vertices) or node is the fundamental unit of which graphs are formed.                                                                                                                                                                              |
+| <p id="glossary-19">19</p> | Cross-Platform                                                               | Refers to software that can run on multiple operating systems, such as Windows, macOS, and Linux.                                                                                                                                                                                                                                   |
+| <p id="glossary-20">20</p> | California Consumer Privacy Act (CCPA)                                       | The California Consumer Privacy Act (CCPA) is a state statute intended to enhance privacy rights and consumer protection for residents of the state of California in the United States.                                                                                                                                             |
+| <p id="glossary-21">21</p> | Directed Acyclic Graph (DAG)                                                 | In mathematics, particularly graph theory, and computer science, a directed acyclic graph (DAG) is a directed graph with no directed cycles. That is, it consists of vertices and edges (also called arcs), with each edge directed from one vertex to another, such that following those directions will never form a closed loop. |
+| <p id="glossary-22">22</p> | Fibonacci heap                                                               | In computer science, a Fibonacci heap is a data structure for priority queue operations, consisting of a collection of heap-ordered trees. It has a better amortized running time than many other priority queue data structures including the binary heap and binomial heap.                                                       |
+| <p id="glossary-23">23</p> | API Documentation                                                            | A reference guide that provides detailed information about an API’s endpoints, parameters, responses, and error codes, aiding developers in using the API.                                                                                                                                                                          |
+| <p id="glossary-24">24</p> | Role-Based Access Control (RBAC)                                             | A method of restricting system access based on the roles assigned to users, ensuring that users have access only to the resources necessary for their roles.                                                                                                                                                                        |
+| <p id="glossary-25">25</p> | Euclidean Distance                                                           | The straight-line distance between two points in Euclidean space, often used in pathfinding algorithms as a heuristic.                                                                                                                                                                                                              |
+| <p id="glossary-26">26</p> | Manhattan Distance                                                           | A type of distance measurement used in pathfinding that calculates the distance between two points by only moving along grid lines (i.e., horizontal and vertical).                                                                                                                                                                 |
+| <p id="glossary-27">27</p> | Modular Design                                                               | A software design approach that splits a system into separate, self-contained modules, each responsible for a specific functionality, making the system easier to maintain and extend.                                                                                                                                              |
+| <p id="glossary-28">28</p> | Scalability                                                                  | The capability of a system to handle a growing amount of work or to accommodate growth, especially in terms of system capacity, number of users, or data volume.                                                                                                                                                                    |
+| <p id="glossary-29">29</p> | Adjacency List                                                               | A way of representing a graph, where each node points to a list of all other nodes it is directly connected to by edges.                                                                                                                                                                                                            |
+| <p id="glossary-30">30</p> | Priority Queue (Min-Heap)                                                    | A data structure that allows efficient retrieval of the element with the highest or lowest priority. A min-heap ensures that the smallest element is always at the top.                                                                                                                                                             |
+| <p id="glossary-31">31</p> | Git                                                                          | Git is a distributed version control system that tracks versions of files[.](https://en.wikipedia.org/wiki/Git#Naming) It is often used to control source code by programmers who are developing software collaboratively[.](https://en.wikipedia.org/wiki/Git#Naming)                                                              |
+| <p id="glossary-32">32</p> | Concurrency                                                                  | The ability of a system to handle multiple tasks or requests at the same time, often used to improve performance in multi-threaded applications.                                                                                                                                                                                    |
+| <p id="glossary-33">33</p> | Data Integrity                                                               | The accuracy, consistency, and reliability of data throughout its lifecycle, ensuring that it is not corrupted or altered incorrectly.                                                                                                                                                                                              |
+| <p id="glossary-34">34</p> | Hash Map (Dictionary)                                                        | A data structure that stores key-value pairs, allowing for fast retrieval of values based on their corresponding keys.                                                                                                                                                                                                              |
+| <p id="glossary-35">35</p> | Rate Limiting                                                                | A technique used to control the amount of incoming requests to a system in a given time period, helping to prevent overloads or abuse.                                                                                                                                                                                              |
+| <p id="glossary-39">39</p> | Serialization                                                                | The process of converting an object into a format (like JSON or XML) that can be easily stored or transmitted and later reconstructed.                                                                                                                                                                                              |
+| <p id="glossary-40">40</p> | Load Balancer                                                                | A system or tool used to distribute incoming network traffic across multiple servers, improving performance and reliability.                                                                                                                                                                                                        |
+| <p id="glossary-41">41</p> | Input Sanitization                                                           | The process of cleaning user inputs to ensure they do not contain malicious code or invalid data, helping to prevent security vulnerabilities like SQL injection.                                                                                                                                                                   |
+| <p id="glossary-42">42</p> | Threading                                                                    | A method of executing multiple parts of a program simultaneously in different threads, helping improve the efficiency and performance of multi-core processors.                                                                                                                                                                     |
+| <p id="glossary-43">43</p> | Modular Architecture                                                         | A design approach that divides a system into smaller, self-contained components, making it easier to scale, maintain, and improve individual parts of the system.                                                                                                                                                                   |
+| <p id="glossary-47">47</p> | Unit Testing                                                                 | A software testing method where individual components or functions are tested in isolation to verify their correctness.                                                                                                                                                                                                             |
+| <p id="glossary-48">48</p> | Integration Testing                                                          | Testing the combination of multiple components of the system to ensure they work together as expected.                                                                                                                                                                                                                              |
+| <p id="glossary-49">49</p> | System Testing                                                               | Testing the complete and integrated system to verify that it functions as a whole and meets the project requirements.                                                                                                                                                                                                               |
+| <p id="glossary-50">50</p> | Buffer Overflow                                                              | A situation where a program writes more data to a buffer than it can hold, potentially leading to unexpected behavior or security vulnerabilities.                                                                                                                                                                                  |
+| <p id="glossary-51">51</p> | GitHub                                                                       | GitHub is a proprietary developer platform that allows developers to create, store, manage, and share their code. It uses Git to provide distributed version control and GitHub itself provides access control, bug tracking, software feature requests, task management, continuous integration, and wikis for every project.      |
+| <p id="glossary-52">52</p> | Denial of Service (DoS) Attacks                                              | A type of cyberattack where the attacker attempts to make a machine or network resource unavailable to its intended users by overwhelming it with requests.                                                                                                                                                                         |
 
 <!-- LINKS -->
 [1]: https://en.wikipedia.org/wiki/C%2B%2B "C++ Wikipedia"
