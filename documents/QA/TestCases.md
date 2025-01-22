@@ -144,7 +144,14 @@ Test Template
 
 | Test ID | 113 |
 | --- | --- |
-| Description | Test Download |
+| Description | Test Download JSON |
 | Steps | 1. Run the large test path 2. Click on the Download button |
-| Expected Result | A .csv file with all the steps has been downloaded |
+| Expected Result | A JSON file with all the steps has been downloaded |
+| Severity | Medium |
+
+| Test ID | 114 |
+| --- | --- |
+| Description | Test Download XML |
+| Steps | 1. Run the large test path 2. Click on the Download button  |
+| Expected Result | A XML file with all the steps has been downloaded |
 | Severity | Medium |

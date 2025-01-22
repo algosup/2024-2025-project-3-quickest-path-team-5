@@ -113,7 +113,7 @@ It allows us to write and execute a series of unit tests.
 
 #### GitHub Actions
 
-GitHub Actions allow users to create/implement workflows to automate certain tasks when certain conditions are fulfilled, the workflow is composed of 3 parts:
+GitHub Actions allow it's users to create/implement workflows to automate certain tasks when certain conditions are fulfilled, the workflow is composed of 3 parts:
 
 - It's name
 - The activation condition
@@ -133,7 +133,7 @@ A runner is an application that runs jobs from GitHub Actions, we chose to use a
 
 #### GitHub Issues
 
-GitHub Issues allow users to create/manage issues to find and track problems that arise and their resolution; issues can be applied to:
+GitHub Issues allow users to create/manage issues to find and track problems that arise and their resolution, issues can be applied to:
 
 - Bugs in the code
 - Documentation Mistakes
@@ -156,7 +156,7 @@ Here are the different labels used to specify the type of Issue:
 - documentation
 - duplicate
 - enhancement
-- the good first issue
+- good first issue
 - help wanted
 - invalid
 - question
