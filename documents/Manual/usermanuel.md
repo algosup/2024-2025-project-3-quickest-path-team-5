@@ -179,14 +179,14 @@ Once your environment is ready, it’s time to prepare the software.
                     Now that you're in the right folder, you're ready to compile the software!
          </details>
 
-
       3. **Create a Build Directory**:  
          Run the following command to create a build directory (a separate folder where the build process will occur):
+
             ```bash
             mkdir build
             cd build
             ```
-      
+
       4. **Generate Makefiles with CMake**:
           Inside the build directory, run the following command to generate the necessary files for building the project:
 
@@ -203,45 +203,62 @@ Once your environment is ready, it’s time to prepare the software.
           make
           ```
 
-      6. **Run test**:
-          After the build completes successfully, you can navigate to the bin directory (where the executable is located) and run the program:
-
-          ```bash
-          cd ../bin
-          ./test
-          ```
-      
-      7. **Run software**:
+      6. **Run software**:
           Once the tests are successful, you can run the program:
+
           ```bash
           ./dgv
           ```
 
 ## 4. Usage Instructions
 
-- <strong>Sending API Requests:</strong>
-  Use tools like **curl**, **Postman**, or a browser:
+### Finding the Quickest Path
 
-      ```bash
-      curl "http://localhost:PORT/api/path?source_id=1&destination_id=5"
-      ```
+1. **How It Works**  
+   The software calculates the shortest route between two landmarks using the provided road network data.
 
-- <strong>Interpreting the Response:</strong>
-  - travel_time: The time required to travel between landmarks.
-  - path: An ordered list of landmarks representing the route.
+2. **Using the Command Line**  
+    Run the program from the `bin` directory with the following command:  
+
+    ```bash
+    ./dgv
+    ```
+
+3. **Understanding the Output**
+
+    - Travel Time: Displays the estimated time to traverse the path.
+    - Path: Lists the sequence of landmarks to follow for the route.
+  
+4. **Adding Your Data**
+
+Update or replace the USA-roads.csv file with your road network data.
+
+⚠️Ensure it follows the required format:
+
+```
+StartNode,EndNode,Distance
+```
 
 ## 5. Test Suite
 
 - <strong>Overview:</strong>
-  Includes tests for correctness, performance, and compliance with the 10% approximation rule.
+  
+  The test suite verifies the correctness, performance, and compliance of the software with the 10% approximation rule. It ensures that the application behaves as expected and meets the defined requirements.
 - <strong>Running Tests:</strong>
 
+    After the build process is completed, follow these steps to run the test suite:
+
   ```bash
+  # Navigate to the bin directory where the test executable is located
+  cd ../bin
+
+  # Run the test suite
   ./test
   ```
 
-- <strong>Sample Results:</strong>
-  Outputs the expected travel time and path for predefined test cases.
+- <strong>Results</strong>
+  
+    The test suite outputs the results of predefined test cases, including travel times and paths, to validate the functionality and performance of the application.
 
 ## 6. Troubleshooting
 
@@ -261,13 +278,46 @@ Once your environment is ready, it’s time to prepare the software.
 
 ## 7. FAQs
 
-<strong>Common Questions</strong>
+### **Common Questions**
 
-- Q: How does the software handle invalid inputs?
-  - A: Returns an error message indicating the issue.
+- **Q: How does the software handle invalid inputs?**  
+  - **A:** Returns an error message indicating the issue.
 
-- Q: Can additional data be added to **USA-roads.csv**?
-  - A: Yes, but it must follow the required format.
+- **Q: Can additional data be added to **USA-roads.csv**?**  
+  - **A:** Yes, but it must follow the required format.
+
+- **Q: What format should the input data files follow?**  
+  - **A:** All input files must be CSV files with specific columns: `StartNode`, `EndNode`, and `Distance`. Refer to the provided `USA-roads.csv` for an example.
+
+- **Q: What happens if the data file is missing or corrupted?**  
+  - **A:** The software will notify the user and exit gracefully with an error message.
+
+- **Q: Can I run the program on systems other than Linux?**  
+  - **A:** Yes, the program is compatible with Windows, macOS, and Linux, but you need to ensure you have the necessary build tools installed (e.g., CMake and a compatible compiler).
+
+- **Q: How are performance metrics calculated?**  
+  - **A:** The program calculates the total travel time, shortest path, and compliance with the 10% approximation rule during the testing phase.
+
+- **Q: Is it possible to visualize the generated paths?**  
+  - **A:** Currently, the program does not include visualization, but you can export the results for use in third-party tools.
+
+- **Q: Can I add more test cases?**  
+  - **A:** Yes, you can modify the test suite by editing the corresponding test files in the source code.
+
+- **Q: Does the software support weighted graphs with different cost metrics?**  
+  - **A:** Yes, you can modify the input data to include weights (e.g., distance, time, cost) as long as it aligns with the required format.
+
+- **Q: How do I reset or rebuild the project?**  
+  - **A:** Delete the `build` directory and rerun the following commands:
+  
+    ```bash
+    cmake -S . -B build
+    cd build
+    make
+    ```
+
+- **Q: Where can I report bugs or request features?**  
+  - **A:** Please use the project's GitHub repository issue tracker or contact the development team directly.
 
 ## 8. Contact Information
 
@@ -284,8 +334,7 @@ Once your environment is ready, it’s time to prepare the software.
   - STL Documentation: <link>
   - REST API Standards: <link>
 
-
-Remove :
+If you see something you think it might be interesting to keep. Else i will remove it :
 
 1. **Open Command Prompt (Windows) or Terminal (Mac):**
 
