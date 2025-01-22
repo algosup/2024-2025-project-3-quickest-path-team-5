@@ -8,20 +8,81 @@
 #   cd build
 #   make
 
-# Minimum CMake version
-cmake_minimum_required(VERSION 3.10)
-cmake_policy(SET CMP0167 OLD)
+cmake_minimum_required(VERSION 3.30)
 
-# Project name and version
-project(
-    CAP
-    VERSION 0.1
-    LANGUAGES CXX
-)
+set(CMAKE_CXX_COMPILER "clang++")
 
-# Specify the C++ standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+project(
+  CAP
+  VERSION 0.1
+  LANGUAGES CXX
+)
+
+find_package(Threads REQUIRED)
+
+add_executable(tests
+  src/api/api.cpp
+  src/test/test.cc
+  ../googletest/googletest/src/gtest-all.cc
+)
+
+target_include_directories(tests
+  PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/api"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../googletest/googletest/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../googletest/googletest"
+    "${CMAKE_CURRENT_SOURCE_DIR}/test"
+)
+
+target_link_libraries(tests
+  PRIVATE
+    Threads::Threads
+)
+
+target_compile_options(tests
+  PRIVATE
+  -Wall -Wextra -pedantic -g -O2
+)
+
+set_target_properties(tests
+  PROPERTIES
+    CXX_STANDARD 17
+    CXX_EXTENSIONS OFF
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"
+)
+
+add_executable(cap
+    src/cap.cpp
+    src/api/api.cpp
+)
+
+target_include_directories(cap
+  PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/io"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/api"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/data_struct"
+)
+
+target_link_libraries(cap
+  PRIVATE
+    Threads::Threads
+)
+
+target_compile_options(cap
+  PRIVATE
+  -Wall -Wextra -pedantic -g -O2
+)
+
+set_target_properties(cap
+  PROPERTIES
+  CXX_STANDARD 17
+  CXX_EXTENSIONS OFF
+  RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"
+)
 
 # Add Boost and JSONCPP (dependencies for Crow)
 find_package(Boost REQUIRED)
@@ -45,15 +106,3 @@ add_executable(server ${SERVER_SOURCES})
 
 # Link libraries to the server executable
 target_link_libraries(server ${Boost_LIBRARIES} jsoncpp)
-
-# Google Test configuration
-# Download and install Google Test if not available
-include(FetchContent)
-FetchContent_Declare(
-    googletest
-    URL https://github.com/google/googletest/archive/refs/heads/main.zip
-    DOWNLOAD_EXTRACT_TIMESTAMP true # Explicitly set the extraction timestamp behavior
-)
-# Prevent Google Test from overriding our compiler/linker options
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
