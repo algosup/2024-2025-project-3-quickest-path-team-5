@@ -47,6 +47,29 @@ namespace api {
             }
         });
 
+
+        // Route to serve the image
+        CROW_ROUTE(app, "/img/logo.png")
+        ([]() {
+            std::ifstream file("../src/api/static/img/logo.png", std::ios::binary | std::ios::ate);
+            if (!file) {
+                return crow::response(404, "Image not found");
+            }
+    
+            auto size = file.tellg();
+            file.seekg(0, std::ios::beg);
+    
+            std::vector<char> buffer(size);
+            file.read(buffer.data(), size);
+    
+            crow::response res;
+            res.code = 200;
+            res.set_header("Content-Type", "image/png");
+            res.body = std::string(buffer.begin(), buffer.end());
+            return res;
+        });
+
+
         // Shortest path endpoint with file download support
         CROW_ROUTE(app, "/shortest-path").methods(crow::HTTPMethod::POST)(
             [](const crow::request& req) {
