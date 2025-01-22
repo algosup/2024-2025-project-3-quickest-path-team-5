@@ -145,13 +145,13 @@ Test Template
 | Test ID | 113 |
 | --- | --- |
 | Description | Test Download JSON |
-| Steps | 1. Run the large test path 2. Click on the Download button |
+| Steps | 1. Run the large test path 2. Select the JSON option 3. Click on the Download button |
 | Expected Result | A JSON file with all the steps has been downloaded |
 | Severity | Medium |
 
 | Test ID | 114 |
 | --- | --- |
 | Description | Test Download XML |
-| Steps | 1. Run the large test path 2. Click on the Download button  |
+| Steps | 1. Run the large test path 2. Select the XML option 3. Click on the Download button  |
 | Expected Result | A XML file with all the steps has been downloaded |
 | Severity | Medium |
