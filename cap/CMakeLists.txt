@@ -21,13 +21,25 @@ include_directories(${Boost_INCLUDE_DIRS} ${JSONCPP_INCLUDE_DIRS} include)
 link_directories(/opt/homebrew/lib)
 
 # Source files for the API
-set(SOURCES
-    src/api/api.cpp
+set(SERVER_SOURCES
+    src/api/Api.cpp
     src/cap.cpp
 )
 
-# Create the main executable
-add_executable(server ${SOURCES})
+# Create the main executable for the server
+add_executable(server ${SERVER_SOURCES})
 
-# Link libraries to the executable
+# Link libraries to the server executable
 target_link_libraries(server ${Boost_LIBRARIES} jsoncpp)
+
+# Google Test configuration
+# Download and install Google Test if not available
+include(FetchContent)
+FetchContent_Declare(
+    googletest
+    URL https://github.com/google/googletest/archive/refs/heads/main.zip
+    DOWNLOAD_EXTRACT_TIMESTAMP true # Explicitly set the extraction timestamp behavior
+)
+# Prevent Google Test from overriding our compiler/linker options
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
