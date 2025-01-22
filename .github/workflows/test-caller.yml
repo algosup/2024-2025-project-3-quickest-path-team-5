@@ -1,13 +1,13 @@
 name: Run Tests
 
 on:
-    pull_request:
+     pull_request:
         branches:
             - main
 
 jobs:
     system_requirements:
-        runs-on: self-hosted, linux, x64
+        runs-on: [self-hosted, linux, x64]
         steps:
             - name: Instal software requirements
               run: |  
@@ -18,13 +18,13 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v3
               with:
-                ref: ${{ github.event.pull_request.head.sha }}
+                 ref: ${{ github.event.pull_request.head.sha }}
             - name: checkout message
               run: |
                     echo "Checking out the repository"
                     echo "Repository: ${{ github.repository }} has been checked out"
     build:
-        runs-on: self-hosted, linux, x64
+        runs-on: [self-hosted, linux, x64]
         needs: system_requirements
         steps:
             - name: Getting Google Test
@@ -37,20 +37,22 @@ jobs:
             - name: Build
               run: |
                         echo "Building the project"
-                        cmake -S . -B Build
-                        cd Build
+                        cd dag_graph_validator
+                        cmake -S . -B build
+                        cd build
                         make
                         cd ..
                         echo "Build complete"
                         echo "Ready to run tests"
     test:
-        runs-on: self-hosted, linux, x64
+        runs-on: [self-hosted, linux, x64]
         needs: build
         steps:
             - name: Run tests
               run: |
                     echo "Running tests"
+                    cd dag_graph_validator
                     cd bin
-                    ./test
+                    ./tests
                     echo "Tests complete"
               shell: bash
