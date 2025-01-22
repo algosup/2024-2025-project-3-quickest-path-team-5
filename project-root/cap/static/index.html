@@ -1,7 +1,7 @@
-<!-- HTML: Interface for the Quickest Path Finder -->
-<!--              file: index.html                -->
-<!--     brief: HTML file for the interface       -->
-<!--     authors: Rémy CHARLES, Maxime CARON      -->
+<!--     HTML: Interface for the Quickest Path Finde           -->
+<!--              file: index.html                             -->
+<!--     brief: HTML file for the interface                    -->
+<!--     authors: Rémy CHARLES, Maxime CARON, Robin GOUMY      -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,30 +9,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CAP</title>
+    <link rel="icon" href="./img/logo.png" type="image/png">
     <style>
         /* CSS: Styling for the interface */
-        body {
+        html, body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
+            height: 100%;
+            background: linear-gradient(to bottom, #3b39c5, #b7b7c0);
+            color: #ffffff;
         }
 
         header {
-            background-color: #007bff;
-            color: white;
-            padding: 1rem;
+            color: rgb(255, 255, 255);
+            padding: 1.5rem;
             text-align: center;
+            flex-shrink: 0;
+        }
+
+        header img {
+            position: absolute;
+            top: 70px;
+            left: 70px;
+            height: 170px;
         }
 
         main {
-            margin: 20px auto;
+            flex: 1; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0 auto;
+            margin-top: 80px;
             max-width: 600px;
-            background: white;
+            background: rgba(0, 0, 0, 0.3);
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
         }
 
         form {
@@ -49,7 +63,7 @@
             margin-bottom: 15px;
             border: 1px solid #ddd;
             border-radius: 5px;
-            width: 100%;
+            width: 95%;
         }
 
         button {
@@ -58,6 +72,7 @@
             border: none;
             cursor: pointer;
             transition: background-color 0.3s;
+            width: 100%;
         }
 
         button:hover {
@@ -69,8 +84,7 @@
         }
 
         pre {
-            background: #f4f4f4;
-            border: 1px solid #ddd;
+            border: 1px solid #ffffff;
             padding: 10px;
             border-radius: 5px;
             overflow-x: auto;
@@ -85,18 +99,21 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1>CAP</h1>
-        <h2>The Quickest Path Finder</h2>
+    <header class="flex-container">
+        <img src="./img/logo.png" alt="Quickest Path Logo">
+        <div class="text">
+            <h1>CAP</h1>
+            <h2>The Quickest Path Finder</h2>
+        </div>
     </header>
     <main>
         <section class="form-section">
             <form id="api-form">
                 <label for="source">Source:</label>
-                <input type="text" id="source" name="source" placeholder="Enter the source ID" required>
+                <input type="text" id="source" name="source" placeholder="Enter the landmark A" required>
 
                 <label for="destination">Destination:</label>
-                <input type="text" id="destination" name="destination" placeholder="Enter the destination ID" required>
+                <input type="text" id="destination" name="destination" placeholder="Enter the landmark B" required>
 
                 <label for="format">Response Format:</label>
                 <select id="format" name="format" required>
@@ -108,13 +125,18 @@
             </form>
         </section>
         <section class="response-section">
-            <h2>Response</h2>
+            <h2>Travel time:</h2>
+            <pre id="response-output">Waiting for API response...</pre>
+            <button id="download-btn" style="display: none;">Download File</button>
+        </section>
+        <section class="Steps-section">
+            <h2>Steps:</h2>
             <pre id="response-output">Waiting for API response...</pre>
             <button id="download-btn" style="display: none;">Download File</button>
         </section>
     </main>
     <footer>
-        <p>&copy; 2024 Quickest Path Project Team 5</p>
+        <p>&copy; 2025 Quickest Path Project Team 5</p>
     </footer>
     <script>
         // JavaScript: Handle form submission and API interaction
