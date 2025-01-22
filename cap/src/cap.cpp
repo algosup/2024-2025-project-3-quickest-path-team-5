@@ -35,7 +35,7 @@ int main()
 
     struct rusage usage;
     Graph *graph = new Graph();
-    clock_t begin = clock();    
+    clock_t begin = clock();
     loadDataset(graph, buffer);
     clock_t end = clock();
     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
@@ -44,40 +44,57 @@ int main()
     float memUsage = (float)(usage.ru_maxrss / (1024.0f * 1024.0f)); // Convert to MB
     cout << "Memory usage: " << (int)memUsage << " MB for: " << graph->getNumNodes() << " nodes and " << graph->getNumEdges() << " edges" << endl;
 
-    // Dijkstra's algorithm
-    uint32_t from, to;
-    cout << "Enter the source node: ";
-    cin >> from;
-    cout << "Enter the destination node: ";
-    cin >> to;
+    bool running = true;
 
-    begin = clock();
-    vector<uint32_t> path = graph->dijkstra(from, to);
-    end = clock();
-    time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-
-    cout << "Shortest path from " << from << " to " << to << " contains " << path.size() << " nodes:" << endl;
-    cout << "Path: ";
-    for (uint32_t node : path)
+    while (running)
     {
-        cout << node << "\t";
-    }
-    cout << endl;
-    cout << "Time spent finding the shortest path: " << time_spent << " seconds" << endl;
+        // Dijkstra's algorithm
+        uint32_t from, to;
+        cout << "Enter the source node: ";
+        cin >> from;
+        cout << "Enter the destination node: ";
+        cin >> to;
 
-    begin = clock();
-    path = graph->dijkstra(to, from);
-    end = clock();
-    time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+        begin = clock();
+        vector<uint32_t> path = graph->dijkstra(from, to);
+        end = clock();
+        time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 
-    cout << "Shortest path from " << to << " to " << from << " contains " << path.size() << " nodes:" << endl;
-    cout << "Path: ";
-    for (uint32_t node : path)
-    {
-        cout << node << "\t";
+        cout << "Shortest path from " << from << " to " << to << " using Dijkstra contains " << path.size() << " nodes:" << endl;
+        cout << "Time spent finding the shortest path: " << time_spent << " seconds" << endl;
+
+        begin = clock();
+        path = graph->dijkstra(to, from);
+        end = clock();
+        time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+
+        cout << "Shortest reversed path from " << to << " to " << from << " using Dijkstra contains " << path.size() << " nodes:" << endl;
+        cout << "Time spent finding the shortest path: " << time_spent << " seconds" << endl;
+
+        begin = clock();
+        path = graph->timedDijkstra(from, to, 1000); // 900ms time limit
+        end = clock();
+        time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+
+        cout << "Shortest path from " << from << " to " << to << " using timed Dijkstra contains " << path.size() << " nodes:" << endl;
+        cout << "Time spent finding the shortest path: " << time_spent << " seconds" << endl;
+
+        begin = clock();
+        path = graph->timedDijkstra(to, from, 1000); // 900ms time limit
+        end = clock();
+        time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+
+        cout << "Shortest reversed path from " << to << " to " << from << " using timed Dijkstra contains " << path.size() << " nodes:" << endl;
+        cout << "Time spent finding the shortest path: " << time_spent << " seconds" << endl;
+
+        cout << "Do you want to continue? (y/n): ";
+        char choice;
+        cin >> choice;
+        if (choice != 'y' && choice != 'Y')
+        {
+            running = false;
+        }
     }
-    cout << endl;
-    cout << "Time spent finding the shortest path: " << time_spent << " seconds" << endl;
 
     graph->~Graph();
 

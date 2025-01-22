@@ -53,6 +53,26 @@ void Node::setHead(Edge *head)
     this->head = head;
 }
 
+void Node::addEdgeSorted(Edge *edge)
+{
+    this->numEdges++;
+    if (this->head == nullptr)
+    {
+        edge->setNext(head);
+        head = edge;
+        return;
+    }
+
+    Edge *current = head;
+    while (current->getNext() != nullptr && current->getNext()->getTime() < edge->getTime())
+    {
+        current = current->getNext();
+    }
+
+    edge->setNext(current->getNext());
+    current->setNext(edge);
+}
+
 void Node::incrementNumEdges()
 {
     this->numEdges++;

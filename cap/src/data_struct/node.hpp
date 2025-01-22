@@ -66,6 +66,12 @@ class Node {
         void setHead(Edge* head);
 
         /*!
+            \brief Add an edge to the node's edge list and keep it sorted by time
+            \param edge Pointer to the edge to add
+        */
+        void addEdgeSorted(Edge* edge);
+
+        /*!
             \brief Increment the number of edges
         */
         void incrementNumEdges();

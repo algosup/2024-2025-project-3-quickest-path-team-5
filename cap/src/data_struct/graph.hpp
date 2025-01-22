@@ -9,6 +9,7 @@
 #include <cstdint>
 #include <cstring>
 #include <vector>
+#include <chrono>
 
 #include "node.hpp"
 #include "edge.hpp"
@@ -118,10 +119,20 @@ public:
     Graph &operator=(Graph &&other) noexcept;
 
     /*!
-        \brief Implements Dijkstra's algorithm to find the shortest path between two nodes
+        \brief Dijkstra's algorithm to find the shortest path between two nodes
         \param from The source node
         \param to The destination node
         \return A vector containing the shortest distance to each node
      */
     vector<uint32_t> dijkstra(uint32_t from, uint32_t to);
+
+    /*!
+        \brief Dijkstra's algorithm to find the shortest path between two nodes with a time limit
+        \param from The source node
+        \param to The destination node
+        \param timeLimitMs The time limit in milliseconds
+        \return A vector containing the shortest distance to each node
+    */
+    std::vector<uint32_t> timedDijkstra(uint32_t from, uint32_t to, long long timeLimitMs);
+
 };

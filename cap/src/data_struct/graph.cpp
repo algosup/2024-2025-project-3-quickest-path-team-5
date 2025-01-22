@@ -90,8 +90,7 @@ bool Graph::addEdge(uint32_t from, uint32_t to, uint32_t distance)
 
     Edge *edge0 = new Edge(toNode, distance);
     edge0->setNext(fromNode->getHead());
-    fromNode->setHead(edge0);
-    fromNode->incrementNumEdges();
+    fromNode->addEdgeSorted(edge0); // Keep the edges sorted by time
     this->numEdges++;
 
     fromNode->setNext(this->head);
@@ -99,8 +98,7 @@ bool Graph::addEdge(uint32_t from, uint32_t to, uint32_t distance)
     // New edge for the other node
     Edge *edge1 = new Edge(fromNode, distance);
     edge1->setNext(toNode->getHead());
-    toNode->setHead(edge1);
-    toNode->incrementNumEdges();
+    toNode->addEdgeSorted(edge1); // Keep the edges sorted by time
     this->numEdges++;
 
     toNode->setNext(fromNode);
@@ -174,6 +172,11 @@ vector<uint32_t> Graph::dijkstra(uint32_t from, uint32_t to)
             continue; // Skip if node is null
         }
 
+        if (currentNode->getNumEdges() < 2)
+        {
+            continue; // Skip if node has 0 or 1 edges
+        }
+
         // Explore each edge from the current node
         Edge *edge = currentNode->getHead();
         while (edge != nullptr)
@@ -204,6 +207,83 @@ vector<uint32_t> Graph::dijkstra(uint32_t from, uint32_t to)
     // If the path doesn't start with the source node, no path exists
     if (path[0] != from)
     {
+        path.clear();
+    }
+
+    return path;
+}
+
+std::vector<uint32_t> Graph::timedDijkstra(uint32_t from, uint32_t to, long long timeLimitMs) {
+    using Clock = std::chrono::steady_clock;
+
+    // Start the timer
+    auto startTime = Clock::now();
+
+    // Initialize distances and previous node tracking
+    std::vector<uint32_t> distances(numNodes, UINT32_MAX);
+    std::vector<int> previous(numNodes, -1);
+    distances[from] = 0;
+
+    // Min-heap priority queue
+    using NodeDistance = std::pair<uint32_t, uint32_t>; // {distance, nodeId}
+    std::priority_queue<NodeDistance, std::vector<NodeDistance>, std::greater<NodeDistance>> pq;
+    pq.emplace(0, from); // {distance, from}
+
+    // Process nodes
+    while (!pq.empty()) {
+        // Check elapsed time
+        auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - startTime).count();
+        if (elapsedTime > timeLimitMs) {
+            break; // Stop processing if time limit exceeded
+        }
+
+        uint32_t currentDist = pq.top().first;
+        uint32_t currentId = pq.top().second;
+        pq.pop();
+
+        // Stop early if destination is reached
+        if (currentId == to) {
+            break;
+        }
+
+        // Skip if the current distance is outdated
+        if (currentDist > distances[currentId]) {
+            continue;
+        }
+
+        // Get current node
+        Node* currentNode = nodeMap[currentId];
+        if (!currentNode) {
+            continue;
+        }
+
+        // Traverse edges
+        Edge* edge = currentNode->getHead();
+        while (edge) {
+            uint32_t neighborId = edge->getSelf()->getId();
+            uint32_t edgeTime = edge->getTime();
+            uint32_t newDist = currentDist + edgeTime;
+
+            // Update distance if a shorter path is found
+            if (newDist < distances[neighborId]) {
+                distances[neighborId] = newDist;
+                previous[neighborId] = currentId;
+                pq.emplace(newDist, neighborId);
+            }
+
+            edge = edge->getNext();
+        }
+    }
+
+    // Reconstruct the best path found
+    std::vector<uint32_t> path;
+    for (int at = to; at != -1; at = previous[at]) {
+        path.push_back(at);
+    }
+    std::reverse(path.begin(), path.end());
+
+    // Validate path
+    if (path.empty() || path[0] != from) {
         path.clear();
     }
 
