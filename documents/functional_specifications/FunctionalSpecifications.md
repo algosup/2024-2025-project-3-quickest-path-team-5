@@ -26,7 +26,7 @@
 
 ---
 
-### *Last Update on January 20th, 2025*
+### *Last Update on January 22th, 2025*
 
 <details>
 
@@ -34,7 +34,7 @@
 
 - [Functional Specifications - Project Quickest Path](#functional-specifications---project-quickest-path)
   - [**Title:** CAP (Cap Api Pathfinder)](#title-cap-cap-api-pathfinder)
-    - [*Last Update on January 20th, 2025*](#last-update-on-january-20th-2025)
+    - [*Last Update on January 22th, 2025*](#last-update-on-january-22th-2025)
   - [Introduction](#introduction)
     - [Document Purpose](#document-purpose)
     - [Project Goal](#project-goal)
@@ -520,15 +520,14 @@ The algorithm returns:
 
 Although optional, a simple web interface will be developed using HTML and Tailwind CSS to improve user experience.
 
-Home Page: Allows the user to input two landmarks.
 
-![alt text](images/figma_cap_main_page.png)
+The aim is to have one main page with all the information. Users will be able to enter their landmarks. 
 
-Result Page: Displays the total travel time and the landmarks along the route.
+This will return the begining of steps to reach the destination, as seen on Maps
+You can also download the complete file with all directions from landmark A to landmark B in XML or JSON format.
 
-You can also download the complete file with all directions from Landmark A to Landmark B in XML or JSON format.
+![alt text](images/web_app.png)
 
-![alt text](<images/figma_cap_ next_page.png>)
 
 ### Acceptance Criteria
 
