@@ -13,7 +13,11 @@ cmake_minimum_required(VERSION 3.10)
 cmake_policy(SET CMP0167 OLD)
 
 # Project name and version
-project(RestAPI VERSION 1.0)
+project(
+    CAP
+    VERSION 0.1
+    LANGUAGES CXX
+)
 
 # Specify the C++ standard
 set(CMAKE_CXX_STANDARD 17)
@@ -32,7 +36,7 @@ link_directories(/opt/homebrew/lib)
 
 # Source files for the API
 set(SERVER_SOURCES
-    src/api/Api.cpp
+    src/api/api.cpp
     src/cap.cpp
 )
 
