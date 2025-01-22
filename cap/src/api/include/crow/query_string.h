@@ -200,7 +200,7 @@ inline char * qs_k2v(const char * key, char * const * qs_kv, size_t qs_kv_size, 
     return nullptr;
 }
 
-inline std::unique_ptr<std::pair<std::string, std::string>> qs_dict_name2kv(const char * dict_name, char * const * qs_kv, size_t qs_kv_size, int nth = 0)
+inline std::unique_ptr<std::pair<std::string, std::string> > qs_dict_name2kv(const char * dict_name, char * const * qs_kv, size_t qs_kv_size, int nth = 0)
 {
     size_t i;
     size_t name_len, skip_to_eq, skip_to_brace_open, skip_to_brace_close;
