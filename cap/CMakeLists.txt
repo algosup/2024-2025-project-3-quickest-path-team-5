@@ -22,7 +22,7 @@ link_directories(/opt/homebrew/lib)
 
 # Source files for the API
 set(SOURCES
-    src/api/Api.cpp
+    src/api/api.cpp
     src/cap.cpp
 )
 
