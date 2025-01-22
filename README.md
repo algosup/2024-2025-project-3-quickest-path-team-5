@@ -1,30 +1,28 @@
-# 2024-2025-project-3-quickest-path-team-5 CAP
+<div align="center">
 
-<div style="display: flex; justify-content: center; align-items: center;">
+# 2024-2025-project-3-quickest-path-team-5
+
   <img src="https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/functional-specifications/documents/functional_specifications/images/logo_quickest_path.png?raw=true" style="object-fit: cover; width: 30%; height: 30%;">
+
 </div>
 
 ## Team Members 🙋
 
 | Photo | Name | Role | Contact |
 |---|---|---|---|
-| <img src="https://avatars.githubusercontent.com/u/145991425?v=4" width="100" height="100"> | Project Manager | Habi CAILLEAU| [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/github_light_logo.png" width="15%" height="15%">](https://github.com/habicll)  [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/linkedin_logo.png" width="15%" height="15%">](https://www.linkedin.com/in/habi-cailleau-3b72b5293/) | 
-| <img src="https://avatars.githubusercontent.com/u/182214449?v=4" width="100" height="100"> | Program Manager | Robin GOUMY |[<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/github_light_logo.png" width="15%" height="15%">](https://github.com/RobinGOUMY)  [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/linkedin_logo.png" width="15%" height="15%">](https://www.linkedin.com/in/robin-goumy-66452832a/) |
-| <img src="https://avatars.githubusercontent.com/u/145995367?v=4" width="100" height="100"> |  Tech Lead | Mathias GAGNEPAIN |[<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/github_light_logo.png" width="15%" height="15%">](https://github.com/MistzSoftware)  [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/linkedin_logo.png" width="15%" height="15%">](https://www.linkedin.com/in/mathias-gagnepain-426a131b0/) |
-| <img src="https://avatars.githubusercontent.com/u/100137905?v=4" width="100" height="100">| Software Engineer | Rémy CHARLES |[<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/github_light_logo.png" width="15%" height="15%">](https://github.com/RemyCHARLES)  [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/linkedin_logo.png" width="15%" height="15%">](https://www.linkedin.com/in/r%C3%A9my-charles-2a8960232/) |
-| <img src="https://avatars.githubusercontent.com/u/145995231?v=4" width="100" height="100">| Software Engineer | Maxime CARON |[<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/github_light_logo.png" width="15%" height="15%">](https://github.com/MaximeAlgosup)  [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/linkedin_logo.png" width="15%" height="15%">](https://www.linkedin.com/in/maxime-caron-dev/) |
-| <img src="https://avatars.githubusercontent.com/u/114397870?v=4" width="100" height="100"> | Quality Assurance | Jason GROSSO |[<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/github_light_logo.png" width="15%" height="15%">](https://github.com/JasonGROSSO)  [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/linkedin_logo.png" width="15%" height="15%">](https://www.linkedin.com/in/jason-grosso-847b39251/) |
-| <img src="https://avatars.githubusercontent.com/u/123485791?v=4" width="100" height="100"> | Technical Writer | Alexandre BOPP |[<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/github_light_logo.png" width="15%" height="15%">](https://github.com/Boppalex)  [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/linkedin_logo.png" width="15%" height="15%">](https://www.linkedin.com/in/alexandre-bopp-682a97250/) |
+| <img src="https://avatars.githubusercontent.com/u/145991425?v=4" width="100" height="100"  style="object-fit: cover;"> | Project Manager | Habi CAILLEAU| [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/github_light_logo.png" width="15%" height="15%">](https://github.com/habicll)  [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/linkedin_logo.png" width="15%" height="15%">](https://www.linkedin.com/in/habi-cailleau-3b72b5293/) | 
+| <img src="https://avatars.githubusercontent.com/u/182214449?v=4" width="100" height="100"  style="object-fit: cover;"> | Program Manager | Robin GOUMY |[<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/github_light_logo.png" width="15%" height="15%">](https://github.com/RobinGOUMY)  [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/linkedin_logo.png" width="15%" height="15%">](https://www.linkedin.com/in/robin-goumy-66452832a/) |
+| <img src="https://avatars.githubusercontent.com/u/145995367?v=4" width="100" height="100"  style="object-fit: cover;"> |  Tech Lead | Mathias GAGNEPAIN |[<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/github_light_logo.png" width="15%" height="15%">](https://github.com/MistzSoftware)  [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/linkedin_logo.png" width="15%" height="15%">](https://www.linkedin.com/in/mathias-gagnepain-426a131b0/) |
+| <img src="https://avatars.githubusercontent.com/u/100137905?v=4" width="100" height="100"  style="object-fit: cover;">| Software Engineer | Rémy CHARLES |[<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/github_light_logo.png" width="15%" height="15%">](https://github.com/RemyCHARLES)  [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/linkedin_logo.png" width="15%" height="15%">](https://www.linkedin.com/in/r%C3%A9my-charles-2a8960232/) |
+| <img src="https://avatars.githubusercontent.com/u/145995231?v=4" width="100" height="100"  style="object-fit: cover;">| Software Engineer | Maxime CARON |[<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/github_light_logo.png" width="15%" height="15%">](https://github.com/MaximeAlgosup)  [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/linkedin_logo.png" width="15%" height="15%">](https://www.linkedin.com/in/maxime-caron-dev/) |
+| <img src="https://avatars.githubusercontent.com/u/114397870?v=4" width="100" height="100"  style="object-fit: cover;"> | Quality Assurance | Jason GROSSO |[<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/github_light_logo.png" width="15%" height="15%">](https://github.com/JasonGROSSO)  [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/linkedin_logo.png" width="15%" height="15%">](https://www.linkedin.com/in/jason-grosso-847b39251/) |
+| <img src="https://avatars.githubusercontent.com/u/123485791?v=4" width="100" height="100"  style="object-fit: cover;"> | Technical Writer | Alexandre BOPP |[<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/github_light_logo.png" width="15%" height="15%">](https://github.com/Boppalex)  [<img src="https://github.com/algosup/2023-2024-project-3-virtual-processor-team-2/raw/main/documents/images/management/linkedin_logo.png" width="15%" height="15%">](https://www.linkedin.com/in/alexandre-bopp-682a97250/) |
 
 ---
 
 ## Overview 🗺️
 
 This is a student-led **ALGOSUP** project aimed at creating a **REST API** to determine the quickest path between two points within a dataset containing **24 million nodes**. The implementation is built using **C++**, leveraging its performance capabilities for efficient processing.
-
-## What is CAP?🧐
-
-**CAP** stands for **Cap API Pathfinder**, the name chosen for this project. It reflects our goal of creating an efficient and reliable API designed to find the quickest path within large datasets. The name "Cap" symbolizes our aim to provide a comprehensive solution for pathfinding challenges.
 
 ## REST API 🌐
 
@@ -53,33 +51,38 @@ To learn more about [C++](https://en.wikipedia.org/wiki/C++), visit the link.
 
 2. Follow the steps below to build and run the project (with Cmake):
 
-    - Step 1: Generate Build Files using CMake
-           ```bash
+    - **Step 1**: Switch to the project directory  
+            ```
+            cd 2024-2025-project-3-quickest-path-team-5
+            ```
+
+    - **Step 2**: Generate Build Files using CMake
+           ```
            cmake -S . -B build
            ```
 
-    - Step 2: Navigate to the build directory
-           ```bash
+    - **Step 3**: Navigate to the build directory
+           ```
            cd build
            ```
 
-    - Step 3: Compile the project
-           ```bash
+    - **Step 4**: Compile the project
+           ```
            make
            ```
 
-    - Step 4: Navigate to the bin directory where executables are stored
-           ```bash  
+    - **Step 5**: Navigate to the bin directory where executables are stored
+           ```  
            cd ../bin
            ```
 
-    - Step 5: Run the test suite to validate functionality
-           ```bash
+    - **Step 6**: Run the test suite to validate functionality
+           ```
            ./tests
            ```
 
-    - Step 6: Launch the application 🚀
-           ```bash
+    - **Step 7**: Launch the application 🚀
+           ```
            ./dgv
            ```
 
