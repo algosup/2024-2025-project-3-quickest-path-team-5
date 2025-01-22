@@ -39,7 +39,8 @@ Refer to the following for more detailed information:
 
 ## Testing
 
-Testing ensures that the project’s functionalities are correctly implemented and meet quality standards. It provides feedback on the state and quality of the software and measures the project's progress.
+Testing ensures that the project’s functionalities are correctly implemented and meet quality standards.
+It provides feedback on the state and quality of the software and measures the project's progress.
 
 ### Strategies
 
@@ -51,7 +52,8 @@ The following testing strategies will ensure software quality:
 
 ### Smoke Testing
 
-Smoke Testing, also known as Build Verification Testing or Confidence Testing, determines whether a new software build is stable enough for the next testing phase. This strategy verifies crucial functionalities without diving into finer details.
+Smoke Testing, also known as Build Verification Testing or Confidence Testing, determines whether a new software build is stable enough for the next testing phase.
+This strategy verifies crucial functionalities without diving into finer details.
 
 Smoke Testing will confirm:
 
@@ -60,15 +62,20 @@ Smoke Testing will confirm:
 
 ### Unit Tests
 
-Unit Tests verify the accuracy of small, isolated blocks of code, typically functions or methods. These tests, written by Software Engineers, run automatically whenever changes are merged into the main branch.
+Unit Tests verify the accuracy of small, isolated blocks of code, typically functions or methods.
+These tests, written by Software Engineers, run automatically whenever changes are merged into the main branch.
 
 ### Feature Testing
 
-Feature Testing validates the functionalities outlined in the Functional Specifications. This testing identifies edge cases and ensures features perform as intended.
+Feature Testing validates the functionalities outlined in the Functional Specifications.
+This testing identifies edge cases and ensures features perform as intended.
 
 #### Test Cases
 
-Test Cases document testing activities and measure project progress. Tests will focus on data verification and the REST API. Access all [Test Cases](/documents/QA/TestCases.md).
+Test Cases document testing activities and measure project progress.
+Tests will focus on data verification and the REST API.
+
+Access all [Test Cases](/documents/QA/TestCases.md).
 
 Test Case format:
 
@@ -83,7 +90,8 @@ Test Case format:
 
 ##### Test Software
 
-A program generates datasets for verifying test cases. It creates 800 unique random pairs of landmarks and their distances, outputting them to a .csv file.
+A program generates datasets for verifying test cases.
+It creates 800 unique random pairs of landmarks and their distances, outputting them to a .csv file.
 
 #### Test History
 
@@ -102,7 +110,8 @@ Several external tools are employed to ensure software and deliverable quality.
 
 ### Google Test
 
-GoogleTest is a testing framework tailored to Google’s requirements. It supports writing and executing unit tests.
+GoogleTest is a testing framework tailored to Google’s requirements.
+It supports writing and executing unit tests.
 
 > A framework is a conceptual structure serving as a support or guide for building systems.
 
@@ -110,7 +119,8 @@ GoogleTest is a testing framework tailored to Google’s requirements. It suppor
 
 #### GitHub Actions
 
-GitHub Actions automate tasks based on defined conditions. A workflow comprises:
+GitHub Actions automate tasks based on defined conditions.
+A workflow comprises:
 
 - Name
 - Activation condition
@@ -126,11 +136,13 @@ A workflow triggers on pull requests to the main branch and performs the followi
 
 #### Self-Hosted Runner
 
-A runner executes GitHub Actions jobs. A Self-Hosted Runner is used for greater control over hardware, OS, and tools.
+A runner executes GitHub Actions jobs.
+A Self-Hosted Runner is used for greater control over hardware, OS, and tools.
 
 #### GitHub Issues
 
-GitHub Issues manage bugs, documentation mistakes, and missing features. A template ensures issues are well-documented and includes:
+GitHub Issues manage bugs, documentation mistakes, and missing features.
+A template ensures issues are well-documented and includes:
 
 - Type and assigned responsibility
 - Severity label (High, Medium, Low)
