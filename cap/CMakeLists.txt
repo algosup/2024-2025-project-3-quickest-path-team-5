@@ -1,3 +1,13 @@
+# How to use with mingw: (Windows)
+#   cmake -S . -B build -G "MinGW Makefiles"
+#   cd build
+#   mingw32-make
+
+# How to use with clang: (Linux and MacOS)
+#   cmake -S . -B build
+#   cd build
+#   make
+
 # Minimum CMake version
 cmake_minimum_required(VERSION 3.10)
 cmake_policy(SET CMP0167 OLD)
