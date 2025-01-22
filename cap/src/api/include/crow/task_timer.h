@@ -16,7 +16,7 @@
 #include <map>
 #include <vector>
 
-#include "crow/logging.h"
+#include "logging.h"
 
 namespace crow
 {

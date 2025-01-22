@@ -22,7 +22,8 @@ link_directories(/opt/homebrew/lib)
 
 # Source files for the API
 set(SOURCES
-    src/api.cpp
+    src/api/Api.cpp
+    src/cap.cpp
 )
 
 # Create the main executable

@@ -6,10 +6,10 @@
 #include <string_view>
 #include <sstream>
 
-#include "crow/http_request.h"
+#include "http_request.h"
 // for crow::multipart::dd
-#include "crow/multipart.h"
-#include "crow/ci_map.h"
+#include "multipart.h"
+#include "ci_map.h"
 
 namespace crow
 {

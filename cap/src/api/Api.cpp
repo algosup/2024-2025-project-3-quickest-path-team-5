@@ -4,7 +4,7 @@
     \authors CHARLES Rémy, CARON Maxime
 */
 
-#include "../include/Api.hpp"
+#include "Api.hpp"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -38,7 +38,7 @@ namespace api {
         // Serve the consolidated HTML interface
         CROW_ROUTE(app, "/")([]() {
             try {
-                std::string html_content = read_file("../cap/static/index.html"); // Adjust path as needed
+                std::string html_content = read_file("../src/api/static/index.html");
                 crow::response res(html_content);
                 res.add_header("Content-Type", "text/html");
                 return res;
@@ -61,8 +61,14 @@ namespace api {
                     int destination = body["destination"].i();
                     std::string format = body["format"].s();
 
+                    // Validate format
                     if (format != "json" && format != "xml") {
                         return crow::response(400, "Invalid format. Must be 'json' or 'xml'.");
+                    }
+                    
+                    // Validate input
+                    if (source <= 0 || destination <= 0) {
+                        return crow::response(400, "Invalid source or destination. Must be a positive number.");
                     }
 
                     // Calculate shortest path
@@ -110,17 +116,4 @@ namespace api {
                 }
             });
     }
-}
-
-int main() {
-    crow::SimpleApp app;
-
-    // Set up API and routes
-    api::setup_routes(app);
-
-    // Start the server
-    std::cout << "Starting server on http://localhost:8080" << std::endl;
-    app.port(8080).multithreaded().run();
-
-    return 0;
 }

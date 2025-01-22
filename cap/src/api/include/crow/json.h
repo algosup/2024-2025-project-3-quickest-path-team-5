@@ -16,10 +16,10 @@
 #include <cmath>
 #include <cfloat>
 
-#include "crow/utility.h"
-#include "crow/settings.h"
-#include "crow/returnable.h"
-#include "crow/logging.h"
+#include "utility.h"
+#include "settings.h"
+#include "returnable.h"
+#include "logging.h"
 
 using std::isinf;
 using std::isnan;
