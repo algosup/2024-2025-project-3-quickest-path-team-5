@@ -118,12 +118,14 @@ A C++ compiler is needed to understand and run the software. Don't worry, we wil
       - Download it from [here](https://ics.uci.edu/~pattis/common/handouts/mingweclipse/mingw.html).
 
   2. **For Mac:** You can install it using Homebrew.
-  Steps : 
-    - Open Terminal. 
+  Steps :
+    - Open Terminal.
     - Type this command to install it:
-      ```bash 
+  
+      ```bash
         brew install gcc
       ```
+
   Tip: If you don’t have Homebrew installed, check [here](https://brew.sh/) to get it.
 
 ### 3. Compile the Software:
@@ -266,7 +268,7 @@ StartNode,EndNode,Distance
 
 | **Issue**                          | **Problem**                                                                 | **Solution**                                                                                           |
 |------------------------------------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
-| **Missing or Incorrect `USA-roads.csv` File** | The file is missing or doesn't match the required format.                  | 1. Ensure the file is in the same folder as the software. <br> 2. The file should look like: `Landmark_A_ID, Landmark_B_ID, Time`. <br> 3. [Click here for an example CSV file](#). |
+| **Missing or Incorrect `USA-roads.csv` File** | The file is missing or doesn't match the required format.                  | 1. Ensure the file is in the same folder as the software. <br> 2. The file should look like: `Landmark_A_ID, Landmark_B_ID, Time`. <br>  |
 | **API Not Responding**             | The server is not running.                                                 | 1. Check if the server is running by typing: <br> `curl http://localhost:<PORT>/api/path?source_id=1&destination_id=5` <br> 2. Ensure the server is on port 8080. <br> 3. Ensure no other program is using the same port. |
 | **Unexpected Results**             | The API is giving wrong results.                                           | 1. Double-check the IDs you're using. <br> 2. Ensure the dataset is correct.                          |
 | **400 (Bad Request)**              | Missing or incorrect data in your request.                                 | 1. Ensure you include both `source_id` and `destination_id`. <br> 2. Example: <br> `http://localhost:<PORT>/api/path?source_id=1&destination_id=5` |
@@ -333,121 +335,3 @@ StartNode,EndNode,Distance
 - References:
   - STL Documentation: <link>
   - REST API Standards: <link>
-
-If you see something you think it might be interesting to keep. Else i will remove it :
-
-1. **Open Command Prompt (Windows) or Terminal (Mac):**
-
-   - **For Windows**:  
-     Press `Win + R`, type `cmd`, and press Enter. This opens **Command Prompt**.
-
-   - **For Mac**:  
-     Open **Terminal** by pressing `Cmd + Space`, typing "Terminal", and pressing Enter.
-
-2. **Navigate to the folder where you downloaded the software:**
-
-
-
-      1. **On Windows**:
-         1. If you used Git, the software should be in the folder **2024-2025-project-3-quickest-path-team-5**.
-         2. In **Command Prompt**, type the following command to navigate to the folder:
-
-          ```bash
-          cd path\to\your\folder\2024-2025-project-3-quickest-path-team-5
-          ```
-
-          - For example, if you downloaded the folder to your **Documents** directory, you would type:
-
-            ```bash
-            cd C:\Users\YourUsername\Documents\2024-2025-project-3-quickest-path-team-5
-            ```
-
-      2. **On Mac**:
-        1. If you used Git, the software should be in the folder **2024-2025-project-3-quickest-path-team-5**.
-        2. In **Terminal**, type the following command to navigate to the folder:
-
-            ```bash
-            cd /path/to/your/folder/2024-2025-project-3-quickest-path-team-5
-            ```
-
-            - For example, if you downloaded the folder to **Documents**, you would type:
-
-              ```bash
-              cd ~/Documents/2024-2025-project-3-quickest-path-team-5
-              ```
-                        
-          Tip: You can also just type "cd" in the terminal (on both) and copy past the link to your after the cd.
-          <img src="images/folderview.png" alt="foldertip" height="100%" width="100%" style="display: block; margin: auto; object-fit:cover;">
-
-            Now that you're in the right folder, you're ready to compile the software!
-
-3. **Now Type this command to compile the software**:
-
-      ```bash
-      g++ -o main main.cpp -std=c++17
-      ```
-
-## 4. API Documentation
-
-<strong>Endpoint Overview</strong>
-
-- Base URL: http://localhost:PORT/api/path
-- Method: GET
-
-### Input Parameters:
-
-| Parameter      | Type    | Description                        |
-| -------------- | ------- | ---------------------------------- |
-| source_id      | integer | Landmark ID of the starting point. |
-| destination_id | integer | Landmark ID of the destination.    |
-
-### Response Formats
-
-- JSON Example:
-
-  ```json
-  {
-    "travel_time": 120,
-    "path": ["Landmark_A", "Landmark_B"]
-  }
-  ```
-
-- XML Example:
-  ```xml
-  <response>
-    <travel_time>120</travel_time>
-    <path>
-      <landmark>Landmark_A</landmark>
-      <landmark>Landmark_B</landmark>
-    </path>
-  </response>
-  ```
-
-### Sample Query
-
-- URL Format:
-  ```bash
-  GET http://localhost:PORT/api/path?source_id=1&destination_id=5
-  ```
-
-
-## 6. Algorithm Explanation
-
-- <strong>Overview:</strong>
-  The software uses graph traversal algorithms (e.g., Dijkstra's or A\* with heuristics) to calculate paths.
-
-- <strong>Time and Space Complexity:</strong>
-
-  - Graph Traversal: O(V + E)
-  - Heuristic Estimation: O(1)
-
-- <strong>Accuracy:</strong>
-  Results are guaranteed to be within 10% of the shortest possible path to prioritize speed.
-
-## 7. Data Integrity Validation
-
-- <strong>Graph Validation:</strong>
-  Ensures the data forms a Directed Acyclic Graph (DAG) and is free of loops.
-
-- <strong>Connectivity Check:</strong>
-  Confirms all landmarks in the graph are reachable.
