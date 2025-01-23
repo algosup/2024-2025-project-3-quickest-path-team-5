@@ -58,34 +58,38 @@ To learn more about [C++](https://en.wikipedia.org/wiki/C++), visit the link.
     - **Step 1**: Switch to the project directory  
             ```
             cd 2024-2025-project-3-quickest-path-team-5
-            ```
 
-    - **Step 2**: Generate Build Files using CMake
+            ```
+    - **Step 2**: Navigate to the dag graph validator director
+            ```
+            cd dag_graph_validator
+
+    - **Step 3**: Generate Build Files using CMake
            ```
            cmake -S . -B build
            ```
 
-    - **Step 3**: Navigate to the build directory
+    - **Step 4**: Navigate to the build directory
            ```
            cd build
            ```
 
-    - **Step 4**: Compile the project
+    - **Step 5**: Compile the project
            ```
            make
            ```
 
-    - **Step 5**: Navigate to the bin directory where executables are stored
-           ```  
+    - **Step 6**: Navigate to the bin directory where executables are stored
+           ```
            cd ../bin
            ```
 
-    - **Step 6**: Run the test suite to validate functionality
+    - **Step 7**: Run the test suite to validate functionality
            ```
            ./tests
            ```
 
-    - **Step 7**: Launch the application 🚀
+    - **Step 8**: Launch the application 🚀
            ```
            ./dgv
            ```
