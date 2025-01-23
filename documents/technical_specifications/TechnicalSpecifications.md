@@ -352,11 +352,11 @@ graph TD
 7. **Client Response:**  
    - Finally, the `Backend Server` sends the formatted response back to the client, which contains the shortest path from the source to the destination, including details like travel times or distances between intermediate **nodes**<sup>[14](#glossary-14)</sup>[.][3]
 8. **Error Handling:**  
-   - If at any point the input validation fails, the system will return an error response (using appropriate HTTP status codes), which will be received by the client[.][3]
+   - If at any point the input validation fails, the system will return an error response (using appropriate HTTP<sup>[11](#glossary-11)</sup> status codes), which will be received by the client[.][3]
 
 #### 3.4.2 REST API Execution Flow
 
-The following explains the flow of the **REST API** execution for processing a pathfinding request in a typical system. The flow is designed to validate inputs, process the pathfinding algorithm, and return a response in the requested format.
+The following explains the flow of the **REST API**<sup>[2](#glossary-2)</sup> execution for processing a pathfinding request in a typical system[.][3] The flow is designed to validate inputs, process the pathfinding algorithm, and return a response in the requested format[.][3]
 
 ```mermaid
 graph TD
@@ -407,57 +407,57 @@ graph TD
 ###### **Execution Flow**
 
 1. **Start**  
-   The process begins, triggering the API endpoint that handles the pathfinding request.
+   The process begins, triggering the API endpoint that handles the pathfinding request[.][3]
 
 2. **Receive Request**  
-   The API receives the incoming request. This could be from a web client, application, or service requesting a pathfinding result.
+   The API receives the incoming request[.][3] This could be from a web client, application, or service requesting a pathfinding result[.][3]
 
 3. **Is it GET method?**  
-   The first check is to determine if the request is a **GET** request. This is crucial because the API only support the **GET** method for retrieving pathfinding results.
+   The first check is to determine if the request is a **GET** request[.][3] This is crucial because the API only support the **GET** method for retrieving pathfinding results[.][3]
 
-   - **Yes**: If the request is a **GET** method, the flow proceeds to the next step.
-   - **No**: If the request is not a **GET** method, the system will return a **400 Bad Request** response (invalid method).
+   - **Yes**: If the request is a **GET** method, the flow proceeds to the next step[.][3]
+   - **No**: If the request is not a **GET** method, the system will return a **400 Bad Request** response (invalid method)<span></span>[.][3]
 
 4. **Validate Input**  
-   The API validates the incoming parameters from the request. These parameters typically include the **source** and **destination** nodes for the pathfinding operation.
+   The API validates the incoming parameters from the request[.][3] These parameters typically include the **source** and **destination** nodes for the pathfinding operation[.][3]
 
 5. **Are parameters valid (source and destination)?**  
-   The next validation step checks whether the **source** and **destination** nodes are valid and exist in the system. This ensures that the input data is correct and prevents errors during pathfinding.
+   The next validation step checks whether the **source** and **destination** nodes are valid and exist in the system[.][3] This ensures that the input data is correct and prevents errors during pathfinding[.][3]
 
-   - **Yes**: If the parameters are valid, the flow continues to the next step.
-   - **No**: If any of the parameters are invalid (e.g., the nodes do not exist), the system returns a **400 Bad Request** response indicating the issue with the parameters.
+   - **Yes**: If the parameters are valid, the flow continues to the next step[.][3]
+   - **No**: If any of the parameters are invalid (e.g., the nodes do not exist), the system returns a **400 Bad Request** response indicating the issue with the parameters[.][3]
 
 6. **Validate returning format**  
-   The API checks the **Accept** field in the HTTP header to ensure the desired response format (e.g., JSON or XML) is supported. This step ensures that the API responds in the correct format, based on client preferences.
+   The API checks the **Accept** field in the **HTTP**<sup>[11](#glossary-11)</sup> header to ensure the desired response format (e.g., **JSON**<sup>[16](#glossary-16)</sup> or **XML**<sup>[17](#glossary-17)</sup>) is supported[.][3] This step ensures that the API responds in the correct format, based on client preferences[.][3]
 
-7. **Is the Accept field in HTTP header valid (JSON or XML)?**  
-   The system checks if the **Accept** header contains a valid format such as **application/json** or **application/xml**.
+7. **Is the Accept field in HTTP<sup>[11](#glossary-11)</sup> header valid (JSON<sup>[16](#glossary-16)</sup> or XML<sup>[17](#glossary-17)</sup>)?**  
+   The system checks if the **Accept** header contains a valid format such as **application/json** or **application/xml**[.][3]
 
-   - **Yes**: If the **Accept** header is valid, the system proceeds with the pathfinding execution.
-   - **No**: If the **Accept** header is invalid or unsupported, the system responds with a **406 Not Acceptable** error.
+   - **Yes**: If the **Accept** header is valid, the system proceeds with the pathfinding execution[.][3]
+   - **No**: If the **Accept** header is invalid or unsupported, the system responds with a **406 Not Acceptable** error[.][3]
 
 8. **Execute the pathfinding algorithm**  
-   The API executes the core pathfinding algorithm based on the **source** and **destination** parameters. This step involves processing the graph, performing computations to determine the shortest path or optimal route.
+   The API executes the core pathfinding algorithm based on the **source** and **destination** parameters[.][3] This step involves processing the graph, performing computations to determine the shortest path or optimal route[.][3]
 
 9. **Format Response (Path Result in desired format)**  
-   After the pathfinding algorithm executes, the results are formatted into the requested format (JSON or XML). The response is structured to provide the path data in a clear and consumable way for the client.
+   After the pathfinding algorithm executes, the results are formatted into the requested format (**JSON**<sup>[16](#glossary-16)</sup> or **XML**<sup>[17](#glossary-17)</sup>)<span></span>[.][3] The response is structured to provide the path data in a clear and consumable way for the client[.][3]
 
 10. **Return Response (Code 200)**  
-   The system sends the **200 OK** response with the formatted pathfinding result. The response includes the desired data (such as the path, distance, or any other relevant details) and confirms that the request was successfully processed.
+   The system sends the **200 OK** response with the formatted pathfinding result[.][3] The response includes the desired data (such as the path, distance, or any other relevant details) and confirms that the request was successfully processed[.][3]
 
 ###### **Error Flow**
 
 In case of any issues during the request validation or processing, the system may respond with error codes:
 
 1. **Error Response - Bad Request (Code 400)**  
-   If the request method is incorrect, or the parameters (**source** or **destination**) are invalid, the system responds with a **400 Bad Request** status code indicating that the request could not be processed due to invalid input.
+   If the request method is incorrect, or the parameters (**source** or **destination**) are invalid, the system responds with a **400 Bad Request** status code indicating that the request could not be processed due to invalid input[.][3]
 
 2. **Error Response - Not Acceptable (Code 406)**  
-   If the **Accept** header specifies a format that the system does not support (neither **JSON** nor **XML**), the system returns a **406 Not Acceptable** response indicating that the requested format is not supported.
+   If the **Accept** header specifies a format that the system does not support (neither **JSON**<sup>[16](#glossary-16)</sup> nor **XML**<sup>[17](#glossary-17)</sup>), the system returns a **406 Not Acceptable** response indicating that the requested format is not supported[.][3]
 
 ###### **Loop and Retry**
 
-- Once an error occurs (either **400** or **406**), the system resets the process, awaiting a new request, which can be retried with corrected parameters or headers.
+- Once an error occurs (either **400** or **406**), the system resets the process, awaiting a new request, which can be retried with corrected parameters or headers[.][3]
 
 #### 3.4.2 Shortest Path Algorithm Execution Flow
 
