@@ -39,10 +39,13 @@ To learn more about [C++](https://en.wikipedia.org/wiki/C++), visit the link.
 
 ## Project Documents 📂
 
-- [Functional Specifications](Link to functional)
-- [Technical Specifications](Link to technical)
-- [User Manual](Link to User Manual)
-- [Test Plan](Link to Test Plan)
+| Name | Link |
+| --  | -- |
+| Functional Specifications  | [functionalSpecifications.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/functional_specifications/FunctionalSpecifications.md) |
+| Technical Specifications  | [technicalSpecifications.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/technical_specifications/TechnicalSpecifications.md) |
+| Test Plan | [TestPlan.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/QA/TestPlan.md) |
+| Test Cases | [TestPlan.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/QA/TestCases.md) |
+| User Manual | [User-Manual]([needs to be updated](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/Manual/usermanuel.md)) |
 
 ## How to Use the Software 🛠️
 
