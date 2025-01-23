@@ -27,10 +27,17 @@
       - [3.1.1 Key Design Considerations](#311-key-design-considerations)
     - [3.2 Pathfinding Algorithms](#32-pathfinding-algorithms)
       - [3.2.1 Dijkstra's Algorithm](#321-dijkstras-algorithm)
-    - [3.3 Data Flow Overview](#33-data-flow-overview)
-      - [3.3.1 High-Level Data Flow Diagram](#331-high-level-data-flow-diagram)
+    - [3.3 API Implementation](#33-api-implementation)
+      - [3.3.1 Crow](#331-crow)
+    - [3.4 Data Flow Overview](#34-data-flow-overview)
+      - [3.4.1 High-Level Data Flow Diagram](#341-high-level-data-flow-diagram)
         - [Explanation of the High-Level Data Flow Diagram](#explanation-of-the-high-level-data-flow-diagram)
-      - [3.3.2 Shortest Path Algorithm Execution Flow](#332-shortest-path-algorithm-execution-flow)
+      - [3.4.2 REST API Execution Flow](#342-rest-api-execution-flow)
+        - [Explanation of the REST API Execution Flow](#explanation-of-the-rest-api-execution-flow)
+          - [**Execution Flow**](#execution-flow)
+          - [**Error Flow**](#error-flow)
+          - [**Loop and Retry**](#loop-and-retry)
+      - [3.4.2 Shortest Path Algorithm Execution Flow](#342-shortest-path-algorithm-execution-flow)
         - [Explanation of the Shortest Path Algorithm Execution Flow](#explanation-of-the-shortest-path-algorithm-execution-flow)
           - [**Thread 1: Calculating Path from Point A to B**](#thread-1-calculating-path-from-point-a-to-b)
           - [**Main Thread: Measuring Time**](#main-thread-measuring-time)
@@ -38,9 +45,9 @@
           - [**Comparison of Paths:**](#comparison-of-paths)
           - [Final Outcome](#final-outcome)
         - [Result Visualization](#result-visualization)
-      - [3.3.3 Dijkstra's Algorithm Execution Flow](#333-dijkstras-algorithm-execution-flow)
+      - [3.4.3 Dijkstra's Algorithm Execution Flow](#343-dijkstras-algorithm-execution-flow)
         - [Explanation of the Dijkstra's Algorithm Execution Flow](#explanation-of-the-dijkstras-algorithm-execution-flow)
-      - [3.3.4 Fibonacci Heap Node Structure with Pointer Relationships](#334-fibonacci-heap-node-structure-with-pointer-relationships)
+      - [3.4.4 Fibonacci Heap Node Structure with Pointer Relationships](#344-fibonacci-heap-node-structure-with-pointer-relationships)
         - [Explanation of the Fibonacci Heap Node Structure with Pointer Relationships](#explanation-of-the-fibonacci-heap-node-structure-with-pointer-relationships)
   - [4. Detailed Design](#4-detailed-design)
     - [4.1 Backend Design](#41-backend-design)
@@ -276,11 +283,31 @@ To complete this project, we employ a robust algorithms, **Dijkstra's Algorithm*
 - **Usage in the Project:**  
   **Dijkstra's algorithm**<sup>[5](#glossary-5)</sup> is used for cases where simplicity and guaranteed accuracy are prioritized over speed[.][3]  
 
-### 3.3 Data Flow Overview
+### 3.3 API Implementation
+
+#### 3.3.1 Crow
+
+- **Purpose:**  
+  Crow is a C++ microframework used to quickly build REST APIs. It is designed for high performance, easy setup, and a minimalistic approach to handling HTTP requests. With its simple API, Crow allows developers to define routes, handle HTTP methods (GET, POST, PUT, DELETE), and serve content efficiently. It can be seen as a lightweight alternative to larger web frameworks in C++.
+
+- **Advantages:**  
+  1. **High Performance:** Crow is built on C++ which gives it an edge in performance over other frameworks, especially for systems that require low latency and high throughput.
+  2. **Lightweight and Simple:** The framework has minimal dependencies, making it easy to integrate and use without much overhead. Its intuitive syntax allows quick development and deployment.
+  3. **Asynchronous Request Handling:** Crow supports asynchronous I/O operations, improving scalability and responsiveness for APIs under heavy traffic.
+  4. **HTTP/1 and WebSocket Support:** In addition to supporting basic HTTP requests, Crow also includes WebSocket support for real-time communication, making it versatile for various web applications.
+  5. **JSON and XML Support:** Native support for handling JSON and XML data makes it easier to build RESTful services with Crow.
+
+- **Usage in the Project:**  
+  In the context of this project, Crow is used to implement the REST API that communicates between the front-end and back-end systems. The API will be responsible for:
+  1. **Serving Graph Data:** It handles requests to retrieve graph-related data (nodes, edges, distances) and delivers it in JSON format for use by the front-end visualization tools.
+  2. **Processing Pathfinding Algorithms:** Crow serves endpoints that allow for submitting graph data to the back-end for computation, then returning results such as the shortest path.
+  3. **Request/Response Handling:** For every user interaction, Crow processes the incoming HTTP requests, handles any necessary computations, and returns the response in the expected format.
+
+### 3.4 Data Flow Overview
 
 Below is a high-level representation of the data flow in the system using a Mermaid<sup>[10](#glossary-10)</sup> diagram:  
 
-#### 3.3.1 High-Level Data Flow Diagram
+#### 3.4.1 High-Level Data Flow Diagram
 
 ```mermaid
 graph TD  
@@ -327,7 +354,112 @@ graph TD
 8. **Error Handling:**  
    - If at any point the input validation fails, the system will return an error response (using appropriate HTTP status codes), which will be received by the client[.][3]
 
-#### 3.3.2 Shortest Path Algorithm Execution Flow
+#### 3.4.2 REST API Execution Flow
+
+The following explains the flow of the **REST API** execution for processing a pathfinding request in a typical system. The flow is designed to validate inputs, process the pathfinding algorithm, and return a response in the requested format.
+
+```mermaid
+graph TD
+  A@{ shape: circle, label: "Start" }
+  B@{ shape: rounded, label: "Receive Request"}
+  C{Is it GET method?}
+  D[Validate Input]
+  E{"Is parameter are valids (source and destination)?"}
+  F[Validate returning format]
+  G{"Is the Accept field in HTTP header is valide (JSON or XML)"}
+  H[Execute the pathfinding algorithm]
+  I["Format Response (Path Result in desired format)"]
+  J["Return Response (Code 200)"]
+
+  K["Error Response Bad Request (Code 400)"]
+  L["Error Response Not Acceptable (Code 406)"]
+
+  %% Normal Flow
+
+  subgraph  
+    subgraph Execution flow
+      A --> B
+      B --> C
+      C -- Yes --> D
+      D --> E
+      E -- Yes --> F
+      F --> G
+      G -- Yes --> H
+      H --> I
+     
+    end
+
+    %% Error Flow
+    subgraph Errors
+      C -- No --> K
+      E -- No --> K
+      G -- No --> L
+      K --> B
+      L --> B
+      I --> J
+      J --> B
+    end
+  end
+```
+
+##### Explanation of the REST API Execution Flow
+
+###### **Execution Flow**
+
+1. **Start**  
+   The process begins, triggering the API endpoint that handles the pathfinding request.
+
+2. **Receive Request**  
+   The API receives the incoming request. This could be from a web client, application, or service requesting a pathfinding result.
+
+3. **Is it GET method?**  
+   The first check is to determine if the request is a **GET** request. This is crucial because the API only support the **GET** method for retrieving pathfinding results.
+
+   - **Yes**: If the request is a **GET** method, the flow proceeds to the next step.
+   - **No**: If the request is not a **GET** method, the system will return a **400 Bad Request** response (invalid method).
+
+4. **Validate Input**  
+   The API validates the incoming parameters from the request. These parameters typically include the **source** and **destination** nodes for the pathfinding operation.
+
+5. **Are parameters valid (source and destination)?**  
+   The next validation step checks whether the **source** and **destination** nodes are valid and exist in the system. This ensures that the input data is correct and prevents errors during pathfinding.
+
+   - **Yes**: If the parameters are valid, the flow continues to the next step.
+   - **No**: If any of the parameters are invalid (e.g., the nodes do not exist), the system returns a **400 Bad Request** response indicating the issue with the parameters.
+
+6. **Validate returning format**  
+   The API checks the **Accept** field in the HTTP header to ensure the desired response format (e.g., JSON or XML) is supported. This step ensures that the API responds in the correct format, based on client preferences.
+
+7. **Is the Accept field in HTTP header valid (JSON or XML)?**  
+   The system checks if the **Accept** header contains a valid format such as **application/json** or **application/xml**.
+
+   - **Yes**: If the **Accept** header is valid, the system proceeds with the pathfinding execution.
+   - **No**: If the **Accept** header is invalid or unsupported, the system responds with a **406 Not Acceptable** error.
+
+8. **Execute the pathfinding algorithm**  
+   The API executes the core pathfinding algorithm based on the **source** and **destination** parameters. This step involves processing the graph, performing computations to determine the shortest path or optimal route.
+
+9. **Format Response (Path Result in desired format)**  
+   After the pathfinding algorithm executes, the results are formatted into the requested format (JSON or XML). The response is structured to provide the path data in a clear and consumable way for the client.
+
+10. **Return Response (Code 200)**  
+   The system sends the **200 OK** response with the formatted pathfinding result. The response includes the desired data (such as the path, distance, or any other relevant details) and confirms that the request was successfully processed.
+
+###### **Error Flow**
+
+In case of any issues during the request validation or processing, the system may respond with error codes:
+
+1. **Error Response - Bad Request (Code 400)**  
+   If the request method is incorrect, or the parameters (**source** or **destination**) are invalid, the system responds with a **400 Bad Request** status code indicating that the request could not be processed due to invalid input.
+
+2. **Error Response - Not Acceptable (Code 406)**  
+   If the **Accept** header specifies a format that the system does not support (neither **JSON** nor **XML**), the system returns a **406 Not Acceptable** response indicating that the requested format is not supported.
+
+###### **Loop and Retry**
+
+- Once an error occurs (either **400** or **406**), the system resets the process, awaiting a new request, which can be retried with corrected parameters or headers.
+
+#### 3.4.2 Shortest Path Algorithm Execution Flow
 
 ```mermaid
 graph TD
@@ -612,7 +744,7 @@ end
 >
 > By comparing both paths, we can clearly see and return the shortest path calculated overall.
 
-#### 3.3.3 Dijkstra's Algorithm Execution Flow
+#### 3.4.3 Dijkstra's Algorithm Execution Flow
 
 ```mermaid
 graph TD
@@ -706,7 +838,7 @@ The following diagram illustrates the step-by-step execution of **Dijkstra's alg
 13. **Return the Quickest Path**  
     - Once all **nodes**<sup>[14](#glossary-14)</sup> have been processed and the **priority queue**<sup>[30](#glossary-30)</sup> is empty, the algorithm concludes, and the `shortest path` from the source **node**<sup>[14](#glossary-14)</sup> to the destination **node**<sup>[14](#glossary-14)</sup> is returned[.][3]
 
-#### 3.3.4 Fibonacci Heap Node Structure with Pointer Relationships
+#### 3.4.4 Fibonacci Heap Node Structure with Pointer Relationships
 
 ![Fibonacci](./images/FibonacciHeap.png)
 
@@ -855,6 +987,7 @@ To ensure the correctness of the **graph structure**<sup>[8](#glossary-8)</sup>,
    - Verify that no duplicate **edges**<sup>[15](#glossary-15)</sup> exist between two **nodes**<sup>[14](#glossary-14)</sup> with differing weights[.][3]
 
       > [!NOTE]
+      >
       > Exemple of a duplicate edge:
       >
       >![Duplicate Edge Exemple](./images/DuplicateEdge.png)
@@ -863,6 +996,7 @@ To ensure the correctness of the **graph structure**<sup>[8](#glossary-8)</sup>,
    - Confirm the **graph**<sup>[8](#glossary-8)</sup> is fully connected, ensuring all **nodes**<sup>[14](#glossary-14)</sup> are reachable from any other **node**<sup>[14](#glossary-14)</sup>[.][3]
 
       > [!NOTE]
+      >
       > Exemple of a non-connected graph:
       >
       >```mermaid
