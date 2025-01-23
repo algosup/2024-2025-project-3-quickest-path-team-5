@@ -58,11 +58,11 @@ To learn more about [C++](https://en.wikipedia.org/wiki/C++), visit the link.
     - **Step 1**: Switch to the project directory  
             ```
             cd 2024-2025-project-3-quickest-path-team-5
-
             ```
     - **Step 2**: Navigate to the dag graph validator director
             ```
             cd dag_graph_validator
+            ```
 
     - **Step 3**: Generate Build Files using CMake
            ```
