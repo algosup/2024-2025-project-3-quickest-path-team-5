@@ -16,9 +16,10 @@
   - [Google Test](#google-test)
   - [GitHub Actions / Issues](#github-actions--issues)
     - [GitHub Actions](#github-actions)
+    - [Pull Request](#pull-request)
     - [Self-Hosted Runner](#self-hosted-runner)
     - [GitHub Issues](#github-issues)
-    - [GitHub Issues Labels](#github-issues-labels)
+      - [GitHub Issues Labels](#github-issues-labels)
 - [Test Criteria](#test-criteria)
   - [Entry Criteria](#entry-criteria)
   - [Suspension Criteria](#suspension-criteria)
@@ -32,14 +33,14 @@ This document defines and accounts for the different testing strategies that wil
 
 Refer to the following for more detailed information:
 
-- [Functional Specifications](insert link)
-- [Technical Specifications](insert link)
+- [Functional Specifications](/documents/functional_specifications/FunctionalSpecifications.md)
+- [Technical Specifications](/documents/technical_specifications/TechnicalSpecifications.md)
 
 ---
 
 ## Testing
 
-Testing ensures that the project’s functionalities are correctly implemented and meet quality standards.
+Testing ensures that the project's functionalities are correctly implemented and meet quality standards.
 It provides feedback on the state and quality of the software and measures the project's progress.
 
 ### Strategies
@@ -110,7 +111,7 @@ Several external tools are employed to ensure software and deliverable quality.
 
 ### Google Test
 
-GoogleTest is a testing framework tailored to Google’s requirements.
+GoogleTest is a testing framework tailored to Google's requirements.
 It supports writing and executing unit tests.
 
 > A framework is a conceptual structure serving as a support or guide for building systems.
@@ -134,6 +135,22 @@ A workflow triggers on pull requests to the main branch and performs the followi
 4. Build the project.
 5. Run the tests.
 
+#### Pull Request
+
+A pull request is a request to merge code changes into the main branch.
+A template to ensure all pull requests are well-documented, it includes:
+
+- Description of changes
+- Prerequisites
+- Type of change
+- Tested / Reviewed ?
+- Checklist of tasks to complete before merging
+- Remarks
+
+Failure to follow the template results in pull request rejection.
+
+> Types of change: Issue fix, New feature, Breaking change, Documentation update
+
 #### Self-Hosted Runner
 
 A runner executes GitHub Actions jobs.
@@ -142,7 +159,7 @@ A Self-Hosted Runner is used for greater control over hardware, OS, and tools.
 #### GitHub Issues
 
 GitHub Issues manage bugs, documentation mistakes, and missing features.
-A template ensures issues are well-documented and includes:
+A template ensures issues are well-documented, it includes:
 
 - Type and assigned responsibility
 - Severity label (High, Medium, Low)
