@@ -107,110 +107,82 @@ To start, you need to get the software on your computer. There are two options f
 Go to the [GitHub repository](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5) and click Download ZIP. Extract the ZIP file to a location on your computer.
 Note: Make sure the folder you download is <strong>easy</strong> to access.
 
-### 2. Setting up the Environment:
+### 2. Setting up the Environment
 
-Before you can run the software, you need a few programs installed on your computer. Here’s how to get them ready:
+To run the software, you need a C++ compiler installed on your system. Follow these steps:
 
-<strong>Install a C++ Compiler:</strong>
-A C++ compiler is needed to understand and run the software. Don't worry, we will help you with the steps!
+| **Operating System** | **Instructions**                                                                                                                                         |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Windows (Install MinGW)** | MinGW is a lightweight tool to compile C++ code. <br> 1. [Download MinGW here](https://ics.uci.edu/~pattis/common/handouts/mingweclipse/mingw.html). |
+| **Mac (Install GCC)**       | Use Homebrew, a package manager for Mac, to install the compiler. <br> 1. Open Terminal. <br> 2. Run this command: `brew install gcc` <br> *(If Homebrew isn’t installed, follow the instructions here: [Homebrew](https://brew.sh/))* |
 
-  1. **For Windows**: You need to install MinGW (Minimalist GNU for Windows). It’s an easy tool to install. 
-      - Download it from [here](https://ics.uci.edu/~pattis/common/handouts/mingweclipse/mingw.html).
+---
 
-  2. **For Mac:** You can install it using Homebrew.
-  Steps :
-    - Open Terminal.
-    - Type this command to install it:
+- Install CMake (Required)
+
+  CMake is a tool that simplifies the compilation of complex projects.
+
+    1. Visit the official website: [CMake Download](https://cmake.org/download).  
+    2. Download and install the version suitable for your system (Windows, Mac, Linux).
+
+### 3. Compile the Software
+
+- **Before You Start: Open Your Terminal**
+
+    Open your terminal application:
+
+    - **Windows:** Search for "Command Prompt" or "PowerShell" in the Start Menu.
+    - **Mac/Linux:** Open the Terminal app from the Applications folder or search for it.
+
+- **Step 1: Navigate to the Project Folder**
   
-      ```bash
-        brew install gcc
-      ```
+    Use the `cd` command to go to the folder where you downloaded the software.
+  
+    ```bash
+    cd /path/to/your/folder/2024-2025-project-3-quickest-path-team-5
+    ```
 
-  Tip: If you don’t have Homebrew installed, check [here](https://brew.sh/) to get it.
+    ![Navigate to Project Folder](images/path-folder.png)
 
-### 3. Compile the Software:
+- **Step 2: Create a Build Directory**
+  
+    Create a separate folder for the build process and move into it.
 
-Once your environment is ready, it’s time to prepare the software.
+    ```bash
+    mkdir build
+    cd build
+    ```
 
-1. **Compiling with CMake** (Recommended)
+    Result in the terminal:
 
-    If you'd like to build the project using **CMake**, follow these steps:
+    ![Create Build Directory](images/mkdir.png)
 
-      1. **Install CMake**:  
-         If you don’t have **CMake** installed, you can download it from [here](https://cmake.org/download/).
+- **Step 3: Generate Makefiles**
+  
+    Use CMake to generate the necessary build files.
 
-      2. **Set Up CMake Project**:  
-         Open your **Command Prompt (Windows)** or **Terminal (Mac)** and navigate to the folder where you downloaded the software.
+    ```bash
+    cmake ..
+    ```
 
-          <details>
-          <summary>More details</summary>
+- **Step 4: Build the Software**
 
-            You’ll need to go to the folder where you have the downloaded software, either by using Git or by manually downloading the ZIP.
+    Compile the software using the `make` command.
 
-            1. **On Windows**:
-                1. If you used Git, the software should be in the folder **2024-2025-project-3-quickest-path-team-5**.
-                2. In **Command Prompt**, type the following command to navigate to the folder:
+    ```bash
+    make
+    ```
 
-                  ```bash
-                  cd path\to\your\folder\2024-2025-project-3-quickest-path-team-5
-                  ```
+- **Step 5: Verify the Dataset**
 
-                  - For example, if you downloaded the folder to your **Documents** directory, you would type:
+    Run the `./dgv` program to verify that your dataset is correct. This step ensures everything is set up properly.
 
-                    ```bash
-                    cd C:\Users\YourUsername\Documents\2024-2025-project-3-quickest-path-team-5
-                    ```
+    ```bash
+    ./dgv
+    ```
 
-            2. **On Mac**:
-                1. If you used Git, the software should be in the folder **2024-2025-project-3-quickest-path-team-5**.
-                2. In **Terminal**, type the following command to navigate to the folder:
-
-                    ```bash
-                    cd /path/to/your/folder/2024-2025-project-3-quickest-path-team-5
-                    ```
-
-                    - For example, if you downloaded the folder to **Documents**, you would type:
-
-                      ```bash
-                      cd ~/Documents/2024-2025-project-3-quickest-path-team-5
-                      ```
-                    Tip: You can also just type "cd" in the terminal (on both) and copy past the link to your after the cd.
-                      
-                    <img src="images/folderview.png" alt="GPS Navigation" height="100%" width="100%" style="display: block; margin: auto; object-fit:cover;">
-
-                    Now that you're in the right folder, you're ready to compile the software!
-         </details>
-
-      3. **Create a Build Directory**:  
-         Run the following command to create a build directory (a separate folder where the build process will occur):
-
-            ```bash
-            mkdir build
-            cd build
-            ```
-
-      4. **Generate Makefiles with CMake**:
-          Inside the build directory, run the following command to generate the necessary files for building the project:
-
-          ```bash
-          cmake ..
-          ```
-
-          This command tells CMake to use the CMakeLists.txt file from the parent directory (your project directory).
-
-      5. **Build the Software**:
-          After generating the makefiles, you can build the software using the make command:
-
-          ```bash
-          make
-          ```
-
-      6. **Run software**:
-          Once the tests are successful, you can run the program:
-
-          ```bash
-          ./dgv
-          ```
+- **Tip:**
+    If you prefer not to use CMake, ensure the project includes a Makefile or other build instructions.
 
 ## 4. Usage Instructions
 
@@ -223,7 +195,7 @@ Once your environment is ready, it’s time to prepare the software.
     Run the program from the `bin` directory with the following command:  
 
     ```bash
-    ./dgv
+    // Add the command line
     ```
 
 3. **Understanding the Output**
@@ -243,24 +215,48 @@ StartNode,EndNode,Distance
 
 ## 5. Test Suite
 
-- <strong>Overview:</strong>
-  
-  The test suite verifies the correctness, performance, and compliance of the software with the 10% approximation rule. It ensures that the application behaves as expected and meets the defined requirements.
-- <strong>Running Tests:</strong>
+### Overview
+The test suite verifies the correctness, performance, and compliance of the software. It ensures the application meets all defined requirements, including validating the dataset and adhering to the 10% approximation rule.
 
-    After the build process is completed, follow these steps to run the test suite:
+### Running Tests
+Follow these steps to run the test suite and verify the dataset:
 
-  ```bash
-  # Navigate to the bin directory where the test executable is located
-  cd ../bin
+- Step 1: Navigate to the Test Directory
+    Move into the `bin` directory where the test executable is located.
 
-  # Run the test suite
-  ./test
-  ```
+    ```bash
+    cd ../bin
+    ```
 
-- <strong>Results</strong>
-  
-    The test suite outputs the results of predefined test cases, including travel times and paths, to validate the functionality and performance of the application.
+- Step 2: Run the Test Suite
+
+    Execute the test program to validate the software.
+
+    ```bash
+    ./test
+    ```
+
+- Step 3: Verify the Dataset
+
+    Use the dataset verification tool to ensure proper setup.
+
+    ```bash
+    ./dgv
+    ```
+
+### Results
+
+#### Test Suite Results
+The `./test` program outputs the following:
+1. Validation of travel times and paths.
+2. Checks for performance requirements.
+
+#### Dataset Verification Results
+The `./dgv` program confirms:
+- The dataset's correctness.
+- Readiness for the application.
+
+
 
 ## 6. Troubleshooting
 
@@ -323,15 +319,39 @@ StartNode,EndNode,Distance
 
 ## 8. Contact Information
 
-- For support or to report issues, contact:
-  - Email: support@example.com
-  - GitHub Issues: <repository_url>/issues
+If you need help or want to report an issue, feel free to reach out to our support team:
+
+| **Support**        |                                                                                             |
+| ------------------ | ------------------------------------------------------------------------------------------- |
+| **Email**          | [alexandre.bopp@algosup.com](mailto:support@example.com)                                            |
+| **Response Time**  | We aim to respond within 24-48 hours.                                                        |
+| **Business Hours** | Monday to Friday, 9 AM - 6 PM (Local Time).                                                  |
+| **Support Topics** | Bugs, Feature Requests, General Inquiries, Setup Assistance.                                 |
 
 ## 9. Appendix
 
-- Glossary:
-  - Landmark: A point of interest in the graph (e.g., city, intersection).
-  - Travel Time: The time required to travel between two connected landmarks.
-- References:
-  - STL Documentation: <link>
-  - REST API Standards: <link>
+### Glossary:
+
+- **Landmark**: A point of interest in the graph (e.g., city, intersection). It’s like a location or stop along your journey.
+
+- **CSV (Comma-Separated Values)**: A simple text file format where data is stored in rows and columns. Each value is separated by a comma. It’s similar to a spreadsheet, but without the rows and columns you see in Excel.
+
+- **API (Application Programming Interface)**: A set of rules that lets different software applications talk to each other. It’s like a menu at a restaurant where the software makes a request and gets a response back.
+
+- **Build Directory**: A folder where temporary files are stored during the process of making a program. Think of it as a workspace where all the pieces of your program come together.
+
+- **Makefiles**: A set of instructions that tell the computer how to compile (build) the software. They’re like a recipe with step-by-step instructions on how to make the program.
+
+- **HTTP Server**: A program that allows other software, like a web browser, to interact with your system. It’s like a waiter that brings requests from the internet and delivers responses back.
+
+- **Git**: A tool that helps manage and track changes in software. It’s like a time machine for your code, allowing you to go back to earlier versions if something goes wrong.
+
+- **Dataset**: A collection of information or data that the software uses to calculate routes or times. It’s like a map with all the road information you need for your trip.
+
+- **Compile**: The process of turning the code you’ve written into a program that can be run on your computer. It’s like putting ingredients together to make a meal.
+
+- **Terminal**: A program where you type commands to interact with your computer. It’s like talking directly to your computer using text.
+
+- **Executable File**: A type of file that contains a program that can be run on your computer. It’s like a machine that performs a task when you click it.
+
+- **Environment Variables**: Special settings that help your system know where to find certain tools or files. They’re like a map that tells your computer where to look for things it needs.
