@@ -55,7 +55,7 @@ set_target_properties(tests
 add_executable(dgv
     src/dgv.c
     src/io/csv_reader.c
-    src/io/mermaid_writer.c
+    src/io/graphviz_exporter.c
     src/data_struct/graphLib.c
 )
 

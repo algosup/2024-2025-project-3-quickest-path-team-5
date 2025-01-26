@@ -1,6 +1,6 @@
-#include "mermaid_writter.h"
+#include "graphviz_exporter.h"
 
-bool writeMermaidFile(const char *filename, graph_t* graph) {
+bool exportGraphvizFile(const char *filename, graph_t* graph) {
     if (!graph || !graph->head) {
         return false;
     }
@@ -10,15 +10,18 @@ bool writeMermaidFile(const char *filename, graph_t* graph) {
         return false;
     }
 
+    // Write the header
+    fprintf(file, "strict graph G {\n");
     node_t* current = graph->head;
     while (current) {
         edge_t* edge = current->head;
         while (edge) {
-            fprintf(file, "%u-->%u: %u\n", current->id, edge->self->id, edge->distance);
+            fprintf(file, "%u -- %u [len=%u, label=%u]; \n", current->id, edge->self->id, edge->distance, edge->distance);
             edge = edge->next;
         }
         current = current->next;
     }
+    fprintf(file, "}\n");
 
 
     fclose(file);

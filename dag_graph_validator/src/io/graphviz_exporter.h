@@ -17,12 +17,12 @@ extern "C"
 #endif
 
 /*!
-    \brief Write a mermaid file from a graph
+    \brief exportGraphvizFile Writes a graph to a file in the Graphviz format
     \param filename The name of the file to write
     \param graph The graph to write
     \return True if all went well, false otherwise
 */
-bool writeMermaidFile(const char *filename, graph_t* graph);
+bool exportGraphvizFile(const char *filename, graph_t* graph);
 
 #ifdef __cplusplus
 }

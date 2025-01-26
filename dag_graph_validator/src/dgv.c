@@ -5,16 +5,16 @@
 #include <time.h>
 
 #include "csv_reader.h"
-#include "mermaid_writter.h"
+#include "graphviz_exporter.h"
 #include "graphLib.h"
 
 #define FILE_PATH "../../data/USA-roads.csv"
-#define MERMAID_FILE "../../data/USA-roads.txt"
+#define EXPRT_FILE_PATH "../../data/USA-roads.dot"
 #include <sys/resource.h> // For memory usage tracking
 
 int main(void) {
     char* defaultFilePath = FILE_PATH;
-    char* defaultMermaidFile = MERMAID_FILE;
+    char* defaultExportFile = EXPRT_FILE_PATH;
     bool isExtracted = false;
 
     printf("Enter the path to the dataset file (default: %s): ", defaultFilePath);
@@ -31,18 +31,18 @@ int main(void) {
     }
 
 
-    printf("Do you want to extract the graph to a Mermaid file? (y/n): ");
+    printf("Do you want to export the graph? (y/n): ");
     fgets(input, sizeof(input), stdin);
-    if (input[0] == 'y') {
+    if (input[0] == 'y' || input[0] == 'Y') {
         isExtracted = true;
     }
 
     if (isExtracted) {
-]        printf("Enter the path to the mermaid file (default: %s): ", defaultMermaidFile);
+        printf("Enter the path to the exporting file (default: %s): ", defaultExportFile);
         fgets(input, sizeof(input), stdin);
         if (input[0] != '\n') {
             input[strcspn(input, "\n")] = 0; // Remove the newline character
-            defaultMermaidFile = input;
+            defaultExportFile = input;
         }
     }
 
@@ -85,14 +85,14 @@ int main(void) {
 
     if (isExtracted) {
         begin = clock();    
-        if (writeMermaidFile(MERMAID_FILE, graph)) {
-            printf("Mermaid file written successfully.\n");
+        if (exportGraphvizFile(defaultExportFile, graph)) {
+            printf("File exported successfully.\n");
         } else {
             fprintf(stderr, "Failed to write the Mermaid file.\n");
         }
         end = clock();
         time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-        printf("Time spent writing the Mermaid file: %f seconds\n", time_spent);
+        printf("Time spent exporting the graph: %f seconds\n", time_spent);
         memUsage = (float)(usage.ru_maxrss / (1024.0f * 1024.0f)); // Convert to MB
         printf("Memory usage: %d MB\n\n", (int)memUsage);
     }

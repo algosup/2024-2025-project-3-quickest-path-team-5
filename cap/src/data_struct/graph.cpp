@@ -106,6 +106,14 @@ bool Graph::addEdge(uint32_t from, uint32_t to, uint32_t distance)
 
     return true;
 }
+bool Graph::addLandmark(uint32_t landmark){
+    if (landmark >= HASH_MAP_SIZE)
+    {
+        return false;
+    }
+    landmarks.push_back(landmark);
+    return true;
+}
 
 Graph::Graph(Graph &&other) noexcept
     : numNodes(other.numNodes), head(other.head)
@@ -288,4 +296,67 @@ std::vector<uint32_t> Graph::timedDijkstra(uint32_t from, uint32_t to, long long
     }
 
     return path;
+}
+
+void Graph::computeLandmarkDistances() {
+    landmarkDistances.clear();
+    for (uint32_t landmark : landmarks) {
+        vector<uint32_t> distances = dijkstra(landmark, UINT32_MAX); // Compute shortest paths
+        landmarkDistances.push_back(distances);
+    }
+}
+
+vector<uint32_t> Graph::aStarLandmark(uint32_t from, uint32_t to) {
+    // Initialize distances and previous nodes
+    vector<uint32_t> distances(numNodes, UINT32_MAX);
+    vector<int> previous(numNodes, -1);
+    distances[from] = 0;
+
+    // Priority queue with heuristic
+    auto compare = [&](uint32_t a, uint32_t b) {
+        uint32_t h_a = 0, h_b = 0;
+        for (size_t i = 0; i < landmarks.size(); ++i) {
+            h_a = max(h_a, abs((int)landmarkDistances[i][a] - (int)landmarkDistances[i][to]));
+            h_b = max(h_b, abs((int)landmarkDistances[i][b] - (int)landmarkDistances[i][to]));
+        }
+        return distances[a] + h_a > distances[b] + h_b;
+    };
+    priority_queue<uint32_t, vector<uint32_t>, decltype(compare)> pq(compare);
+
+    pq.push(from);
+
+    // Process the graph
+    while (!pq.empty()) {
+        uint32_t currentId = pq.top();
+        pq.pop();
+
+        // Stop if we reach the destination
+        if (currentId == to) {
+            break;
+        }
+
+        Node *currentNode = nodeMap[currentId];
+        if (!currentNode) continue;
+
+        Edge *edge = currentNode->getHead();
+        while (edge) {
+            uint32_t neighborId = edge->getSelf()->getId();
+            uint32_t newDist = distances[currentId] + edge->getTime();
+
+            if (newDist < distances[neighborId]) {
+                distances[neighborId] = newDist;
+                previous[neighborId] = currentId;
+                pq.push(neighborId);
+            }
+            edge = edge->getNext();
+        }
+    }
+
+    // Construct the path
+    vector<uint32_t> path;
+    for (int at = to; at != -1; at = previous[at]) {
+        path.push_back(at);
+    }
+    reverse(path.begin(), path.end());
+    return (path[0] == from) ? path : vector<uint32_t>();
 }

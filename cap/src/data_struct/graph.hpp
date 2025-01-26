@@ -29,6 +29,8 @@ private:
     long long numEdges;
     Node *head;
     Node *nodeMap[HASH_MAP_SIZE];
+    vector<uint32_t> landmarks;                  // List of landmark nodes
+    vector<vector<uint32_t>> landmarkDistances;  // Distances between landmark nodes
 
 public:
     /*!
@@ -97,6 +99,13 @@ public:
     bool addEdge(uint32_t from, uint32_t to, uint32_t distance);
 
     /*!
+        \brief Add a landmark node to the graph
+        \param landmark The landmark node ID
+        \return True if the landmark was successfully added, false otherwise
+    */
+    bool addLandmark(uint32_t landmark);
+
+    /*!
         \brief Deleted copy constructor to prevent shallow copies
     */
     Graph(const Graph &) = delete;
@@ -135,4 +144,16 @@ public:
     */
     std::vector<uint32_t> timedDijkstra(uint32_t from, uint32_t to, long long timeLimitMs);
 
+    /*!
+        \brief Graph precomputation to compute the distances between landmark nodes
+    */
+    void computeLandmarkDistances();
+
+    /*!
+        \brief A* algorithm to find the shortest path between two nodes
+        \param from The source node
+        \param to The destination node
+        \return A vector containing the shortest distance to each node
+    */
+    vector<uint32_t> aStarLandmark(uint32_t from, uint32_t to);
 };
