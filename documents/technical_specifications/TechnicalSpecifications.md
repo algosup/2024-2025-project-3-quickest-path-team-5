@@ -34,21 +34,25 @@
         - [Explanation of the High-Level Data Flow Diagram](#explanation-of-the-high-level-data-flow-diagram)
       - [3.4.2 REST API Execution Flow](#342-rest-api-execution-flow)
         - [Explanation of the REST API Execution Flow](#explanation-of-the-rest-api-execution-flow)
-          - [**Execution Flow**](#execution-flow)
-          - [**Error Flow**](#error-flow)
-          - [**Loop and Retry**](#loop-and-retry)
+          - [Execution Flow](#execution-flow)
+          - [Error Flow](#error-flow)
+          - [Loop and Retry](#loop-and-retry)
       - [3.4.2 Shortest Path Algorithm Execution Flow](#342-shortest-path-algorithm-execution-flow)
         - [Explanation of the Shortest Path Algorithm Execution Flow](#explanation-of-the-shortest-path-algorithm-execution-flow)
-          - [**Thread 1: Calculating Path from Point A to B**](#thread-1-calculating-path-from-point-a-to-b)
-          - [**Main Thread: Measuring Time**](#main-thread-measuring-time)
-          - [**Thread 2: Calculating Path from Point B to A**](#thread-2-calculating-path-from-point-b-to-a)
-          - [**Comparison of Paths:**](#comparison-of-paths)
+          - [Thread 1: Calculating Path from Point A to B](#thread-1-calculating-path-from-point-a-to-b)
+          - [Main Thread: Measuring Time](#main-thread-measuring-time)
+          - [Thread 2: Calculating Path from Point B to A](#thread-2-calculating-path-from-point-b-to-a)
+          - [Comparison of Paths](#comparison-of-paths)
           - [Final Outcome](#final-outcome)
         - [Result Visualization](#result-visualization)
       - [3.4.3 Dijkstra's Algorithm Execution Flow](#343-dijkstras-algorithm-execution-flow)
         - [Explanation of the Dijkstra's Algorithm Execution Flow](#explanation-of-the-dijkstras-algorithm-execution-flow)
       - [3.4.4 Fibonacci Heap Node Structure with Pointer Relationships](#344-fibonacci-heap-node-structure-with-pointer-relationships)
         - [Explanation of the Fibonacci Heap Node Structure with Pointer Relationships](#explanation-of-the-fibonacci-heap-node-structure-with-pointer-relationships)
+          - [Types of Pointers and Their Representations](#types-of-pointers-and-their-representations)
+          - [Arrowhead Styles for Distinguishing Pointer Types](#arrowhead-styles-for-distinguishing-pointer-types)
+          - [Synthesis of Child Pointers](#synthesis-of-child-pointers)
+          - [Marking and Minimum Identification](#marking-and-minimum-identification)
   - [4. Detailed Design](#4-detailed-design)
     - [4.1 Backend Design](#41-backend-design)
       - [4.1.1. REST API Endpoint](#411-rest-api-endpoint)
@@ -106,15 +110,15 @@ The purpose of this document is to define the technical specifications for devel
 The project encompasses the following key components, each tailored for **cross-platform**<sup>[19](#glossary-19)</sup> compatibility and developed using industry-standard technologies:
 
 1. **Data Checker**
-   - **Name:** `DGV (Data Graph Validator)`
-   - **Type:** Desktop Application
-   - **Technology:** Developed in [C][2]
-   - **Supported Platforms:** Linux, Windows, and macOS
+   - `Name:` `DGV (Data Graph Validator)`
+   - `Type:` Desktop Application
+   - `Technology:` Developed in [C][2]
+   - `Supported Platforms:` Linux, Windows, and macOS
 2. **REST API**<sup>[2](#glossary-2)</sup>
-   - **Name:** `CAP (Cap API Pathfinder)`
-   - **Type:** Web API
-   - **Technology:** Developed in [C++][1]
-   - **Supported Platforms:** **Platform-agnostic**<sup>[3](#glossary-3)</sup>
+   - `Name:` `CAP (Cap API Pathfinder)`
+   - `Type:` Web API
+   - `Technology:` Developed in [C++][1]
+   - `Supported Platforms:` **Platform-agnostic**<sup>[3](#glossary-3)</sup>
 
 ### 1.3 Audience
 
@@ -132,10 +136,10 @@ This document is intended for the following audiences:
 
 The naming conventions should be as follows:
 
-| type    | convention     |
-| ------- | -------------- |
-| Folders | **snake_case** |
-| Files   | **PascalCase** |
+| type    | convention   |
+| ------- | ------------ |
+| Folders | `snake_case` |
+| Files   | `PascalCase` |
 
 ```md
 2024-2025-project-3-quickest-path-team-5
@@ -190,58 +194,58 @@ You can find the full coding convention guidelines in the [Coding Conventions do
 
 #### 2.1.1 Data Checker  
 
-- **CSV<sup>[9](#glossary-9)</sup> File Import**  
+- `CSV`<sup>[9](#glossary-9)</sup> `File Import`
   - Users should be able to import a **CSV**<sup>[9](#glossary-9)</sup> file into the application for validation[.][3] Supported formats should be clearly documented, and the system should reject invalid files with detailed feedback[.][3]  
 
-- **Error Reporting**  
+- `Error Reporting`  
   - The application will display detailed error messages in the terminal, including row and column numbers, to help users identify and correct issues in the **CSV**<sup>[9](#glossary-9)</sup> file[.][3]  
 
-- **Visual Representation of Linked Nodes<sup>[14](#glossary-14)</sup>**  
+- `Visual Representation of Linked Nodes`<sup>[14](#glossary-14)</sup>
   - The application will generate a visual diagram displaying each **node**<sup>[14](#glossary-14)</sup> and its connections, using color-coded indicators for errors or anomalies in the data[.][3]  
 
-- **Node<sup>[14](#glossary-14)</sup> and Connection Validation**  
+- `Node<sup>[14](#glossary-14)</sup> and Connection Validation`  
   - The application will verify the integrity of the imported data, ensuring all **nodes**<sup>[14](#glossary-14)</sup> and connections are valid and consistent with the required format[.][3]  
 
-- **Algorithm Complexity**  
+- `Algorithm Complexity`
   - The data validation algorithm used for checks, such as **graph**<sup>[8](#glossary-8)</sup> validation and connectivity, will operate with a **time complexity**<sup>[13](#glossary-13)</sup> of **[O(log n)][6]** for most operations, ensuring efficient processing of large datasets[.][3]
 
 #### 2.1.2 REST API  
 
-- **Endpoint for Shortest Path Calculation**  
+- `Endpoint for Shortest Path Calculation`
   - Provide an endpoint that accepts input parameters (e.g., start point, end point) and returns the shortest path, including intermediate steps and estimated travel times[.][3]  
 
-- **Error Handling and Status Codes**  
+- `Error Handling and Status Codes`
   - Ensure all API endpoints return appropriate **HTTP**<sup>[11](#glossary-11)</sup> status codes and detailed error messages for invalid requests or server errors[.][3]  
 
 ### 2.2 Non-Functional Requirements  
 
 #### 2.2.1 Data Checker  
 
-- **Compatibility**  
+- `Compatibility`
   - The application should be compatible with Linux, Windows, and macOS, supporting the latest releases of each operating system[.][3]  
 
-- **Usability**  
+- `Usability`
   - The interface should provide clear feedback during file imports and error highlighting to minimize user confusion[.][3]  
   - A help section or documentation link should be accessible from the interface for troubleshooting[.][3]  
 
-- **Performance**  
+- `Performance`  
   - The application should process **CSV**<sup>[9](#glossary-9)</sup> files and provide error feedback and graph visual representation using **mermaid**<sup>[10](#glossary-10)</sup>[.][3]  
 
 #### 2.2.2 REST API
 
-- **Performance**  
-  - The **REST API**<sup>[2](#glossary-2)</sup> should respond to requests within **1 second** under normal conditions and support high throughput[.][3]  
+- `Performance`
+  - The **REST API**<sup>[2](#glossary-2)</sup> should respond to requests within `1 second` under normal conditions and support high throughput[.][3]  
 
-- **Scalability<sup>[28](#glossary-28)</sup>**  
+- `Scalability`<sup>[28](#glossary-28)</sup>
   - The backend should be designed to scale horizontally to handle a growing number of concurrent users efficiently[.][3]  
 
-- **Compatibility**  
+- `Compatibility`  
   - The **REST API**<sup>[2](#glossary-2)</sup> should be **platform-agnostic**<sup>[3](#glossary-3)</sup> and deployable on any server environment that supports the required C++ runtime and dependencies[.][3]  
 
-- **Security**  
-  - The **deployed version** of the API must adhere to industry-standard practices such as HTTPS for secure communication[.][3]  
+- `Security`
+  - The `deployed version` of the API must adhere to industry-standard practices such as HTTPS for secure communication[.][3]  
 
-- **Documentation**  
+- `Documentation`
   - Comprehensive **API documentation**<sup>[23](#glossary-23)</sup> must be provided, including endpoint details, example requests/responses, and error codes[.][3]
 
 ## 3. System Architecture
@@ -252,22 +256,22 @@ You can find the full coding convention guidelines in the [Coding Conventions do
 
 The system architecture is designed to ensure seamless functionality, high performance, and a user-friendly experience across all supported platforms[.][3] It consists of the following key components:
 
-- **Desktop Application (Data Checker)**  
-  - **Technology**: Developed using [C][2] for its performance in handling **data integrity**<sup>[33](#glossary-33)</sup> checks[.][3]  
-  - **Purpose**: A utility application used to validate the integrity of the dataset (e.g., **CSV**<sup>[9](#glossary-9)</sup> file) by verifying **graph**<sup>[8](#glossary-8)</sup> properties such as connectivity and absence of loops[.][3]  
-  - **Supported Platforms**: Compatible with Linux, Windows, and macOS[.][3]  
+- `Desktop Application (Data Checker)`
+  - `Technology`: Developed using [C][2] for its performance in handling **data integrity**<sup>[33](#glossary-33)</sup> checks[.][3]  
+  - `Purpose`: A utility application used to validate the integrity of the dataset (e.g., **CSV**<sup>[9](#glossary-9)</sup> file) by verifying **graph**<sup>[8](#glossary-8)</sup> properties such as connectivity and absence of loops[.][3]  
+  - `Supported Platforms`: Compatible with Linux, Windows, and macOS[.][3]  
 
-- **REST API<sup>[2](#glossary-2)</sup>**  
-  - **Technology**: Developed using [C++][1] to ensure **platform-agnostic**<sup>[3](#glossary-3)</sup> deployment[.][3]  
-  - **Purpose**: Exposes core functionality through an **HTTP**<sup>[11](#glossary-11)</sup> server, providing endpoints for calculating shortest paths, managing data, and retrieving results in multiple formats (e.g., **JSON**<sup>[16](#glossary-16)</sup> or **XML**<sup>[17](#glossary-17)</sup>)[.][3]  
-  - **Compatibility**: Designed to be deployable on any server environment that supports the required C++ runtime[.][3]  
+- `REST API<sup>[2](#glossary-2)</sup>`
+  - `Technology`: Developed using [C++][1] to ensure **platform-agnostic**<sup>[3](#glossary-3)</sup> deployment[.][3]  
+  - `Purpose`: Exposes core functionality through an **HTTP**<sup>[11](#glossary-11)</sup> server, providing endpoints for calculating shortest paths, managing data, and retrieving results in multiple formats (e.g., **JSON**<sup>[16](#glossary-16)</sup> or **XML**<sup>[17](#glossary-17)</sup>)[.][3]  
+  - `Compatibility`: Designed to be deployable on any server environment that supports the required C++ runtime[.][3]  
 
 #### 3.1.1 Key Design Considerations
 
-- **Modular Design<sup>[27](#glossary-27)</sup>**: Each component is designed to operate independently, ensuring maintainability and ease of updates[.][3]  
-- **High Performance**: The architecture prioritizes efficiency to handle large datasets and complex computations within the defined performance constraints[.][3]  
-- **Cross-Platform<sup>[19](#glossary-19)</sup> Support**: Desktop applications and the **REST API**<sup>[2](#glossary-2)</sup> are built to function seamlessly across Linux, Windows, and macOS[.][3]  
-- **Extensibility**: The system is designed to accommodate future enhancements, such as adding new endpoints, improving UI/UX, or integrating with external services[.][3]  
+- `Modular Design`<sup>[27](#glossary-27)</sup>: Each component is designed to operate independently, ensuring maintainability and ease of updates[.][3]  
+- `High Performance`: The architecture prioritizes efficiency to handle large datasets and complex computations within the defined performance constraints[.][3]  
+- `Cross-Platform`<sup>[19](#glossary-19)</sup> `Support`: Desktop applications and the **REST API**<sup>[2](#glossary-2)</sup> are built to function seamlessly across Linux, Windows, and macOS[.][3]  
+- `Extensibility`: The system is designed to accommodate future enhancements, such as adding new endpoints, improving UI/UX, or integrating with external services[.][3]  
 
 ### 3.2 Pathfinding Algorithms
 
@@ -275,37 +279,37 @@ To complete this project, we employ a robust algorithms, **Dijkstra's Algorithm*
 
 #### 3.2.1 Dijkstra's Algorithm
 
-- **Purpose:**  
+- `Purpose:`  
   Finds the shortest path between two landmarks in a **graph**<sup>[8](#glossary-8)</sup>[.][3]  
-- **Advantages:**  
+- `Advantages:`  
   - Guarantees the shortest path[.][3]  
   - Works well when all **edge**<sup>[15](#glossary-15)</sup> weights are non-negative[.][3]  
-- **Usage in the Project:**  
+- `Usage in the Project:`  
   **Dijkstra's algorithm**<sup>[5](#glossary-5)</sup> is used for cases where simplicity and guaranteed accuracy are prioritized over speed[.][3]  
 
 ### 3.3 API Implementation
 
 #### 3.3.1 Crow
 
-- **Purpose:**  
-  Crow is a C++ microframework used to quickly build REST APIs. It is designed for high performance, easy setup, and a minimalistic approach to handling HTTP requests. With its simple API, Crow allows developers to define routes, handle HTTP methods (GET, POST, PUT, DELETE), and serve content efficiently. It can be seen as a lightweight alternative to larger web frameworks in C++.
+- `Purpose:`  
+  Crow is a C++ microframework used to quickly build REST APIs. It is designed for high performance, easy setup, and a minimalistic approach to handling HTTP requests. With its simple API, Crow allows developers to define routes, handle HTTP methods (**GET**<sup>[37](#glossary-37)</sup>, POST, PUT, DELETE), and serve content efficiently. It can be seen as a lightweight alternative to larger web frameworks in C++.
 
-- **Advantages:**  
-  1. **High Performance:** Crow is built on C++ which gives it an edge in performance over other frameworks, especially for systems that require low latency and high throughput.
-  2. **Lightweight and Simple:** The framework has minimal dependencies, making it easy to integrate and use without much overhead. Its intuitive syntax allows quick development and deployment.
-  3. **Asynchronous Request Handling:** Crow supports asynchronous I/O operations, improving scalability and responsiveness for APIs under heavy traffic.
-  4. **HTTP/1 and WebSocket Support:** In addition to supporting basic HTTP requests, Crow also includes WebSocket support for real-time communication, making it versatile for various web applications.
-  5. **JSON and XML Support:** Native support for handling JSON and XML data makes it easier to build RESTful services with Crow.
+- `Advantages:`
+  1. `High Performance:` Crow is built on C++ which gives it an edge in performance over other frameworks, especially for systems that require low latency and high throughput.
+  2. `Lightweight and Simple:` The framework has minimal dependencies, making it easy to integrate and use without much overhead. Its intuitive syntax allows quick development and deployment.
+  3. `Asynchronous Request Handling:` Crow supports asynchronous I/O operations, improving scalability and responsiveness for APIs under heavy traffic.
+  4. `HTTP/1 and WebSocket Support:` In addition to supporting basic HTTP requests, Crow also includes WebSocket support for real-time communication, making it versatile for various web applications.
+  5. `JSON and XML Support:` Native support for handling JSON and XML data makes it easier to build RESTful services with Crow.
 
-- **Usage in the Project:**  
+- `Usage in the Project:`  
   In the context of this project, Crow is used to implement the REST API that communicates between the front-end and back-end systems. The API will be responsible for:
-  1. **Serving Graph Data:** It handles requests to retrieve graph-related data (nodes, edges, distances) and delivers it in JSON format for use by the front-end visualization tools.
-  2. **Processing Pathfinding Algorithms:** Crow serves endpoints that allow for submitting graph data to the back-end for computation, then returning results such as the shortest path.
-  3. **Request/Response Handling:** For every user interaction, Crow processes the incoming HTTP requests, handles any necessary computations, and returns the response in the expected format.
+  1. `Serving Graph Data:` It handles requests to retrieve graph-related data (nodes, edges, distances) and delivers it in JSON format for use by the front-end visualization tools.
+  2. `Processing Pathfinding Algorithms:` Crow serves endpoints that allow for submitting graph data to the back-end for computation, then returning results such as the shortest path.
+  3. `Request/Response Handling:` For every user interaction, Crow processes the incoming HTTP requests, handles any necessary computations, and returns the response in the expected format.
 
 ### 3.4 Data Flow Overview
 
-Below is a high-level representation of the data flow in the system using a Mermaid<sup>[10](#glossary-10)</sup> diagram:  
+Below is a high-level representation of the data flow in the system using a **Mermaid**<sup>[10](#glossary-10)</sup> diagram:  
 
 #### 3.4.1 High-Level Data Flow Diagram
 
@@ -337,22 +341,22 @@ graph TD
 
 ##### Explanation of the High-Level Data Flow Diagram
 
-1. **Client Request:**  
+1. `Client Request:`  
    - The process begins when a client sends a **REST API**<sup>[2](#glossary-2)</sup> request to the `Backend Server`. The request contains the source and destination landmarks (**nodes**<sup>[14](#glossary-14)</sup>) for which the shortest path is required[.][3]
-2. **Input Validation Module:**  
+2. `Input Validation Module:`  
    - The `Backend Server` forwards the request to the `Input Validation Module`, which checks the validity of the input (e.g., valid IDs, non-empty input\)[.][3] This involves verifying that the provided source and destination **nodes**<sup>[14](#glossary-14)</sup> exist and that the parameters are correctly formatted[.][3] If the input is valid, the system proceeds; otherwise, an error response is returned to the client[.][3]
-3. **Graph Data Loader:**  
+3. `Graph Data Loader:`  
    - If the input is valid, the `Graph Data Loader` retrieves the relevant **graph<sup>[8](#glossary-8)</sup> data** (**nodes**<sup>[14](#glossary-14)</sup> and **edges**<sup>[15](#glossary-15)</sup>) from the dataset and loads it into memory[.][3] This data will be used in the next steps to compute the shortest path[.][3]
-4. **Dijkstra's Algorithm Execution:**  
+4. `Dijkstra's Algorithm Execution:`  
    - The **Dijkstra's algorithm**<sup>[5](#glossary-5)</sup> calculates the minimal path by evaluating the **edges**<sup>[15](#glossary-15)</sup> and **nodes**<sup>[14](#glossary-14)</sup> of the graph based on their weights (distances or costs\)[.][3]
-5. **Path Result Generator:**  
+5. `Path Result Generator:`  
    - Once the algorithm completes, the `Path Result Generator` processes the results[.][3] It converts the raw output (a list of **nodes**<sup>[14](#glossary-14)</sup> in the shortest path, including distances) into a structured format that can be easily understood by the client[.][3]
-6. **Response Formatter:**  
+6. `Response Formatter:`  
    - The `Response Formatter` takes the processed data and formats it according to the client's request (either **JSON**<sup>[16](#glossary-16)</sup> or **XML**<sup>[17](#glossary-17)</sup>)[.][3] This ensures that the output is compatible with the client's expected format[.][3]
-7. **Client Response:**  
+7. `Client Response:`  
    - Finally, the `Backend Server` sends the formatted response back to the client, which contains the shortest path from the source to the destination, including details like travel times or distances between intermediate **nodes**<sup>[14](#glossary-14)</sup>[.][3]
-8. **Error Handling:**  
-   - If at any point the input validation fails, the system will return an error response (using appropriate HTTP<sup>[11](#glossary-11)</sup> status codes), which will be received by the client[.][3]
+8. `Error Handling:`  
+   - If at any point the input validation fails, the system will return an error response (using appropriate **HTTP**<sup>[11](#glossary-11)</sup> status codes), which will be received by the client[.][3]
 
 #### 3.4.2 REST API Execution Flow
 
@@ -404,60 +408,60 @@ graph TD
 
 ##### Explanation of the REST API Execution Flow
 
-###### **Execution Flow**
+###### Execution Flow
 
-1. **Start**  
+1. `Start`  
    The process begins, triggering the API endpoint that handles the pathfinding request[.][3]
 
-2. **Receive Request**  
+2. `Receive Request`  
    The API receives the incoming request[.][3] This could be from a web client, application, or service requesting a pathfinding result[.][3]
 
-3. **Is it GET method?**  
-   The first check is to determine if the request is a **GET** request[.][3] This is crucial because the API only support the **GET** method for retrieving pathfinding results[.][3]
+3. `Is it GET method?`  
+   The first check is to determine if the request is a **GET**<sup>[37](#glossary-37)</sup> request[.][3] This is crucial because the API only support the **GET**<sup>[37](#glossary-37)</sup> method for retrieving pathfinding results[.][3]
 
-   - **Yes**: If the request is a **GET** method, the flow proceeds to the next step[.][3]
-   - **No**: If the request is not a **GET** method, the system will return a **400 Bad Request** response (invalid method)<span></span>[.][3]
+   - `Yes`: If the request is a **GET**<sup>[37](#glossary-37)</sup> method, the flow proceeds to the next step[.][3]
+   - `No`: If the request is not a **GET**<sup>[37](#glossary-37)</sup> method, the system will return a **400 Bad Request**<sup>[44](#glossary-44)</sup> response (invalid method)<span></span>[.][3]
 
-4. **Validate Input**  
-   The API validates the incoming parameters from the request[.][3] These parameters typically include the **source** and **destination** nodes for the pathfinding operation[.][3]
+4. `Validate Input`  
+   The API validates the incoming parameters from the request[.][3] These parameters typically include the `source` and `destination` nodes for the pathfinding operation[.][3]
 
-5. **Are parameters valid (source and destination)?**  
-   The next validation step checks whether the **source** and **destination** nodes are valid and exist in the system[.][3] This ensures that the input data is correct and prevents errors during pathfinding[.][3]
+5. `Are parameters valid (source and destination)?`  
+   The next validation step checks whether the `source` and `destination` nodes are valid and exist in the system[.][3] This ensures that the input data is correct and prevents errors during pathfinding[.][3]
 
-   - **Yes**: If the parameters are valid, the flow continues to the next step[.][3]
-   - **No**: If any of the parameters are invalid (e.g., the nodes do not exist), the system returns a **400 Bad Request** response indicating the issue with the parameters[.][3]
+   - `Yes`: If the parameters are valid, the flow continues to the next step[.][3]
+   - `No`: If any of the parameters are invalid (e.g., the nodes do not exist), the system returns a **400 Bad Request**<sup>[44](#glossary-44)</sup> response indicating the issue with the parameters[.][3]
 
-6. **Validate returning format**  
-   The API checks the **Accept** field in the **HTTP**<sup>[11](#glossary-11)</sup> header to ensure the desired response format (e.g., **JSON**<sup>[16](#glossary-16)</sup> or **XML**<sup>[17](#glossary-17)</sup>) is supported[.][3] This step ensures that the API responds in the correct format, based on client preferences[.][3]
+6. `Validate returning format`  
+   The API checks the **Accept field** in the **HTTP**<sup>[11](#glossary-11)</sup> header to ensure the desired response format (e.g., **JSON**<sup>[16](#glossary-16)</sup> or **XML**<sup>[17](#glossary-17)</sup>) is supported[.][3] This step ensures that the API responds in the correct format, based on client preferences[.][3]
 
-7. **Is the Accept field in HTTP<sup>[11](#glossary-11)</sup> header valid (JSON<sup>[16](#glossary-16)</sup> or XML<sup>[17](#glossary-17)</sup>)?**  
-   The system checks if the **Accept** header contains a valid format such as **application/json** or **application/xml**[.][3]
+7. `Is the Accept field in HTTP`<sup>[11](#glossary-11) </sup>`header valid (JSON`<sup>[16](#glossary-16)</sup> `or XML`<sup>[17](#glossary-17)</sup>`)?`  
+   The system checks if the **Accept** header contains a valid format such as `application/json` or `application/xml`[.][3]
 
-   - **Yes**: If the **Accept** header is valid, the system proceeds with the pathfinding execution[.][3]
-   - **No**: If the **Accept** header is invalid or unsupported, the system responds with a **406 Not Acceptable** error[.][3]
+   - `Yes`: If the **Accept** header is valid, the system proceeds with the pathfinding execution[.][3]
+   - `No`: If the **Accept** header is invalid or unsupported, the system responds with a **406 Not Acceptable**<sup>[45](#glossary-45)</sup> error[.][3]
 
-8. **Execute the pathfinding algorithm**  
-   The API executes the core pathfinding algorithm based on the **source** and **destination** parameters[.][3] This step involves processing the graph, performing computations to determine the shortest path or optimal route[.][3]
+8. `Execute the pathfinding algorithm`  
+   The API executes the core pathfinding algorithm based on the `source` and `destination` parameters[.][3] This step involves processing the graph, performing computations to determine the shortest path or optimal route[.][3]
 
-9. **Format Response (Path Result in desired format)**  
+9. `Format Response (Path Result in desired format)`  
    After the pathfinding algorithm executes, the results are formatted into the requested format (**JSON**<sup>[16](#glossary-16)</sup> or **XML**<sup>[17](#glossary-17)</sup>)<span></span>[.][3] The response is structured to provide the path data in a clear and consumable way for the client[.][3]
 
-10. **Return Response (Code 200)**  
-   The system sends the **200 OK** response with the formatted pathfinding result[.][3] The response includes the desired data (such as the path, distance, or any other relevant details) and confirms that the request was successfully processed[.][3]
+10. `Return Response (Code 200`<sup>[46](#glossary-46)</sup>`)`  
+   The system sends the **200 OK**<sup>[46](#glossary-46)</sup> response with the formatted pathfinding result[.][3] The response includes the desired data (such as the path, distance, or any other relevant details) and confirms that the request was successfully processed[.][3]
 
-###### **Error Flow**
+###### Error Flow
 
 In case of any issues during the request validation or processing, the system may respond with error codes:
 
-1. **Error Response - Bad Request (Code 400)**  
-   If the request method is incorrect, or the parameters (**source** or **destination**) are invalid, the system responds with a **400 Bad Request** status code indicating that the request could not be processed due to invalid input[.][3]
+1. `Error Response - Bad Request (Code 400`<sup>[44](#glossary-44)</sup>`)`  
+   If the request method is incorrect, or the parameters (`source` or `destination`) are invalid, the system responds with a **400 Bad Request**<sup>[44](#glossary-44)</sup> status code indicating that the request could not be processed due to invalid input[.][3]
 
-2. **Error Response - Not Acceptable (Code 406)**  
-   If the **Accept** header specifies a format that the system does not support (neither **JSON**<sup>[16](#glossary-16)</sup> nor **XML**<sup>[17](#glossary-17)</sup>), the system returns a **406 Not Acceptable** response indicating that the requested format is not supported[.][3]
+2. `Error Response - Not Acceptable (Code 406`<sup>[45](#glossary-45)</sup>`)`  
+   If the **Accept** header specifies a format that the system does not support (neither **JSON**<sup>[16](#glossary-16)</sup> nor **XML**<sup>[17](#glossary-17)</sup>), the system returns a **406 Not Acceptable**<sup>[45](#glossary-45)</sup> response indicating that the requested format is not supported[.][3]
 
-###### **Loop and Retry**
+###### Loop and Retry
 
-- Once an error occurs (either **400** or **406**), the system resets the process, awaiting a new request, which can be retried with corrected parameters or headers[.][3]
+- Once an error occurs (either **400**<sup>[44](#glossary-44)</sup> or **406**<sup>[45](#glossary-45)</sup>), the system resets the process, awaiting a new request, which can be retried with corrected parameters or headers[.][3]
 
 #### 3.4.2 Shortest Path Algorithm Execution Flow
 
@@ -482,12 +486,13 @@ graph TD
   M[Flip the path, to convert it into A to B path]
   m[Return the shortest path]
 
-
   N[Start Thread]
   O[Count the time]
   P{Is time is greater or equal to 950ms?}
   Q[End All Threads]
+  r{Is a path has been found?}
   R{Is Thread 1 path is shorter than Thread 2 path?}
+  S[Return HTTP Error 500]
 
 
   subgraph  
@@ -520,7 +525,9 @@ graph TD
       K -- No --> j
     end
 
-    Q --> R
+    Q --> r
+    r -- Yes --> R
+    r -- No --> S
     G --> H
     L --> M
     R -- Yes --> H
@@ -532,106 +539,106 @@ graph TD
 
 ##### Explanation of the Shortest Path Algorithm Execution Flow
 
-This flowchart illustrates the execution of a shortest path algorithm using a **multithreading**<sup>[42](#glossary-42)</sup> approach, where three threads<sup>[42](#glossary-42)</sup> are employed to perform different tasks concurrently[.][3] The primary goal is to find the shortest path between two points, A and B, while also measuring the time taken and comparing the results[.][3]
+This flowchart illustrates the execution of a shortest path algorithm using a **multithreading**<sup>[42](#glossary-42)</sup> approach, where three **threads**<sup>[42](#glossary-42)</sup> are employed to perform different tasks concurrently[.][3] The primary goal is to find the shortest path between two points, A and B, while also measuring the time taken and comparing the results[.][3]
 
 ---
 
-1. **Start:**
+1. `Start:`
    - The process begins when the user requests to find the shortest path between two points, A and B[.][3]
 
-2. **Get the Shortest Path:**
-   - The system initiates the calculation for the shortest path and starts the process in parallel threads<sup>[42](#glossary-42)</sup>[.][3]
+2. `Get the Shortest Path:`
+   - The system initiates the calculation for the shortest path and starts the process in parallel **threads**<sup>[42](#glossary-42)</sup>[.][3]
 
-3. **Create 3 Threads:**
-   - Three threads<sup>[42](#glossary-42)</sup> are created to perform different tasks concurrently:
-     1. **Thread 1**: Calculates the shortest path from point A to B using Dijkstra's algorithm<sup>[5](#glossary-5)</sup>[.][3]
-     2. **Thread 2**: Calculates the shortest path from point B to A using Dijkstra's algorithm<sup>[5](#glossary-5)</sup>[.][3]
-     3. **Main Thread**: Tracks the time taken and determines whether the process completes within a specified time[.][3]
-
----
-
-###### **Thread 1: Calculating Path from Point A to B**
-
-1. **Start Thread<sup>[42](#glossary-42)</sup> 1:**
-   - The first thread<sup>[42](#glossary-42)</sup> starts executing[.][3]
-2. **Start Dijkstra<sup>[5](#glossary-5)</sup> from Point A to B:**
-   - Thread<sup>[42](#glossary-42)</sup> 1 runs Dijkstra's algorithm<sup>[5](#glossary-5)</sup> starting from point A to point B to find the shortest path[.][3]
-3. **Wait for Dijkstra<sup>[5](#glossary-5)</sup> to Finish:**
-   - The thread<sup>[42](#glossary-42)</sup> waits for the algorithm to finish computing the shortest path[.][3]
-4. **Is the Shortest Path Found?**
-   - If Dijkstra's algorithm<sup>[5](#glossary-5)</sup> finds a valid path, the thread<sup>[42](#glossary-42)</sup> ends; otherwise, it continues executing until a valid path is found[.][3]
-5. **End All Threads<sup>[42](#glossary-42)</sup>:**
-   - Once the path is found, Thread<sup>[42](#glossary-42)</sup> 1 completes, signaling the end of its task[.][3]
-6. **Return the Shortest Path:**
-   - The shortest path from point A to point B is returned by the thread<sup>[42](#glossary-42)</sup>[.][3]
+3. `Create 3 Threads:`
+   - Three **threads**<sup>[42](#glossary-42)</sup> are created to perform different tasks concurrently:
+     1. `Thread 1`: Calculates the shortest path from point A to B using **Dijkstra's algorithm**<sup>[5](#glossary-5)</sup>[.][3]
+     2. `Thread 2`: Calculates the shortest path from point B to A using **Dijkstra's algorithm**<sup>[5](#glossary-5)</sup>[.][3]
+     3. `Main Thread`: Tracks the time taken and determines whether the process completes within a specified time[.][3]
 
 ---
 
-###### **Main Thread: Measuring Time**
+###### Thread 1: Calculating Path from Point A to B
 
-1. **Start Main Thread<sup>[42](#glossary-42)</sup>:**
-    - The main thread<sup>[42](#glossary-42)</sup> begins execution and starts the time tracking process[.][3]
+1. `Start Thread`<sup>[42](#glossary-42)</sup> `1:`
+   - The first **thread**<sup>[42](#glossary-42)</sup> starts executing[.][3]
+2. `Start Dijkstra`<sup>[5](#glossary-5)</sup> `from Point A to B:`
+   - **Thread**<sup>[42](#glossary-42)</sup> 1 runs **Dijkstra's algorithm**<sup>[5](#glossary-5)</sup> starting from point A to point B to find the shortest path[.][3]
+3. `Wait for Dijkstra`<sup>[5](#glossary-5)</sup> `to Finish:`
+   - The **thread**<sup>[42](#glossary-42)</sup> waits for the algorithm to finish computing the shortest path[.][3]
+4. `Is the Shortest Path Found?`
+   - If **Dijkstra's algorithm**<sup>[5](#glossary-5)</sup> finds a valid path, the **thread**<sup>[42](#glossary-42)</sup> ends; otherwise, it continues executing until a valid path is found[.][3]
+5. `End All Threads`<sup>[42](#glossary-42)</sup>`:`
+   - Once the path is found, **Thread**<sup>[42](#glossary-42)</sup> 1 completes, signaling the end of its task[.][3]
+6. `Return the Shortest Path:`
+   - The shortest path from point A to point B is returned by the **thread**<sup>[42](#glossary-42)</sup>[.][3]
 
-2. **Count the Time:**
+---
+
+###### Main Thread: Measuring Time
+
+1. `Start Main Thread`<sup>[42](#glossary-42)</sup>`:`
+    - The main **thread**<sup>[42](#glossary-42)</sup> begins execution and starts the time tracking process[.][3]
+
+2. `Count the Time:`
     - The system starts counting the time taken for the pathfinding calculations[.][3]
 
-3. **Is Time Greater Than or Equal to 950ms?**
-    - The main thread<sup>[42](#glossary-42)</sup> monitors the time[.][3] If the time taken by the threads<sup>[42](#glossary-42)</sup> exceeds 950ms, the process is stopped and the threads<sup>[42](#glossary-42)</sup> are ended[.][3]
+3. `Is Time Greater Than or Equal to 950ms?`
+    - The main **thread**<sup>[42](#glossary-42)</sup> monitors the time[.][3] If the time taken by the **threads**<sup>[42](#glossary-42)</sup> exceeds 950ms, the process is stopped and the **threads**<sup>[42](#glossary-42)</sup> are ended[.][3]
 
-4. **End All Threads<sup>[42](#glossary-42)</sup>:**
-    - If the time limit is reached, the main thread<sup>[42](#glossary-42)</sup> ends all active threads<sup>[42](#glossary-42)</sup>[.][3]
+4. `End All Threads`<sup>[42](#glossary-42)</sup>`:`
+    - If the time limit is reached, the main **thread**<sup>[42](#glossary-42)</sup> ends all active **threads**<sup>[42](#glossary-42)</sup>[.][3]
 
 ---
 
-###### **Thread 2: Calculating Path from Point B to A**
+###### Thread 2: Calculating Path from Point B to A
 
-1. **Start Thread<sup>[42](#glossary-42)</sup> 2:**
-    - The second thread<sup>[42](#glossary-42)</sup> starts executing concurrently with the others[.][3]
+1. `Start Thread`<sup>[42](#glossary-42)</sup> `2:`
+    - The second **thread**<sup>[42](#glossary-42)</sup> starts executing concurrently with the others[.][3]
 
-2. **Start Dijkstra<sup>[5](#glossary-5)</sup> from Point B to A:**
-    - Thread<sup>[42](#glossary-42)</sup> 2 runs Dijkstra's algorithm<sup>[5](#glossary-5)</sup> in reverse, from point B to point A[.][3]
+2. `Start Dijkstra`<sup>[5](#glossary-5)</sup> `from Point B to A:`
+    - **Thread**<sup>[42](#glossary-42)</sup> 2 runs **Dijkstra's algorithm**<sup>[5](#glossary-5)</sup> in reverse, from point B to point A[.][3]
 
-3. **Wait for Dijkstra<sup>[5](#glossary-5)</sup> to Finish:**
-    - Thread<sup>[42](#glossary-42)</sup> 2 waits for the Dijkstra algorithm<sup>[5](#glossary-5)</sup> to finish[.][3]
+3. `Wait for Dijkstra`<sup>[5](#glossary-5)</sup> `to Finish:`
+    - **Thread**<sup>[42](#glossary-42)</sup> 2 waits for the **Dijkstra algorithm**<sup>[5](#glossary-5)</sup> to finish[.][3]
 
-4. **Is the Shortest Path Found?**
-    - Thread<sup>[42](#glossary-42)</sup> 2 checks whether it has found a valid path[.][3] If yes, it proceeds to the next step; otherwise, it waits until a valid path is found[.][3]
+4. `Is the Shortest Path Found?`
+    - **Thread**<sup>[42](#glossary-42)</sup> 2 checks whether it has found a valid path[.][3] If yes, it proceeds to the next step; otherwise, it waits until a valid path is found[.][3]
 
-5. **End All Threads<sup>[42](#glossary-42)</sup>:**
-    - Once the shortest path is found, the second thread<sup>[42](#glossary-42)</sup> completes its task[.][3]
+5. `End All Threads`<sup>[42](#glossary-42)</sup>`:`
+    - Once the shortest path is found, the second **thread**<sup>[42](#glossary-42)</sup> completes its task[.][3]
 
-6. **Flip the Path**
+6. `Flip the Path`
     - Since the user want each steps from A(starting point) to B(destination), the path is "flipped" to convert it from `B --> A` to `A --> B`[.][3]
 
-7. **Return the Shortest Path:**
-    - The shortest path from point A to point B is returned by Thread<sup>[42](#glossary-42)</sup> 2[.][3]
+7. `Return the Shortest Path:`
+    - The shortest path from point A to point B is returned by **Thread**<sup>[42](#glossary-42)</sup> 2[.][3]
 
 ---
 
-###### **Comparison of Paths:**
+###### Comparison of Paths
 
-1. **Compare Path Lengths:**
-    - After both threads<sup>[42](#glossary-42)</sup> (Thread<sup>[42](#glossary-42)</sup> 1 and Thread<sup>[42](#glossary-42)</sup> 2) have stopped, the system compares the paths found by the two threads<sup>[42](#glossary-42)</sup>[.][3]
+1. `Compare Path Lengths:`
+    - After both **threads**<sup>[42](#glossary-42)</sup> (**Thread**<sup>[42](#glossary-42)</sup> 1 and **Thread**<sup>[42](#glossary-42)</sup> 2) have stopped, the system compares the paths found by the two **threads**<sup>[42](#glossary-42)</sup>[.][3]
 
-2. **Is Thread<sup>[42](#glossary-42)</sup> 1 Path Shorter Than Thread<sup>[42](#glossary-42)</sup> 2 Path?**
-    - If the path calculated by Thread<sup>[42](#glossary-42)</sup> 1 (A to B) is shorter than the path calculated by Thread<sup>[42](#glossary-42)</sup> 2 (B to A), the result from Thread<sup>[42](#glossary-42)</sup> 1 is selected[.][3]
+2. `Is Thread`<sup>[42](#glossary-42)</sup> `1 Path Shorter Than Thread`<sup>[42](#glossary-42)</sup> `2 Path?`
+    - If the path calculated by **Thread**<sup>[42](#glossary-42)</sup> 1 (A to B) is shorter than the path calculated by **Thread**<sup>[42](#glossary-42)</sup> 2 (B to A), the result from **Thread**<sup>[42](#glossary-42)</sup> 1 is selected[.][3]
 
-3. **Return the Shortest Path:**
-    - If Thread<sup>[42](#glossary-42)</sup> 1's path is shorter, it returns the path from A to B; otherwise, it returns Thread<sup>[42](#glossary-42)</sup> 2's the path from B to A[.][3]
+3. `Return the Shortest Path:`
+    - If **Thread**<sup>[42](#glossary-42)</sup> 1's path is shorter, it returns the path from A to B; otherwise, it returns **Thread**<sup>[42](#glossary-42)</sup> 2's the path from B to A[.][3]
 
 ---
 
 ###### Final Outcome
 
-- The system determines the shortest path by comparing the results of both threads<sup>[42](#glossary-42)</sup> and considers the time taken to ensure efficiency[.][3]
-- The shortest path is returned to the user, either from **A to B** or **B to A**, depending on the results of the comparison[.][3]
+- The system determines the shortest path by comparing the results of both **threads**<sup>[42](#glossary-42)</sup> and considers the time taken to ensure efficiency[.][3]
+- The shortest path is returned to the user, either from `A to B` or `B to A`, depending on the results of the comparison[.][3]
 
 ##### Result Visualization
 
-The following Mermaid<sup>[10](#glossary-10)</sup> diagram illustrates the **graph**<sup>[8](#glossary-8)</sup> structure and the paths calculated by each thread<sup>[42](#glossary-42)</sup>:
+The following **Mermaid**<sup>[10](#glossary-10)</sup> diagram illustrates the **graph**<sup>[8](#glossary-8)</sup> structure and the paths calculated by each **thread**<sup>[42](#glossary-42)</sup>:
   
-- **Thread 1 Path**: Calculated from **A** *(node 2)* **to B** *(node 30)*(green arrows)
-- **Thread 2 Path**: Calculated from **B** *(node 30)* **to A** *(node 2)*(red arrows)
+- `Thread 1 Path`: Calculated from `A` *(node 2)* `to B` *(node 30)*(green arrows)
+- `Thread 2 Path`: Calculated from `B` *(node 30)* `to A` *(node 2)*(red arrows)
 
 ```mermaid
   graph TD
@@ -777,7 +784,6 @@ graph TD
         L -- Yes --> M
         M --> N
         L --> No --> K
-        K --> H
         N --> E
         G --> O
     end
@@ -789,53 +795,53 @@ The following diagram illustrates the step-by-step execution of **Dijkstra's alg
 
 ---
 
-1. **Start**  
+1. `Start`  
    The algorithm begins[.][3] This marks the initiation of the process to find the shortest path between the source **node**<sup>[14](#glossary-14)</sup> and the destination **node**<sup>[14](#glossary-14)</sup>[.][3]
 
-2. **Initialize Distance Array with Infinity, Set Source Distance to 0**  
+2. `Initialize Distance Array with Infinity, Set Source Distance to 0`  
    - The algorithm initializes an array of distances, setting the distance for all **nodes**<sup>[14](#glossary-14)</sup> to `infinity (∞)` because their exact distances are unknown initially[.][3]
    - The distance for the **source node**<sup>[14](#glossary-14)</sup> is set to 0 since the shortest path from the source to itself is always zero[.][3]
 
-3. **Initialize Priority Queue<sup>[30](#glossary-30)</sup> with the Source Node<sup>[14](#glossary-14)</sup>**  
+3. `Initialize Priority Queue`<sup>[30](#glossary-30)</sup> `with the Source Node`<sup>[14](#glossary-14)</sup>
    - The algorithm initializes a **priority queue**<sup>[30](#glossary-30)</sup> (often implemented as a min-heap) and inserts the **source node**<sup>[14](#glossary-14)</sup> with a distance of 0[.][3]
-   - The priority queue<sup>[30](#glossary-30)</sup> ensures that the node<sup>[14](#glossary-14)</sup> with the smallest tentative distance is always processed first[.][3]
+   - The **priority queue**<sup>[30](#glossary-30)</sup> ensures that the **node**<sup>[14](#glossary-14)</sup> with the smallest tentative distance is always processed first[.][3]
 
-4. **Is Priority Queue<sup>[30](#glossary-30)</sup> Empty?**  
+4. `Is Priority Queue`<sup>[30](#glossary-30)</sup> `Empty?`  
    - The algorithm checks if the **priority queue**<sup>[30](#glossary-30)</sup> is empty[.][3]
-     - **Yes**: If the queue is empty, it means all reachable nodes<sup>[14](#glossary-14)</sup> have been processed[.][3] The algorithm terminates here, and the shortest path is found[.][3]
-     - **No**: If the queue is not empty, the algorithm proceeds to process the next node<sup>[14](#glossary-14)</sup>[.][3]
+     - `Yes`: If the queue is empty, it means all reachable **nodes**<sup>[14](#glossary-14)</sup> have been processed[.][3] The algorithm terminates here, and the shortest path is found[.][3]
+     - `No`: If the queue is not empty, the algorithm proceeds to process the next **node**<sup>[14](#glossary-14)</sup>[.][3]
 
-5. **Extract Node with Minimum Distance from Priority Queue<sup>[30](#glossary-30)</sup>**  
+5. `Extract Node with Minimum Distance from Priority Queue`<sup>[30](#glossary-30)</sup>  
    - The algorithm extracts the **node**<sup>[14](#glossary-14)</sup> with the smallest distance from the **priority queue**<sup>[30](#glossary-30)</sup>[.][3]
    - This **node**<sup>[14](#glossary-14)</sup> is then marked as the current **node**<sup>[14](#glossary-14)</sup> being processed[.][3]
 
-6. **Is Node Visited?**  
+6. `Is Node Visited?`  
    - The algorithm checks if the current **node**<sup>[14](#glossary-14)</sup> has already been visited[.][3]
-     - **Yes**: If the **node**<sup>[14](#glossary-14)</sup> has been visited before, the algorithm skips processing it again and moves to the next **node**<sup>[14](#glossary-14)</sup> in the priority queue[.][3]
-     - **No**: If the **node**<sup>[14](#glossary-14)</sup> has not been visited, the algorithm proceeds to process the **node**<sup>[14](#glossary-14)</sup>[.][3]
+     - `Yes`: If the **node**<sup>[14](#glossary-14)</sup> has been visited before, the algorithm skips processing it again and moves to the next **node**<sup>[14](#glossary-14)</sup> in the priority queue[.][3]
+     - `No`: If the **node**<sup>[14](#glossary-14)</sup> has not been visited, the algorithm proceeds to process the **node**<sup>[14](#glossary-14)</sup>[.][3]
 
-7. **Mark Node<sup>[14](#glossary-14)</sup> as Visited**  
-   - The **node**<sup>[14](#glossary-14)</sup> is marked as **visited** to avoid reprocessing it in future iterations[.][3]
+7. `Mark Node`<sup>[14](#glossary-14)</sup> `as Visited`  
+   - The **node**<sup>[14](#glossary-14)</sup> is marked as `visited` to avoid reprocessing it in future iterations[.][3]
 
-8. **For Each Neighbor of the Current Node<sup>[14](#glossary-14)</sup>**  
+8. `For Each Neighbor of the Current Node`<sup>[14](#glossary-14)</sup>  
    - The algorithm iterates over all neighbors of the current **node**<sup>[14](#glossary-14)</sup> to explore the shortest paths through them[.][3]
 
-9. **Is the Neighbor's Tentative Distance Smaller?**  
+9. `Is the Neighbor's Tentative Distance Smaller?`  
    - For each neighbor, the algorithm checks if its `tentative distance` (current known distance) is smaller than the previously recorded distance[.][3]
-     - **Yes**: If the tentative distance is smaller, the algorithm updates the neighbor's distance in the distance array[.][3]
-     - **No**: If the neighbor's tentative distance is not smaller, no update is made, and the algorithm moves to the next neighbor[.][3]
+     - `Yes`: If the tentative distance is smaller, the algorithm updates the neighbor's distance in the distance array[.][3]
+     - `No`: If the neighbor's tentative distance is not smaller, no update is made, and the algorithm moves to the next neighbor[.][3]
 
-10. **Update Neighbor's Distance in Distance Array**  
+10. `Update Neighbor's Distance in Distance Array`  
     - If the tentative distance for a neighbor is smaller than the recorded distance, the algorithm updates that neighbor's distance in the distance array[.][3]
 
-11. **Add Neighbor to Priority Queue<sup>[30](#glossary-30)</sup> with Updated Distance**  
+11. `Add Neighbor to Priority Queue`<sup>[30](#glossary-30)</sup> `with Updated Distance`  
     - The updated neighbor is then added to the **priority queue**<sup>[30](#glossary-30)</sup> with its new, smaller tentative distance[.][3]
 
-12. **Is Priority Queue Empty Again?**  
+12. `Is Priority Queue Empty Again?`  
     - The algorithm checks the priority queue again to determine if there are any more nodes to process[.][3]
     - If the queue is not empty, it continues processing the remaining nodes until all reachable nodes are processed[.][3]
 
-13. **Return the Quickest Path**  
+13. `Return the Quickest Path`  
     - Once all **nodes**<sup>[14](#glossary-14)</sup> have been processed and the **priority queue**<sup>[30](#glossary-30)</sup> is empty, the algorithm concludes, and the `shortest path` from the source **node**<sup>[14](#glossary-14)</sup> to the destination **node**<sup>[14](#glossary-14)</sup> is returned[.][3]
 
 #### 3.4.4 Fibonacci Heap Node Structure with Pointer Relationships
@@ -844,12 +850,52 @@ The following diagram illustrates the step-by-step execution of **Dijkstra's alg
 
 ##### Explanation of the Fibonacci Heap Node Structure with Pointer Relationships
 
-- `Half-headed arrows` are used for next and previous pointers<sup>[36](#glossary-36)</sup>[.][3]
-- `Half-headed full arrows` are used for child and parent pointers<sup>[36](#glossary-36)</sup>[.][3]
-- `Filled arrowheads` are used for next and child pointers<sup>[36](#glossary-36)</sup>[.][3]
-- `White arrowheads` are for previous and parent pointers<sup>[36](#glossary-36)</sup>[.][3]
-- `Note` that we synthesis child pointers<sup>[36](#glossary-36)</sup> to all the children of a node; in actuality, only one of these pointers<sup>[36](#glossary-36)</sup> is stored, since we can find sibling nodes[.][3]
-- `Marked nodes` are grey and hoepfully the minimum is obvious[.][3]
+###### Types of Pointers and Their Representations
+
+1. `Next and Previous Pointers:`
+   - Represented by `half-headed arrows`.
+   - These pointers are used to navigate between sibling nodes in a circular doubly linked list.
+   - Each node in the heap maintains links to its next and previous sibling nodes for efficient traversal.
+
+2. `Child and Parent Pointers:`
+   - Represented by `half-headed full arrows`.
+   - Child pointers point to the first child of a node, while parent pointers point back to the node's parent.
+   - These relationships help maintain the hierarchical structure of the heap.
+
+---
+
+###### Arrowhead Styles for Distinguishing Pointer Types
+
+- `Filled Arrowheads:`
+  - Denote `next` and `child` pointers.
+  - For example, a filled arrow pointing to a node signifies a connection to either the next sibling or the first child.
+
+- `White Arrowheads:`
+  - Denote `previous` and `parent` pointers.
+  - These help indicate backward relationships in both sibling and parent-child relationships.
+
+---
+
+###### Synthesis of Child Pointers
+
+- `Representation of Child Relationships:`
+  - In diagrams, child pointers are often "synthesized," meaning all children of a node may appear to have direct connections to the parent.
+  - In reality, only `one child pointer` is stored per node. This pointer leads to the first child, from which siblings can be navigated using the next and previous pointers.
+
+- `Sibling Navigation:`
+  - Since sibling nodes are part of a circular doubly linked list, additional child pointers are unnecessary. Siblings can be found through the next and previous pointers.
+
+---
+
+###### Marking and Minimum Identification
+
+- `Marked Nodes:`
+  - Marked nodes, which are nodes that have lost a child since their last connection to a parent, are represented as `grey`.
+  - These nodes indicate that a cascading cut may be necessary if they lose another child.
+
+- `Minimum Node:`
+  - The minimum node is the root node with the smallest key.
+  - It is typically highlighted in diagrams to differentiate it from other nodes.
 
 ## 4. Detailed Design
 
@@ -861,55 +907,55 @@ The backend is structured to handle multiple requests efficiently and securely[.
 
 #### 4.1.1. REST API Endpoint
 
-- **Purpose**: Provides access to the core functionality of the application through a single GET endpoint[.][3]  
-- **Input**: Accepts source and destination landmark IDs as query parameters[.][3]  
-- **Output**: Returns the travel time and the ordered list of landmarks in the shortest path in `XML`<sup>[17](#glossary-17)</sup> or `JSON`<sup>[16](#glossary-16)</sup> formats[.][3]  
-- **Design**: Built using C++ for high performance, leveraging lightweight **HTTP**<sup>[11](#glossary-11)</sup> server libraries such as `Boost.Beast`, `cpp-httplib` or `Pistache`[.][3]
+- `Purpose`: Provides access to the core functionality of the application through a single **GET**<sup>[37](#glossary-37)</sup> endpoint[.][3]  
+- `Input`: Accepts source and destination landmark IDs as query parameters[.][3]  
+- `Output`: Returns the travel time and the ordered list of landmarks in the shortest path in **XML**<sup>[17](#glossary-17)</sup> or **JSON**<sup>[16](#glossary-16)</sup> formats[.][3]  
+- `Design`: Built using C++ for high performance, leveraging lightweight **HTTP**<sup>[11](#glossary-11)</sup> server libraries such as `Boost.Beast`, `cpp-httplib` or `Pistache`[.][3]
 <!-- TODO: Change it if using another library like crow -->
 
 #### 4.1.2. Request Handling Layer
 
-- **Purpose**: Parses incoming requests, validates inputs, and routes them to the appropriate modules[.][3]  
-- **Error Handling**: Ensures that invalid or incomplete requests return descriptive error messages (e.g., `400 Bad Request`)[.][3]  
-- **Concurrency<sup>[32](#glossary-32)</sup>**: Supports handling multiple requests simultaneously using **threading**<sup>[42](#glossary-42)</sup> or asynchronous techniques[.][3]
+- `Purpose`: Parses incoming requests, validates inputs, and routes them to the appropriate modules[.][3]  
+- `Error Handling`: Ensures that invalid or incomplete requests return descriptive error messages (e.g., **400 Bad Request**<sup>[44](#glossary-44)</sup>)<span></span>[.][3]  
+- `Concurrency<sup>[32](#glossary-32)</sup>`: Supports handling multiple requests simultaneously using **threading**<sup>[42](#glossary-42)</sup> or asynchronous techniques[.][3]
 
 #### 4.1.3. Pathfinding Engine
 
-- **Purpose**: Implements the core algorithm for finding the shortest path between two landmarks[.][3]  
-- **Algorithm**: Utilizes **Dijkstra**<sup>[5](#glossary-5)</sup>’s  algorithm for optimal precision using **DFS**<sup>[6](#glossary-6)</sup> and **Fibonacci Heap**<sup>[22](#glossary-22)</sup> (**priority queue**<sup>[30](#glossary-30)</sup>) for optimal performance[.][3]  
-- **Data Loading**: Reads the **graph**<sup>[8](#glossary-8)</sup> data (from `USA-roads.csv`) into memory during initialization to optimize query response times[.][3]  
-- **Performance Goals**: Ensures responses within 1 second for typical requests[.][3]
+- `Purpose`: Implements the core algorithm for finding the shortest path between two landmarks[.][3]  
+- `Algorithm`: Utilizes **Dijkstra**<sup>[5](#glossary-5)</sup>’s  algorithm for optimal precision using **DFS**<sup>[6](#glossary-6)</sup> and **Fibonacci Heap**<sup>[22](#glossary-22)</sup> (**priority queue**<sup>[30](#glossary-30)</sup>) for optimal performance[.][3]  
+- `Data Loading`: Reads the **graph**<sup>[8](#glossary-8)</sup> data (from `USA-roads.csv`) into memory during initialization to optimize query response times[.][3]  
+- `Performance Goals`: Ensures responses within 1 second for typical requests[.][3]
 
 #### 4.1.4. Data Validation Tool
 
-- **Purpose**: Verifies the integrity of the **graph**<sup>[8](#glossary-8)</sup> data before it is loaded into the server's memory[.][3]  
-- **Functionality**: Ensures that the dataset forms a fully connected **graph**<sup>[8](#glossary-8)</sup> and is free of loops[.][3]  
-- **Implementation**: Operates independently from the API, but higly recommanded before uploading a **CSV**<sup>[9](#glossary-9)</sup> on the server[.][3]
+- `Purpose`: Verifies the integrity of the **graph**<sup>[8](#glossary-8)</sup> data before it is loaded into the server's memory[.][3]  
+- `Functionality`: Ensures that the dataset forms a fully connected **graph**<sup>[8](#glossary-8)</sup> and is free of loops[.][3]  
+- `Implementation`: Operates independently from the API, but highly recommanded before uploading a **CSV**<sup>[9](#glossary-9)</sup> on the server[.][3]
 
 #### 4.1.5. Security Layer
 
-- **Purpose**: Protects the **REST API**<sup>[2](#glossary-2)</sup> from unauthorized access[.][3]  
-- **Implementation**:
+- `Purpose`: Protects the **REST API**<sup>[2](#glossary-2)</sup> from unauthorized access[.][3]  
+- `Implementation`:
   - **Input sanitization**<sup>[41](#glossary-41)</sup> to prevent injection attacks[.][3]  
   - **Rate limiting**<sup>[35](#glossary-35)</sup> to mitigate **DoS (Denial of Service**<sup>[52](#glossary-52)</sup>**)** attacks[.][3]
 
 #### 4.1.6. Response Serialization
 
-- **Purpose**: Converts the output of the **pathfinding**<sup>[4](#glossary-4)</sup> engine into the requested format (**XML**<sup>[17](#glossary-17)</sup> or **JSON**<sup>[16](#glossary-16)</sup>)[.][3]  
-- **Design**: Utilizes **lightweight serialization**<sup>[39](#glossary-39)</sup> implementation to minimize overhead while maintaining compatibility with modern REST standards[.][3]
+- `Purpose`: Converts the output of the **pathfinding**<sup>[4](#glossary-4)</sup> engine into the requested format (**XML**<sup>[17](#glossary-17)</sup> or **JSON**<sup>[16](#glossary-16)</sup>)[.][3]  
+- `Design`: Utilizes **lightweight serialization**<sup>[39](#glossary-39)</sup> implementation to minimize overhead while maintaining compatibility with modern REST standards[.][3]
 
 #### 4.1.7. Scalability Design
 
-- **Purpose**: Prepares the backend for increasing traffic and data loads[.][3]  
-- **Techniques**:  
+- `Purpose`: Prepares the backend for increasing traffic and data loads[.][3]  
+- `Techniques`:  
   - **Modular architecture**<sup>[43](#glossary-43)</sup> to allow easy scaling of individual components[.][3]  
   - Potential integration with a **load balancer**<sup>[40](#glossary-40)</sup> for distributed deployments in production environments[.][3]
 
 #### 4.1.8. Testing and Monitoring
 
-- **Unit Testing<sup>[47](#glossary-47)</sup>**: Comprehensive test suite to validate the correctness of each backend component[.][3]  
-- **Performance Testing**: Ensures the API meets the 1-second response time requirement under normal conditions[.][3]  
-- **Logging and Monitoring**: Captures API usage and performance metrics to diagnose issues and optimize performance over time[.][3]
+- `Unit Testing`<sup>[47](#glossary-47)</sup>: Comprehensive test suite to validate the correctness of each backend component[.][3]  
+- `Performance Testing`: Ensures the API meets the 1-second response time requirement under normal conditions[.][3]  
+- `Logging and Monitoring`: Captures API usage and performance metrics to diagnose issues and optimize performance over time[.][3]
 
 ### 4.3 Data Structure
 
@@ -917,38 +963,38 @@ The application relies on a **weighted, undirected graph<sup>[8](#glossary-8)</s
 
 #### 4.3.1 Graph Characteristics
 
-- **Nodes<sup>[14](#glossary-14)</sup> (Vertices<sup>[18](#glossary-18)</sup>):**  
+- `Nodes`<sup>[14](#glossary-14)</sup> `(Vertices`<sup>[18](#glossary-18)</sup>`):`  
   Represent landmarks in the road network[.][3] Each **node**<sup>[14](#glossary-14)</sup> is uniquely identified by a landmark ID[.][3]
 
-- **Edges<sup>[15](#glossary-15)</sup>:**  
+- `Edges`<sup>[15](#glossary-15)</sup>`:`  
   Represent bidirectional roads connecting two landmarks[.][3] Each **edge**<sup>[15](#glossary-15)</sup> has a weight, which corresponds to the travel time between the two connected landmarks[.][3]
 
-- **Weights:**  
+- `Weights:`
   **Edge**<sup>[15](#glossary-15)</sup> weights are integer values representing travel time in an unspecified unit[.][3] Lower weights indicate shorter travel times[.][3]
 
 #### 4.3.2 Graph Properties
 
-- **Weighted:**  
+- `Weighted:`
   Each **edge**<sup>[15](#glossary-15)</sup> has a numerical value (weight) representing travel time[.][3]
 
-- **Undirected:**  
+- `Undirected:`  
   Roads are bidirectional[.][3] If an **edge**<sup>[15](#glossary-15)</sup> exists from landmark A to landmark B, the reverse is also true[.][3]
 
-- **Cyclic:**  
+- `Cyclic:`  
   The **graph**<sup>[8](#glossary-8)</sup> inherently contains cycles, as multiple paths often connect landmarks[.][3]
 
-- **Sparse Graph:**  
+- `Sparse Graph:`  
   Since real-world road networks are typically sparse (many fewer **edges**<sup>[15](#glossary-15)</sup> than the maximum possible), efficient data structures are used to optimize memory and runtime performance[.][3]
 
 #### 4.3.3 Data Representation
 
 The **graph**<sup>[8](#glossary-8)</sup> will be implemented using the following data structures for optimal performance and **scalability**<sup>[28](#glossary-28)</sup>:
 
-1. **Adjacency List<sup>[29](#glossary-29)</sup>:**  
+1. `Adjacency List`<sup>[29](#glossary-29)</sup>`:`
    - Used for representing the **graph**<sup>[8](#glossary-8)</sup>[.][3] Each **node**<sup>[14](#glossary-14)</sup> maintains a list of its neighbors and associated weights (travel times\)[.][3]  
    - Efficient for sparse graphs, as it minimizes memory usage[.][3]
 
-   **Example:**
+   `Example:`
 
    ```text
     Node A: [(B, 5), (C, 10)]  
@@ -956,21 +1002,21 @@ The **graph**<sup>[8](#glossary-8)</sup> will be implemented using the following
     Node C: [(A, 10), (B, 3)]
    ```  
 
-2. **Hash Map<sup>[34](#glossary-34)</sup> for Node<sup>[14](#glossary-14)</sup> Lookup:**
-   - A hash map<sup>[34](#glossary-34)</sup> (or dictionary) is used for fast lookup of **nodes**<sup>[14](#glossary-14)</sup> by their landmark IDs[.][3]
+2. `Hash Map`<sup>[34](#glossary-34)</sup> `for Node`<sup>[14](#glossary-14)</sup> `Lookup:`
+   - A **hash map**<sup>[34](#glossary-34)</sup> (or dictionary) is used for fast lookup of **nodes**<sup>[14](#glossary-14)</sup> by their landmark IDs[.][3]
 
-   **Example:**
+   `Example:`
 
     ```cpp
     std::unordered_map<int, std::vector<std::pair<int, int>>> graph;
     Priority Queue (for Pathfinding):
     ```
 
-3. **Priority Queue<sup>[30](#glossary-30)</sup> (for Pathfinding<sup>[4](#glossary-4)</sup>):**
+3. `Priority Queue`<sup>[30](#glossary-30)</sup> `(for Pathfinding`<sup>[4](#glossary-4)</sup>`):`
    - Utilized in algorithms like **Dijkstra**<sup>[5](#glossary-5)</sup> to efficiently retrieve the next **node**<sup>[14](#glossary-14)</sup> with the shortest travel time[.][3]
    - Typically implemented as a min-heap[.][3]
 
-   **Example:**
+   `Example:`
 
     ```cpp
     std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<>> minHeap;
@@ -980,10 +1026,10 @@ The **graph**<sup>[8](#glossary-8)</sup> will be implemented using the following
 
 To ensure the correctness of the **graph structure**<sup>[8](#glossary-8)</sup>, the following validation steps are performed during the data import phase:
 
-1. **Self-Loop Check:**
+1. `Self-Loop Check:`
    - Ensure no **edge**<sup>[15](#glossary-15)</sup> connects a **node**<sup>[14](#glossary-14)</sup> to itself (e.g., `A -> A`)[.][3]
 
-2. **Duplicate Edge<sup>[15](#glossary-15)</sup> Check:**
+2. `Duplicate Edge`<sup>[15](#glossary-15)</sup> `Check:`
    - Verify that no duplicate **edges**<sup>[15](#glossary-15)</sup> exist between two **nodes**<sup>[14](#glossary-14)</sup> with differing weights[.][3]
 
       > [!NOTE]
@@ -992,7 +1038,7 @@ To ensure the correctness of the **graph structure**<sup>[8](#glossary-8)</sup>,
       >
       >![Duplicate Edge Exemple](./images/DuplicateEdge.png)
 
-3. **Connectivity Check:**
+3. `Connectivity Check:`
    - Confirm the **graph**<sup>[8](#glossary-8)</sup> is fully connected, ensuring all **nodes**<sup>[14](#glossary-14)</sup> are reachable from any other **node**<sup>[14](#glossary-14)</sup>[.][3]
 
       > [!NOTE]
@@ -1005,7 +1051,7 @@ To ensure the correctness of the **graph structure**<sup>[8](#glossary-8)</sup>,
       > B --> C((C))
       > D((D))
 
-4. **Symmetry Check:**
+4. `Symmetry Check:`
    - Ensure bidirectionality of all **edges**<sup>[15](#glossary-15)</sup> (e.g., if `A -> B` exists, `B -> A` must also exist with the same weight)[.][3]
 
 #### 4.3.5 Usage in Pathfinding
@@ -1219,11 +1265,16 @@ Since the application is designed for local use (on a local server), the securit
 | <p id="glossary-34">34</p> | Hash Map (Dictionary)                                                        | A data structure that stores key-value pairs, allowing for fast retrieval of values based on their corresponding keys.                                                                                                                                                                                                              |
 | <p id="glossary-35">35</p> | Rate Limiting                                                                | A technique used to control the amount of incoming requests to a system in a given time period, helping to prevent overloads or abuse.                                                                                                                                                                                              |
 | <p id="glossary-36">36</p> | Pointer                                                                      | In computer science, a pointer is an object in many programming languages that stores a memory address. This can be that of another value located in computer memory, or in some cases, that of memory-mapped computer hardware.                                                                                                    |
+| <p id="glossary-37">37</p> | GET method (HTTP)                                                            | A GET method is an HTTP request method used to retrieve data from a server. It appends parameters to the URL as query strings and is typically used for fetching resources without modifying them.                                                                                                                                  |
+| <p id="glossary-38">38</p> | Accept field (HTTP Header)                                                   | The Accept field in an HTTP header is used by the client to specify the media types (e.g., text/html, application/json) it can process. The server uses this information to return a response in a format supported by the client. It may include quality values (e.g., q=0.9) to indicate preference.                              |
 | <p id="glossary-39">39</p> | Serialization                                                                | The process of converting an object into a format (like JSON or XML) that can be easily stored or transmitted and later reconstructed.                                                                                                                                                                                              |
 | <p id="glossary-40">40</p> | Load Balancer                                                                | A system or tool used to distribute incoming network traffic across multiple servers, improving performance and reliability.                                                                                                                                                                                                        |
 | <p id="glossary-41">41</p> | Input Sanitization                                                           | The process of cleaning user inputs to ensure they do not contain malicious code or invalid data, helping to prevent security vulnerabilities like SQL injection.                                                                                                                                                                   |
 | <p id="glossary-42">42</p> | Threading                                                                    | A method of executing multiple parts of a program simultaneously in different threads, helping improve the efficiency and performance of multi-core processors.                                                                                                                                                                     |
 | <p id="glossary-43">43</p> | Modular Architecture                                                         | A design approach that divides a system into smaller, self-contained components, making it easier to scale, maintain, and improve individual parts of the system.                                                                                                                                                                   |
+| <p id="glossary-44">44</p> | Error 400 - Bad Request                                                      | Indicates that the server could not understand the request due to malformed syntax, invalid parameters, or missing data.                                                                                                                                                                                                            |
+| <p id="glossary-45">45</p> | Error 406 - Not Acceptable                                                   | Occurs when the server cannot produce a response that matches the media types specified in the client's Accept header.                                                                                                                                                                                                              |
+| <p id="glossary-46">46</p> | Error 200 - Ok                                                               | Indicates that the request was successful, and the server has returned the requested resource or completed the requested action.                                                                                                                                                                                                    |
 | <p id="glossary-47">47</p> | Unit Testing                                                                 | A software testing method where individual components or functions are tested in isolation to verify their correctness.                                                                                                                                                                                                             |
 | <p id="glossary-48">48</p> | Integration Testing                                                          | Testing the combination of multiple components of the system to ensure they work together as expected.                                                                                                                                                                                                                              |
 | <p id="glossary-49">49</p> | System Testing                                                               | Testing the complete and integrated system to verify that it functions as a whole and meets the project requirements.                                                                                                                                                                                                               |
