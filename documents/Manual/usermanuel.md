@@ -1,8 +1,10 @@
 # User Manual for 2024-2025 Project 3: Call for Tender
 
-| Name           | date      |
-| -------------- | --------- |
-| Alexandre Bopp | 1/13/2025 |
+| Name           | date      | role |
+| -------------- | --------- |------|
+| Alexandre Bopp | 1/13/2025 | Technical Writer |
+| Robin Goumy    |     -     | Program Manager |
+| Jason Grosso   |     -     | Quality Assurance |
 
 <img src="images/intro.jpg" alt="GPS Navigation" height="100%" width="100%" style="display: block; margin: auto; object-fit:cover;">
 
@@ -55,29 +57,29 @@ The software provides a **REST API** that allows users to find travel times and 
 
   - **Windows**:
 
-  1. Press `Windows + R` to open the Run dialog.
-  2. Type `dxdiag` and press Enter.
-  3. In the DirectX Diagnostic Tool, you can find your **Processor**, **Memory (RAM)**, and **Graphics** listed.
+    1. Press `Windows + R` to open the Run dialog.
+    2. Type `dxdiag` and press Enter.
+    3. In the DirectX Diagnostic Tool, you can find your **Processor**, **Memory (RAM)**, and **Graphics** listed.
 
   - **Mac**:
 
-  1. Click the Apple logo in the top-left corner.
-  2. Select **About This Mac**.
-  3. The window that appears will show details about your **Processor**, **Memory (RAM)**, **Storage**, and **Graphics**.
+    1. Click the Apple logo in the top-left corner.
+    2. Select **About This Mac**.
+    3. The window that appears will show details about your **Processor**, **Memory (RAM)**, **Storage**, and **Graphics**.
 
   These steps will help you confirm your system's specifications for ensuring compatibility with the software.
 
 - **Software Requirements**:
 
-  1. **C++ Compiler**:  
-     You will need a program called GCC to run the software. This is a tool that helps your computer understand and execute the code.
+  - **C++ Compiler**:  
+    You will need a program called GCC to run the software. This is a tool that helps your computer understand and execute the code.
 
-     - To install it, just click [here to download GCC](https://gcc.gnu.org/) and follow the easy steps on the website.
+    - To install it, just click [here to download GCC](https://gcc.gnu.org/) and follow the easy steps on the website.
 
-  2. **HTTP Server**:  
-     An HTTP server is needed to make the software work on your computer. If you don't already have one, we suggest using **Apache** or **Nginx**.
+  - **HTTP Server**:  
+    An HTTP server is needed to make the software work on your computer. If you don't already have one, we suggest using **Apache** or **Nginx**.
 
-     - Don’t worry, these servers are widely used and have easy-to-follow [guides](https://www.ionos.fr/digitalguide/serveur/configuration/installer-un-serveur-apache-nos-conseils/). 
+    - Don’t worry, these servers are widely used and have easy-to-follow [guides](https://www.ionos.fr/digitalguide/serveur/configuration/installer-un-serveur-apache-nos-conseils/). 
 
 - **Data File**:
 
@@ -122,8 +124,8 @@ To run the software, you need a C++ compiler installed on your system. Follow th
 
   CMake is a tool that simplifies the compilation of complex projects.
 
-    1. Visit the official website: [CMake Download](https://cmake.org/download).  
-    2. Download and install the version suitable for your system (Windows, Mac, Linux).
+  1. Visit the official website: [CMake Download](https://cmake.org/download).  
+  2. Download and install the version suitable for your system (Windows, Mac, Linux).
 
 ### 3. Compile the Software
 
@@ -342,7 +344,7 @@ If you need help or want to report an issue, feel free to reach out to our suppo
 | ------------------ | ------------------------------------------------------------------------------------------- |
 | **Email**          | [alexandre.bopp@algosup.com](mailto:support@example.com)                                            |
 | **Response Time**  | We aim to respond within 24-48 hours.                                                        |
-| **Business Hours** | Monday to Friday, 9 AM - 6 PM (Local Time).                                                  |
+| **Work Time** | Monday to Friday, 9 AM - 6 PM (Local Time).                                                  |
 | **Support Topics** | Bugs, Feature Requests, General Inquiries, Setup Assistance.                                 |
 
 ## 9. Appendix
