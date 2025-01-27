@@ -135,6 +135,12 @@ A workflow triggers on pull requests to the main branch and performs the followi
 4. Build the project.
 5. Run the tests.
 
+#### Self-Hosted Runner
+
+A self-hosted runner is a machine that runs GitHub Actions workflows.
+It is installed on a local machine or server and connects to GitHub Actions.
+In our case it is installed on a local machine.
+
 #### Pull Request
 
 A pull request is a request to merge code changes into the main branch.
@@ -150,11 +156,6 @@ A template to ensure all pull requests are well-documented, it includes:
 Failure to follow the template results in pull request rejection.
 
 > Types of change: Issue fix, New feature, Breaking change, Documentation update
-
-#### Self-Hosted Runner
-
-A runner executes GitHub Actions jobs.
-A Self-Hosted Runner is used for greater control over hardware, OS, and tools.
 
 #### GitHub Issues
 
