@@ -186,9 +186,28 @@ To run the software, you need a C++ compiler installed on your system. Follow th
 
 ## 4. Usage Instructions
 
+The interface is easy to use, and takes the form of a single page containing all the information.
+
+1. Enter your two landmarks, your source and your destination
+
+![alt text](images/source_destination.png)
+
+2. Choose your download format
+
+![alt text](images/response_format.png)
+
+3. Submit your request
+   
+![alt text](images/submit.png)
+
+4. Waiting to access the travel times and the steps
+
+![alt text](images/travel_time_and_steps.png)
+
+<!-- 1. **How It Works**  
+  
 ### Finding the Quickest Path
 
-1. **How It Works**  
    The software calculates the shortest route between two landmarks using the provided road network data.
 
 2. **Using the Command Line**  
@@ -211,7 +230,7 @@ Update or replace the USA-roads.csv file with your road network data.
 
 ```
 StartNode,EndNode,Distance
-```
+``` -->
 
 ## 5. Test Suite
 
@@ -255,8 +274,6 @@ The `./test` program outputs the following:
 The `./dgv` program confirms:
 - The dataset's correctness.
 - Readiness for the application.
-
-
 
 ## 6. Troubleshooting
 
