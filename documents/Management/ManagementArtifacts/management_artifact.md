@@ -14,6 +14,7 @@
 
 <br>
 
+</div>
 
 ## Tasks & schedule
 
