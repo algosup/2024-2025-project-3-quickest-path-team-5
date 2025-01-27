@@ -124,17 +124,17 @@ To run the software, you need a C++ compiler installed on your system. Follow th
 
   CMake is a tool that simplifies the compilation of complex projects.
 
-  1. Visit the official website: [CMake Download](https://cmake.org/download).  
-  2. Download and install the version suitable for your system (Windows, Mac, Linux).
+  - Visit the official website: [CMake Download](https://cmake.org/download).  
+  - Download and install the version suitable for your system (Windows, Mac, Linux).
 
 ### 3. Compile the Software
 
 - **Before You Start: Open Your Terminal**
 
-    Open your terminal application:
+  Open your terminal application:
 
-    - **Windows:** Search for "Command Prompt" or "PowerShell" in the Start Menu.
-    - **Mac/Linux:** Open the Terminal app from the Applications folder or search for it.
+  - **Windows:** Search for "Command Prompt" or "PowerShell" in the Start Menu.
+  - **Mac/Linux:** Open the Terminal app from the Applications folder or search for it.
 
 - **Step 1: Navigate to the Project Folder**
   
@@ -175,71 +175,25 @@ To run the software, you need a C++ compiler installed on your system. Follow th
     make
     ```
 
-- **Step 5: Verify the Dataset**
+- **Step 5: Run the software**
 
-    Run the `./dgv` program to verify that your dataset is correct. This step ensures everything is set up properly.
+     ADD description
 
     ```bash
-    ./dgv
+    // add command line
     ```
 
 - **Tip:**
     If you prefer not to use CMake, ensure the project includes a Makefile or other build instructions.
 
-## 4. Usage Instructions
-
-The interface is easy to use, and takes the form of a single page containing all the information.
-
-1. Enter your two landmarks, your source and your destination
-
-![alt text](images/source_destination.png)
-
-2. Choose your download format
-
-![alt text](images/response_format.png)
-
-3. Submit your request
-   
-![alt text](images/submit.png)
-
-4. Waiting to access the travel times and the steps
-
-![alt text](images/travel_time_and_steps.png)
-
-<!-- 1. **How It Works**  
-  
-### Finding the Quickest Path
-
-   The software calculates the shortest route between two landmarks using the provided road network data.
-
-2. **Using the Command Line**  
-    Run the program from the `bin` directory with the following command:  
-
-    ```bash
-    // Add the command line
-    ```
-
-3. **Understanding the Output**
-
-    - Travel Time: Displays the estimated time to traverse the path.
-    - Path: Lists the sequence of landmarks to follow for the route.
-  
-4. **Adding Your Data**
-
-Update or replace the USA-roads.csv file with your road network data.
-
-⚠️Ensure it follows the required format:
-
-```
-StartNode,EndNode,Distance
-``` -->
-
-## 5. Test Suite
+## 4. Tests
 
 ### Overview
+
 The test suite verifies the correctness, performance, and compliance of the software. It ensures the application meets all defined requirements, including validating the dataset and adhering to the 10% approximation rule.
 
 ### Running Tests
+
 Follow these steps to run the test suite and verify the dataset:
 
 - Step 1: Navigate to the Test Directory
@@ -267,15 +221,53 @@ Follow these steps to run the test suite and verify the dataset:
 
 ### Results
 
-#### Test Suite Results
-The `./test` program outputs the following:
-1. Validation of travel times and paths.
-2. Checks for performance requirements.
+#### ./Test Result
 
-#### Dataset Verification Results
+The `./test` program outputs the following:
+
+- Validation of travel times and paths.
+- Checks for performance requirements.
+
+#### Dataset Verification Result
+
 The `./dgv` program confirms:
+
 - The dataset's correctness.
 - Readiness for the application.
+
+## 5. Usage Instructions
+
+### Finding the Quickest Path
+
+- **How It Works**  
+   The software calculates the shortest route between two landmarks using the provided road network data.
+
+- **Understanding the Output**
+
+  - Travel Time: Displays the estimated time to traverse the path.
+  - Path: Lists the sequence of landmarks to follow for the route.
+
+- **The interface is easy to use, and takes the form of a single page containing all the information.**
+
+  1. Enter your two landmarks, your source and your destination
+
+      ![alt text](images/source_destination.png)
+
+  2. Choose your download format
+
+      ![alt text](images/response_format.png)
+
+  3. Submit your request
+
+      ![alt text](images/submit.png)
+
+  4. Waiting to access the travel times and the steps
+
+      ![alt text](images/travel_time_and_steps.png)
+
+- **Example of a response**:
+
+    // Add screenshots.
 
 ## 6. Troubleshooting
 
@@ -344,7 +336,7 @@ If you need help or want to report an issue, feel free to reach out to our suppo
 | ------------------ | ------------------------------------------------------------------------------------------- |
 | **Email**          | [alexandre.bopp@algosup.com](mailto:support@example.com)                                            |
 | **Response Time**  | We aim to respond within 24-48 hours.                                                        |
-| **Work Time** | Monday to Friday, 9 AM - 6 PM (Local Time).                                                  |
+| **Work Time** | Monday to Friday, 9 AM - 5 PM (CET - Central European Time).                                                  |
 | **Support Topics** | Bugs, Feature Requests, General Inquiries, Setup Assistance.                                 |
 
 ## 9. Appendix
