@@ -94,6 +94,8 @@ Test Case format:
 A program generates datasets for verifying test cases.
 It creates 800 unique random pairs of landmarks and their distances, outputting them to a .csv file.
 
+> A .csv file is a comma-separated values file, which stores tabular data in plain text.
+
 #### Test History
 
 View the detailed [Test History](https://docs.google.com/spreadsheets/d/1JB1lV4f822tu6zhfQbtrtQGsYIInJZw8AnJMDjYGYeo/edit?gid=0#gid=0).
