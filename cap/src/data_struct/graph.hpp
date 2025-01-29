@@ -136,15 +136,6 @@ public:
     vector<uint32_t> dijkstra(uint32_t from, uint32_t to);
 
     /*!
-        \brief Dijkstra's algorithm to find the shortest path between two nodes with a time limit
-        \param from The source node
-        \param to The destination node
-        \param timeLimitMs The time limit in milliseconds
-        \return A vector containing the shortest distance to each node
-    */
-    std::vector<uint32_t> timedDijkstra(uint32_t from, uint32_t to, long long timeLimitMs);
-
-    /*!
         \brief Graph precomputation to compute the distances between landmark nodes
     */
     void computeLandmarkDistances();
@@ -156,4 +147,16 @@ public:
         \return A vector containing the shortest distance to each node
     */
     vector<uint32_t> aStarLandmark(uint32_t from, uint32_t to);
+
+    /*!
+        \brief Find the farthest pair of nodes in the graph
+        \return A pair of node IDs representing the farthest pair of nodes
+    */
+    pair<uint32_t, uint32_t> farthestPath();
+
+    /*!
+        \brief Select a number of landmark nodes to use in the A* algorithm
+        \param numLandmarks The number of landmarks to select
+    */
+    void selectLandmarks(size_t numLandmarks);
 };

@@ -43,6 +43,12 @@ int main()
     getrusage(RUSAGE_SELF, &usage);
     float memUsage = (float)(usage.ru_maxrss / (1024.0f * 1024.0f)); // Convert to MB
     cout << "Memory usage: " << (int)memUsage << " MB for: " << graph->getNumNodes() << " nodes and " << graph->getNumEdges() << " edges" << endl;
+    
+    cout << "Computing landmark distances..." << endl;
+    begin = clock();
+    graph->selectLandmarks(4);
+    graph->computeLandmarkDistances();
+    end = clock();
 
     bool running = true;
 
@@ -72,19 +78,19 @@ int main()
         cout << "Time spent finding the shortest path: " << time_spent << " seconds" << endl;
 
         begin = clock();
-        path = graph->timedDijkstra(from, to, 1000); // 900ms time limit
+        path = graph->aStarLandmark(from, to);
         end = clock();
         time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 
-        cout << "Shortest path from " << from << " to " << to << " using timed Dijkstra contains " << path.size() << " nodes:" << endl;
+        cout << "Shortest path from " << from << " to " << to << " using A* landmarks contains " << path.size() << " nodes:" << endl;
         cout << "Time spent finding the shortest path: " << time_spent << " seconds" << endl;
 
         begin = clock();
-        path = graph->timedDijkstra(to, from, 1000); // 900ms time limit
+        path = graph->aStarLandmark(to, from);
         end = clock();
         time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 
-        cout << "Shortest reversed path from " << to << " to " << from << " using timed Dijkstra contains " << path.size() << " nodes:" << endl;
+        cout << "Shortest reversed path from " << to << " to " << from << " using A* landmarks contains " << path.size() << " nodes:" << endl;
         cout << "Time spent finding the shortest path: " << time_spent << " seconds" << endl;
 
         cout << "Do you want to continue? (y/n): ";
