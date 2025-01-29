@@ -58,6 +58,7 @@ The **REST API** must be accompanied by **CSV** data checker to be sure the file
 
 1. Prepare the project:
    1. Open your terminal and clone the project:
+
 > [!IMPORTANT]
 > Git is required for this step.
 
@@ -91,6 +92,7 @@ The **REST API** must be accompanied by **CSV** data checker to be sure the file
 
 > [!IMPORTANT]
 > For **Windows**:
+>
 > - **MinGW** is required for this step.
 >
 > ```bash
@@ -126,6 +128,7 @@ The **REST API** must be accompanied by **CSV** data checker to be sure the file
 
 > [!IMPORTANT]
 > For **Windows**:
+>
 > - **MinGW** is required for this step.
 >
 > ```bash
