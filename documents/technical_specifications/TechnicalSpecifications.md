@@ -1196,11 +1196,11 @@ We decided to target the following platforms for compatibility, performance, and
 - **Integration Testing**<sup>[48](#glossary-48)</sup>: To ensure different parts of the application work together[.][3]
 - **System Testing**<sup>[49](#glossary-49)</sup>: To test the complete system as a whole[.][3]
 
-The detailed testing strategy can be seen in the test plan: [HERE](QA/TestPlan.md)
+The detailed testing strategy can be seen in the test plan: [HERE](qa/TestPlan.md)
 
 ### 6.2 Tools
 
-- **Unit Testing**<sup>[47](#glossary-47)</sup>: Wrote by our Software Engineer team and/or Quality Assurance team and ran with googleTest following [test cases](QA/TestCases.md) [.][3]
+- **Unit Testing**<sup>[47](#glossary-47)</sup>: Wrote by our Software Engineer team and/or Quality Assurance team and ran with googleTest following [test cases](qa/TestCases.md) [.][3]
 - **CI/CD**<sup>[1](#glossary-1)</sup> Testing: Automated testing using GitHub<sup>[51](#glossary-51)</sup> Actions[.][3]
 
 ## 7. Deployment
