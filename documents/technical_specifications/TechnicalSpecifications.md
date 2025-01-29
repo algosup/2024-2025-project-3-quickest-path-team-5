@@ -855,49 +855,49 @@ The following diagram illustrates the step-by-step execution of **Dijkstra's alg
 ###### Types of Pointers and Their Representations
 
 1. `Next and Previous Pointers:`
-   - Represented by `half-headed arrows`.
-   - These pointers are used to navigate between sibling nodes in a circular doubly linked list.
-   - Each node in the heap maintains links to its next and previous sibling nodes for efficient traversal.
+   - Represented by `half-headed arrows`[.][3]
+   - These pointers are used to navigate between sibling nodes in a circular doubly linked list[.][3]
+   - Each node in the heap maintains links to its next and previous sibling nodes for efficient traversal[.][3]
 
 2. `Child and Parent Pointers:`
-   - Represented by `half-headed full arrows`.
-   - Child pointers point to the first child of a node, while parent pointers point back to the node's parent.
-   - These relationships help maintain the hierarchical structure of the heap.
+   - Represented by `half-headed full arrows`[.][3]
+   - `Child pointers` point to the first child of a node, while parent pointers point back to the node's parent[.][3]
+   - These relationships help maintain the hierarchical structure of the heap[.][3]
 
 ---
 
 ###### Arrowhead Styles for Distinguishing Pointer Types
 
 - `Filled Arrowheads:`
-  - Denote `next` and `child` pointers.
-  - For example, a filled arrow pointing to a node signifies a connection to either the next sibling or the first child.
+  - Denote `next` and `child` pointers[.][3]
+  - For example, a filled arrow pointing to a node signifies a connection to either the next sibling or the first child[.][3]
 
 - `White Arrowheads:`
-  - Denote `previous` and `parent` pointers.
-  - These help indicate backward relationships in both sibling and parent-child relationships.
+  - Denote `previous` and `parent` pointers[.][3]
+  - These help indicate backward relationships in both sibling and parent-child relationships[.][3]
 
 ---
 
 ###### Synthesis of Child Pointers
 
 - `Representation of Child Relationships:`
-  - In diagrams, child pointers are often "synthesized," meaning all children of a node may appear to have direct connections to the parent.
-  - In reality, only `one child pointer` is stored per node. This pointer leads to the first child, from which siblings can be navigated using the next and previous pointers.
+  - In diagrams, `child pointers` are often "synthesized," meaning all children of a node may appear to have direct connections to the parent[.][3]
+  - In reality, only one `child pointer` is stored per node[.][3] This pointer leads to the first child, from which siblings can be navigated using the next and previous pointers[.][3]
 
 - `Sibling Navigation:`
-  - Since sibling nodes are part of a circular doubly linked list, additional child pointers are unnecessary. Siblings can be found through the next and previous pointers.
+  - Since sibling nodes are part of a circular doubly linked list, additional `child pointers` are unnecessary[.][3] Siblings can be found through the next and previous pointers[.][3]
 
 ---
 
 ###### Marking and Minimum Identification
 
 - `Marked Nodes:`
-  - Marked nodes, which are nodes that have lost a child since their last connection to a parent, are represented as `grey`.
-  - These nodes indicate that a cascading cut may be necessary if they lose another child.
+  - Marked nodes, which are nodes that have lost a child since their last connection to a parent, are represented as `grey`[.][3]
+  - These nodes indicate that a cascading cut may be necessary if they lose another child[.][3]
 
 - `Minimum Node:`
-  - The minimum node is the root node with the smallest key.
-  - It is typically highlighted in diagrams to differentiate it from other nodes.
+  - The minimum node is the root node with the smallest key[.][3]
+  - It is typically highlighted in diagrams to differentiate it from other nodes[.][3]
 
 ## 4. Detailed Design
 
@@ -993,8 +993,8 @@ The **graph**<sup>[8](#glossary-8)</sup> will be implemented using the following
 
 1. Linked List of Linked Lists:
 
-     - A linked list of linked lists is a data structure where each node in the main linked list contains a reference to another linked list. This structure is often used to represent hierarchical or multi-dimensional data, such as graphs, matrices, or sparse arrays.
-     - It is particularly useful when the data is irregular or sparse, as it avoids allocating memory for unused elements.
+     - A linked list of linked lists is a data structure where each node in the main linked list contains a reference to another linked list[.][3] This structure is often used to represent hierarchical or multi-dimensional data, such as graphs, matrices, or sparse arrays[.][3]
+     - It is particularly useful when the data is irregular or sparse, as it avoids allocating memory for unused elements[.][3]
 
    `Example:`
 
@@ -1007,9 +1007,9 @@ The **graph**<sup>[8](#glossary-8)</sup> will be implemented using the following
 
 2. `Applications:`
 
-   - `Graph Representation:` Similar to an adjacency list, where each node in the main list represents a vertex, and its sub-list represents connected edges or neighbors.
-   - `Sparse Matrix Storage:` Efficiently stores non-zero elements in a matrix by using linked lists for rows and columns.
-   - `Hierarchical Data:` Represents tree-like structures or organizational hierarchies.
+   - `Graph Representation:` Similar to an adjacency list, where each node in the main list represents a vertex, and its sub-list represents connected edges or neighbors[.][3]
+   - `Sparse Matrix Storage:` Efficiently stores non-zero elements in a matrix by using linked lists for rows and columns[.][3]
+   - `Hierarchical Data:` Represents tree-like structures or organizational hierarchies[.][3]
 
    `Example:`
 
@@ -1120,36 +1120,36 @@ The project will follow the Agile methodology, with development broken down into
 
 | C++ Library Name                  | Full Name                             | Version of implementation | Is part of the standard library? | Description                                                                                                               | Links                                                                  |
 | --------------------------------- | ------------------------------------- | ------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `Standard Template Library (STL)` | **C++ Standard Template Library**     | **C++11+**                | ✅                                | Provides a collection of generic classes and functions, such as vectors, lists, stacks, queues, and algorithms.           | [Reference](https://en.cppreference.com/w/cpp/standard_library)        |
-| `iostream`                        | **Input/Output Stream Library**       | **C++98+**                | ✅                                | Provides functionality for input and output operations, including `cin`, `cout`, and `cerr`.                              | [Reference](https://en.cppreference.com/w/cpp/io/iostream)             |
-| `fstream`                         | **File Stream Library**               | **C++98+**                | ✅                                | Provides functionality for file input and output using streams like `ifstream`, `ofstream`, and `fstream`.                | [Reference](https://en.cppreference.com/w/cpp/io/fstream)              |
-| `stdexcept`                       | **Standard Exception Library**        | **C++98+**                | ✅                                | Provides exception handling classes, including `std::runtime_error`, `std::invalid_argument`, and more.                   | [Reference](https://en.cppreference.com/w/cpp/error/stdexcept)         |
-| `chrono`                          | **Time Library**                      | **C++11+**                | ✅                                | Provides functionality for time measurement, durations, and clocks in C++.                                                | [Reference](https://en.cppreference.com/w/cpp/chrono)                  |
-| `iomanip`                         | **Input/Output Manipulation Library** | **C++98+**                | ✅                                | Provides facilities for formatting input and output, including stream manipulators like `setw`, `setprecision`.           | [Reference](https://en.cppreference.com/w/cpp/io/iomanip)              |
-| `unordered_map`                   | **Unordered Map Library**             | **C++11+**                | ✅                                | Provides an unordered associative container that uses hash tables, allowing fast lookup, insertion, and deletion.         | [Reference](https://en.cppreference.com/w/cpp/container/unordered_map) |
-| `vector`                          | **Vector Library**                    | **C++98+**                | ✅                                | Provides a dynamic array that can grow in size, supporting random access and efficient insertions and deletions.          | [Reference](https://en.cppreference.com/w/cpp/container/vector)        |
-| `string`                          | **String Library**                    | **C++98+**                | ✅                                | Provides the `std::string` class to manipulate sequences of characters with dynamic sizing.                               | [Reference](https://en.cppreference.com/w/cpp/string/basic_string)     |
-| `utility`                         | **Utility Library**                   | **C++98+**                | ✅                                | Provides general-purpose utility functions, including `std::pair`, `std::move`, and `std::swap`.                          | [Reference](https://en.cppreference.com/w/cpp/utility)                 |
-| `sstream`                         | **String Stream Library**             | **C++98+**                | ✅                                | Provides functionality for string-based input/output operations using streams like `std::istringstream`, `ostringstream`. | [Reference](https://en.cppreference.com/w/cpp/io/sstream)              |
-| `crow`                            | **Crow Web Framework**                | Third-party               | ❌                                | A modern C++ web framework for building REST APIs and web applications.                                                   | [GitHub](https://github.com/CrowCpp/Crow)                              |
-| `queue`                           | **Queue Library**                     | **C++98+**                | ✅                                | Provides the `std::queue` container adapter for implementing FIFO (first-in-first-out) data structures.                   | [Reference](https://en.cppreference.com/w/cpp/container/queue)         |
-| `algorithm`                       | **Algorithm Library**                 | **C++98+**                | ✅                                | Provides a variety of functions for algorithms like searching, sorting, and manipulating containers.                      | [Reference](https://en.cppreference.com/w/cpp/algorithm)               |
-| `googletest`                      | **Google Test Framework**             | Third-party               | ❌                                | A popular C++ testing framework for unit testing, providing tools for assertions, fixtures, and mocking.                  | [GitHub](https://github.com/google/googletest)                         |
-| `climit`                          | **C Library for Limits**              | **C++98+**                | ✅                                | Provides limits for integral data types from C, such as `INT_MAX` and `CHAR_MIN`.                                         | [Reference](https://en.cppreference.com/w/cpp/header/climits)          |
-| `cstring`                         | **C String Library**                  | **C++98+**                | ✅                                | Provides C-style string manipulation functions like strcpy, strlen, and strcmp.                                           | [Reference](https://en.cppreference.com/w/cpp/header/cstring)          |
-| `cstdint`                         | **C Integer Types Library**           | **C++11+**                | ✅                                | Provides fixed-width integer types (`int8_t`, `uint64_t`) and limits for these types.                                     | [Reference](https://en.cppreference.com/w/cpp/header/cstdint)          |
+| `Standard Template Library (STL)` | **C++ Standard Template Library**     | **C++11+**                | ✅                                | Provides a collection of generic classes and functions, such as vectors, lists, stacks, queues, and algorithms[.][3]           | [Reference](https://en.cppreference.com/w/cpp/standard_library)        |
+| `iostream`                        | **Input/Output Stream Library**       | **C++98+**                | ✅                                | Provides functionality for input and output operations, including `cin`, `cout`, and `cerr`[.][3]                              | [Reference](https://en.cppreference.com/w/cpp/io/iostream)             |
+| `fstream`                         | **File Stream Library**               | **C++98+**                | ✅                                | Provides functionality for file input and output using streams like `ifstream`, `ofstream`, and `fstream`[.][3]                | [Reference](https://en.cppreference.com/w/cpp/io/fstream)              |
+| `stdexcept`                       | **Standard Exception Library**        | **C++98+**                | ✅                                | Provides exception handling classes, including `std::runtime_error`, `std::invalid_argument`, and more[.][3]                   | [Reference](https://en.cppreference.com/w/cpp/error/stdexcept)         |
+| `chrono`                          | **Time Library**                      | **C++11+**                | ✅                                | Provides functionality for time measurement, durations, and clocks in C++[.][3]                                                | [Reference](https://en.cppreference.com/w/cpp/chrono)                  |
+| `iomanip`                         | **Input/Output Manipulation Library** | **C++98+**                | ✅                                | Provides facilities for formatting input and output, including stream manipulators like `setw`, `setprecision`[.][3]           | [Reference](https://en.cppreference.com/w/cpp/io/iomanip)              |
+| `unordered_map`                   | **Unordered Map Library**             | **C++11+**                | ✅                                | Provides an unordered associative container that uses hash tables, allowing fast lookup, insertion, and deletion[.][3]         | [Reference](https://en.cppreference.com/w/cpp/container/unordered_map) |
+| `vector`                          | **Vector Library**                    | **C++98+**                | ✅                                | Provides a dynamic array that can grow in size, supporting random access and efficient insertions and deletions[.][3]          | [Reference](https://en.cppreference.com/w/cpp/container/vector)        |
+| `string`                          | **String Library**                    | **C++98+**                | ✅                                | Provides the `std::string` class to manipulate sequences of characters with dynamic sizing[.][3]                               | [Reference](https://en.cppreference.com/w/cpp/string/basic_string)     |
+| `utility`                         | **Utility Library**                   | **C++98+**                | ✅                                | Provides general-purpose utility functions, including `std::pair`, `std::move`, and `std::swap`[.][3]                          | [Reference](https://en.cppreference.com/w/cpp/utility)                 |
+| `sstream`                         | **String Stream Library**             | **C++98+**                | ✅                                | Provides functionality for string-based input/output operations using streams like `std::istringstream`, `ostringstream`[.][3] | [Reference](https://en.cppreference.com/w/cpp/io/sstream)              |
+| `crow`                            | **Crow Web Framework**                | Third-party               | ❌                                | A modern C++ web framework for building REST APIs and web applications[.][3]                                                   | [GitHub](https://github.com/CrowCpp/Crow)                              |
+| `queue`                           | **Queue Library**                     | **C++98+**                | ✅                                | Provides the `std::queue` container adapter for implementing FIFO (first-in-first-out) data structures[.][3]                   | [Reference](https://en.cppreference.com/w/cpp/container/queue)         |
+| `algorithm`                       | **Algorithm Library**                 | **C++98+**                | ✅                                | Provides a variety of functions for algorithms like searching, sorting, and manipulating containers[.][3]                      | [Reference](https://en.cppreference.com/w/cpp/algorithm)               |
+| `googletest`                      | **Google Test Framework**             | Third-party               | ❌                                | A popular C++ testing framework for unit testing, providing tools for assertions, fixtures, and mocking[.][3]                  | [GitHub](https://github.com/google/googletest)                         |
+| `climit`                          | **C Library for Limits**              | **C++98+**                | ✅                                | Provides limits for integral data types from C, such as `INT_MAX` and `CHAR_MIN`[.][3]                                         | [Reference](https://en.cppreference.com/w/cpp/header/climits)          |
+| `cstring`                         | **C String Library**                  | **C++98+**                | ✅                                | Provides C-style string manipulation functions like strcpy, strlen, and strcmp[.][3]                                           | [Reference](https://en.cppreference.com/w/cpp/header/cstring)          |
+| `cstdint`                         | **C Integer Types Library**           | **C++11+**                | ✅                                | Provides fixed-width integer types (`int8_t`, `uint64_t`) and limits for these types[.][3]                                     | [Reference](https://en.cppreference.com/w/cpp/header/cstdint)          |
 
 | C Library Name | Full Name                         | Version of implementation | Description                                                                                                      | Links                                                      |
 | -------------- | --------------------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| `stdio.h`      | **Standard Input/Output Library** | **C89+**                  | Provides input and output functions, including file handling, standard input/output, and formatting.             | [Reference](https://en.cppreference.com/w/c/io/stdio)      |
-| `stdlib.h`     | **Standard Library**              | **C89+**                  | Provides functions for memory allocation, process control, conversions, and random number generation.            | [Reference](https://en.cppreference.com/w/c/stdlib)        |
-| `stdint.h`     | **Standard Integer Library**      | **C99+**                  | Defines macros for fixed-width integer types, such as `int32_t`, `int64_t`, and others for ensuring portability. | [Reference](https://en.cppreference.com/w/c/types/stdint)  |
-| `stdbool.h`    | **Standard Boolean Library**      | **C99+**                  | Defines macros for Boolean type (`bool`), with values `true` and `false`.                                        | [Reference](https://en.cppreference.com/w/c/types/stdbool) |
-| `time.h`       | **Time Library**                  | **C89+**                  | Provides functions for manipulating date and time, such as `time()`, `localtime()`, and `strftime()`.            | [Reference](https://en.cppreference.com/w/c/chrono/time)   |
-| `limits.h`     | **C Library for Limits**          | **C89+**                  | Provides limits for integral data types from C, such as `INT_MAX` and `CHAR_MIN`.                                | [Reference](https://en.cppreference.com/w/c/limits)        |
-| `string.h`     | **C String Library**              | **C89+**                  | Provides C-style string manipulation functions like `strcpy`, `strlen`, `strcmp`, and more.                      | [Reference](https://en.cppreference.com/w/c/string/byte)   |
-| `time.h`       | **C Time Library**                | **C89+**                  | Provides functionality to manipulate and retrieve system time, such as `time_t` and `strftime`.                  | [Reference](https://en.cppreference.com/w/c/chrono/time)   |
-| `stdio.h`      | **C Standard I/O Library**        | **C89+**                  | Provides input/output functions like `printf` and `scanf` from the C library.                                    | [Reference](https://en.cppreference.com/w/c/io)            |
+| `stdio.h`      | **Standard Input/Output Library** | **C89+**                  | Provides input and output functions, including file handling, standard input/output, and formatting[.][3]             | [Reference](https://en.cppreference.com/w/c/io/stdio)      |
+| `stdlib.h`     | **Standard Library**              | **C89+**                  | Provides functions for memory allocation, process control, conversions, and random number generation[.][3]            | [Reference](https://en.cppreference.com/w/c/stdlib)        |
+| `stdint.h`     | **Standard Integer Library**      | **C99+**                  | Defines macros for fixed-width integer types, such as `int32_t`, `int64_t`, and others for ensuring portability[.][3] | [Reference](https://en.cppreference.com/w/c/types/stdint)  |
+| `stdbool.h`    | **Standard Boolean Library**      | **C99+**                  | Defines macros for Boolean type (`bool`), with values `true` and `false`[.][3]                                        | [Reference](https://en.cppreference.com/w/c/types/stdbool) |
+| `time.h`       | **Time Library**                  | **C89+**                  | Provides functions for manipulating date and time, such as `time()`, `localtime()`, and `strftime()`[.][3]            | [Reference](https://en.cppreference.com/w/c/chrono/time)   |
+| `limits.h`     | **C Library for Limits**          | **C89+**                  | Provides limits for integral data types from C, such as `INT_MAX` and `CHAR_MIN`[.][3]                                | [Reference](https://en.cppreference.com/w/c/limits)        |
+| `string.h`     | **C String Library**              | **C89+**                  | Provides C-style string manipulation functions like `strcpy`, `strlen`, `strcmp`, and more[.][3]                      | [Reference](https://en.cppreference.com/w/c/string/byte)   |
+| `time.h`       | **C Time Library**                | **C89+**                  | Provides functionality to manipulate and retrieve system time, such as `time_t` and `strftime`[.][3]                  | [Reference](https://en.cppreference.com/w/c/chrono/time)   |
+| `stdio.h`      | **C Standard I/O Library**        | **C89+**                  | Provides input/output functions like `printf` and `scanf` from the C library[.][3]                                    | [Reference](https://en.cppreference.com/w/c/io)            |
 
 ### 5.4 Software
 
