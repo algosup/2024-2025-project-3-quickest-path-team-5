@@ -172,19 +172,19 @@
             </form>
         </section>
 
-        <!-- 1️⃣ Path Section -->
+        <!-- 1️ Path Section -->
         <section class="response-section">
             <h3>Path (Steps from A to B):</h2>
             <pre id="path-output">Waiting for API response...</pre>
         </section>
 
-        <!-- 2️⃣ Travel Time Section -->
+        <!-- 2️ Travel Time Section -->
         <section class="response-section">
             <h3>Travel Time:</h2>
             <pre id="travel-time-output">Waiting for API response...</pre>
         </section>
 
-        <!-- 3️⃣ Raw API Output and Download Button -->
+        <!-- 3️ Raw API Output and Download Button -->
         <section class="response-section">
             <h3>API Response:</h2>
             <pre id="response-output">Waiting for API response...</pre>
@@ -204,7 +204,7 @@
             const destination = document.getElementById("destination").value;
 
             // Construct the API request URL
-            const url = `http://localhost:8080/shortest-path?source=${encodeURIComponent(source)}&destination=${encodeURIComponent(destination)}`;
+            const url = `http://localhost:8080/quickest-path?source=${encodeURIComponent(source)}&destination=${encodeURIComponent(destination)}`;
 
             try {
                 // Send API request using GET method with Accept header
@@ -241,7 +241,7 @@
                 downloadBtn.onclick = () => {
                     const a = document.createElement("a");
                     a.href = urlObject;
-                    a.download = "shortest-path-response.json";
+                    a.download = "quickest-path-response.json";
                     a.click();
                     window.URL.revokeObjectURL(urlObject);
                 };
