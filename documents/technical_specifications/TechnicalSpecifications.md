@@ -1027,7 +1027,17 @@ The **graph**<sup>[8](#glossary-8)</sup> will be implemented using the following
     MainNode* mainList; // Represents the linked list of linked lists
     ```
 
-3. `Priority Queue`<sup>[30](#glossary-30)</sup> `(for Pathfinding`<sup>[4](#glossary-4)</sup>`):`
+3. `Hash Map`<sup>[34](#glossary-34)</sup> `for Node`<sup>[14](#glossary-14)</sup> `Lookup:`
+   - A **hash map**<sup>[34](#glossary-34)</sup> (or dictionary) is used for fast lookup of **nodes**<sup>[14](#glossary-14)</sup> by their landmark IDs[.][3]
+
+    `Example:`
+
+    ```cpp
+    std::unordered_map<int, std::vector<std::pair<int, int>>> graph;
+    Priority Queue (for Pathfinding):
+    ```
+
+4. `Priority Queue`<sup>[30](#glossary-30)</sup> `(for Pathfinding`<sup>[4](#glossary-4)</sup>`):`
    - Utilized in algorithms like **Dijkstra**<sup>[5](#glossary-5)</sup> to efficiently retrieve the next **node**<sup>[14](#glossary-14)</sup> with the shortest travel time[.][3]
    - Typically implemented as a min-heap[.][3]
 
@@ -1178,6 +1188,8 @@ We decided to target the following platforms for compatibility, performance, and
 
 ## 6. Testing
 
+<br>
+
 ### 6.1 Testing Strategy
 
 - **Unit Testing**<sup>[47](#glossary-47)</sup>: For individual components and functions[.][3]
@@ -1193,6 +1205,8 @@ The detailed testing strategy can be seen in the test plan: [HERE](QA/TestPlan.m
 
 ## 7. Deployment
 
+<br>
+
 ### 7.1 Deployment Pipeline
 
 - `Staging Environment:` For pre-production testing[.][3]
@@ -1203,6 +1217,8 @@ The detailed testing strategy can be seen in the test plan: [HERE](QA/TestPlan.m
 Regular updates and bug fixes based on user feedback and performance metrics[.][3]
 
 ## 8. Security
+
+<br>
 
 ### 8.1 Data Security
 
