@@ -1,7 +1,7 @@
-<!--     HTML: Interface for the Quickest Path Finde           -->
-<!--              file: index.html                             -->
-<!--     brief: HTML file for the interface                    -->
-<!--     authors: Rémy CHARLES, Maxime CARON, Robin GOUMY      -->
+<!--     HTML: Interface for the Quickest Path Finder       -->
+<!--              file: index.html                          -->
+<!--     brief: HTML file for the interface                 -->
+<!--     authors: Rémy CHARLES, Maxime CARON, Robin GOUMY   -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -57,7 +57,7 @@
             margin-bottom: 5px;
         }
 
-        input, select, button {
+        input, button {
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ddd;
@@ -118,12 +118,6 @@
                 <label for="destination">Destination:</label>
                 <input type="text" id="destination" name="destination" placeholder="Enter the landmark B" required>
 
-                <label for="format">Response Format:</label>
-                <select id="format" name="format" required>
-                    <option value="json">JSON</option>
-                    <option value="xml">XML</option>
-                </select>
-
                 <button type="submit">Find Path</button>
             </form>
         </section>
@@ -134,8 +128,8 @@
         </section>
         <section class="Steps-section">
             <h2>Steps:</h2>
-            <pre id="response-output">Waiting for API response...</pre>
-            <button id="download-btn" style="display: none;">Download File</button>
+            <pre id="steps-output">Waiting for API response...</pre>
+            <button id="download-btn-steps" style="display: none;">Download File</button>
         </section>
     </main>
     <footer>
@@ -149,16 +143,17 @@
             // Get input values
             const source = document.getElementById("source").value;
             const destination = document.getElementById("destination").value;
-            const format = document.getElementById("format").value;
+
+            // Construct the API request URL
+            const url = `http://localhost:8080/shortest-path?source=${encodeURIComponent(source)}&destination=${encodeURIComponent(destination)}`;
 
             try {
-                // Send API request
-                const response = await fetch("http://localhost:8080/shortest-path", {
-                    method: "POST",
+                // Send API request using GET method with Accept header
+                const response = await fetch(url, {
+                    method: "GET",
                     headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ source, destination, format })
+                        "Accept": "application/json, application/xml" // Allows JSON and XML responses
+                    }
                 });
 
                 // Handle the response
@@ -173,13 +168,13 @@
                 downloadBtn.style.display = "block";
 
                 // Set up download button to download the file
-                const url = window.URL.createObjectURL(blob);
+                const urlObject = window.URL.createObjectURL(blob);
                 downloadBtn.onclick = () => {
                     const a = document.createElement("a");
-                    a.href = url;
-                    a.download = `shortest-path.${format}`;
+                    a.href = urlObject;
+                    a.download = "shortest-path-response";
                     a.click();
-                    window.URL.revokeObjectURL(url);
+                    window.URL.revokeObjectURL(urlObject);
                 };
             } catch (error) {
                 // Handle errors
