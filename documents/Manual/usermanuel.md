@@ -328,16 +328,40 @@ The `./dgv` program confirms:
 - **Q: Where can I report bugs or request features?**  
   - **A:** Please use the project's GitHub repository issue tracker or contact the development team directly.
 
-## 8. Contact Information
+## 8. Legal Mentions
 
-If you need help or want to report an issue, feel free to reach out to our support team:
+### 1. Copyright  
 
-| **Support**        |                                                                                             |
-| ------------------ | ------------------------------------------------------------------------------------------- |
-| **Email**          | [alexandre.bopp@algosup.com](mailto:support@example.com)                                            |
-| **Response Time**  | We aim to respond within 24-48 hours.                                                        |
-| **Work Time** | Monday to Friday, 9 AM - 5 PM (CET - Central European Time).                                                  |
-| **Support Topics** | Bugs, Feature Requests, General Inquiries, Setup Assistance.                                 |
+  All content within this document, including text, images, and code snippets, is the property of Team 5 and is protected under applicable copyright laws. Unauthorized reproduction, distribution, or modification of this document is strictly prohibited.
+
+  © 2025 Team 5. All rights reserved.
+
+### 2. License & Usage  
+
+This document is provided for informational purposes only. It may not be copied, shared, or used for commercial purposes without prior written consent from Team 5.
+
+  For more information on copyright and usage, you may refer to the following legal articles:
+
+- **Berne Convention for the Protection of Literary and Artistic Works** 
+- **EU Directive 2001/29/EC**
+  
+### 3. Liability Disclaimer  
+
+  Team 5 provides this software free of charge, without collecting personal data. The software is offered "as is," with no express or implied warranties. While we strive for accuracy and reliability, we do not guarantee uninterrupted or error-free operation. Users are responsible for their own use of the software. Team 5 shall not be liable for any indirect or incidental issues arising from its use, except in cases of gross negligence or willful misconduct.
+
+### 4. Modifications & Updates  
+
+  Team 5 reserves the right to modify, update or delete any part of its services, whether documents or software.
+
+### 5. Contact Information  
+
+  | **Category**        | **Details**                                                 |
+  |---------------------|-------------------------------------------------------------|
+  | **Email**          | alexandre.bopp@algosup.com                                   |
+  | **Company Name**   | Team 5                                                       |
+  | **Response Time**  | We aim to respond within 24-48 hours.                        |
+  | **Work Time**      | Monday to Friday, 9 AM - 5 PM (CET - Central European Time). |
+  | **Support Topics** | Bugs, Feature Requests, General Inquiries, Setup Assistance. |
 
 ## 9. Appendix
 
