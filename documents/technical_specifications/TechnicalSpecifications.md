@@ -247,8 +247,8 @@ You can find the full coding convention guidelines in the [Coding Conventions do
 - `Documentation`
   - Comprehensive **API documentation**<sup>[23](#glossary-23)</sup> must be provided, including endpoint details, example requests/responses, and error codes[.][3]
 
-  > [!NOTE]
-  > The API Documentation can be found [HERE](APIDocumentation.md).
+> [!NOTE]
+> The API Documentation can be found [HERE](APIDocumentation.md).
   
 ## 3. System Architecture
 
@@ -1037,19 +1037,19 @@ The **graph**<sup>[8](#glossary-8)</sup> will be implemented using the following
     std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<>> minHeap;
     ```
 
-    > [!CAUTION]
-    > This exemple use the **priority_queue**<sup>[30](#glossary-30)</sup> system built in the C++ STL, but it's important to note that the priority_queue system in C++ STL is based on a `Binary Heap` for performance reason we will use a **Fibonacci Heap**<sup>[22](#glossary-22)</sup> instead.
-    >
-    > Time complexity comparaison:
-    >
-    > | **Operation**            | **Fibonacci Heap** (Amortized) | **Binary Heap** (Worst Case) |
-    > |--------------------------|--------------------------------|------------------------------|
-    > | **Insert**               | O(1)                          | O(log n)                     |
-    > | **Find Minimum**         | O(1)                          | O(1)                         |
-    > | **Extract Minimum**      | O(log n)                      | O(log n)                     |
-    > | **Union (Merge)**        | O(1)                          | O(n)                         |
-    > | **Decrease Key**         | O(1)                          | O(log n)                     |
-    > | **Delete**               | O(log n)                      | O(log n)                     |
+> [!CAUTION]
+> This exemple use the **priority_queue**<sup>[30](#glossary-30)</sup> system built in the C++ STL, but it's important to note that the priority_queue system in C++ STL is based on a `Binary Heap` for performance reason we will use a **Fibonacci Heap**<sup>[22](#glossary-22)</sup> instead.
+>
+> Time complexity comparaison:
+>
+> | **Operation**            | **Fibonacci Heap** (Amortized) | **Binary Heap** (Worst Case) |
+> |--------------------------|--------------------------------|------------------------------|
+> | **Insert**               | O(1)                          | O(log n)                     |
+> | **Find Minimum**         | O(1)                          | O(1)                         |
+> | **Extract Minimum**      | O(log n)                      | O(log n)                     |
+> | **Union (Merge)**        | O(1)                          | O(n)                         |
+> | **Decrease Key**         | O(1)                          | O(log n)                     |
+> | **Delete**               | O(log n)                      | O(log n)                     |
 
 #### 4.3.4 Data Integrity Validation
 
@@ -1061,26 +1061,27 @@ To ensure the correctness of the **graph structure**<sup>[8](#glossary-8)</sup>,
 2. `Duplicate Edge`<sup>[15](#glossary-15)</sup> `Check:`
    - Verify that no duplicate **edges**<sup>[15](#glossary-15)</sup> exist between two **nodes**<sup>[14](#glossary-14)</sup> with differing weights[.][3]
 
-    > [!NOTE]
-    >
-    > Exemple of a duplicate edge:
-    >
-    >![Duplicate Edge Exemple](./images/DuplicateEdge.png)
+> [!NOTE]
+>
+> Exemple of a duplicate edge:
+>
+>![Duplicate Edge Exemple](./images/DuplicateEdge.png)
 
 3. `Connectivity Check:`
+
    - Confirm the **graph**<sup>[8](#glossary-8)</sup> is fully connected, ensuring all **nodes**<sup>[14](#glossary-14)</sup> are reachable from any other **node**<sup>[14](#glossary-14)</sup>[.][3]
 
-    > [!NOTE]
-    >
-    > Exemple of a non-connected graph:
-    >
-    >```mermaid
-    >graph LR
-    > A((A)) --> B((B))
-    > B --> C((C))
-    > D((D))
+> [!NOTE]
+>
+> Exemple of a non-connected graph:
+>
+>```mermaid
+>graph LR
+> A((A)) --> B((B))
+> B --> C((C))
+> D((D))
 
-4. `Symmetry Check:`
+1. `Symmetry Check:`
    - Ensure bidirectionality of all **edges**<sup>[15](#glossary-15)</sup> (e.g., if `A -> B` exists, `B -> A` must also exist with the same weight)[.][3]
 
 #### 4.3.5 Usage in Pathfinding
