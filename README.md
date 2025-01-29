@@ -58,8 +58,8 @@ The **REST API** must be accompanied by **CSV** data checker to be sure the file
 
 1. Prepare the project:
    1. Open your terminal and clone the project:
-       > [!IMPORTANT]
-       > Git is required for this step.
+> [!IMPORTANT]
+> Git is required for this step.
 
        ```bash
        git clone https://github.com/algosup/2024-2025-project-3-quickest-path-team-5
@@ -89,32 +89,32 @@ The **REST API** must be accompanied by **CSV** data checker to be sure the file
 
    1. Generate Build Files using CMake:
 
-       > [!IMPORTANT]
-       > For **Windows**:
-       > - **MinGW** is required for this step.
-       >
-       > ```bash
-       > cmake -S . -B build -G "MinGW Makefiles"
-       > ```
+> [!IMPORTANT]
+> For **Windows**:
+> - **MinGW** is required for this step.
+>
+> ```bash
+> cmake -S . -B build -G "MinGW Makefiles"
+> ```
 
-       <br>
+<br>
 
-       > [!IMPORTANT]
-       > For **MacOS/Linux**:
-       >
-       > ```bash
-       > cmake -S . -B build
-       > ```
+> [!IMPORTANT]
+> For **MacOS/Linux**:
+>
+> ```bash
+> cmake -S . -B build
+> ```
 
-       <br>
+<br>
 
-       > [!WARNING]
-       > If you want to also build the test suite, verify your terminal:
-       >
-       > | Message                                     | Meaning                                               |
-       > | ------------------------------------------- | ----------------------------------------------------- |
-       > | GoogleTest not found. Skipping tests build. | You wrongly install GoogleTest. Take look to step 1.3 |
-       > | GoogleTest found. Building tests.           | Everything is good and the test suite will be build   |
+> [!WARNING]
+> If you want to also build the test suite, verify your terminal:
+>
+> | Message                                     | Meaning                                               |
+> | ------------------------------------------- | ----------------------------------------------------- |
+> | GoogleTest not found. Skipping tests build. | You wrongly install GoogleTest. Take look to step 1.3 |
+> | GoogleTest found. Building tests.           | Everything is good and the test suite will be build   |
 
    2. Navigate to the build directory:
 
@@ -124,33 +124,33 @@ The **REST API** must be accompanied by **CSV** data checker to be sure the file
 
    3. Generate executable(s):
 
-       > [!IMPORTANT]
-       > For **Windows**:
-       > - **MinGW** is required for this step.
-       >
-       > ```bash
-       > mingw32-make
-       > ```
+> [!IMPORTANT]
+> For **Windows**:
+> - **MinGW** is required for this step.
+>
+> ```bash
+> mingw32-make
+> ```
 
-       <br>
+<br>
 
-       > [!IMPORTANT]
-       > For **MacOS/Linux**:
-       >
-       > ```bash
-       > make
-       > ```
+> [!IMPORTANT]
+> For **MacOS/Linux**:
+>
+> ```bash
+> make
+> ```
 
 3. Run the program(s):
 
     1. Navigate to the bin directory where executables are stored:
 
-       > [!WARNING]
-       > If you are in the build folder, you need to go back to the project directory before going to the bin directory:
-       >
-       > ```bash
-       > cd ..
-       > ```
+> [!WARNING]
+> If you are in the build folder, you need to go back to the project directory before going to the bin directory:
+>
+> ```bash
+> cd ..
+> ```
 
        <br>
 
