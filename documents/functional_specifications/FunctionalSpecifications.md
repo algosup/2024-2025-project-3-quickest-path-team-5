@@ -26,7 +26,7 @@
 
 ---
 
-### *Last Update on January 22th, 2025*
+### *Last Update on January 29th, 2025*
 
 <details>
 
@@ -34,7 +34,7 @@
 
 - [Functional Specifications - Project Quickest Path](#functional-specifications---project-quickest-path)
   - [**Title:** CAP (Cap Api Pathfinder)](#title-cap-cap-api-pathfinder)
-    - [*Last Update on January 22th, 2025*](#last-update-on-january-22th-2025)
+    - [*Last Update on January 29th, 2025*](#last-update-on-january-29th-2025)
   - [Introduction](#introduction)
     - [Document Purpose](#document-purpose)
     - [Project Goal](#project-goal)
@@ -121,6 +121,7 @@ As defined by the project owner, the team is arranged as follows:
 | **C++**           | A powerful programming language used for games, system software, and fast applications.                                |
 | **CSV**           | Comma-Separated Values - A simple text format for storing data in tables.                                              |
 | **DAG**           | Directed Acyclic Graph - A graph with one-way links and no loops, useful in many systems.                              |
+| **Data Checker**| A data checker is a crucial tool for ensuring that the data is correct, reliable and adapted to the algorithm used, thus avoiding errors later on in the program. |  
 | **Data Structure**| A way to organize and store data for quick access, like arrays or trees.                                               |
 | **Directed Edge** | A one-way connection between two points in a graph.                                                                    |
 | **Euclidean Distance** | The straight-line distance between two points in a Euclidean space, calculated using the Pythagorean theorem.     |
@@ -180,12 +181,12 @@ For this project all the deadlines for the customer are February 7th 2025. But o
 
 | Name | Deadline | Link |
 | --  | -- | -- |
-| Functional Specifications Document  | 20/01/2025 | [FunctionalSpecifications.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/documents/functional_specifications/FunctionalSpecifications.md) |
-| Technical Specifications Document  | 27/01/2024 | [TechnicalSpecifications.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/documents/technical_specifications/TechnicalSpecifications.md) |
-| Code | 07/01/2025  | [Code](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/src) |
-| Test Plan | 07/01/2025 | [TestPlan.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/documents/qa/TestPlan.md) |
-| Test Cases | 07/01/2025 | [TestCases.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/documents/qa/TestCases.md) |
-| User Manual | 07/01/2025 | [UserManual](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/documents/manual/UserManual.md") |
+| Functional Specifications Document  | 20/01/2025 | [FunctionalSpecifications.md](../functional_specifications/FunctionalSpecifications.md) |
+| Technical Specifications Document  | 27/01/2024 | [TechnicalSpecifications.md](../technical_specifications/TechnicalSpecifications.md) |
+| Code | 07/01/2025  | [Folder source](../../src) |
+| Test Plan | 07/01/2025 | [TestPlan.md](../qa/TestPlan.md) |
+| Test Cases | 07/01/2025 | [TestCases.md](../qa/TestCases.md) |
+| User Manual | 07/01/2025 | [UserManual.md](../manual/UserManual.md") |
 
 ---
 
@@ -290,8 +291,7 @@ Users simply provide the IDs of two landmarks as input, and the software calcula
 
 <br>
 
-The data checker is a crucial tool for ensuring that the data is correct, reliable and adapted to the algorithm used, thus avoiding errors later on in the program.
-For example, it checks that there are no infinite loops or duplicate nodes.
+The data checker is essential, for example,  it checks that there are no infinite loops or duplicate nodes.
 It also checks that all nodes are present, that there is a possible route for all of them, i.e. that they are related, that the data type is usable and complete for each node, stop and time.
 
 <br>
@@ -330,7 +330,6 @@ It defines how requests and responses should be formatted, enabling developers t
 |-------------|-------------------------------------------------------------------------------------|----------|
 | `source`    | The starting point                                                                  | Yes      |
 | `destination` | The finish point                                                                  | Yes      |
-| `format`    | Specifies the response format. Supported values: `json`, `xml`                      | No       |
 
 ##### Headers
 
@@ -344,16 +343,8 @@ It defines how requests and responses should be formatted, enabling developers t
 
 #### Request with Default Format:  
 
-<details>
-  <summary>Click to view request</summary>
-  
-  ```http
-  GET /quickest-path?source=1543&destination=7845 HTTP/1.1  
-  Host: api.example.com  
-  Accept: application/json
-  ```
-  
-</details>
+For more information about, read the API documentation [here](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/documents/manual/UserManual.md).
+
 
 #### Response Details
 
@@ -365,7 +356,8 @@ It defines how requests and responses should be formatted, enabling developers t
 | **Error**                    | **Status Code**         | **Description**                                                                                                                                         | 
 |------------------------------|-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **400 Missing Parameters**    | `400 Bad Request`       | This means required query parameters are missing. For example, a request may not include the "source" or "destination" parameters.                     | 
-| **404 Destination Not Found** | `404 Not Found`         | This occurs when one or both points (source or destination) are not found in the dataset or are invalid.                                                |
+| **404 Not Found** | `404 Not Found` | This means that the requested resource could not be found on the server. This may occur if the URL is incorrect, the resource has been deleted. |
+| **406 Not Acceptable** | `406 Not Acceptable` | This means that the server cannot provide a response in the format requested by the client. This may be due to an unsupported header, e.g. text/html is not supported by the API. |
 | **500 Internal Server Error** | `500 Internal Server Error` | This indicates an unexpected error occurred on the server while processing the request. This can be due to system failure, database issues, or other unforeseen errors. |
 
 
@@ -408,13 +400,15 @@ The algorithm returns:
 
 ### User Interface
 
-Although optional, a simple web interface will be developed using HTML and Tailwind CSS to improve user experience.
+Although optional, a simple web interface will be developed using HTML and native CSS to improve user experience.
 
 
 The aim is to have one main page with all the information. Users will be able to enter their landmarks. 
 
 This will return the begining of steps to reach the destination, as seen on Maps
 You can also download the complete file with all directions from landmark A to landmark B in XML or JSON format.
+
+>The web app isn't part of the product, it has been made for debug purposes
 
 ![alt text](images/web_app.png)
 
@@ -485,12 +479,6 @@ To kown more about it : [GDPR License](https://en.wikipedia.org/wiki/General_Dat
 - Precision
   - Enhanced routes: More landmarks and live traffic data for better route accuracy.
   - Detailed map info: Road quality, speed zones, and weather conditions.
-  
-- User Interface
-  - Interactive maps: Zoom in/out for street-level or overview view.
-  - Smart settings: Remembers travel preferences (e.g., toll-avoider, highway enthusiast).
-  - Mobile optimization: Seamless mobile experience like the desktop version.
-  - Accessibility: Features supporting screen readers.
   
 - Efficiency and Optimization
   - Machine learning: Predict and suggest better routes based on travel patterns.
