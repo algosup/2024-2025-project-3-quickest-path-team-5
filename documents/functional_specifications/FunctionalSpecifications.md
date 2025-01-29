@@ -41,7 +41,7 @@
     - [Project Team Roles](#project-team-roles)
     - [Stakeholders](#stakeholders)
     - [Glossary](#glossary)
-  - [Requirements](#requirements)
+- [Requirements](#requirements)
     - [Performance Goals](#performance-goals)
     - [Data Integrity Verification](#data-integrity-verification)
     - [Deliverables](#deliverables)
@@ -85,7 +85,7 @@
 
 ### Document Purpose
 
-The aim of this document is to describe in detail the functionalities and expected behavior of the software, to ensure a common understanding between all stakeholders (all team members, customers, and others).
+The aim of this document is to describe in detail the functionalities and expected behavior of the software, to ensure a common understanding between all stakeholders (all team members and customers).
   
 ### Project Goal
 
@@ -143,110 +143,36 @@ As defined by the project owner, the team is arranged as follows:
 
 ---
 
-## Requirements
+# Requirements
 
-<br>
-
-The requirements are the conditions that must be fulfilled to meet the school's objectives.
-These represent the core functionalities we need to implement before the deadline.
+The requirements are the conditions that must be fulfilled to meet the client's expectations.  
+These represent the core functionalities we need to implement before the deadline.  
 Any additional features developed beyond these requirements will be considered a bonus and add extra value to our work.
 
-<br>
-
-<table>
-  <thead>
-    <tr>
-      <th>Category</th>
-      <th>Details</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr> 
-      <td><strong>Programming Language</strong></td> 
-      <td>The project must be implemented in <strong>C++</strong> to achieve optimal performance.</td>
-    </tr>
-    <tr> 
-      <td rowspan="4"><strong>REST API</strong></td>
-      <td>A REST API must be developed to expose the software's functionality via an HTTP server (localhost).</td>
-    </tr>
-    <tr> 
-      <td><strong>Endpoint:</strong> A single GET request to calculate the quickest path.</td>
-    </tr>
-    <tr> 
-      <td><strong>Input:</strong> Source and destination landmark IDs.</td>
-    </tr>
-    <tr> 
-      <td><strong>Output:</strong> Ordered list of landmarks in the path and total travel time. <br> <strong>Response Formats:</strong> Support both <strong>JSON</strong> and <strong>XML</strong>.</td>
-    </tr>
-    <tr>
-      <td><strong>Data Source</strong></td>
-      <td> The provided dataset (<code>USA-roads.csv</code>) contains ~24 million nodes. This serves as the foundation for computing paths.<br> <ul> <li><strong>Format:</strong> Each line represents a connection: <code>Landmark_A_ID, Landmark_B_ID, Time</code>.</li> <li>Connections are <strong>bidirectional</strong> even if not explicitly listed in the file.</li> </ul> </td>
-    </tr>
-    <tr>
-      <td><strong>Source Code</strong></td>
-      <td>The C++ source code must include <strong>comments</strong> and <strong>clear documentation</strong>. Only <strong>STL libraries</strong> and those required for the web server may be used.</td>
-    </tr>
-    <tr>
-      <td><strong>Algorithm Complexity</strong></td> 
-      <td>Use <strong>Big O notation</strong> to document the time and space complexity of key algorithms.</td>
-    </tr>
-    <tr>
-      <td><strong>Test Suite</strong></td>
-      <td> A comprehensive test suite is required to validate: <ul> <li>Correctness of outputs.</li> <li>Compliance with the <strong>10% approximation rule</strong>.</li> <li>General performance goals.</li> </ul> </td>
-    </tr>
-    <tr>
-      <td><strong>Data Validation Tool</strong></td> 
-      <td>A utility must verify the integrity of the dataset before use, ensuring its structure and validity.</td>
-    </tr>
-  </tbody>
-</table>
+| **Category**              | **Details** |
+|---------------------------|------------|
+| **Programming Language** | The project must be implemented in **C++** to achieve optimal performance. |
+| **REST API** | A REST API must be developed to expose the software's functionality via an HTTP server (localhost). <br><br> **Endpoint:** A single GET request to calculate the quickest path. <br><br> **Input:** Source and destination landmark IDs. <br><br> **Output:** Ordered list of landmarks in the path and total travel time.  <br><br> **Response Formats:** Support both **JSON** and **XML**. |
+| **Data Source** | The provided dataset (`USA-roads.csv`) contains ~24 million nodes. This serves as the foundation for computing paths. <br><br> - **Format:** Each line represents a connection: `Landmark_A_ID, Landmark_B_ID, Time`. <br> <br> - Connections are **bidirectional** even if not explicitly listed in the file. |
+| **Source Code** | The C++ source code must include **comments** and **clear documentation**. Only **STL libraries** and those required for the web server may be used. |
+| **Algorithm Complexity** | Use **Big O notation** to document the time and space complexity of key algorithms. |
+| **Test Suite** | A comprehensive test suite is required to validate: <br> <br> - Correctness of outputs. <br> <br> - Compliance with the **10% approximation rule**. <br> <br> - General performance goals. |
+| **Data Validation Tool** | A utility must verify the integrity of the dataset before use, ensuring its structure and validity. |
 
 ### Performance Goals
 
-<table>
-  <thead>
-    <tr>
-      <th>Category</th>
-      <th>Details</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr> 
-      <td><strong>Response Time</strong></td>
-      <td>The API must respond to all queries within <strong>1 second</strong> on a typical laptop.</td> 
-    </tr>
-    <tr> 
-      <td><strong>Accuracy</strong></td> 
-      <td> The algorithm may prioritize <strong>speed over precision</strong> by using heuristics. <br> <strong>Rule:</strong> The returned path should not exceed the shortest path duration by more than <strong>10%</strong>.
-      </td>
-    </tr>
-  </tbody>
-</table>
+| **Category**      | **Details** |
+|-------------------|------------|
+| **Response Time** | The API must respond to all queries within **1 second** on a typical laptop. |
+| **Accuracy** | The algorithm may prioritize **speed over precision** by using heuristics. <br> **Rule:** The returned path should not exceed the shortest path duration by more than **10%**. |
 
 ### Data Integrity Verification
 
-<table> 
-  <thead> 
-    <tr> 
-      <th>Category</th>
-      <th>Details</th>
-    </tr>
-  </thead>
-  <tbody> 
-    <tr> 
-      <td><strong>Graph Validation</strong></td>
-      <td>Validate that the dataset forms a <strong>Directed Acyclic Graph (DAG)</strong> and is free of loops.</td>
-    </tr> 
-    <tr> 
-      <td><strong>Connectivity Check</strong></td> 
-      <td>Ensure the graph is <strong>fully connected</strong>, allowing navigation between any two landmarks.</td>
-    </tr>
-    <tr>
-      <td><strong>Programming Language Flexibility</strong></td> 
-      <td>A language other than C++ may be used for this validation, as performance is not critical in these tasks.</td>
-    </tr>
-  </tbody>
-</table>
+| **Category**      | **Details** |
+|-------------------|------------|
+| **Graph Validation** | Validate that the dataset forms a **Directed Acyclic Graph (DAG)** and is free of loops. |
+| **Connectivity Check** | Ensure the graph is **fully connected**, allowing navigation between any two landmarks. |
+| **Programming Language Flexibility** | A language other than C++ may be used for this validation, as performance is not critical in these tasks. |
 
 ### Deliverables
 
@@ -254,12 +180,12 @@ For this project all the deadlines for the customer are February 7th 2025. But o
 
 | Name | Deadline | Link |
 | --  | -- | -- |
-| Functional Specifications Document  | 20/01/2025 | [functionalSpecifications.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/documents/functional_specifications/FunctionalSpecifications.md) |
-| Technical Specifications Document  | 27/01/2024 | [technicalSpecifications.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/documents/technical_specifications/TechnicalSpecifications.md) |
-| Code | 07/01/2025  | [code](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/src) |
-| Test Plan | 07/01/2025 | [TestPlan.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/documents/QA/TestPlan.md) |
-| Test Cases | 07/01/2025 | [TestPlan.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/documents/QA/TestCases.md) |
-| User Manual | 07/01/2025 | [User-Manual](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/documents/Manual/usermanuel.md) |
+| Functional Specifications Document  | 20/01/2025 | [FunctionalSpecifications.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/documents/functional_specifications/FunctionalSpecifications.md) |
+| Technical Specifications Document  | 27/01/2024 | [TechnicalSpecifications.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/documents/technical_specifications/TechnicalSpecifications.md) |
+| Code | 07/01/2025  | [Code](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/src) |
+| Test Plan | 07/01/2025 | [TestPlan.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/documents/qa/TestPlan.md) |
+| Test Cases | 07/01/2025 | [TestCases.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/documents/qa/TestCases.md) |
+| User Manual | 07/01/2025 | [UserManual](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/documents/manual/UserManual.md") |
 
 ---
 
@@ -542,7 +468,7 @@ Compliance with the General Data Protection Regulation (GDPR) is crucial in deve
 By adhering to these standards, developers not only ensure legal compliance but also build user trust.
 The GDPR requires transparent data collection, storage, and processing practices, giving users control over their personal information, which is essential for the acceptance of digital technologies.
 
-To kown more about it : [RGPD License](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation)
+To kown more about it : [GDPR License](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation)
 
 ### Risk Management Plan
 
@@ -571,9 +497,6 @@ To kown more about it : [RGPD License](https://en.wikipedia.org/wiki/General_Dat
   - Smart rerouting: Automatic updates when traffic worsens.
   - Optimized data: Faster performance with efficient data grouping.
   - Advanced computing: Speeding up complex calculations.
-  
-- Additional Features
-  - Offline support: Full functionality without a signal.
-  - Global language options: Tailored for international users.
+
   
 We believe these changes will make a real difference in how people use our software, whether they're daily commuters or occasional travelers.
