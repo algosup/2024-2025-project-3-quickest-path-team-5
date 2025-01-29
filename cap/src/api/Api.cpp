@@ -89,46 +89,57 @@ namespace api {
         CROW_ROUTE(app, "/shortest-path").methods(crow::HTTPMethod::GET)(
             [](const crow::request& req) {
                 crow::response res;
-
+        
                 try {
                     // Extract query parameters
                     auto query_params = crow::query_string(req.url_params);
                     auto source_param = query_params.get("source");
                     auto destination_param = query_params.get("destination");
-
+        
                     if (!source_param || !destination_param) {
                         res.code = 400;
                         res.body = "Invalid input: 'source' and 'destination' are required.";
-                        add_cors_headers(res); // Add CORS headers
+                        add_cors_headers(res);
                         return res;
                     }
-
+        
                     int source = std::stoi(source_param);
                     int destination = std::stoi(destination_param);
-
+        
                     // Validate input
                     if (source <= 0 || destination <= 0) {
                         res.code = 400;
                         res.body = "Invalid source or destination. Must be a positive number.";
-                        add_cors_headers(res); // Add CORS headers
+                        add_cors_headers(res);
                         return res;
                     }
-
+        
                     // Determine response format based on Accept header
                     std::string accept_header = req.get_header_value("Accept");
-                    std::string format = "json"; // Default JSON
-
-                    if (accept_header.find("application/xml") != std::string::npos) {
-                        format = "xml";
+        
+                    // Default to JSON if no Accept header is provided
+                    std::string format = "json";
+                    if (!accept_header.empty()) {
+                        if (accept_header.find("application/json") != std::string::npos) {
+                            format = "json";
+                        } else if (accept_header.find("application/xml") != std::string::npos) {
+                            format = "xml";
+                        } else {
+                            // Return 406 Not Acceptable if format is unsupported
+                            res.code = 406;
+                            res.body = "Error 406: Not Acceptable. Supported formats: application/json, application/xml.";
+                            add_cors_headers(res);
+                            return res;
+                        }
                     }
-
+        
                     // Calculate shortest path
                     auto [travel_time, path] = calculate_shortest_path(source, destination);
-
+        
                     // Prepare response content
                     std::string response_content;
                     std::string content_type;
-
+        
                     if (format == "xml") {
                         std::ostringstream xml_response;
                         xml_response << "<response>";
@@ -139,28 +150,28 @@ namespace api {
                         }
                         xml_response << "</path>";
                         xml_response << "</response>";
-
+        
                         response_content = xml_response.str();
                         content_type = "application/xml";
                     } else {
                         crow::json::wvalue json_response;
                         json_response["travel_time"] = travel_time;
                         json_response["path"] = path;
-
+        
                         response_content = json_response.dump();
                         content_type = "application/json";
                     }
-
+        
                     // Send response
                     res.body = response_content;
                     res.code = 200;
                     res.add_header("Content-Type", content_type);
-                    add_cors_headers(res); // Add CORS headers
+                    add_cors_headers(res);
                     return res;
                 } catch (const std::exception& e) {
                     res.code = 500;
                     res.body = "An error occurred: " + std::string(e.what());
-                    add_cors_headers(res); // Add CORS headers
+                    add_cors_headers(res);
                     return res;
                 }
             });
