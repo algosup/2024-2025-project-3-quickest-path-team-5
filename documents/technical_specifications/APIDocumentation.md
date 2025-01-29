@@ -6,7 +6,7 @@
 - [API Documentation](#api-documentation)
   - [Overview](#overview)
   - [Endpoints](#endpoints)
-    - [1. Get Shortest Path](#1-get-shortest-path)
+    - [1. Get Quickest Path](#1-get-quickest-path)
   - [Contact](#contact)
 
 </details>
@@ -17,9 +17,9 @@ This document provides details about the API endpoints, request formats, and res
 
 ## Endpoints
 
-### 1. Get Shortest Path
+### 1. Get Quickest Path
 
-**Endpoint:** `GET /shortest-path?source={SourceID}&destination{DestinationID}`
+**Endpoint:** `GET /quickest-path?source={SourceID}&destination{DestinationID}`
 
 > [!IMPORTANT]
 > Accepted formats:
@@ -33,7 +33,7 @@ This document provides details about the API endpoints, request formats, and res
 **Request Example:**
 
 ```bash
-curl -X GET "http://localhost/shortest-path?source=7&destination=12" \
+curl -X GET "http://localhost/quickest-path?source=7&destination=12" \
      -H "Accept: application/json, application/xml"
 ```
 
