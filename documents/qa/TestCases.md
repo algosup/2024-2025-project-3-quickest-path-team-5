@@ -6,6 +6,8 @@ The purpose of this document is to regroup all of the different Test Cases creat
 
 ## Severity
 
+| Severity | Description |
+| --- | --- |
 | Low | Can be tested at a later date than specified |
 | Medium | Important but not critical |
 | High | Critical, is to be tested ASAP |
@@ -15,19 +17,6 @@ The purpose of this document is to regroup all of the different Test Cases creat
 You can find the detailed history of our tests on the [linked spreadsheet](https://docs.google.com/spreadsheets/d/1JB1lV4f822tu6zhfQbtrtQGsYIInJZw8AnJMDjYGYeo/edit?gid=0#gid=0).
 
 ## Tests
-
-<!--
-
-Test Template
-
-| Test ID |  |
-| --- | --- |
-| Description |  |
-| Steps |  |
-| Expected Result |  |
-| Severity |  |
-
- -->
 
 ### Data Verification
 
