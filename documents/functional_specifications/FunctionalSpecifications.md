@@ -123,6 +123,7 @@ As defined by the project owner, the team is arranged as follows:
 | **DAG**           | Directed Acyclic Graph - A graph with one-way links and no loops, useful in many systems.                              |
 | **Data Structure**| A way to organize and store data for quick access, like arrays or trees.                                               |
 | **Directed Edge** | A one-way connection between two points in a graph.                                                                    |
+| **Euclidean Distance** | The straight-line distance between two points in a Euclidean space, calculated using the Pythagorean theorem.     |
 | **Frameworks**    | Pre-built tools or libraries to speed up development, like React or Django.                                            |
 | **GDPR**          | General Data Protection Regulation - EU law for protecting personal data and privacy.                                  |
 | **Graph**         | A collection of points (nodes) connected by lines (edges), like social networks.                                       |
@@ -138,6 +139,7 @@ As defined by the project owner, the team is arranged as follows:
 | **Test Plan**     | A document describing what, when, and how to test in software.                                                         |
 | **UI**            | User Interface - What users see and interact with in software, like buttons and menus.                                 |
 | **XML**           | Extensible Markup Language - A flexible format for structuring and exchanging data.                                    |
+
 
 ---
 
@@ -252,12 +254,12 @@ For this project all the deadlines for the customer are February 7th 2025. But o
 
 | Name | Deadline | Link |
 | --  | -- | -- |
-| Functional Specifications Document  | 20/01/2025 | [functionalSpecifications.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/functional_specifications/FunctionalSpecifications.md) |
-| Technical Specifications Document  | 27/01/2024 | [technicalSpecifications.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/technical_specifications/TechnicalSpecifications.md) |
-| Code | 07/01/2025  | [code](needs to be updated) |
-| Test Plan | 07/01/2025 | [TestPlan.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/QA/TestPlan.md) |
-| Test Cases | 07/01/2025 | [TestPlan.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/QA/TestCases.md) |
-| User Manual | 07/01/2025 | [User-Manual]([needs to be updated](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/Manual/usermanuel.md)) |
+| Functional Specifications Document  | 20/01/2025 | [functionalSpecifications.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/documents/functional_specifications/FunctionalSpecifications.md) |
+| Technical Specifications Document  | 27/01/2024 | [technicalSpecifications.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/documents/technical_specifications/TechnicalSpecifications.md) |
+| Code | 07/01/2025  | [code](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/src) |
+| Test Plan | 07/01/2025 | [TestPlan.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/documents/QA/TestPlan.md) |
+| Test Cases | 07/01/2025 | [TestPlan.md](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/documents/QA/TestCases.md) |
+| User Manual | 07/01/2025 | [User-Manual](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/documents/Manual/usermanuel.md) |
 
 ---
 
@@ -432,44 +434,6 @@ It defines how requests and responses should be formatted, enabling developers t
 |Status Code |Description |
 |------------|--------------|
 |200 |The request was successfully processed, and the response contains the data related to the quickest path calculation between the specified source and destination. |
-
-<details> 
-  <summary>Click to view example JSON response</summary>
-  <pre><code>
-  {
-        {
-            "distance": 1234,
-            "steps": [
-                {
-                    "segmentA": 12,
-                    "segmentB": 65,
-                    "distance": 1234
-                }...
-            ]
-        }
-  }
-
-  </code></pre>
-</details>
-
-<details> 
-<summary>Click to view example XML response</summary>
-<pre><code>
-&lt;response&gt;
-  &lt;distance&gt;1234&lt;/distance&gt;
-    &lt;steps&gt;
-        &lt;step&gt;
-            &lt;segmentA&gt;12&lt;/segmentA&gt;
-            &lt;segmentB&gt;65&lt;/segmentB&gt;
-            &lt;distance&gt;1234&lt;/distance&gt;
-        &lt;/step&gt;...
-    &lt;/steps&gt;
-&lt;/response&gt;
-</code></pre>
-</details>
-
->These are examples, the values do not correspond to actual values.
-
 
 
 | **Error**                    | **Status Code**         | **Description**                                                                                                                                         | 
