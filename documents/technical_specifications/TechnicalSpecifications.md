@@ -77,7 +77,6 @@
     - [5.5 Target](#55-target)
       - [5.5.1 Desktop Platforms](#551-desktop-platforms)
       - [5.5.2 Web Server for REST API](#552-web-server-for-rest-api)
-    - [Notes](#notes)
   - [6. Testing](#6-testing)
     - [6.1 Testing Strategy](#61-testing-strategy)
     - [6.2 Tools](#62-tools)
@@ -203,7 +202,7 @@ You can find the full coding convention guidelines in the [Coding Conventions do
 - `Visual Representation of Linked Nodes`<sup>[14](#glossary-14)</sup>
   - The application will generate a visual diagram displaying each **node**<sup>[14](#glossary-14)</sup> and its connections, using color-coded indicators for errors or anomalies in the data[.][3]  
 
-- `Node<sup>[14](#glossary-14)</sup> and Connection Validation`  
+- `Node`<sup>[14](#glossary-14)</sup> `and Connection Validation`  
   - The application will verify the integrity of the imported data, ensuring all **nodes**<sup>[14](#glossary-14)</sup> and connections are valid and consistent with the required format[.][3]  
 
 - `Algorithm Complexity`
@@ -248,6 +247,9 @@ You can find the full coding convention guidelines in the [Coding Conventions do
 - `Documentation`
   - Comprehensive **API documentation**<sup>[23](#glossary-23)</sup> must be provided, including endpoint details, example requests/responses, and error codes[.][3]
 
+  > [!NOTE]
+  > The API Documentation can be found [HERE](APIDocumentation.md).
+  
 ## 3. System Architecture
 
 <br>
@@ -432,13 +434,13 @@ graph TD
    - `No`: If any of the parameters are invalid (e.g., the nodes do not exist), the system returns a **400 Bad Request**<sup>[44](#glossary-44)</sup> response indicating the issue with the parameters[.][3]
 
 6. `Validate returning format`  
-   The API checks the **Accept field** in the **HTTP**<sup>[11](#glossary-11)</sup> header to ensure the desired response format (e.g., **JSON**<sup>[16](#glossary-16)</sup> or **XML**<sup>[17](#glossary-17)</sup>) is supported[.][3] This step ensures that the API responds in the correct format, based on client preferences[.][3]
+   The API checks the **Accept field**<sup>[38](#glossary-38)</sup> in the **HTTP**<sup>[11](#glossary-11)</sup> header to ensure the desired response format (e.g., **JSON**<sup>[16](#glossary-16)</sup> or **XML**<sup>[17](#glossary-17)</sup>) is supported[.][3] This step ensures that the API responds in the correct format, based on client preferences[.][3]
 
 7. `Is the Accept field in HTTP`<sup>[11](#glossary-11) </sup>`header valid (JSON`<sup>[16](#glossary-16)</sup> `or XML`<sup>[17](#glossary-17)</sup>`)?`  
-   The system checks if the **Accept** header contains a valid format such as `application/json` or `application/xml`[.][3]
+   The system checks if the **Accept**<sup>[38](#glossary-38)</sup> header contains a valid format such as `application/json` or `application/xml`[.][3]
 
-   - `Yes`: If the **Accept** header is valid, the system proceeds with the pathfinding execution[.][3]
-   - `No`: If the **Accept** header is invalid or unsupported, the system responds with a **406 Not Acceptable**<sup>[45](#glossary-45)</sup> error[.][3]
+   - `Yes`: If the **Accept**<sup>[38](#glossary-38)</sup> header is valid, the system proceeds with the pathfinding execution[.][3]
+   - `No`: If the **Accept**<sup>[38](#glossary-38)</sup> header is invalid or unsupported, the system responds with a **406 Not Acceptable**<sup>[45](#glossary-45)</sup> error[.][3]
 
 8. `Execute the pathfinding algorithm`  
    The API executes the core pathfinding algorithm based on the `source` and `destination` parameters[.][3] This step involves processing the graph, performing computations to determine the shortest path or optimal route[.][3]
@@ -457,7 +459,7 @@ In case of any issues during the request validation or processing, the system ma
    If the request method is incorrect, or the parameters (`source` or `destination`) are invalid, the system responds with a **400 Bad Request**<sup>[44](#glossary-44)</sup> status code indicating that the request could not be processed due to invalid input[.][3]
 
 2. `Error Response - Not Acceptable (Code 406`<sup>[45](#glossary-45)</sup>`)`  
-   If the **Accept** header specifies a format that the system does not support (neither **JSON**<sup>[16](#glossary-16)</sup> nor **XML**<sup>[17](#glossary-17)</sup>), the system returns a **406 Not Acceptable**<sup>[45](#glossary-45)</sup> response indicating that the requested format is not supported[.][3]
+   If the **Accept**<sup>[38](#glossary-38)</sup> header specifies a format that the system does not support (neither **JSON**<sup>[16](#glossary-16)</sup> nor **XML**<sup>[17](#glossary-17)</sup>), the system returns a **406 Not Acceptable**<sup>[45](#glossary-45)</sup> response indicating that the requested format is not supported[.][3]
 
 ###### Loop and Retry
 
@@ -783,7 +785,7 @@ graph TD
         K --> L
         L -- Yes --> M
         M --> N
-        L --> No --> K
+        L -- No --> K
         N --> E
         G --> O
     end
@@ -989,26 +991,40 @@ The application relies on a **weighted, undirected graph<sup>[8](#glossary-8)</s
 
 The **graph**<sup>[8](#glossary-8)</sup> will be implemented using the following data structures for optimal performance and **scalability**<sup>[28](#glossary-28)</sup>:
 
-1. `Adjacency List`<sup>[29](#glossary-29)</sup>`:`
-   - Used for representing the **graph**<sup>[8](#glossary-8)</sup>[.][3] Each **node**<sup>[14](#glossary-14)</sup> maintains a list of its neighbors and associated weights (travel times\)[.][3]  
-   - Efficient for sparse graphs, as it minimizes memory usage[.][3]
+1. Linked List of Linked Lists:
+
+     - A linked list of linked lists is a data structure where each node in the main linked list contains a reference to another linked list. This structure is often used to represent hierarchical or multi-dimensional data, such as graphs, matrices, or sparse arrays.
+     - It is particularly useful when the data is irregular or sparse, as it avoids allocating memory for unused elements.
 
    `Example:`
 
    ```text
-    Node A: [(B, 5), (C, 10)]  
-    Node B: [(A, 5), (C, 3)]  
-    Node C: [(A, 10), (B, 3)]
+    Main List: [Node A] -> [Node B] -> [Node C]  
+    Node A: [Data 1] -> [Data 2]  
+    Node B: [Data 3]  
+    Node C: [Data 4] -> [Data 5] -> [Data 6]
    ```  
 
-2. `Hash Map`<sup>[34](#glossary-34)</sup> `for Node`<sup>[14](#glossary-14)</sup> `Lookup:`
-   - A **hash map**<sup>[34](#glossary-34)</sup> (or dictionary) is used for fast lookup of **nodes**<sup>[14](#glossary-14)</sup> by their landmark IDs[.][3]
+2. `Applications:`
+
+   - `Graph Representation:` Similar to an adjacency list, where each node in the main list represents a vertex, and its sub-list represents connected edges or neighbors.
+   - `Sparse Matrix Storage:` Efficiently stores non-zero elements in a matrix by using linked lists for rows and columns.
+   - `Hierarchical Data:` Represents tree-like structures or organizational hierarchies.
 
    `Example:`
 
     ```cpp
-    std::unordered_map<int, std::vector<std::pair<int, int>>> graph;
-    Priority Queue (for Pathfinding):
+    struct Node {
+        int data;
+        Node* next;
+    };
+
+    struct MainNode {
+        Node* subList;
+        MainNode* next;
+    };
+
+    MainNode* mainList; // Represents the linked list of linked lists
     ```
 
 3. `Priority Queue`<sup>[30](#glossary-30)</sup> `(for Pathfinding`<sup>[4](#glossary-4)</sup>`):`
@@ -1021,6 +1037,20 @@ The **graph**<sup>[8](#glossary-8)</sup> will be implemented using the following
     std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<>> minHeap;
     ```
 
+    > [!CAUTION]
+    > This exemple use the **priority_queue**<sup>[30](#glossary-30)</sup> system built in the C++ STL, but it's important to note that the priority_queue system in C++ STL is based on a `Binary Heap` for performance reason we will use a **Fibonacci Heap**<sup>[22](#glossary-22)</sup> instead.
+    >
+    > Time complexity comparaison:
+    >
+    > | **Operation**            | **Fibonacci Heap** (Amortized) | **Binary Heap** (Worst Case) |
+    > |--------------------------|--------------------------------|------------------------------|
+    > | **Insert**               | O(1)                          | O(log n)                     |
+    > | **Find Minimum**         | O(1)                          | O(1)                         |
+    > | **Extract Minimum**      | O(log n)                      | O(log n)                     |
+    > | **Union (Merge)**        | O(1)                          | O(n)                         |
+    > | **Decrease Key**         | O(1)                          | O(log n)                     |
+    > | **Delete**               | O(log n)                      | O(log n)                     |
+
 #### 4.3.4 Data Integrity Validation
 
 To ensure the correctness of the **graph structure**<sup>[8](#glossary-8)</sup>, the following validation steps are performed during the data import phase:
@@ -1031,24 +1061,24 @@ To ensure the correctness of the **graph structure**<sup>[8](#glossary-8)</sup>,
 2. `Duplicate Edge`<sup>[15](#glossary-15)</sup> `Check:`
    - Verify that no duplicate **edges**<sup>[15](#glossary-15)</sup> exist between two **nodes**<sup>[14](#glossary-14)</sup> with differing weights[.][3]
 
-      > [!NOTE]
-      >
-      > Exemple of a duplicate edge:
-      >
-      >![Duplicate Edge Exemple](./images/DuplicateEdge.png)
+    > [!NOTE]
+    >
+    > Exemple of a duplicate edge:
+    >
+    >![Duplicate Edge Exemple](./images/DuplicateEdge.png)
 
 3. `Connectivity Check:`
    - Confirm the **graph**<sup>[8](#glossary-8)</sup> is fully connected, ensuring all **nodes**<sup>[14](#glossary-14)</sup> are reachable from any other **node**<sup>[14](#glossary-14)</sup>[.][3]
 
-      > [!NOTE]
-      >
-      > Exemple of a non-connected graph:
-      >
-      >```mermaid
-      >graph LR
-      > A((A)) --> B((B))
-      > B --> C((C))
-      > D((D))
+    > [!NOTE]
+    >
+    > Exemple of a non-connected graph:
+    >
+    >```mermaid
+    >graph LR
+    > A((A)) --> B((B))
+    > B --> C((C))
+    > D((D))
 
 4. `Symmetry Check:`
    - Ensure bidirectionality of all **edges**<sup>[15](#glossary-15)</sup> (e.g., if `A -> B` exists, `B -> A` must also exist with the same weight)[.][3]
@@ -1077,27 +1107,26 @@ The project will follow the Agile methodology, with development broken down into
 
 ### 5.3 Libraries used
 
-| C++ Library Name                    | Full Name                             | Version of implementation | Is part of the standard library? | Description                                                                                                               | Links                                                                  |
-| ----------------------------------- | ------------------------------------- | ------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| **Standard Template Library (STL)** | **C++ Standard Template Library**     | **C++11+**                | ✅                                | Provides a collection of generic classes and functions, such as vectors, lists, stacks, queues, and algorithms.           | [Reference](https://en.cppreference.com/w/cpp/standard_library)        |
-| `iostream`                          | **Input/Output Stream Library**       | **C++98+**                | ✅                                | Provides functionality for input and output operations, including `cin`, `cout`, and `cerr`.                              | [Reference](https://en.cppreference.com/w/cpp/io/iostream)             |
-| `fstream`                           | **File Stream Library**               | **C++98+**                | ✅                                | Provides functionality for file input and output using streams like `ifstream`, `ofstream`, and `fstream`.                | [Reference](https://en.cppreference.com/w/cpp/io/fstream)              |
-| `stdexcept`                         | **Standard Exception Library**        | **C++98+**                | ✅                                | Provides exception handling classes, including `std::runtime_error`, `std::invalid_argument`, and more.                   | [Reference](https://en.cppreference.com/w/cpp/error/stdexcept)         |
-| `chrono`                            | **Time Library**                      | **C++11+**                | ✅                                | Provides functionality for time measurement, durations, and clocks in C++.                                                | [Reference](https://en.cppreference.com/w/cpp/chrono)                  |
-| `iomanip`                           | **Input/Output Manipulation Library** | **C++98+**                | ✅                                | Provides facilities for formatting input and output, including stream manipulators like `setw`, `setprecision`.           | [Reference](https://en.cppreference.com/w/cpp/io/iomanip)              |
-| `unordered_map`                     | **Unordered Map Library**             | **C++11+**                | ✅                                | Provides an unordered associative container that uses hash tables, allowing fast lookup, insertion, and deletion.         | [Reference](https://en.cppreference.com/w/cpp/container/unordered_map) |
-| `vector`                            | **Vector Library**                    | **C++98+**                | ✅                                | Provides a dynamic array that can grow in size, supporting random access and efficient insertions and deletions.          | [Reference](https://en.cppreference.com/w/cpp/container/vector)        |
-| `string`                            | **String Library**                    | **C++98+**                | ✅                                | Provides the `std::string` class to manipulate sequences of characters with dynamic sizing.                               | [Reference](https://en.cppreference.com/w/cpp/string/basic_string)     |
-| `utility`                           | **Utility Library**                   | **C++98+**                | ✅                                | Provides general-purpose utility functions, including `std::pair`, `std::move`, and `std::swap`.                          | [Reference](https://en.cppreference.com/w/cpp/utility)                 |
-| `sstream`                           | **String Stream Library**             | **C++98+**                | ✅                                | Provides functionality for string-based input/output operations using streams like `std::istringstream`, `ostringstream`. | [Reference](https://en.cppreference.com/w/cpp/io/sstream)              |
-| `crow`                              | **Crow Web Framework**                | Third-party               | ❌                                | A modern C++ web framework for building REST APIs and web applications.                                                   | [GitHub](https://github.com/CrowCpp/Crow)                              |
-| `queue`                             | **Queue Library**                     | **C++98+**                | ✅                                | Provides the `std::queue` container adapter for implementing FIFO (first-in-first-out) data structures.                   | [Reference](https://en.cppreference.com/w/cpp/container/queue)         |
-| `algorithm`                         | **Algorithm Library**                 | **C++98+**                | ✅                                | Provides a variety of functions for algorithms like searching, sorting, and manipulating containers.                      | [Reference](https://en.cppreference.com/w/cpp/algorithm)               |
-| `googletest`                        | **Google Test Framework**             | Third-party               | ❌                                | A popular C++ testing framework for unit testing, providing tools for assertions, fixtures, and mocking.                  | [GitHub](https://github.com/google/googletest)                         |
-| `climit`                            | **C Library for Limits**              | **C++98+**                | ✅                                | Provides limits for integral data types from C, such as `INT_MAX` and `CHAR_MIN`.                                         | [Reference](https://en.cppreference.com/w/cpp/header/climits)          |
-| `cstring`                           | **C String Library**                  | **C++98+**                | ✅                                | Provides C-style string manipulation functions like strcpy, strlen, and strcmp.                                           | [Reference](https://en.cppreference.com/w/cpp/header/cstring)          |
-| `cstdint`                           | **C Integer Types Library**           | **C++11+**                | ✅                                | Provides fixed-width integer types (`int8_t`, `uint64_t`) and limits for these types.                                     | [Reference](https://en.cppreference.com/w/cpp/header/cstdint)          |
-<!-- TODO: Add all used C++ libs from the REST API -->
+| C++ Library Name                  | Full Name                             | Version of implementation | Is part of the standard library? | Description                                                                                                               | Links                                                                  |
+| --------------------------------- | ------------------------------------- | ------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `Standard Template Library (STL)` | **C++ Standard Template Library**     | **C++11+**                | ✅                                | Provides a collection of generic classes and functions, such as vectors, lists, stacks, queues, and algorithms.           | [Reference](https://en.cppreference.com/w/cpp/standard_library)        |
+| `iostream`                        | **Input/Output Stream Library**       | **C++98+**                | ✅                                | Provides functionality for input and output operations, including `cin`, `cout`, and `cerr`.                              | [Reference](https://en.cppreference.com/w/cpp/io/iostream)             |
+| `fstream`                         | **File Stream Library**               | **C++98+**                | ✅                                | Provides functionality for file input and output using streams like `ifstream`, `ofstream`, and `fstream`.                | [Reference](https://en.cppreference.com/w/cpp/io/fstream)              |
+| `stdexcept`                       | **Standard Exception Library**        | **C++98+**                | ✅                                | Provides exception handling classes, including `std::runtime_error`, `std::invalid_argument`, and more.                   | [Reference](https://en.cppreference.com/w/cpp/error/stdexcept)         |
+| `chrono`                          | **Time Library**                      | **C++11+**                | ✅                                | Provides functionality for time measurement, durations, and clocks in C++.                                                | [Reference](https://en.cppreference.com/w/cpp/chrono)                  |
+| `iomanip`                         | **Input/Output Manipulation Library** | **C++98+**                | ✅                                | Provides facilities for formatting input and output, including stream manipulators like `setw`, `setprecision`.           | [Reference](https://en.cppreference.com/w/cpp/io/iomanip)              |
+| `unordered_map`                   | **Unordered Map Library**             | **C++11+**                | ✅                                | Provides an unordered associative container that uses hash tables, allowing fast lookup, insertion, and deletion.         | [Reference](https://en.cppreference.com/w/cpp/container/unordered_map) |
+| `vector`                          | **Vector Library**                    | **C++98+**                | ✅                                | Provides a dynamic array that can grow in size, supporting random access and efficient insertions and deletions.          | [Reference](https://en.cppreference.com/w/cpp/container/vector)        |
+| `string`                          | **String Library**                    | **C++98+**                | ✅                                | Provides the `std::string` class to manipulate sequences of characters with dynamic sizing.                               | [Reference](https://en.cppreference.com/w/cpp/string/basic_string)     |
+| `utility`                         | **Utility Library**                   | **C++98+**                | ✅                                | Provides general-purpose utility functions, including `std::pair`, `std::move`, and `std::swap`.                          | [Reference](https://en.cppreference.com/w/cpp/utility)                 |
+| `sstream`                         | **String Stream Library**             | **C++98+**                | ✅                                | Provides functionality for string-based input/output operations using streams like `std::istringstream`, `ostringstream`. | [Reference](https://en.cppreference.com/w/cpp/io/sstream)              |
+| `crow`                            | **Crow Web Framework**                | Third-party               | ❌                                | A modern C++ web framework for building REST APIs and web applications.                                                   | [GitHub](https://github.com/CrowCpp/Crow)                              |
+| `queue`                           | **Queue Library**                     | **C++98+**                | ✅                                | Provides the `std::queue` container adapter for implementing FIFO (first-in-first-out) data structures.                   | [Reference](https://en.cppreference.com/w/cpp/container/queue)         |
+| `algorithm`                       | **Algorithm Library**                 | **C++98+**                | ✅                                | Provides a variety of functions for algorithms like searching, sorting, and manipulating containers.                      | [Reference](https://en.cppreference.com/w/cpp/algorithm)               |
+| `googletest`                      | **Google Test Framework**             | Third-party               | ❌                                | A popular C++ testing framework for unit testing, providing tools for assertions, fixtures, and mocking.                  | [GitHub](https://github.com/google/googletest)                         |
+| `climit`                          | **C Library for Limits**              | **C++98+**                | ✅                                | Provides limits for integral data types from C, such as `INT_MAX` and `CHAR_MIN`.                                         | [Reference](https://en.cppreference.com/w/cpp/header/climits)          |
+| `cstring`                         | **C String Library**                  | **C++98+**                | ✅                                | Provides C-style string manipulation functions like strcpy, strlen, and strcmp.                                           | [Reference](https://en.cppreference.com/w/cpp/header/cstring)          |
+| `cstdint`                         | **C Integer Types Library**           | **C++11+**                | ✅                                | Provides fixed-width integer types (`int8_t`, `uint64_t`) and limits for these types.                                     | [Reference](https://en.cppreference.com/w/cpp/header/cstdint)          |
 
 | C Library Name | Full Name                         | Version of implementation | Description                                                                                                      | Links                                                      |
 | -------------- | --------------------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
@@ -1140,21 +1169,13 @@ We decided to target the following platforms for compatibility, performance, and
 | **HTTP<sup>[11](#glossary-11)</sup> Servers** | Linux, Windows, macOS    | **Platform-agnostic**<sup>[3](#glossary-3)</sup> support ensures flexibility for deployment and development[.][3] |
 | **Localhost**                                 | Development environments | Simplifies testing and debugging during the development phase[.][3]                                               |
 
----
-
-### Notes
-
-1. **macOS Targeting:**  
-   - **macOS 14 (Sequoia)** is the primary target version for this project[.][3]  
-   - **macOS 13 (Ventura)** and **macOS 12 (Monterey)** are supported, systems running earlier versions may still work but are not officially supported[.][3]
-
-2. **Cross-Platform<sup>[19](#glossary-19)</sup> Compatibility:**  
-   - By leveraging C++ and standardized libraries, the project ensures a seamless experience across major desktop platforms[.][3]  
-   - The **REST API**<sup>[2](#glossary-2)</sup> is developed to work with any platform hosting an **HTTP**<sup>[11](#glossary-11)</sup> server capable of supporting the required runtime[.][3]
+> [!NOTE]
+>**Cross-Platform<sup>[19](#glossary-19)</sup> Compatibility:**  
+>
+> - By leveraging C++ and standardized libraries, the project ensures a seamless experience across major desktop platforms[.][3]  
+> - The **REST API**<sup>[2](#glossary-2)</sup> is developed to work with any platform hosting an **HTTP**<sup>[11](#glossary-11)</sup> server capable of supporting the required runtime[.][3]
 
 ## 6. Testing
-
-<br>
 
 ### 6.1 Testing Strategy
 
@@ -1170,8 +1191,6 @@ The detailed testing strategy can be seen in the test plan: [HERE](QA/TestPlan.m
 - **CI/CD**<sup>[1](#glossary-1)</sup> Testing: Automated testing using GitHub<sup>[51](#glossary-51)</sup> Actions[.][3]
 
 ## 7. Deployment
-
-<br>
 
 ### 7.1 Deployment Pipeline
 
@@ -1190,7 +1209,7 @@ Since the application is designed for local use (on a local server), the securit
 
 - **Encryption:**
   - Communication between the client and server will be done over **HTTP<sup>[11](#glossary-11)</sup>** since the system operates in a localhost environment[.][3]
-  - Although we will not implement HTTPS or **SSL**<sup>[12](#glossary-12)</sup> for localhost, it's highly recommended that in production environments (if the project is moved to the internet) to secure the data transmitted between the client and server[.][3]
+  - Although we will not implement HTTPS or **SSL**<sup>[12](#glossary-12)</sup> for localhost, it's highly recommended that in production environments *(if the project is moved to the internet)* to secure the data transmitted between the client and server[.][3]
   - Since the application doesn’t store user data, encryption is not necessary for data at rest[.][3] The only data that exists is the **CSV**<sup>[9](#glossary-9)</sup> file, which is stored on the server[.][3]
 
 - **Data Integrity<sup>[33](#glossary-33)</sup>:**
@@ -1227,7 +1246,7 @@ Since the application is designed for local use (on a local server), the securit
 
 - **Code Review and Secure Coding:**
   - We follow secure coding practices to prevent vulnerabilities such as **buffer overflows**<sup>[50](#glossary-50)</sup>, code injection, and other common vulnerabilities[.][3] Any code changes are reviewed to ensure adherence to security standards[.][3]
-  - Proper **input validation** is implemented to prevent issues when processing data from the **CSV**<sup>[9](#glossary-9)</sup> file[.][3]
+  - Proper `input validation` is implemented to prevent issues when processing data from the **CSV**<sup>[9](#glossary-9)</sup> file[.][3]
 
 - **Regular Updates:**
   - We will ensure that the system, especially the server environment, is regularly updated with security patches to minimize the risk of exploits[.][3]
