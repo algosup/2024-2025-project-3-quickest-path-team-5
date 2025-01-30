@@ -1,4 +1,4 @@
-# User Manual for 2024-2025 Project 3: Call for Tender
+# User Manual for 2024-2025 Project 3: Quickest Path
 
 | Name           | date      | role |
 | -------------- | --------- |------|
@@ -6,7 +6,7 @@
 | Robin Goumy    |     -     | Program Manager |
 | Jason Grosso   |     -     | Quality Assurance |
 
-<img src="images/intro.jpg" alt="GPS Navigation" height="100%" width="100%" style="display: block; margin: auto; object-fit:cover;">
+<img src="images/map2.jpg" alt="GPS Navigation" height="100%" width="100%" style="display: block; margin: auto; object-fit:cover;">
 
 ---
 
@@ -18,7 +18,7 @@ This user manual provides guidance on how to operate and interact with the **Qui
 
 ### **Audience**
 
-This user manual is designed for everyday workers with no technical or computer-related background. The software is built to be easy to use, with a simple interface that doesn't require technical knowledge. Once installed, the tool is ready for use and allows you to perform your tasks without needing to understand complex systems.
+This user manual is designed for everyone, no technical requirements or computer-related background are expected. The software is built to be easy to use, with a simple interface that doesn't require technical knowledge. Once installed, the tool is ready for use and allows you to perform your tasks without needing to understand complex systems.
 
 #### **Key Points for the Audience**:
 
@@ -357,7 +357,7 @@ This document is provided for informational purposes only. It may not be copied,
 
   | **Category**        | **Details**                                                 |
   |---------------------|-------------------------------------------------------------|
-  | **Email**          | alexandre.bopp@algosup.com                                   |
+  | **Email**          | team_5@algosup.com                                   |
   | **Company Name**   | Team 5                                                       |
   | **Response Time**  | We aim to respond within 24-48 hours.                        |
   | **Work Time**      | Monday to Friday, 9 AM - 5 PM (CET - Central European Time). |
