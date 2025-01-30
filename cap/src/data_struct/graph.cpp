@@ -258,13 +258,14 @@ vector<uint32_t> Graph::aStarLandmark(uint32_t from, uint32_t to)
     distances[from] = 0;
 
     // Priority queue with heuristic
-    auto compare = [&](uint32_t a, uint32_t b) {
-        uint32_t h_a = 0, h_b = 0;
-        for (size_t i = 0; i < landmarks.size(); ++i) {
-            h_a = (h_a > (uint32_t)abs((int)landmarkDistances[i][a] - (int)landmarkDistances[i][to])) ? h_a : (uint32_t)abs((int)landmarkDistances[i][a] - (int)landmarkDistances[i][to]);
-            h_b = (h_b > (uint32_t)abs((int)landmarkDistances[i][b] - (int)landmarkDistances[i][to])) ? h_b : (uint32_t)abs((int)landmarkDistances[i][b] - (int)landmarkDistances[i][to]);
+    auto compare = [&](uint32_t a, uint32_t b)
+    {
+        if (a >= distances.size() || b >= distances.size())
+        {
+            cerr << "Error: comparator accessing out-of-bounds index." << endl;
+            throw std::out_of_range("Comparator out of bounds");
         }
-        return distances[a] + h_a > distances[b] + h_b;
+        return distances[a] > distances[b];
     };
     priority_queue<uint32_t, vector<uint32_t>, decltype(compare)> pq(compare);
 
@@ -286,11 +287,11 @@ vector<uint32_t> Graph::aStarLandmark(uint32_t from, uint32_t to)
             continue;
 
         Edge *edge = currentNode->getHead();
+
         while (edge != nullptr)
         {
             uint32_t neighborId = edge->getSelf()->getId();
             uint32_t newDist = distances[currentId] + edge->getTime();
-
 
             if (newDist < distances[neighborId])
             {
@@ -298,11 +299,8 @@ vector<uint32_t> Graph::aStarLandmark(uint32_t from, uint32_t to)
                 previous[neighborId] = currentId;
                 pq.push(neighborId);
             }
-
-
             edge = edge->getNext();
         }
-
     }
 
     // Construct the path

@@ -47,7 +47,6 @@ int main(void) {
 
     
 
-    struct rusage usage;
     graph_t* graph = createGraph();
     clock_t begin = clock();    
     readDataset(graph, FILE_PATH);
