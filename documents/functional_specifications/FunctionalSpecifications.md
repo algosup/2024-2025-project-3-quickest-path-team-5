@@ -250,8 +250,21 @@ This algorithm will be implemented in C, as it is a high-performance language at
 
 <br>
 
-![alt text](/documents/functional_specifications/images/logic_quickest_path.png)  
 
+```mermaid
+
+flowchart TD
+
+    A(Start) --> B[Input Dataset]
+    B --> C{Data Checker}
+    C -- Not valid --> Z(Stop)
+    C -- Valid input --> D[Load Dataset]
+    D --> E[Rest API operating]
+    E --> F[Calculate quickest path]
+    F --> G[Respond to user JSON/XML]
+    G --> Z
+
+```
 
 <br>
 
@@ -262,7 +275,15 @@ It defines how requests and responses should be formatted, enabling developers t
 
 <br>
 
-![alt text](images/Input_output_system.png)
+```mermaid
+
+flowchart TD
+    A([Input : CSV File]) --> B[Algorithm]
+    B --> C[Classify all informations]
+    C --> D([Output : XML File])
+    C --> E([Output : JSON File])
+
+```
 
 <br>
 
