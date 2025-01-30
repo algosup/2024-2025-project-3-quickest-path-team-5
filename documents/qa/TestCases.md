@@ -6,6 +6,8 @@ The purpose of this document is to regroup all of the different Test Cases creat
 
 ## Severity
 
+| Severity | Description |
+| --- | --- |
 | Low | Can be tested at a later date than specified |
 | Medium | Important but not critical |
 | High | Critical, is to be tested ASAP |
@@ -15,19 +17,6 @@ The purpose of this document is to regroup all of the different Test Cases creat
 You can find the detailed history of our tests on the [linked spreadsheet](https://docs.google.com/spreadsheets/d/1JB1lV4f822tu6zhfQbtrtQGsYIInJZw8AnJMDjYGYeo/edit?gid=0#gid=0).
 
 ## Tests
-
-<!--
-
-Test Template
-
-| Test ID |  |
-| --- | --- |
-| Description |  |
-| Steps |  |
-| Expected Result |  |
-| Severity |  |
-
- -->
 
 ### Data Verification
 
@@ -144,7 +133,14 @@ Test Template
 
 | Test ID | 113 |
 | --- | --- |
-| Description | Test Download |
-| Steps | 1. Run the large test path 2. Click on the Download button |
-| Expected Result | A .csv file with all the steps has been downloaded |
+| Description | Test Download JSON |
+| Steps | 1. Run the large test path <br> 2. Select the JSON option <br> 3. Click on the Download button |
+| Expected Result | A JSON file with all the steps has been downloaded |
+| Severity | Medium |
+
+| Test ID | 114 |
+| --- | --- |
+| Description | Test Download XML |
+| Steps | 1. Run the large test path <br> 2. Select the XML option <br> 3. Click on the Download button  |
+| Expected Result | A XML file with all the steps has been downloaded |
 | Severity | Medium |
