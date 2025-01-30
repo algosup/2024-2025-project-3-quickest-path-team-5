@@ -4,7 +4,7 @@
     \authors CHARLES Rémy, CARON Maxime
 */
 
-#include "api.hpp"
+#include "Api.hpp"
 #include <iostream>
 #include <fstream>
 #include <sstream>
