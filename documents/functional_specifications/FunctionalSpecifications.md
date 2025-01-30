@@ -26,7 +26,7 @@
 
 ---
 
-### *Last Update on January 29th, 2025*
+### *Last Update on January 30th, 2025*
 
 <details>
 
@@ -34,7 +34,7 @@
 
 - [Functional Specifications - Project Quickest Path](#functional-specifications---project-quickest-path)
   - [**Title:** CAP (Cap Api Pathfinder)](#title-cap-cap-api-pathfinder)
-    - [*Last Update on January 29th, 2025*](#last-update-on-january-29th-2025)
+    - [*Last Update on January 30th, 2025*](#last-update-on-january-30th-2025)
   - [Introduction](#introduction)
     - [Document Purpose](#document-purpose)
     - [Project Goal](#project-goal)
@@ -194,75 +194,16 @@ For this project all the deadlines for the customer are February 7th 2025. But o
 
 ### Personnas
 
-<table>
-  <thead>
-    <tr>
-      <th><strong>Picture</strong></th>
-      <th><strong>Attribute</strong></th>
-      <th><strong>Details</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td rowspan="5">
-        <img src="https://t4.ftcdn.net/jpg/03/96/16/79/360_F_396167959_aAhZiGlJoeXOBHivMvaO0Aloxvhg3eVT.jpg" alt="Business Traveler Tom" width="200" style="object-fit: cover;" />
-      </td>
-      <td><strong>Name</strong></td>
-      <td>Tom Smith</td>
-    </tr>
-    <tr>
-      <td><strong>Age</strong></td>
-      <td>30 - 40</td>
-    </tr>
-    <tr>
-      <td><strong>Occupation</strong></td>
-      <td>Logistics Planning Manager</td>
-    </tr>
-    <tr>
-      <td><strong>Skills</strong></td>
-      <td>Project management, logistics coordination, team leadership, data analysis</td>
-    </tr>
-    <tr>
-      <td><strong>Usage Scenario</strong></td>
-      <td>Tom uses the API to calculate real-time optimal delivery routes for his drivers. he tracks distances and travel times to optimize costs and team performance.</td>
-    </tr>
-  </tbody>
-</table>
 
-<table>
-  <thead>
-    <tr>
-      <th><strong>Picture</strong></th>
-      <th><strong>Attribute</strong></th>
-      <th><strong>Details</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td rowspan="5">
-        <img src="https://t4.ftcdn.net/jpg/05/99/07/69/360_F_599076934_L4nJ7MWjLgvmLUUXD6Y5VSFvQEFPSv6c.jpg" alt="Retiree Lucy" width="200" style="object-fit: cover;" />
-      </td>
-      <td><strong>Name</strong></td>
-      <td>Lucy Martinez</td>
-    </tr>
-    <tr>
-      <td><strong>Age</strong></td>
-      <td>60 - 80</td>
-    </tr>
-    <tr>
-      <td><strong>Occupation</strong></td>
-      <td>Retiree</td>
-    </tr>
-    <tr>
-      <td><strong>Skills</strong></td>
-      <td>Destination research, budgeting, travel planning</td>
-    </tr>
-    <tr>
-      <td><strong>Usage Scenario</strong></td>
-      <td>Lucy uses an application powered by the API to plan her vacations. She finds the fastest routes, calculates transportation costs, and adjusts her budget accordingly.</td>
-    </tr>
-  </tbody>
-</table>
+| **Picture** | **Attribute**       | **Details** |
+|------------|--------------------|------------|
+| ![Business Traveler Tom](https://t4.ftcdn.net/jpg/03/96/16/79/360_F_396167959_aAhZiGlJoeXOBHivMvaO0Aloxvhg3eVT.jpg) | - **Name** <br><br> - **Age** <br><br> - **Occupation** <br><br> - **Skills** <br><br> - **Usage Scenario** | Tom Smith <br><br> 30 - 40 <br><br> Logistics Planning Manager <br><br> Project management, logistics coordination, team leadership, data analysis <br><br> Tom uses the API to calculate real-time optimal delivery routes for his drivers. He tracks distances and travel times to optimize costs and team performance. |
+
+| **Picture** | **Attribute**       | **Details** |
+|------------|--------------------|------------|
+| ![Retiree Lucy](https://t4.ftcdn.net/jpg/05/99/07/69/360_F_599076934_L4nJ7MWjLgvmLUUXD6Y5VSFvQEFPSv6c.jpg) | - **Name** <br><br> - **Age**<br><br>- **Occupation**<br><br>- **Skills**<br><br>- **Usage Scenario** | Lucy Martinez <br><br> 60 - 80 <br><br>Retiree <br><br> Destination research, budgeting, travel planning <br><br> Lucy uses an application powered by the API to plan her vacations. She finds the fastest routes, calculates transportation costs, and adjusts her budget accordingly.  |
+
+
 
 
 ### Use Cases
@@ -356,7 +297,6 @@ For more information about, read the API documentation [here](https://github.com
 | **Error**                    | **Status Code**         | **Description**                                                                                                                                         | 
 |------------------------------|-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **400 Missing Parameters**    | `400 Bad Request`       | This means required query parameters are missing. For example, a request may not include the "source" or "destination" parameters.                     | 
-| **404 Not Found** | `404 Not Found` | This means that the requested resource could not be found on the server. This may occur if the URL is incorrect, the resource has been deleted. |
 | **406 Not Acceptable** | `406 Not Acceptable` | This means that the server cannot provide a response in the format requested by the client. This may be due to an unsupported header, e.g. text/html is not supported by the API. |
 | **500 Internal Server Error** | `500 Internal Server Error` | This indicates an unexpected error occurred on the server while processing the request. This can be due to system failure, database issues, or other unforeseen errors. |
 
