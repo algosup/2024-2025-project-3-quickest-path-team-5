@@ -147,16 +147,4 @@ public:
         \return A vector containing the shortest distance to each node
     */
     vector<uint32_t> aStarLandmark(uint32_t from, uint32_t to);
-
-    /*!
-        \brief Find the farthest pair of nodes in the graph
-        \return A pair of node IDs representing the farthest pair of nodes
-    */
-    pair<uint32_t, uint32_t> farthestPath();
-
-    /*!
-        \brief Select a number of landmark nodes to use in the A* algorithm
-        \param numLandmarks The number of landmarks to select
-    */
-    void selectLandmarks(size_t numLandmarks);
 };

@@ -1,6 +1,5 @@
 #include <iostream>
 #include <time.h>
-#include <sys/resource.h> // For memory usage tracking
 #include <cstring>
 #include <vector>
 
@@ -40,13 +39,11 @@ int main()
     clock_t end = clock();
     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     cout << "Time spent reading the dataset: " << time_spent << " seconds" << endl;
-    getrusage(RUSAGE_SELF, &usage);
-    float memUsage = (float)(usage.ru_maxrss / (1024.0f * 1024.0f)); // Convert to MB
-    cout << "Memory usage: " << (int)memUsage << " MB for: " << graph->getNumNodes() << " nodes and " << graph->getNumEdges() << " edges" << endl;
     
-    cout << "Computing landmark distances..." << endl;
     begin = clock();
-    graph->selectLandmarks(4);
+    graph->addLandmark(1);
+    graph->addLandmark(22382040);
+    graph->addLandmark(9000000);
     graph->computeLandmarkDistances();
     end = clock();
 

@@ -10,7 +10,6 @@
 
 #define FILE_PATH "../../data/USA-roads.csv"
 #define EXPRT_FILE_PATH "../../data/USA-roads.dot"
-#include <sys/resource.h> // For memory usage tracking
 
 int main(void) {
     char* defaultFilePath = FILE_PATH;
@@ -55,9 +54,6 @@ int main(void) {
     clock_t end = clock();
     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     printf("Time spent reading the dataset: %f seconds\n", time_spent);
-    getrusage(RUSAGE_SELF, &usage);
-    float memUsage = (float)(usage.ru_maxrss / (1024.0f * 1024.0f)); // Convert to MB
-    printf("Memory usage: %d MB\n\n", (int)memUsage);
 
     begin = clock();    
     if (isDAG(graph)) {
@@ -68,8 +64,6 @@ int main(void) {
     end = clock();
     time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     printf("Time spent checking for cycles: %f seconds\n", time_spent);
-    memUsage = (float)(usage.ru_maxrss / (1024.0f * 1024.0f)); // Convert to MB
-    printf("Memory usage: %d MB\n\n", (int)memUsage);
 
     begin = clock();    
     if (areAllNodesAccessible(graph)) {
@@ -80,8 +74,6 @@ int main(void) {
     end = clock();
     time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     printf("Time spent checking for connectivity: %f seconds\n", time_spent);
-    memUsage = (float)(usage.ru_maxrss / (1024.0f * 1024.0f)); // Convert to MB
-    printf("Memory usage: %d MB\n\n", (int)memUsage);
 
     if (isExtracted) {
         begin = clock();    
@@ -93,8 +85,6 @@ int main(void) {
         end = clock();
         time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
         printf("Time spent exporting the graph: %f seconds\n", time_spent);
-        memUsage = (float)(usage.ru_maxrss / (1024.0f * 1024.0f)); // Convert to MB
-        printf("Memory usage: %d MB\n\n", (int)memUsage);
     }
 
     freeGraph(graph);
