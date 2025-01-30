@@ -16,6 +16,7 @@ _deps
 CMakeUserPresets.json
 googletest/
 .vscode/
+./cap/src/api/include/*
 
 node_modules
 
