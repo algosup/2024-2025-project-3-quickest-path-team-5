@@ -62,9 +62,9 @@ The **REST API** must be accompanied by **CSV** data checker to be sure the file
 > [!IMPORTANT]
 > Git is required for this step.
 
-       ```bash
-       git clone https://github.com/algosup/2024-2025-project-3-quickest-path-team-5
-       ```
+```bash
+git clone https://github.com/algosup/2024-2025-project-3-quickest-path-team-5
+```
 
    2. Navigate to the project directory:
 
@@ -155,13 +155,13 @@ The **REST API** must be accompanied by **CSV** data checker to be sure the file
 > cd ..
 > ```
 
-       <br>
+<br>
 
-       ```bash
-       cd ../bin
-       ```
+```bash
+cd ../bin
+```
 
-    2. Run the programs:
+   2. Run the programs:
 
        - To run the application, execute the following command:
 
