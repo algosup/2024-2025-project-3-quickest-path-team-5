@@ -120,10 +120,7 @@ namespace api {
                         } else if (accept_header.find("application/xml") != std::string::npos) {
                             format = "xml";
                         } else {
-                            res.code = 406;
-                            res.body = "Error 406: Not Acceptable. Supported formats: application/json, application/xml.";
-                            add_cors_headers(res);
-                            return res;
+                            format = "json";
                         }
                     }
 

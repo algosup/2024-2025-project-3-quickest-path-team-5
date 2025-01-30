@@ -25,7 +25,7 @@ add_executable(tests
   src/data_struct/node.cpp
   src/data_struct/edge.cpp
   # src/api/api.cpp
-  src/test/test.cc
+  test/test.cc
   ../googletest/googletest/src/gtest-all.cc
 )
 
