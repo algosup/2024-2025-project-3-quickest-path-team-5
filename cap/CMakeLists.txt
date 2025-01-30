@@ -24,13 +24,15 @@ add_executable(tests
   src/data_struct/graph.cpp
   src/data_struct/node.cpp
   src/data_struct/edge.cpp
-  test/test.cc
+  src/api/api.cpp
+  src/test/test.cc
   ../googletest/googletest/src/gtest-all.cc
 )
 
 target_include_directories(tests
   PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/src/data_struct"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/api"
     "${CMAKE_CURRENT_SOURCE_DIR}/../googletest/googletest/include"
     "${CMAKE_CURRENT_SOURCE_DIR}/../googletest/googletest"
     "${CMAKE_CURRENT_SOURCE_DIR}/test"
@@ -59,12 +61,14 @@ add_executable(cap
     src/data_struct/graph.cpp
     src/data_struct/node.cpp
     src/data_struct/edge.cpp
+    src/api/api.cpp
 )
 
 target_include_directories(cap
   PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/io"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/api"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/data_struct"
 )
 
@@ -84,3 +88,26 @@ set_target_properties(cap
   CXX_EXTENSIONS OFF
   RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"
 )
+
+# Add Boost and JSONCPP (dependencies for Crow)
+find_package(Boost REQUIRED)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(JSONCPP REQUIRED jsoncpp)
+
+# Include directories
+include_directories(${Boost_INCLUDE_DIRS} ${JSONCPP_INCLUDE_DIRS} include)
+
+# Add library search path for jsoncpp (if necessary)
+link_directories(/opt/homebrew/lib)
+
+# Source files for the API
+set(SERVER_SOURCES
+    src/api/api.cpp
+    src/cap.cpp
+)
+
+# Create the main executable for the server
+add_executable(server ${SERVER_SOURCES})
+
+# Link libraries to the server executable
+target_link_libraries(server ${Boost_LIBRARIES} jsoncpp)

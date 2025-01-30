@@ -5,6 +5,7 @@
 
 #include "graph.hpp"
 #include "csv_reader.hpp"
+#include "api/Api.hpp"
 
 #define FILE_PATH "../../data/USA-roads.csv"
 
@@ -32,7 +33,6 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-    struct rusage usage;
     Graph *graph = new Graph();
     clock_t begin = clock();
     loadDataset(graph, buffer);
@@ -46,6 +46,16 @@ int main()
     graph->addLandmark(9000000);
     graph->computeLandmarkDistances();
     end = clock();
+
+//     crow::SimpleApp app;
+
+//     // Set up API and routes
+//     api::setup_routes(app);
+
+//     // Start the server
+//     std::cout << "Starting server on http://localhost:8080" << std::endl;
+//     app.port(8080).multithreaded().run();
+
 
     bool running = true;
 
