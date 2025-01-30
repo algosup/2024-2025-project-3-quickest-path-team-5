@@ -232,8 +232,17 @@ Users simply provide the IDs of two landmarks as input, and the software calcula
 
 <br>
 
-The data checker is essential, for example,  it checks that there are no infinite loops or duplicate nodes.
-It also checks that all nodes are present, that there is a possible route for all of them, i.e. that they are related, that the data type is usable and complete for each node, stop and time.
+The data checker is essential, for example,  it checks that :
+
+| Check Type          | Description |
+|---------------------|-------------|
+| Infinite Loops     | Ensures that there are no infinite loops in the data. |
+| Duplicate Nodes    | Checks that there are no duplicate nodes. |
+| Presence of Nodes  | Verifies that all expected nodes are present. |
+| Connectivity      | Ensures that every node has a possible route and is related to others. |
+| Data Type Validity | Checks that the data type for each node is usable. |
+| Data Completeness | Ensures that each node, stop, and time information is complete. |
+
 
 <br>
 
@@ -284,7 +293,7 @@ It defines how requests and responses should be formatted, enabling developers t
 
 #### Request with Default Format:  
 
-For more information about, read the API documentation [here](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/tree/main/documents/manual/UserManual.md).
+For more information about, read the API documentation [here](../technical_specifications/UserManual.md).
 
 
 #### Response Details
