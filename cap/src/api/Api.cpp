@@ -119,12 +119,29 @@ namespace api {
                             format = "json";
                         } else if (accept_header.find("application/xml") != std::string::npos) {
                             format = "xml";
-                        } else {
+                        } else if (accept_header.find("*/*") != std::string::npos) {
                             format = "json";
+                        } else {
+                            res.code = 406;
+                            res.body = "Error 406: Not Acceptable. Supported formats: application/json, application/xml.";
+                            add_cors_headers(res);
+                            return res;
                         }
+                    } else {
+                        res.code = 406;
+                        res.body = "Error 406: Not Acceptable. Supported formats: application/json, application/xml.";
+                        add_cors_headers(res);
+                        return res;
                     }
 
-                    auto [travel_time, path] = calculate_quickest_path(source, destination);
+                    auto result = calculate_quickest_path(source, destination);
+                    if (result.second.empty()) {
+                        res.code = 500;
+                        res.body = "Error: Failed to calculate the quickest path.";
+                        add_cors_headers(res);
+                        return res;
+                    }
+                    auto [travel_time, path] = result;
 
                     std::string response_content;
                     std::string content_type;
