@@ -22,35 +22,12 @@ Node::~Node()
     Edge *current = head;
     while (current != nullptr)
     {
-        Edge *nextEdge = current->getNext();
-        delete current;
+        Edge *nextEdge = current->next;
+        current->~Edge();
         current = nextEdge;
     }
-}
-
-uint32_t Node::getId() const
-{
-    return this->id;
-}
-
-Edge *Node::getHead() const
-{
-    return this->head;
-}
-
-Node *Node::getNext() const
-{
-    return this->next;
-}
-
-void Node::setNext(Node *next)
-{
-    this->next = next;
-}
-
-void Node::setHead(Edge *head)
-{
-    this->head = head;
+    this->head = nullptr;
+    this->next = nullptr;
 }
 
 void Node::addEdgeSorted(Edge *edge)
@@ -58,34 +35,19 @@ void Node::addEdgeSorted(Edge *edge)
     this->numEdges++;
     if (this->head == nullptr)
     {
-        edge->setNext(head);
+        edge->next = head;
         head = edge;
         return;
     }
 
     Edge *current = head;
-    while (current->getNext() != nullptr && current->getNext()->getTime() < edge->getTime())
+    while (current->next != nullptr && current->next->time < edge->time)
     {
-        current = current->getNext();
+        current = current->next;
     }
 
-    edge->setNext(current->getNext());
-    current->setNext(edge);
-}
-
-void Node::incrementNumEdges()
-{
-    this->numEdges++;
-}
-
-void Node::decrementNumEdges()
-{
-    this->numEdges--;
-}
-
-uint32_t Node::getNumEdges() const
-{
-    return this->numEdges;
+    edge->next = current->next;
+    current->next = edge;
 }
 
 Node::Node(Node &&other) noexcept
@@ -103,7 +65,7 @@ Node &Node::operator=(Node &&other) noexcept
         Edge *current = head;
         while (current)
         {
-            Edge *nextEdge = current->getNext();
+            Edge *nextEdge = current->next;
             delete current;
             current = nextEdge;
         }

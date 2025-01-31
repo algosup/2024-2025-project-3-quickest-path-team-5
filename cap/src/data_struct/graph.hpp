@@ -29,8 +29,8 @@ private:
     long long numEdges;
     Node *head;
     Node *nodeMap[HASH_MAP_SIZE];
-    vector<uint32_t> landmarks;                  // List of landmark nodes
-    vector<vector<uint32_t>> landmarkDistances;  // Distances between landmark nodes
+    vector<uint32_t> landmarks;                 // List of landmark nodes
+    vector<vector<uint32_t>> landmarkDistances; // Distances between landmark nodes
 
 public:
     /*!
@@ -147,4 +147,12 @@ public:
         \return A vector containing the shortest distance to each node
     */
     vector<uint32_t> aStarLandmark(uint32_t from, uint32_t to);
+
+
+    /*!
+        \brief Breadth-first search to find the fartherst path from a node
+        \param start The starting node
+        \return A pair containing the farthest node and the distance to it
+    */
+    pair<uint32_t, uint32_t>  farthestPathWeightedBFS(uint32_t start);
 };

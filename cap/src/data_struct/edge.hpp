@@ -17,12 +17,11 @@ class Node;// Forward declaration of the Node class
 */
 class Edge
 {
-private:
+public:
     Node *self;
     uint32_t time;
     Edge *next;
 
-public:
     /*!
         \brief Constructor for the Edge class
         \param self The node the edge is connected to
@@ -36,32 +35,8 @@ public:
     ~Edge();
 
     /*!
-        \brief Get the node the edge is connected to
-        \return The node the edge is connected to
+        \brief Deleted copy constructor to prevent unintended shallow copies
     */
-    Node *getSelf() const;
-
-    /*!
-        \brief Get the time it takes to travel the edge
-        \return The time it takes to travel the edge
-    */
-    uint32_t getTime() const;
-
-    /*!
-        \brief Get the next edge
-        \return The next edge
-    */
-    Edge *getNext() const;
-
-    /*!
-        \brief Set the next edge
-        \param next The next edge
-    */
-    void setNext(Edge *next);
-
-    /*!
-    \brief Deleted copy constructor to prevent unintended shallow copies
-*/
     Edge(const Edge &) = delete;
 
     /*!

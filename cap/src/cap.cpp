@@ -39,13 +39,24 @@ int main()
     clock_t end = clock();
     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     cout << "Time spent reading the dataset: " << time_spent << " seconds" << endl;
-    
+    cout << "Precomputing landmark distances..." << endl;
     begin = clock();
+    uint32_t point = graph->farthestPathWeightedBFS(1).first;
     graph->addLandmark(1);
+    graph->addLandmark(point);
+    cout << "Landmark 1: " << point << " distance: " << graph->farthestPathWeightedBFS(1).second << endl;
+    point = graph->farthestPathWeightedBFS(22382040).first;
     graph->addLandmark(22382040);
+    graph->addLandmark(point);
+    cout << "Landmark 22382040: " << point << " distance: " << graph->farthestPathWeightedBFS(22382040).second << endl;
+    point = graph->farthestPathWeightedBFS(9000000).first;
     graph->addLandmark(9000000);
+    graph->addLandmark(point);
+    cout << "Landmark 9000000: " << point << " distance: " << graph->farthestPathWeightedBFS(9000000).second << endl;
     graph->computeLandmarkDistances();
     end = clock();
+    time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    cout << "Time spent precomputing landmark distances: " << time_spent << " seconds" << endl;
 
 //     crow::SimpleApp app;
 

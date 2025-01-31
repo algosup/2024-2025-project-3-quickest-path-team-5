@@ -23,10 +23,10 @@ Graph::Graph() : numNodes(0), numEdges(0), head(nullptr)
 Graph::~Graph()
 {
     Node *current = head;
-    while (current)
+    while (current != nullptr)
     {
-        Node *nextNode = current->getNext();
-        delete current;
+        Node *nextNode = current->next;
+        current->~Node();
         current = nextNode;
     }
 }
@@ -91,19 +91,19 @@ bool Graph::addEdge(uint32_t from, uint32_t to, uint32_t distance)
     }
 
     Edge *edge0 = new Edge(toNode, distance);
-    edge0->setNext(fromNode->getHead());
+    edge0->next = fromNode->head;
     fromNode->addEdgeSorted(edge0); // Keep the edges sorted by time
     this->numEdges++;
 
-    fromNode->setNext(this->head);
+    fromNode->next = this->head;
 
     // New edge for the other node
     Edge *edge1 = new Edge(fromNode, distance);
-    edge1->setNext(toNode->getHead());
+    edge1->next = toNode->head;
     toNode->addEdgeSorted(edge1); // Keep the edges sorted by time
     this->numEdges++;
 
-    toNode->setNext(fromNode);
+    toNode->next = fromNode;
     this->head = toNode;
 
     return true;
@@ -134,7 +134,7 @@ Graph &Graph::operator=(Graph &&other) noexcept
         Node *current = head;
         while (current)
         {
-            Node *nextNode = current->getNext();
+            Node *nextNode = current->next;
             delete current;
             current = nextNode;
         }
@@ -157,40 +157,34 @@ vector<uint32_t> Graph::dijkstra(uint32_t from, uint32_t to)
     vector<int> previous(numNodes, -1);
     distances[from] = 0;
 
-    // Priority queue to pick the node with the minimum distance
     auto compare = [&](uint32_t a, uint32_t b)
     { return distances[a] > distances[b]; };
     priority_queue<uint32_t, vector<uint32_t>, decltype(compare)> pq(compare);
 
-    // Push the source node to the priority queue
     pq.push(from);
 
-    // Process the graph
     while (!pq.empty())
     {
         uint32_t currentId = pq.top();
         pq.pop();
 
-        // If we reach the destination, stop the algorithm
         if (currentId == to)
         {
             break;
         }
 
-        Node *currentNode = nodeMap[currentId]; // Get the current node
+        Node *currentNode = nodeMap[currentId];
         if (!currentNode)
         {
-            continue; // Skip if node is null
+            continue;
         }
 
-        // Explore each edge from the current node
-        Edge *edge = currentNode->getHead();
+        Edge *edge = currentNode->head;
         while (edge != nullptr)
         {
-            uint32_t neighborId = edge->getSelf()->getId();
-            uint32_t newDist = distances[currentId] + edge->getTime();
+            uint32_t neighborId = edge->self->id;
+            uint32_t newDist = distances[currentId] + edge->time;
 
-            // If a shorter path is found, update the distance and previous node
             if (newDist < distances[neighborId])
             {
                 distances[neighborId] = newDist;
@@ -198,11 +192,10 @@ vector<uint32_t> Graph::dijkstra(uint32_t from, uint32_t to)
                 pq.push(neighborId);
             }
 
-            edge = edge->getNext();
+            edge = edge->next;
         }
     }
 
-    // Construct the shortest path from 'from' to 'to' using the previous array
     vector<uint32_t> path;
     for (int at = to; at != -1; at = previous[at])
     {
@@ -210,7 +203,6 @@ vector<uint32_t> Graph::dijkstra(uint32_t from, uint32_t to)
     }
     reverse(path.begin(), path.end());
 
-    // If the path doesn't start with the source node, no path exists
     if (path[0] != from)
     {
         cout << "No path found from " << from << " to " << to << endl;
@@ -240,24 +232,20 @@ void Graph::computeLandmarkDistances()
 
 vector<uint32_t> Graph::aStarLandmark(uint32_t from, uint32_t to)
 {
-    // Validate landmarkDistances dimensions
     if (landmarkDistances.size() != landmarks.size())
     {
         throw runtime_error("Mismatch: landmarkDistances does not match the number of landmarks.");
     }
 
-    // Validate input indices
     if (from >= numNodes || to >= numNodes || from < 1 || to < 1)
     {
         throw out_of_range("Invalid node indices: from = " + std::to_string(from) + ", to = " + std::to_string(to));
     }
 
-    // Initialize distances and previous nodes
     vector<uint32_t> distances(numNodes, UINT32_MAX);
     vector<int> previous(numNodes, -1);
     distances[from] = 0;
 
-    // Priority queue with heuristic
     auto compare = [&](uint32_t a, uint32_t b)
     {
         if (a >= distances.size() || b >= distances.size())
@@ -271,7 +259,6 @@ vector<uint32_t> Graph::aStarLandmark(uint32_t from, uint32_t to)
 
     pq.push(from);
 
-    // Process the graph
     while (!pq.empty())
     {
         uint32_t currentId = pq.top();
@@ -286,12 +273,12 @@ vector<uint32_t> Graph::aStarLandmark(uint32_t from, uint32_t to)
         if (!currentNode)
             continue;
 
-        Edge *edge = currentNode->getHead();
+        Edge *edge = currentNode->head;
 
         while (edge != nullptr)
         {
-            uint32_t neighborId = edge->getSelf()->getId();
-            uint32_t newDist = distances[currentId] + edge->getTime();
+            uint32_t neighborId = edge->self->id;
+            uint32_t newDist = distances[currentId] + edge->time;
 
             if (newDist < distances[neighborId])
             {
@@ -299,11 +286,10 @@ vector<uint32_t> Graph::aStarLandmark(uint32_t from, uint32_t to)
                 previous[neighborId] = currentId;
                 pq.push(neighborId);
             }
-            edge = edge->getNext();
+            edge = edge->next;
         }
     }
 
-    // Construct the path
     vector<uint32_t> path;
     for (int at = to; at != -1; at = previous[at])
     {
@@ -311,4 +297,52 @@ vector<uint32_t> Graph::aStarLandmark(uint32_t from, uint32_t to)
     }
     reverse(path.begin(), path.end());
     return (path[0] == from) ? path : vector<uint32_t>();
+}
+
+pair<uint32_t, uint32_t> Graph::farthestPathWeightedBFS(uint32_t start) {
+    vector<uint32_t> distances(numNodes, 0);
+    vector<bool> visited(numNodes, false);
+    distances[start] = 0;
+
+    priority_queue<pair<uint32_t, uint32_t>> pq;
+    pq.push({1, start});
+
+    uint32_t farthestNode = start;
+    uint32_t maxDistance = 0;
+
+    while (!pq.empty()) {
+        auto [currentDistance, currentNode] = pq.top();
+        pq.pop();
+
+        if (visited[currentNode]) {
+            continue;
+        }
+        visited[currentNode] = true;
+
+        if (currentDistance > maxDistance) {
+            maxDistance = currentDistance;
+            farthestNode = currentNode;
+        }
+
+        Node* node = nodeMap[currentNode];
+        if (!node) {
+            continue;
+        }
+
+        Edge* edge = node->head;
+        while (edge) {
+            uint32_t neighbor = edge->self->id;
+            uint32_t weight = edge->time;
+            uint32_t newDistance = distances[currentNode] + weight;
+
+            if (newDistance > distances[neighbor]) {
+                distances[neighbor] = newDistance;
+                pq.push({newDistance, neighbor});
+            }
+
+            edge = edge->next;
+        }
+    }
+
+    return {farthestNode, maxDistance};
 }

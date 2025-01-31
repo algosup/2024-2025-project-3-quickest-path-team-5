@@ -17,27 +17,8 @@ Edge::Edge(Node *self, uint32_t time)
 
 Edge::~Edge()
 {
+    self = nullptr;
     next = nullptr;
-}
-
-Node *Edge::getSelf() const
-{
-    return this->self;
-}
-
-uint32_t Edge::getTime() const
-{
-    return this->time;
-}
-
-Edge *Edge::getNext() const
-{
-    return this->next;
-}
-
-void Edge::setNext(Edge *next)
-{
-    this->next = next;
 }
 
 Edge::Edge(Edge &&other) noexcept
@@ -54,7 +35,7 @@ Edge &Edge::operator=(Edge &&other) noexcept
         Edge *current = next;
         while (current)
         {
-            Edge *nextEdge = current->getNext();
+            Edge *nextEdge = current->next;
             delete current;
             current = nextEdge;
         }
