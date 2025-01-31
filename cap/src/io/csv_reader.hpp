@@ -23,6 +23,5 @@ bool checkFileExists(const char *filename);
     \brief Read a CSV file and fill the graph with the data
     \param graph the graph to add the edge to
     \param file the file to read
-    \return A boolean indicating if the graph was well filled
 */
 void loadDataset(Graph* graph, const char* filename);
