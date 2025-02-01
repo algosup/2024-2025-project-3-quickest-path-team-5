@@ -181,8 +181,8 @@ For this project all the deadlines for the customer are February 7th 2025. But o
 
 | Name | Deadline | Link |
 | --  | -- | -- |
-| Functional Specifications Document  | 20/01/2025 | [FunctionalSpecifications.md](../functional_specifications/FunctionalSpecifications.md) |
-| Technical Specifications Document  | 27/01/2024 | [TechnicalSpecifications.md](../technical_specifications/TechnicalSpecifications.md) |
+| Functional Specifications  | 20/01/2025 | [FunctionalSpecifications.md](../functional_specifications/FunctionalSpecifications.md) |
+| Technical Specifications  | 27/01/2024 | [TechnicalSpecifications.md](../technical_specifications/TechnicalSpecifications.md) |
 | Code | 07/01/2025  | [Folder source](../../src) |
 | Test Plan | 07/01/2025 | [TestPlan.md](../qa/TestPlan.md) |
 | Test Cases | 07/01/2025 | [TestCases.md](../qa/TestCases.md) |
@@ -314,7 +314,7 @@ flowchart TD
 
 #### Request with Default Format:  
 
-For more information about, read the API documentation [here](../technical_specifications/UserManual.md).
+For more information about, read the API documentation [here](../technical_specifications/APIDocumentation.md).
 
 
 #### Response Details
