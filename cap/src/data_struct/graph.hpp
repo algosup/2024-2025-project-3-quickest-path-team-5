@@ -24,70 +24,22 @@ using namespace std;
 */
 class Graph
 {
-private:
+public:
     uint32_t numNodes;
     long long numEdges;
-    Node *head;
+    uint32_t minNode;
+    uint32_t maxNode;
+    vector<Node> nodes;
     Node *nodeMap[HASH_MAP_SIZE];
+    uint32_t numLandmarks;                      // Number of landmark nodes
     vector<uint32_t> landmarks;                 // List of landmark nodes
     vector<vector<uint32_t>> landmarkDistances; // Distances between landmark nodes
 
-public:
     /*!
         \brief Constructor for the Graph class
         Initializes the graph with no nodes and an empty hash map.
     */
     Graph();
-
-    /*!
-        \brief Destructor for the Graph class
-        Frees all dynamically allocated nodes and their edges.
-    */
-    ~Graph();
-
-    /*!
-        \brief Get the number of nodes in the graph
-        \return The number of nodes in the graph
-    */
-    uint32_t getNumNodes() const;
-
-    /*!
-        \brief Get the edges of the graph
-        \return The number of edges in the graph
-    */
-    long long getNumEdges() const;
-
-    /*!
-        \brief Get the head node of the graph
-        \return Pointer to the head node of the graph
-    */
-    Node *getHead() const;
-
-    /*!
-        \brief Get a node from the hash map
-        \param index The index of the node in the hash map
-        \return Pointer to the node at the index, or nullptr if not found
-    */
-    Node *getNodeMap(uint32_t index) const;
-
-    /*!
-        \brief Set the number of nodes in the graph
-        \param numNodes The new number of nodes
-    */
-    void setNumNodes(uint32_t numNodes);
-
-    /*!
-        \brief Set the head node of the graph
-        \param head Pointer to the new head node
-    */
-    void setHead(Node *head);
-
-    /*!
-        \brief Set a node in the hash map
-        \param index The index of the node in the hash map
-        \param node Pointer to the node to set
-    */
-    void setNodeMap(uint32_t index, Node *node);
 
     /*!
         \brief Add an edge to the graph (in fact 2 edges, one for each node)
@@ -122,12 +74,6 @@ public:
     Graph(Graph &&other) noexcept;
 
     /*!
-        \brief Move assignment operator
-        Transfers ownership of graph resources.
-    */
-    Graph &operator=(Graph &&other) noexcept;
-
-    /*!
         \brief Dijkstra's algorithm to find the shortest path between two nodes
         \param from The source node
         \param to The destination node
@@ -141,18 +87,19 @@ public:
     void computeLandmarkDistances();
 
     /*!
+        \brief Heuristic function for A* algorithm
+        \param u The current node
+        \param to The destination node
+        \param landmarkToDists The distances to the landmark nodes
+        \return The heuristic value
+    */
+    uint32_t  heuristic(uint32_t u, uint32_t to, const vector<uint32_t>& landmarkToDists) const;
+
+    /*!
         \brief A* algorithm to find the shortest path between two nodes
         \param from The source node
         \param to The destination node
         \return A vector containing the shortest distance to each node
     */
     vector<uint32_t> aStarLandmark(uint32_t from, uint32_t to);
-
-
-    /*!
-        \brief Breadth-first search to find the fartherst path from a node
-        \param start The starting node
-        \return A pair containing the farthest node and the distance to it
-    */
-    pair<uint32_t, uint32_t>  farthestPathWeightedBFS(uint32_t start);
 };

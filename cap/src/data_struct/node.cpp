@@ -12,71 +12,13 @@ using namespace std;
 Node::Node(uint32_t id)
 {
     this->id = id;
-    this->head = nullptr;
-    this->numEdges = 0;
-    this->next = nullptr;
 }
 
-Node::~Node()
+void Node::addEdgeSorted(uint32_t destID, uint32_t time)
 {
-    Edge *current = head;
-    while (current != nullptr)
-    {
-        Edge *nextEdge = current->next;
-        current->~Edge();
-        current = nextEdge;
-    }
-    this->head = nullptr;
-    this->next = nullptr;
-}
+    auto it = lower_bound(edges.begin(), edges.end(), destID, [](const Edge &edge, uint32_t destID) {
+        return edge.destID < destID;
+    });
 
-void Node::addEdgeSorted(Edge *edge)
-{
-    this->numEdges++;
-    if (this->head == nullptr)
-    {
-        edge->next = head;
-        head = edge;
-        return;
-    }
-
-    Edge *current = head;
-    while (current->next != nullptr && current->next->time < edge->time)
-    {
-        current = current->next;
-    }
-
-    edge->next = current->next;
-    current->next = edge;
-}
-
-Node::Node(Node &&other) noexcept
-    : id(other.id), head(other.head), next(other.next)
-{
-    other.head = nullptr;
-    other.next = nullptr;
-}
-
-Node &Node::operator=(Node &&other) noexcept
-{
-    if (this != &other)
-    {
-        // Free current edges
-        Edge *current = head;
-        while (current)
-        {
-            Edge *nextEdge = current->next;
-            delete current;
-            current = nextEdge;
-        }
-
-        // Transfer ownership
-        id = other.id;
-        head = other.head;
-        next = other.next;
-
-        other.head = nullptr;
-        other.next = nullptr;
-    }
-    return *this;
+    edges.insert(it, Edge(destID, time));
 }

@@ -41,32 +41,35 @@ int main()
     cout << "Time spent reading the dataset: " << time_spent << " seconds" << endl;
     cout << "Precomputing landmark distances..." << endl;
     begin = clock();
-    uint32_t point = graph->farthestPathWeightedBFS(1).first;
-    graph->addLandmark(1);
-    graph->addLandmark(point);
-    cout << "Landmark 1: " << point << " distance: " << graph->farthestPathWeightedBFS(1).second << endl;
-    point = graph->farthestPathWeightedBFS(22382040).first;
+    // graph->addLandmark(23947347);
+    graph->addLandmark(9446407);
+    graph->addLandmark(4410450);
+    graph->addLandmark(19611782);
+    graph->addLandmark(1782128);
+    graph->addLandmark(9619503);
+    graph->addLandmark(1470570);
+    graph->addLandmark(12422389);
+    graph->addLandmark(689971);
+    graph->addLandmark(6232040);
+    graph->addLandmark(10375698);
+    graph->addLandmark(1352513);
+    graph->addLandmark(14911007);
+    graph->addLandmark(19560849);
     graph->addLandmark(22382040);
-    graph->addLandmark(point);
-    cout << "Landmark 22382040: " << point << " distance: " << graph->farthestPathWeightedBFS(22382040).second << endl;
-    point = graph->farthestPathWeightedBFS(9000000).first;
-    graph->addLandmark(9000000);
-    graph->addLandmark(point);
-    cout << "Landmark 9000000: " << point << " distance: " << graph->farthestPathWeightedBFS(9000000).second << endl;
+    graph->addLandmark(20794957);
     graph->computeLandmarkDistances();
     end = clock();
     time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     cout << "Time spent precomputing landmark distances: " << time_spent << " seconds" << endl;
 
-//     crow::SimpleApp app;
+    //     crow::SimpleApp app;
 
-//     // Set up API and routes
-//     api::setup_routes(app);
+    //     // Set up API and routes
+    //     api::setup_routes(app);
 
-//     // Start the server
-//     std::cout << "Starting server on http://localhost:8080" << std::endl;
-//     app.port(8080).multithreaded().run();
-
+    //     // Start the server
+    //     std::cout << "Starting server on http://localhost:8080" << std::endl;
+    //     app.port(8080).multithreaded().run();
 
     bool running = true;
 
@@ -119,8 +122,6 @@ int main()
             running = false;
         }
     }
-
-    graph->~Graph();
 
     return 0;
 }
