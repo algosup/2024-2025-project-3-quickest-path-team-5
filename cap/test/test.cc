@@ -7,8 +7,6 @@
 #include "gtest/gtest.h"
 #include "cap.cpp"
 
-
-
 /***********************************************************************
  * Test Node
  ***********************************************************************/
@@ -47,9 +45,51 @@ TEST(GraphTest, addEdge) {
     ASSERT_TRUE(graph->addEdge(1, 2, 1));
 }
 
-TEST(GrahTest, addLandmark) {
+TEST(GraphTest, addLandmark) {
     Graph *graph = new Graph();
     ASSERT_TRUE(graph->addLandmark(1));
+}
+
+TEST(GraphTest, loadDataset) {
+    Graph *graph = new Graph();
+    loadDataset(graph, FILE_PATH);
+    ASSERT_NE(graph, nullptr);
+}
+
+TEST(GraphTest, dijkstraFromTo) {
+    uint32_t from = 1;
+    uint32_t to = 22382040;
+    Graph *graph = new Graph();
+    loadDataset(graph, FILE_PATH);
+    graph->selectLandmarks(16);
+    ASSERT_ANY_THROW(graph->dijkstra(from, to));
+}
+
+TEST(GraphTest, dijkstraToFrom) {
+    uint32_t from = 1;
+    uint32_t to = 22382040;
+    Graph *graph = new Graph();
+    loadDataset(graph, FILE_PATH);
+    graph->selectLandmarks(16);
+    ASSERT_ANY_THROW(graph->dijkstra(to, from));
+}
+
+TEST(GraphTest, aStarFromTo) {
+    uint32_t from = 1;
+    uint32_t to = 22382040;
+    Graph *graph = new Graph();
+    loadDataset(graph, FILE_PATH);
+    graph->selectLandmarks(16);
+    ASSERT_ANY_THROW(graph->aStarLandmark(from, to));
+}
+
+TEST(GraphTest, aStarToFrom) {
+    uint32_t from = 1;
+    uint32_t to = 22382040;
+    Graph *graph = new Graph();
+    loadDataset(graph, FILE_PATH);
+    graph->selectLandmarks(16);
+    ASSERT_ANY_THROW(graph->aStarLandmark(to, from));
 }
 
 /***********************************************************************
