@@ -7,6 +7,7 @@
 The Quickest Path API project is a student-led project that aims to create a REST API to find the quickest path between two points in a file that contains 24 million nodes using C++.
 
 For futher information, please refer to the [functional specifications](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/functional_specifications/FunctionalSpecifications.md).
+
 For further technical information, please refer to the [technical specifications](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/technical_specifications/TechnicalSpecifications.md).
 
 ---
