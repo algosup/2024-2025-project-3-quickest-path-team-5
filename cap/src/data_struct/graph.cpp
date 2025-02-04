@@ -186,7 +186,7 @@ void Graph::computeLandmarkDistances()
     for (size_t i = 0; i < numLandmarks; ++i)
     {
         uint32_t landmark = landmarks[i];
-        landmarkDistances[i] = nodeComputeDijkstra(landmark, 0); // 0 is a dummy target
+        landmarkDistances[i] = nodeComputeDijkstra(landmark, 0); // dummy target
     }
 }
 
@@ -208,17 +208,16 @@ vector<uint32_t> Graph::aStarLandmark(uint32_t from, uint32_t to)
 
     constexpr uint32_t INF = numeric_limits<uint32_t>::max();
     vector<uint32_t> dist(HASH_MAP_SIZE, INF);
-    vector<int> previous(numNodes, -1); // To reconstruct the shortest path
+    vector<int> previous(numNodes, -1);
     dist[from] = 0;
 
-    // Precompute landmark distances to 'to'
     vector<uint32_t> landmarkToDists(numLandmarks);
     for (size_t i = 0; i < numLandmarks; ++i)
     {
         landmarkToDists[i] = landmarkDistances[i][to];
     }
 
-    using Pair = pair<uint32_t, uint32_t>; // (f = g + h, node)
+    using Pair = pair<uint32_t, uint32_t>;
     priority_queue<Pair, vector<Pair>, greater<>> pq;
     pq.emplace(heuristic(from, landmarkToDists), from);
 
@@ -268,7 +267,6 @@ vector<uint32_t> Graph::multiSourceDijkstra(const vector<uint32_t>& sources) {
     vector<uint32_t> dist(HASH_MAP_SIZE, UINT32_MAX);
     priority_queue<pair<uint32_t, uint32_t>, vector<pair<uint32_t, uint32_t>>, greater<>> pq;
 
-    // Initialize with all sources
     for (uint32_t src : sources) {
         if (src >= HASH_MAP_SIZE || !nodeMap[src]) continue;
         dist[src] = 0;
@@ -303,7 +301,6 @@ void Graph::selectLandmarks(uint32_t count) {
 
     if (count == 0 || numNodes == 0) return;
 
-    // Find initial node (first existing node)
     uint32_t first = UINT32_MAX;
     for (uint32_t i = 0; i < HASH_MAP_SIZE; ++i) {
         if (nodeMap[i]) {
@@ -315,7 +312,6 @@ void Graph::selectLandmarks(uint32_t count) {
 
     addLandmark(first);
 
-    // Greedy farthest selection
     for (uint32_t i = 1; i < count; ++i) {
         vector<uint32_t> min_dists = multiSourceDijkstra(landmarks);
         
@@ -332,7 +328,7 @@ void Graph::selectLandmarks(uint32_t count) {
             }
         }
 
-        if (farthest == UINT32_MAX) break; // No more valid nodes
+        if (farthest == UINT32_MAX) break;
         
         addLandmark(farthest);
     }
