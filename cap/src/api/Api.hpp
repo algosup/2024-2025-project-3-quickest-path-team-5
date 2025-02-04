@@ -8,7 +8,7 @@
 #define API_H
 
 #include "crow_all.h"
-#include "../data_struct/Graph.hpp"
+#include "graph.hpp"
 #include <cstdint>
 #include <string>
 #include <vector>

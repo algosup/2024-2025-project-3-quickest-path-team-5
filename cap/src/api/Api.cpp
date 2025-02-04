@@ -1,151 +1,165 @@
 /*!
     \file Api.cpp
-    \brief API Code source
+    \brief API implementation for shortest path calculation
     \authors CHARLES Rémy, CARON Maxime
 */
 
-#include "Api.hpp"
-#include <iostream>
-#include <fstream>
+#include "api.hpp"
+#include <crow_all.h>
 #include <sstream>
+#include <stdexcept>
+
+using namespace std;
 
 namespace api {
-    // Simulate quickest path calculation
-    std::pair<int, std::vector<uint32_t>> calculate_quickest_path(Graph* graph, uint32_t source, uint32_t destination) {
-        if (source == destination) {
+    namespace {
+        // HTTP status constants
+        constexpr int HTTP_OK = 200;
+        constexpr int HTTP_BAD_REQUEST = 400;
+        constexpr int HTTP_NOT_ACCEPTABLE = 406;
+        constexpr int HTTP_INTERNAL_ERROR = 500;
+
+        // Add CORS headers to responses
+        void add_cors_headers(crow::response& res) {
+            res.add_header("Access-Control-Allow-Origin", "*");
+            res.add_header("Access-Control-Allow-Methods", "GET, OPTIONS");
+            res.add_header("Access-Control-Allow-Headers", "Accept, Content-Type");
+        }
+
+        // Validate and parse node ID parameter
+        optional<uint32_t> parse_node_param(const string& param, const string& name, crow::response& res) {
+            if (param.empty()) {
+                res.code = HTTP_BAD_REQUEST;
+                res.body = "Missing parameter: " + name;
+                return nullopt;
+            }
+
+            try {
+                size_t pos;
+                auto value = stoul(param, &pos);
+                
+                if (pos != param.size()) {
+                    res.code = HTTP_BAD_REQUEST;
+                    res.body = "Invalid " + name + ": contains non-numeric characters";
+                    return nullopt;
+                }
+                return static_cast<uint32_t>(value);
+            }
+            catch (const exception&) {
+                res.code = HTTP_BAD_REQUEST;
+                res.body = "Invalid " + name + ": must be a positive integer";
+                return nullopt;
+            }
+        }
+
+        // Generate XML response
+        string generate_xml_response(uint64_t travel_time, const vector<uint32_t>& path) {
+            ostringstream xml;
+            xml << "<response>";
+            xml << "<travel_time>" << travel_time << "</travel_time>";
+            xml << "<path>";
+            for (auto node : path) {
+                xml << "<node>" << node << "</node>";
+            }
+            xml << "</path>";
+            xml << "</response>";
+            return xml.str();
+        }
+
+        // Generate JSON response
+        string generate_json_response(uint64_t travel_time, const vector<uint32_t>& path) {
+            crow::json::wvalue json;
+            json["travel_time"] = travel_time;
+            json["path"] = path;
+            return json.dump();
+        }
+    }
+
+    pair<uint64_t, vector<uint32_t>> calculate_quickest_path(Graph* graph, uint32_t source, uint32_t destination) {
+        if (!graph || source == destination) {
             return {0, {source}};
         }
 
-        int travel_time = 10;
-        std::vector<uint32_t> path = graph->aStarLandmark(source, destination);
-
-        return {travel_time, path};
-    }
-
-    // Helper function to read files
-    std::string read_file(const std::string& filepath) {
-        std::ifstream file(filepath);
-        if (!file.is_open()) {
-            throw std::runtime_error("Failed to open file: " + filepath);
+        auto path = graph->aStarLandmark(source, destination);
+        if (path.empty()) {
+            throw runtime_error("No path found between nodes");
         }
-        return std::string((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+
+        // Calculate actual travel time from path
+        uint64_t total_time = 0;
+        for (size_t i = 0; i < path.size() - 1; ++i) {
+            auto& edges = graph->nodeMap[path[i]]->edges;
+            for (const auto& edge : edges) {
+                if (edge.destID == path[i+1]) {
+                    total_time += edge.time;
+                    break;
+                }
+            }
+        }
+
+        return {total_time, path};
     }
 
-    // Function to add CORS headers
-    void add_cors_headers(crow::response& res) {
-        res.add_header("Access-Control-Allow-Origin", "*");
-        res.add_header("Access-Control-Allow-Methods", "GET, OPTIONS");
-        res.add_header("Access-Control-Allow-Headers", "Accept, Content-Type");
-    }
-
-    // Set up API routes
     void setup_routes(crow::SimpleApp& app, Graph* graph) {
-
-        // Handle preflight OPTIONS requests for CORS
-        CROW_ROUTE(app, "/quickest-path").methods(crow::HTTPMethod::OPTIONS)(
-            [](const crow::request& req) {
-                (void)req;
+        // CORS preflight handler
+        CROW_ROUTE(app, "/quickest-path")
+            .methods(crow::HTTPMethod::OPTIONS)([](const crow::request&) {
                 crow::response res;
                 add_cors_headers(res);
                 res.code = 204;
                 return res;
             });
 
-        // Quickest path endpoint using GET with query parameters
-        CROW_ROUTE(app, "/quickest-path").methods(crow::HTTPMethod::GET)(
-            [&graph](const crow::request& req) {
+        // Main endpoint handler
+        CROW_ROUTE(app, "/quickest-path")
+            .methods(crow::HTTPMethod::GET)([graph](const crow::request& req) {
                 crow::response res;
+                add_cors_headers(res);
 
                 try {
-                    auto query_params = crow::query_string(req.url_params);
-                    auto source_param = query_params.get("source");
-                    auto destination_param = query_params.get("destination");
+                    // Parse parameters
+                    auto source = parse_node_param(req.url_params.get("source"), "source", res);
+                    auto destination = parse_node_param(req.url_params.get("destination"), "destination", res);
+                    if (!source || !destination) return res;
 
-                    if (!source_param || !destination_param) {
-                        res.code = 400;
-                        res.body = "Invalid input: 'source' and 'destination' are required.";
-                        add_cors_headers(res);
+                    // Validate nodes exist
+                    if (!graph->nodeMap[*source] || !graph->nodeMap[*destination]) {
+                        res.code = HTTP_BAD_REQUEST;
+                        res.body = "Requested nodes do not exist in the graph";
                         return res;
                     }
 
-                    int source = std::stoi(source_param);
-                    int destination = std::stoi(destination_param);
+                    // Determine response format
+                    const auto accept = req.get_header_value("Accept");
+                    const bool wants_json = accept.find("application/json") != string::npos;
+                    const bool wants_xml = accept.find("application/xml") != string::npos;
 
-                    if (source <= 0 || destination <= 0) {
-                        res.code = 400;
-                        res.body = "Invalid source or destination. Must be a positive number.";
-                        add_cors_headers(res);
+                    if (!wants_json && !wants_xml && accept != "*/*") {
+                        res.code = HTTP_NOT_ACCEPTABLE;
+                        res.body = "Supported formats: application/json, application/xml";
                         return res;
                     }
 
-                    std::string accept_header = req.get_header_value("Accept");
-
-                    std::string format = "json";
-                    if (!accept_header.empty()) {
-                        if (accept_header.find("application/json") != std::string::npos) {
-                            format = "json";
-                        } else if (accept_header.find("application/xml") != std::string::npos) {
-                            format = "xml";
-                        } else if (accept_header.find("*/*") != std::string::npos) {
-                            format = "json";
-                        } else {
-                            res.code = 406;
-                            res.body = "Error 406: Not Acceptable. Supported formats: application/json, application/xml.";
-                            add_cors_headers(res);
-                            return res;
-                        }
+                    // Calculate path
+                    auto [travel_time, path] = calculate_quickest_path(graph, *source, *destination);
+                    
+                    // Generate response
+                    if (wants_xml) {
+                        res.body = generate_xml_response(travel_time, path);
+                        res.set_header("Content-Type", "application/xml");
                     } else {
-                        res.code = 406;
-                        res.body = "Error 406: Not Acceptable. Supported formats: application/json, application/xml.";
-                        add_cors_headers(res);
-                        return res;
+                        res.body = generate_json_response(travel_time, path);
+                        res.set_header("Content-Type", "application/json");
                     }
 
-                    auto result = calculate_quickest_path(graph, source, destination);
-                    if (result.second.empty()) {
-                        res.code = 500;
-                        res.body = "Error: Failed to calculate the quickest path.";
-                        add_cors_headers(res);
-                        return res;
-                    }
-                    auto [travel_time, path] = result;
-
-                    std::string response_content;
-                    std::string content_type;
-
-                    if (format == "xml") {
-                        std::ostringstream xml_response;
-                        xml_response << "<response>";
-                        xml_response << "<travel_time>" << travel_time << "</travel_time>";
-                        xml_response << "<path>";
-                        for (int node : path) {
-                            xml_response << "<node>" << node << "</node>";
-                        }
-                        xml_response << "</path>";
-                        xml_response << "</response>";
-
-                        response_content = xml_response.str();
-                        content_type = "application/xml";
-                    } else {
-                        crow::json::wvalue json_response;
-                        json_response["travel_time"] = travel_time;
-                        json_response["path"] = path;
-
-                        response_content = json_response.dump();
-                        content_type = "application/json";
-                    }
-
-                    res.body = response_content;
-                    res.code = 200;
-                    res.add_header("Content-Type", content_type);
-                    add_cors_headers(res);
-                    return res;
-                } catch (const std::exception& e) {
-                    res.code = 500;
-                    res.body = "An error occurred: " + std::string(e.what());
-                    add_cors_headers(res);
-                    return res;
+                    res.code = HTTP_OK;
                 }
+                catch (const exception& e) {
+                    res.code = HTTP_INTERNAL_ERROR;
+                    res.body = "Calculation error: " + string(e.what());
+                }
+
+                return res;
             });
     }
 }

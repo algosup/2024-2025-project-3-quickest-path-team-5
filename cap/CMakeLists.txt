@@ -99,9 +99,3 @@ include_directories(${Boost_INCLUDE_DIRS} ${JSONCPP_INCLUDE_DIRS} include)
 
 # Add library search path for jsoncpp (if necessary)
 link_directories(/opt/homebrew/lib)
-
-# Source files for the API
-set(SERVER_SOURCES
-    src/api/api.cpp
-    src/cap.cpp
-)
