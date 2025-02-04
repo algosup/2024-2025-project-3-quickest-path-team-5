@@ -9,105 +9,72 @@
 #include <iostream>
 #include <algorithm>
 
-#include "graph.hpp"
+#include <thread>
+#include <mutex>
+#include <future>
 
-#define MIN_NODE 1
+#include "graph.hpp"
 
 using namespace std;
 
-Graph::Graph() : numNodes(0), numEdges(0), head(nullptr)
+Graph::Graph() : numNodes(0), numEdges(0)
 {
+    minNode = UINT32_MAX;
+    maxNode = 0;
     memset(nodeMap, 0, sizeof(nodeMap)); // Initialize the hash map to nullptr
-}
-
-Graph::~Graph()
-{
-    Node *current = head;
-    while (current)
-    {
-        Node *nextNode = current->getNext();
-        delete current;
-        current = nextNode;
-    }
-}
-
-uint32_t Graph::getNumNodes() const
-{
-    return this->numNodes;
-}
-
-long long Graph::getNumEdges() const
-{
-    return this->numEdges;
-}
-
-Node *Graph::getHead() const
-{
-    return this->head;
-}
-
-Node *Graph::getNodeMap(uint32_t index) const
-{
-    return this->nodeMap[index];
-}
-
-void Graph::setNumNodes(uint32_t numNodes)
-{
-    this->numNodes = numNodes;
-}
-
-void Graph::setHead(Node *head)
-{
-    this->head = head;
-}
-
-void Graph::setNodeMap(uint32_t index, Node *node)
-{
-    this->nodeMap[index] = node;
 }
 
 bool Graph::addEdge(uint32_t from, uint32_t to, uint32_t distance)
 {
     if (from >= HASH_MAP_SIZE || to >= HASH_MAP_SIZE)
     {
+        cerr << "Error: Node index out of bounds. from = " << from << ", to = " << to << endl;
         return false;
     }
 
     Node *fromNode = this->nodeMap[from];
-    Node *toNode = this->nodeMap[to];
-
     if (fromNode == nullptr)
     {
         fromNode = new Node(from);
         this->nodeMap[from] = fromNode;
+
+        if (from < minNode)
+        {
+            minNode = from;
+        }
+        if (from > maxNode)
+        {
+            maxNode = from;
+        }
         this->numNodes++;
     }
 
+    Node *toNode = this->nodeMap[to];
     if (toNode == nullptr)
     {
         toNode = new Node(to);
         this->nodeMap[to] = toNode;
+
+        if (to < minNode)
+        {
+            minNode = to;
+        }
+        if (to > maxNode)
+        {
+            maxNode = to;
+        }
         this->numNodes++;
     }
 
-    Edge *edge0 = new Edge(toNode, distance);
-    edge0->setNext(fromNode->getHead());
-    fromNode->addEdgeSorted(edge0); // Keep the edges sorted by time
-    this->numEdges++;
+    fromNode->addEdgeSorted(toNode->id, distance);
 
-    fromNode->setNext(this->head);
+    toNode->addEdgeSorted(fromNode->id, distance);
 
-    // New edge for the other node
-    Edge *edge1 = new Edge(fromNode, distance);
-    edge1->setNext(toNode->getHead());
-    toNode->addEdgeSorted(edge1); // Keep the edges sorted by time
-    this->numEdges++;
-
-    toNode->setNext(fromNode);
-    this->head = toNode;
+    this->numEdges += 2;
 
     return true;
 }
+
 bool Graph::addLandmark(uint32_t landmark)
 {
     if (landmark >= HASH_MAP_SIZE)
@@ -115,94 +82,94 @@ bool Graph::addLandmark(uint32_t landmark)
         return false;
     }
     landmarks.push_back(landmark);
+    numLandmarks++;
     return true;
 }
 
 Graph::Graph(Graph &&other) noexcept
-    : numNodes(other.numNodes), head(other.head)
+    : numNodes(other.numNodes)
 {
     memcpy(nodeMap, other.nodeMap, sizeof(nodeMap));
-    other.head = nullptr;
     other.numNodes = 0;
     memset(other.nodeMap, 0, sizeof(other.nodeMap));
 }
 
-Graph &Graph::operator=(Graph &&other) noexcept
+vector<uint32_t> Graph::nodeComputeDijkstra(uint32_t from, uint32_t to)
 {
-    if (this != &other)
+    constexpr uint32_t INF = numeric_limits<uint32_t>::max();
+    vector<uint32_t> dist(HASH_MAP_SIZE, INF);
+    dist[from] = 0;
+
+    using Pair = pair<uint32_t, uint32_t>; // (distance, node)
+    priority_queue<Pair, vector<Pair>, greater<>> pq;
+    pq.emplace(0, from);
+
+    while (!pq.empty())
     {
-        Node *current = head;
-        while (current)
+        auto [d, u] = pq.top();
+        pq.pop();
+
+        if (u == to)
+            break; // Early exit if target is reached
+        if (d > dist[u])
+            continue;
+
+        Node *u_node = nodeMap[u];
+        for (const Edge &edge : u_node->edges)
         {
-            Node *nextNode = current->getNext();
-            delete current;
-            current = nextNode;
+            uint32_t v = edge.destID;
+            uint32_t new_dist = d + edge.time;
+
+            if (new_dist < dist[v])
+            {
+                dist[v] = new_dist;
+                pq.emplace(new_dist, v);
+            }
         }
-
-        numNodes = other.numNodes;
-        head = other.head;
-        memcpy(nodeMap, other.nodeMap, sizeof(nodeMap));
-
-        other.head = nullptr;
-        other.numNodes = 0;
-        memset(other.nodeMap, 0, sizeof(other.nodeMap));
     }
-    return *this;
+
+    return dist;
 }
 
 vector<uint32_t> Graph::dijkstra(uint32_t from, uint32_t to)
 {
-    // Initialize distances with infinity and previous nodes with -1
-    vector<uint32_t> distances(numNodes, UINT32_MAX);
-    vector<int> previous(numNodes, -1);
-    distances[from] = 0;
+    constexpr uint32_t INF = numeric_limits<uint32_t>::max();
+    vector<uint32_t> dist(HASH_MAP_SIZE, INF);
+    vector<int> previous(numNodes, -1); // To reconstruct the shortest path
+    dist[from] = 0;
 
-    // Priority queue to pick the node with the minimum distance
-    auto compare = [&](uint32_t a, uint32_t b)
-    { return distances[a] > distances[b]; };
-    priority_queue<uint32_t, vector<uint32_t>, decltype(compare)> pq(compare);
+    using Pair = pair<uint32_t, uint32_t>; // (distance, node)
+    priority_queue<Pair, vector<Pair>, greater<>> pq;
+    pq.emplace(0, from);
 
-    // Push the source node to the priority queue
-    pq.push(from);
-
-    // Process the graph
     while (!pq.empty())
     {
-        uint32_t currentId = pq.top();
+        auto [d, u] = pq.top();
         pq.pop();
 
-        // If we reach the destination, stop the algorithm
-        if (currentId == to)
-        {
-            break;
-        }
+        if (u == to)
+            break; // Early exit if target is reached
+        if (d > dist[u])
+            continue;
 
-        Node *currentNode = nodeMap[currentId]; // Get the current node
-        if (!currentNode)
+        Node *u_node = nodeMap[u];
+        for (const Edge &edge : u_node->edges)
         {
-            continue; // Skip if node is null
-        }
+            uint32_t v = edge.destID;
+            uint32_t new_dist = d + edge.time;
 
-        // Explore each edge from the current node
-        Edge *edge = currentNode->getHead();
-        while (edge != nullptr)
-        {
-            uint32_t neighborId = edge->getSelf()->getId();
-            uint32_t newDist = distances[currentId] + edge->getTime();
-
-            // If a shorter path is found, update the distance and previous node
-            if (newDist < distances[neighborId])
+            if (new_dist < dist[v])
             {
-                distances[neighborId] = newDist;
-                previous[neighborId] = currentId;
-                pq.push(neighborId);
+                dist[v] = new_dist;
+                previous[v] = u;
+                pq.emplace(new_dist, v);
             }
-
-            edge = edge->getNext();
         }
     }
-
-    // Construct the shortest path from 'from' to 'to' using the previous array
+    if (to == UINT32_MAX)
+    {
+        return dist;
+    }
     vector<uint32_t> path;
     for (int at = to; at != -1; at = previous[at])
     {
@@ -210,105 +177,161 @@ vector<uint32_t> Graph::dijkstra(uint32_t from, uint32_t to)
     }
     reverse(path.begin(), path.end());
 
-    // If the path doesn't start with the source node, no path exists
-    if (path[0] != from)
-    {
-        cout << "No path found from " << from << " to " << to << endl;
-        path.clear();
-    }
     return path;
 }
 
 void Graph::computeLandmarkDistances()
 {
-    landmarkDistances.clear(); // Clear any previously computed distances
-    for (uint32_t landmark : landmarks)
+    landmarkDistances.resize(numLandmarks);
+    for (size_t i = 0; i < numLandmarks; ++i)
     {
-        if (landmark >= numNodes)
-        {
-            throw std::out_of_range("Landmark index out of bounds");
-        }
-        if (!nodeMap[landmark])
-        {
-            throw std::runtime_error("Landmark does not exist in the graph.");
-        }
-
-        vector<uint32_t> distances = dijkstra(landmark, this->numNodes - 1);
-        landmarkDistances.push_back(distances);
+        uint32_t landmark = landmarks[i];
+        landmarkDistances[i] = nodeComputeDijkstra(landmark, 0); // dummy target
     }
+}
+
+uint32_t Graph::heuristic(uint32_t u, const vector<uint32_t> &landmarkToDists) const
+{
+    uint32_t h = 0;
+    for (size_t i = 0; i < numLandmarks; ++i)
+    {
+        int32_t diff = static_cast<int32_t>(landmarkDistances[i][u]) - landmarkToDists[i];
+        h = max(h, static_cast<uint32_t>(abs(diff)));
+    }
+    return h;
 }
 
 vector<uint32_t> Graph::aStarLandmark(uint32_t from, uint32_t to)
 {
-    // Validate landmarkDistances dimensions
-    if (landmarkDistances.size() != landmarks.size())
-    {
-        throw runtime_error("Mismatch: landmarkDistances does not match the number of landmarks.");
-    }
+    if (from == to)
+        return {0};
 
-    // Validate input indices
-    if (from >= numNodes || to >= numNodes || from < 1 || to < 1)
-    {
-        throw out_of_range("Invalid node indices: from = " + std::to_string(from) + ", to = " + std::to_string(to));
-    }
-
-    // Initialize distances and previous nodes
-    vector<uint32_t> distances(numNodes, UINT32_MAX);
+    constexpr uint32_t INF = numeric_limits<uint32_t>::max();
+    vector<uint32_t> dist(HASH_MAP_SIZE, INF);
     vector<int> previous(numNodes, -1);
-    distances[from] = 0;
+    dist[from] = 0;
 
-    // Priority queue with heuristic
-    auto compare = [&](uint32_t a, uint32_t b)
+    vector<uint32_t> landmarkToDists(numLandmarks);
+    for (size_t i = 0; i < numLandmarks; ++i)
     {
-        if (a >= distances.size() || b >= distances.size())
-        {
-            cerr << "Error: comparator accessing out-of-bounds index." << endl;
-            throw std::out_of_range("Comparator out of bounds");
-        }
-        return distances[a] > distances[b];
-    };
-    priority_queue<uint32_t, vector<uint32_t>, decltype(compare)> pq(compare);
+        landmarkToDists[i] = landmarkDistances[i][to];
+    }
 
-    pq.push(from);
+    using Pair = pair<uint32_t, uint32_t>;
+    priority_queue<Pair, vector<Pair>, greater<>> pq;
+    pq.emplace(heuristic(from, landmarkToDists), from);
 
-    // Process the graph
     while (!pq.empty())
     {
-        uint32_t currentId = pq.top();
+        auto [f, u] = pq.top();
         pq.pop();
 
-        if (currentId == to)
-        {
-            break;
-        }
+        if (u == to)
+            break; // Early exit
 
-        Node *currentNode = nodeMap[currentId];
-        if (!currentNode)
+        uint32_t g_u = dist[u];
+        if (f > g_u + heuristic(u, landmarkToDists))
             continue;
 
-        Edge *edge = currentNode->getHead();
-
-        while (edge != nullptr)
+        Node *u_node = nodeMap[u];
+        for (const Edge &edge : u_node->edges)
         {
-            uint32_t neighborId = edge->getSelf()->getId();
-            uint32_t newDist = distances[currentId] + edge->getTime();
+            uint32_t v = edge.destID;
+            uint32_t new_g = g_u + edge.time;
 
-            if (newDist < distances[neighborId])
+            if (new_g < dist[v])
             {
-                distances[neighborId] = newDist;
-                previous[neighborId] = currentId;
-                pq.push(neighborId);
+                dist[v] = new_g;
+                previous[v] = u;
+                uint32_t h_v = heuristic(v, landmarkToDists);
+                pq.emplace(new_g + h_v, v);
             }
-            edge = edge->getNext();
         }
     }
 
-    // Construct the path
+    if (to == UINT32_MAX)
+    {
+        return dist;
+    }
     vector<uint32_t> path;
     for (int at = to; at != -1; at = previous[at])
     {
         path.push_back(at);
     }
     reverse(path.begin(), path.end());
-    return (path[0] == from) ? path : vector<uint32_t>();
+
+    return path;
+}
+
+vector<uint32_t> Graph::multiSourceDijkstra(const vector<uint32_t>& sources) {
+    vector<uint32_t> dist(HASH_MAP_SIZE, UINT32_MAX);
+    priority_queue<pair<uint32_t, uint32_t>, vector<pair<uint32_t, uint32_t>>, greater<>> pq;
+
+    for (uint32_t src : sources) {
+        if (src >= HASH_MAP_SIZE || !nodeMap[src]) continue;
+        dist[src] = 0;
+        pq.emplace(0, src);
+    }
+
+    while (!pq.empty()) {
+        auto [d, u] = pq.top();
+        pq.pop();
+
+        if (d > dist[u]) continue;
+
+        Node* u_node = nodeMap[u];
+        for (const Edge& edge : u_node->edges) {
+            uint32_t v = edge.destID;
+            if (v >= HASH_MAP_SIZE || !nodeMap[v]) continue;
+
+            uint32_t new_dist = d + edge.time;
+            if (new_dist < dist[v]) {
+                dist[v] = new_dist;
+                pq.emplace(new_dist, v);
+            }
+        }
+    }
+
+    return dist;
+}
+
+void Graph::selectLandmarks(uint32_t count) {
+    landmarks.clear();
+    numLandmarks = 0;
+
+    if (count == 0 || numNodes == 0) return;
+
+    uint32_t first = UINT32_MAX;
+    for (uint32_t i = 0; i < HASH_MAP_SIZE; ++i) {
+        if (nodeMap[i]) {
+            first = i;
+            break;
+        }
+    }
+    if (first == UINT32_MAX) return;
+
+    addLandmark(first);
+
+    for (uint32_t i = 1; i < count; ++i) {
+        vector<uint32_t> min_dists = multiSourceDijkstra(landmarks);
+        
+        uint32_t max_dist = 0;
+        uint32_t farthest = UINT32_MAX;
+        
+        for (uint32_t node = 0; node < HASH_MAP_SIZE; ++node) {
+            if (!nodeMap[node] || find(landmarks.begin(), landmarks.end(), node) != landmarks.end()) 
+                continue;
+
+            if (min_dists[node] > max_dist && min_dists[node] != UINT32_MAX) {
+                max_dist = min_dists[node];
+                farthest = node;
+            }
+        }
+
+        if (farthest == UINT32_MAX) break;
+        
+        addLandmark(farthest);
+    }
+
+    computeLandmarkDistances();
 }

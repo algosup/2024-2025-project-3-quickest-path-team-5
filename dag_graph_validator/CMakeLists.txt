@@ -15,7 +15,7 @@ set(CMAKE_C_COMPILER "clang")
 
 project(
   DAG_GRAPH_VALIDATOR
-  VERSION 1.1
+  VERSION 1.2
   LANGUAGES CXX C
 )
 

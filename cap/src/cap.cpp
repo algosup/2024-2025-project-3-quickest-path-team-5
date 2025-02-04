@@ -39,23 +39,21 @@ int main()
     clock_t end = clock();
     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     cout << "Time spent reading the dataset: " << time_spent << " seconds" << endl;
-    
+    cout << "Precomputing landmark distances..." << endl;
     begin = clock();
-    graph->addLandmark(1);
-    graph->addLandmark(22382040);
-    graph->addLandmark(9000000);
-    graph->computeLandmarkDistances();
+    graph->selectLandmarks(16);
     end = clock();
+    time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    cout << "Time spent precomputing landmark distances: " << time_spent << " seconds" << endl;
 
-//     crow::SimpleApp app;
+    //     crow::SimpleApp app;
 
-//     // Set up API and routes
-//     api::setup_routes(app);
+    //     // Set up API and routes
+    //     api::setup_routes(app);
 
-//     // Start the server
-//     std::cout << "Starting server on http://localhost:8080" << std::endl;
-//     app.port(8080).multithreaded().run();
-
+    //     // Start the server
+    //     std::cout << "Starting server on http://localhost:8080" << std::endl;
+    //     app.port(8080).multithreaded().run();
 
     bool running = true;
 
@@ -108,8 +106,6 @@ int main()
             running = false;
         }
     }
-
-    graph->~Graph();
 
     return 0;
 }
