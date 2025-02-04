@@ -5,7 +5,7 @@
 
 #include "graph.hpp"
 #include "csv_reader.hpp"
-// #include "api/Api.hpp"
+#include "api/Api.hpp"
 
 #define FILE_PATH "../../data/USA-roads.csv"
 
@@ -62,66 +62,14 @@ int main()
     time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     cout << "Time spent precomputing landmark distances: " << time_spent << " seconds" << endl;
 
-    //     crow::SimpleApp app;
+    crow::SimpleApp app;
 
-    //     // Set up API and routes
-    //     api::setup_routes(app);
+    // Set up API and routes
+    api::setup_routes(app, graph);
 
-    //     // Start the server
-    //     std::cout << "Starting server on http://localhost:8080" << std::endl;
-    //     app.port(8080).multithreaded().run();
-
-    bool running = true;
-
-    while (running)
-    {
-        // Dijkstra's algorithm
-        uint32_t from, to;
-        cout << "Enter the source node: ";
-        cin >> from;
-        cout << "Enter the destination node: ";
-        cin >> to;
-
-        begin = clock();
-        vector<uint32_t> path = graph->dijkstra(from, to);
-        end = clock();
-        time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-
-        cout << "Shortest path from " << from << " to " << to << " using Dijkstra contains " << path.size() << " nodes:" << endl;
-        cout << "Time spent finding the shortest path: " << time_spent << " seconds" << endl;
-
-        begin = clock();
-        path = graph->dijkstra(to, from);
-        end = clock();
-        time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-
-        cout << "Shortest reversed path from " << to << " to " << from << " using Dijkstra contains " << path.size() << " nodes:" << endl;
-        cout << "Time spent finding the shortest path: " << time_spent << " seconds" << endl;
-
-        begin = clock();
-        path = graph->aStarLandmark(from, to);
-        end = clock();
-        time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-
-        cout << "Shortest path from " << from << " to " << to << " using A* landmarks contains " << path.size() << " nodes:" << endl;
-        cout << "Time spent finding the shortest path: " << time_spent << " seconds" << endl;
-
-        begin = clock();
-        path = graph->aStarLandmark(to, from);
-        end = clock();
-        time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-
-        cout << "Shortest reversed path from " << to << " to " << from << " using A* landmarks contains " << path.size() << " nodes:" << endl;
-        cout << "Time spent finding the shortest path: " << time_spent << " seconds" << endl;
-
-        cout << "Do you want to continue? (y/n): ";
-        char choice;
-        cin >> choice;
-        if (choice != 'y' && choice != 'Y')
-        {
-            running = false;
-        }
-    }
+    // Start the server
+    std::cout << "Starting server on http://localhost:8080" << std::endl;
+    app.port(8080).multithreaded().run();
 
     return 0;
 }

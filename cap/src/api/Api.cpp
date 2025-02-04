@@ -11,13 +11,13 @@
 
 namespace api {
     // Simulate quickest path calculation
-    std::pair<int, std::vector<int>> calculate_quickest_path(int source, int destination) {
+    std::pair<int, std::vector<uint32_t>> calculate_quickest_path(Graph* graph, uint32_t source, uint32_t destination) {
         if (source == destination) {
             return {0, {source}};
         }
 
-        int travel_time = abs(destination - source) * 10;
-        std::vector<int> path = {source, (source + destination) / 2, destination};
+        int travel_time = 10;
+        std::vector<uint32_t> path = graph->aStarLandmark(source, destination);
 
         return {travel_time, path};
     }
@@ -39,40 +39,7 @@ namespace api {
     }
 
     // Set up API routes
-    void setup_routes(crow::SimpleApp& app) {
-
-        // Serve the consolidated HTML interface
-        CROW_ROUTE(app, "/")([]() {
-            try {
-                std::string html_content = read_file("../src/interface_api/index.html");
-                crow::response res(html_content);
-                res.add_header("Content-Type", "text/html");
-                return res;
-            } catch (const std::exception& e) {
-                return crow::response(500, "Failed to load interface: " + std::string(e.what()));
-            }
-        });
-
-        // Route to serve the image
-        CROW_ROUTE(app, "/img/logo.png")
-        ([]() {
-            std::ifstream file("../src/interface_api/img/logo.png", std::ios::binary | std::ios::ate);
-            if (!file) {
-                return crow::response(404, "Image not found");
-            }
-
-            auto size = file.tellg();
-            file.seekg(0, std::ios::beg);
-
-            std::vector<char> buffer(size);
-            file.read(buffer.data(), size);
-
-            crow::response res;
-            res.code = 200;
-            res.set_header("Content-Type", "image/png");
-            res.body = std::string(buffer.begin(), buffer.end());
-            return res;
-        });
+    void setup_routes(crow::SimpleApp& app, Graph* graph) {
 
         // Handle preflight OPTIONS requests for CORS
         CROW_ROUTE(app, "/quickest-path").methods(crow::HTTPMethod::OPTIONS)(
@@ -86,7 +53,7 @@ namespace api {
 
         // Quickest path endpoint using GET with query parameters
         CROW_ROUTE(app, "/quickest-path").methods(crow::HTTPMethod::GET)(
-            [](const crow::request& req) {
+            [&graph](const crow::request& req) {
                 crow::response res;
 
                 try {
@@ -134,7 +101,7 @@ namespace api {
                         return res;
                     }
 
-                    auto result = calculate_quickest_path(source, destination);
+                    auto result = calculate_quickest_path(graph, source, destination);
                     if (result.second.empty()) {
                         res.code = 500;
                         res.body = "Error: Failed to calculate the quickest path.";

@@ -7,7 +7,9 @@
 #ifndef API_H
 #define API_H
 
-#include "include/crow.h"
+#include "crow_all.h"
+#include "../data_struct/Graph.hpp"
+#include <cstdint>
 #include <string>
 #include <vector>
 #include <utility> // For std::pair
@@ -17,7 +19,7 @@ namespace api {
         \brief Set up the API routes for the Crow application.
         \param app The Crow application instance to configure.
     */
-    void setup_routes(crow::SimpleApp& app);
+    void setup_routes(crow::SimpleApp& app, Graph* graph);
 
     /*!
         \brief Load the graph data from a CSV file.
@@ -32,7 +34,7 @@ namespace api {
         \param destination The destination point of the path.
         \return A pair containing the total travel time and the path as a vector of integers.
     */
-    std::pair<int, std::vector<int>> calculate_shortest_path(int source, int destination);
+    std::pair<int, std::vector<uint32_t>> calculate_shortest_path(Graph* graph, uint32_t source, uint32_t destination);
 
     /*!
         \brief Read a file and return its content as a string.
