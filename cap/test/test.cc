@@ -5,6 +5,52 @@
 */
 
 #include "gtest/gtest.h"
+#include "cap.cpp"
+
+
+
+/***********************************************************************
+ * Test Node
+ ***********************************************************************/
+
+TEST(NodeTest, createNode) {
+    Node *node = new Node(1);
+    ASSERT_NE(node, nullptr);
+}
+
+TEST(NodeTest, addEdgeSorted) {
+    Node *node = new Node(1);
+    node->addEdgeSorted(2, 1);
+    ASSERT_EQ(node->edges[0].destID, 2);
+}
+
+/***********************************************************************
+ * Test Edge
+ ***********************************************************************/
+
+TEST(EdgeTest, createEdge) {
+    Edge *edge = new Edge(1, 1);
+    ASSERT_NE(edge, nullptr);
+}
+
+/***********************************************************************
+ * Test Graph
+ ***********************************************************************/
+
+TEST(GraphTest, creatGraph) {
+    Graph *graph = new Graph();
+    ASSERT_NE(graph, nullptr);
+}
+
+TEST(GraphTest, addEdge) {
+    Graph *graph = new Graph();
+    ASSERT_TRUE(graph->addEdge(1, 2, 1));
+}
+
+TEST(GrahTest, addLandmark) {
+    Graph *graph = new Graph();
+    ASSERT_TRUE(graph->addLandmark(1));
+}
 
 /***********************************************************************
  * Run all tests
