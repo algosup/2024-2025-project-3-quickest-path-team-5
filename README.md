@@ -1,6 +1,105 @@
-# 2024-2025-project-3-quickest-path-team-5
+# Welcome to the Quickest Path API project!
 
-## Team Members
+---
+
+## What is the Quickest Path API project?
+
+The Quickest Path API project is a student-led project that aims to create a REST API to find the quickest path between two points in a file that contains 24 million nodes using C++.
+
+For futher information, please refer to the [functional specifications](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/functional_specifications/FunctionalSpecifications.md).
+For further technical information, please refer to the [technical specifications](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/technical_specifications/TechnicalSpecifications.md).
+
+---
+
+# CAP (Cap API Pathfinding)
+
+CAP is a REST API that allows you to find the quickest path between two verticies of a graph that contains 24 million vertices. The API promises a response time below 1 second in every case. This has been achieved by using a custom algorithm that is based on the A* algorithm. The API is written in C++ and uses the [Crow](https://crowcpp.org/master/) library to handle the HTTP requests.
+
+---
+
+## CAP Getting Started
+
+1. Install [CMake 3.30 or higher](https://cmake.org/download/)
+2. Install [Clang 12 or higher](https://releases.llvm.org/download.html)
+3. Clone GoogleTest repository
+    ```bash
+    # From the root folder of the project
+    git clone https://github.com/google/googletest.git
+    ```
+    Make sure to clone the repository to the root of the project and that the folder is named `googletest`.
+4. Generate the build files
+    ```bash
+    # From the root folder of the project
+    cd cap
+    cmake -S . -B build
+    ```
+    This command can require some modifications depending on your operating system.
+5. Build the project
+    ```bash
+    # From the root folder of the project
+    cd cap
+    cmake --build build
+    ```
+6. Run the project
+    ```bash
+    # From the root folder of the project
+    cd cap
+    ./build/cap
+    ```
+7. Run the tests (optional)
+    ```bash
+    # From the root folder of the project
+    cd cap
+    ./build/tests
+    ```
+
+---
+
+# DGV (DAG Graph Validator)
+
+DGV is a tool that allows you to validate a graph file. The tool will check if the file is correctly formatted and if the graph is a Directed Acyclic Graph (DAG). The tool is written in C for performace reasons.
+
+---
+
+## DGV Getting Started
+
+1. Install [CMake 3.30 or higher](https://cmake.org/download/)
+2. Install [Clang 12 or higher](https://releases.llvm.org/download.html)
+3. Clone GoogleTest repository
+    ```bash
+    # From the root folder of the project
+    git clone https://github.com/google/googletest.git
+    ```
+    Make sure to clone the repository to the root of the project and that the folder is named `googletest`.
+4. Generate the build files
+    ```bash
+    # From the root folder of the project
+    cd dag_graph_validator
+    cmake -S . -B build
+    ```
+    This command can require some modifications depending on your operating system.
+5. Build the project
+    ```bash
+    # From the root folder of the project
+    cd dag_graph_validator
+    cmake --build build
+    ```
+6. Run the project
+    ```bash
+    # From the root folder of the project
+    cd dag_graph_validator
+    ./build/dgv
+    ```
+7. Run the tests (optional)
+    ```bash
+    # From the root folder of the project
+    cd dag_graph_validator
+    ./build/tests
+    ```
+
+---
+
+# Contributors
 
 | Photo | Name | Role | Contact |
 |---|---|---|---|
@@ -11,34 +110,3 @@
 | <img src="https://avatars.githubusercontent.com/u/145995231?v=4" width="100" height="100">| Software Developer | Maxime CARON |[GitHub](https://github.com/MaximeAlgosup) \| [LinkedIn](https://www.linkedin.com/in/maxime-caron-dev/) |
 | <img src="https://avatars.githubusercontent.com/u/114397870?v=4" width="100" height="100"> | Quality Assurance | Jason GROSSO |[GitHub](https://github.com/JasonGROSSO) \| [LinkedIn](https://www.linkedin.com/in/jason-grosso-847b39251/) |
 | <img src="https://avatars.githubusercontent.com/u/123485791?v=4" width="100" height="100"> | Technical Writer | Alexandre BOPP |[GitHub](https://github.com/Boppalex) \| [LinkedIn](https://www.linkedin.com/in/alexandre-bopp-682a97250/) |
-
---- 
-
-## Overview
-
-This is a student-led ALGOSUP project. The aim of the project is to create a REST API to find the quickest path between two point in a file that contains 24 million nodes using C++.
-
-
-## REST API
-
-A REST API (Representational State Transfer Application Programming Interface) is a way for systems to communicate over the internet. It uses URLs to access resources and standard actions like getting, adding, or deleting data. It’s simple, fast, and commonly used to build web services.
-
-To find out more about [REST](https://en.wikipedia.org/wiki/REST) and [API](https://en.wikipedia.org/wiki/API).
-
-
-## C++
-
-C++ is a powerful, high-performance programming language widely used for system software, game development, and performance-critical applications. It extends the C language with object-oriented programming features like classes and inheritance, while also supporting low-level memory manipulation. Its versatility and rich standard library make it suitable for both high-level and low-level programming tasks.
-
-To find out more bout [C++](https://en.wikipedia.org/wiki/C++).
-
-## Project documents
-
-- [Functional Specifications](Link to functional)
-- [Functional Specifications](Link to technical)
-- [User Manual](Link to User Manuel)
-- [Test Plan](Link to Test Plan)
-
-
-
-
