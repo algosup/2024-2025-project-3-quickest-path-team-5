@@ -73,7 +73,6 @@ public:
     */
     Graph(Graph &&other) noexcept;
 
-
     /*!
         \brief Dijkstra's algorithm to find the shortest path between two nodes specificly used to compute nodes for landmarks
         \param from The source node
@@ -81,7 +80,6 @@ public:
         \return A vector containing the shortest distance to each node
     */
     vector<uint32_t> nodeComputeDijkstra(uint32_t from, uint32_t to);
-
 
     /*!
         \brief Dijkstra's algorithm to find the shortest path between two nodes
@@ -99,11 +97,10 @@ public:
     /*!
         \brief Heuristic function for A* algorithm
         \param u The current node
-        \param to The destination node
         \param landmarkToDists The distances to the landmark nodes
         \return The heuristic value
     */
-    uint32_t  heuristic(uint32_t u, uint32_t to, const vector<uint32_t>& landmarkToDists) const;
+    uint32_t heuristic(uint32_t u, const vector<uint32_t> &landmarkToDists) const;
 
     /*!
         \brief A* algorithm to find the shortest path between two nodes
@@ -112,4 +109,18 @@ public:
         \return A vector containing the shortest distance to each node
     */
     vector<uint32_t> aStarLandmark(uint32_t from, uint32_t to);
+
+    /*!
+        \brief Select landmarks for heuristic computation
+        \param count The number of landmarks to select
+    */
+    void selectLandmarks(uint32_t count);
+
+    /*!
+        \brief Multi-source Dijkstra's algorithm to find the shortest path between multiple nodes
+        \param sources The source nodes
+        \return A vector containing the shortest distance to each node
+    */
+    vector<uint32_t> multiSourceDijkstra(const vector<uint32_t>& sources);
+
 };
