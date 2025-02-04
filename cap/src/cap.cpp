@@ -41,7 +41,7 @@ int main()
     cout << "Time spent reading the dataset: " << time_spent << " seconds" << endl;
     cout << "Precomputing landmark distances..." << endl;
     begin = clock();
-    // graph->addLandmark(23947347);
+    graph->addLandmark(23947346);
     graph->addLandmark(9446407);
     graph->addLandmark(4410450);
     graph->addLandmark(19611782);

@@ -73,6 +73,16 @@ public:
     */
     Graph(Graph &&other) noexcept;
 
+
+    /*!
+        \brief Dijkstra's algorithm to find the shortest path between two nodes specificly used to compute nodes for landmarks
+        \param from The source node
+        \param to The destination node
+        \return A vector containing the shortest distance to each node
+    */
+    vector<uint32_t> nodeComputeDijkstra(uint32_t from, uint32_t to);
+
+
     /*!
         \brief Dijkstra's algorithm to find the shortest path between two nodes
         \param from The source node
