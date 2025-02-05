@@ -380,8 +380,39 @@ You can also download the complete file with all directions from landmark A to l
 
 >The web app isn't part of the product, it has been made for debug purposes
 
-![alt text](images/web_app.png)
+<br>
 
+- Enter your two landmarks: Specify your starting point and destination.
+  
+<br>
+
+![alt text](images/input.png)
+
+<br>
+
+- Select your preferred download format: Choose between XML and JSON.
+
+<br>
+
+![alt text](images/format.png)
+
+<br>
+
+- Submit your request: Once everything is set, confirm your input and wait for the processing to complete.
+
+<br>
+
+![alt text](images/find_path.png)
+
+<br>
+
+- View the step-by-step results: The computed path is displayed in a clear and structured manner.
+
+<br>
+
+![alt text](images/result.png)
+
+<br>
 
 ### Acceptance Criteria
 
