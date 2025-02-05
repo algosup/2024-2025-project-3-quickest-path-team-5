@@ -7,9 +7,8 @@
 #include "gtest/gtest.h"
 #include "graph.hpp"
 #include "csv_reader.hpp"
-#include "api.hpp"
 
-#define FILE_PATH "../../data/USA-roads.csv"
+#define FILE_PATH "../../data/test-data.csv"
 
 /***********************************************************************
  * Test Node
