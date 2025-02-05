@@ -5,7 +5,11 @@
 */
 
 #include "gtest/gtest.h"
-#include "./src/cap.cpp"
+#include "graph.hpp"
+#include "csv_reader.hpp"
+#include "api.hpp"
+
+#define FILE_PATH "../../data/USA-roads.csv"
 
 /***********************************************************************
  * Test Node
