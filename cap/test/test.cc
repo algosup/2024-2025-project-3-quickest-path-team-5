@@ -5,7 +5,7 @@
 */
 
 #include "gtest/gtest.h"
-#include "cap.cpp"
+#include "./src/cap.cpp"
 
 /***********************************************************************
  * Test Node
