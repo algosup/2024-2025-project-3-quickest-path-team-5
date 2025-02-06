@@ -70,7 +70,7 @@ TEST(GraphTest, dijkstraFromTo) {
     Graph *graph = new Graph();
     insertEdgesIntoGraph(graph);
     graph->selectLandmarks(16);
-    ASSERT_ANY_THROW(graph->dijkstra(from, to));
+    ASSERT_NO_THROW(graph->dijkstra(from, to));
 }
 
 TEST(GraphTest, dijkstraToFrom) {
@@ -79,7 +79,7 @@ TEST(GraphTest, dijkstraToFrom) {
     Graph *graph = new Graph();
     insertEdgesIntoGraph(graph);
     graph->selectLandmarks(16);
-    ASSERT_ANY_THROW(graph->dijkstra(to, from));
+    ASSERT_NO_THROW(graph->dijkstra(to, from));
 }
 
 TEST(GraphTest, aStarFromTo) {
@@ -88,7 +88,7 @@ TEST(GraphTest, aStarFromTo) {
     Graph *graph = new Graph();
     insertEdgesIntoGraph(graph);
     graph->selectLandmarks(16);
-    ASSERT_ANY_THROW(graph->aStarLandmark(from, to));
+    ASSERT_NO_THROW(graph->aStarLandmark(from, to));
 }
 
 TEST(GraphTest, aStarToFrom) {
@@ -97,7 +97,7 @@ TEST(GraphTest, aStarToFrom) {
     Graph *graph = new Graph();
     insertEdgesIntoGraph(graph);
     graph->selectLandmarks(16);
-    ASSERT_ANY_THROW(graph->aStarLandmark(to, from));
+    ASSERT_NO_THROW(graph->aStarLandmark(to, from));
 }
 
 /***********************************************************************
