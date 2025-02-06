@@ -66,7 +66,7 @@ TEST(GraphTest, loadDataset) {
 
 TEST(GraphTest, dijkstraFromTo) {
     uint32_t from = 1;
-    uint32_t to = 22382040;
+    uint32_t to = 45;
     Graph *graph = new Graph();
     insertEdgesIntoGraph(graph);
     graph->selectLandmarks(16);
@@ -75,7 +75,7 @@ TEST(GraphTest, dijkstraFromTo) {
 
 TEST(GraphTest, dijkstraToFrom) {
     uint32_t from = 1;
-    uint32_t to = 22382040;
+    uint32_t to = 45;
     Graph *graph = new Graph();
     insertEdgesIntoGraph(graph);
     graph->selectLandmarks(16);
@@ -84,7 +84,7 @@ TEST(GraphTest, dijkstraToFrom) {
 
 TEST(GraphTest, aStarFromTo) {
     uint32_t from = 1;
-    uint32_t to = 22382040;
+    uint32_t to = 45;
     Graph *graph = new Graph();
     insertEdgesIntoGraph(graph);
     graph->selectLandmarks(16);
@@ -93,7 +93,7 @@ TEST(GraphTest, aStarFromTo) {
 
 TEST(GraphTest, aStarToFrom) {
     uint32_t from = 1;
-    uint32_t to = 22382040;
+    uint32_t to = 45;
     Graph *graph = new Graph();
     insertEdgesIntoGraph(graph);
     graph->selectLandmarks(16);
