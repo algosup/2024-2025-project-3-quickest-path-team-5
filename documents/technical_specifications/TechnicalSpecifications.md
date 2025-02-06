@@ -135,20 +135,90 @@ This document is intended for the following audiences:
 
 The naming conventions should be as follows:
 
-| type    | convention   |
-| ------- | ------------ |
-| Folders | `snake_case` |
-| Files   | `PascalCase` |
+| type                     | convention   |
+| ------------------------ | ------------ |
+| Folders                  | `snake_case` |
+| Document's related files | `PascalCase` |
+| Code files               | `snake_case` |
 
 ```md
 2024-2025-project-3-quickest-path-team-5
-└───documents
-    ├───functional
-    │   └─── FunctionalSpecifications.md
-    ├───quality
-    └───technical
-        └─── TechnicalSpecifications.md
+├── LICENSE.md
+├── README.md
+├── api_interface
+│   ├── favicon.ico
+│   ├── img
+│   │   ├── logo.png
+│   │   └── map.png
+│   └── index.html
+├── cap
+│   ├── CMakeLists.txt
+│   ├── src
+│   │   ├── api
+│   │   │   ├── api.cpp
+│   │   │   ├── api.hpp
+│   │   │   └── crow_all.h
+│   │   ├── cap.cpp
+│   │   ├── data_struct
+│   │   │   ├── edge.cpp
+│   │   │   ├── edge.hpp
+│   │   │   ├── graph.cpp
+│   │   │   ├── graph.hpp
+│   │   │   ├── node.cpp
+│   │   │   └── node.hpp
+│   │   └── io
+│   │       ├── csv_reader.cpp
+│   │       └── csv_reader.hpp
+│   └── test
+│       └── test.cc
+├── dag_graph_validator
+│   ├── CMakeLists.txt
+│   ├── src
+│   │   ├── data_struct
+│   │   │   ├── graph_lib.c
+│   │   │   └── graph_lib.h
+│   │   ├── dgv.c
+│   │   └── io
+│   │       ├── csv_reader.c
+│   │       ├── csv_reader.h
+│   │       ├── graphviz_exporter.c
+│   │       └── graphviz_exporter.h
+│   └── test
+│       └── test.cc
+└── documents
+    ├── manual
+    │   ├── Usermanual.pdf
+    │   ├── images
+    │   │   ├── Destination.png
+    │   │   ├── Format.png
+    │   │   ├── Map2.jpg
+    │   │   ├── Results.png
+    │   │   └── Submit.png
+    │   └── UserManual.md
+    ├── functional_specifications
+    │   ├── FunctionalSpecifications.md
+    │   └── images
+    │       ├── Find_path.png
+    │       ├── Format.png
+    │       ├── Input.png
+    │       ├── Logo_quickest_path.png
+    │       ├── Research.png
+    │       └── Result.png
+    ├── qa
+    │   ├── TestCases.md
+    │   └── TestPlan.md
+    └── technical_specifications
+        ├── APIDocumentation.md
+        ├── CodingConventions.md
+        ├── TechnicalSpecifications.md
+        └── images
+            ├── DuplicateEdge.png
+            └── FibonacciHeap.png
 ```
+
+> [!NOTE]
+> This file tree is only used as exemple.
+> The file tree structure can be slightly different dependng of the date of last update of this document, but the naming convention should be the same.
 
 #### 1.4.2 Code
 
@@ -1118,8 +1188,8 @@ The project will follow the Agile methodology, with development broken down into
 
 ### 5.3 Libraries used
 
-| C++ Library Name                  | Full Name                             | Version of implementation | Is part of the standard library? | Description                                                                                                               | Links                                                                  |
-| --------------------------------- | ------------------------------------- | ------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| C++ Library Name                  | Full Name                             | Version of implementation | Is part of the standard library? | Description                                                                                                                    | Links                                                                  |
+| --------------------------------- | ------------------------------------- | ------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- |
 | `Standard Template Library (STL)` | **C++ Standard Template Library**     | **C++11+**                | ✅                                | Provides a collection of generic classes and functions, such as vectors, lists, stacks, queues, and algorithms[.][3]           | [Reference](https://en.cppreference.com/w/cpp/standard_library)        |
 | `iostream`                        | **Input/Output Stream Library**       | **C++98+**                | ✅                                | Provides functionality for input and output operations, including `cin`, `cout`, and `cerr`[.][3]                              | [Reference](https://en.cppreference.com/w/cpp/io/iostream)             |
 | `fstream`                         | **File Stream Library**               | **C++98+**                | ✅                                | Provides functionality for file input and output using streams like `ifstream`, `ofstream`, and `fstream`[.][3]                | [Reference](https://en.cppreference.com/w/cpp/io/fstream)              |
@@ -1139,8 +1209,8 @@ The project will follow the Agile methodology, with development broken down into
 | `cstring`                         | **C String Library**                  | **C++98+**                | ✅                                | Provides C-style string manipulation functions like strcpy, strlen, and strcmp[.][3]                                           | [Reference](https://en.cppreference.com/w/cpp/header/cstring)          |
 | `cstdint`                         | **C Integer Types Library**           | **C++11+**                | ✅                                | Provides fixed-width integer types (`int8_t`, `uint64_t`) and limits for these types[.][3]                                     | [Reference](https://en.cppreference.com/w/cpp/header/cstdint)          |
 
-| C Library Name | Full Name                         | Version of implementation | Description                                                                                                      | Links                                                      |
-| -------------- | --------------------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| C Library Name | Full Name                         | Version of implementation | Description                                                                                                           | Links                                                      |
+| -------------- | --------------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
 | `stdio.h`      | **Standard Input/Output Library** | **C89+**                  | Provides input and output functions, including file handling, standard input/output, and formatting[.][3]             | [Reference](https://en.cppreference.com/w/c/io/stdio)      |
 | `stdlib.h`     | **Standard Library**              | **C89+**                  | Provides functions for memory allocation, process control, conversions, and random number generation[.][3]            | [Reference](https://en.cppreference.com/w/c/stdlib)        |
 | `stdint.h`     | **Standard Integer Library**      | **C99+**                  | Defines macros for fixed-width integer types, such as `int32_t`, `int64_t`, and others for ensuring portability[.][3] | [Reference](https://en.cppreference.com/w/c/types/stdint)  |
