@@ -24,7 +24,7 @@
 
 ---
 
-### *Last Update on January 30th, 2025*
+### *Last Update on February 5th, 2025*
 
 <details>
 
@@ -32,7 +32,7 @@
 
 - [Functional Specifications - Project Quickest Path](#functional-specifications---project-quickest-path)
   - [**Title:** CAP (Cap Api Pathfinder)](#title-cap-cap-api-pathfinder)
-    - [*Last Update on January 30th, 2025*](#last-update-on-january-30th-2025)
+    - [*Last Update on February 5th, 2025*](#last-update-on-february-5th-2025)
   - [Introduction](#introduction)
     - [Document Purpose](#document-purpose)
     - [Project Goal](#project-goal)
@@ -178,7 +178,7 @@ Any additional features developed beyond these requirements will be considered a
 
 ### Deliverables
 
-For this project all the deadlines for the customer are February 7th 2025. But our Project Manager decided to impose his own deadlines.
+For this project all the deadlines for the customer are February 7th 2025. But our Project Manager decided to impose his own deadlines, which remain adjustable.
 
 | Name | Deadline | Link |
 | --  | -- | -- |
@@ -382,8 +382,39 @@ You can also download the complete file with all directions from landmark A to l
 
 >The web app isn't part of the product, it has been made for debug purposes
 
-![alt text](images/web_app.png)
+<br>
 
+- Enter your two landmarks: Specify your starting point and destination.
+  
+<br>
+
+![alt text](images/input.png)
+
+<br>
+
+- Select your preferred response format: Choose between XML and JSON.
+
+<br>
+
+![alt text](images/format.png)
+
+<br>
+
+- Submit your request: Once everything is set, confirm your input and wait for the processing to complete.
+
+<br>
+
+![alt text](images/find_path.png)
+
+<br>
+
+- View the step-by-step results: The computed path is displayed in a clear and structured manner.
+
+<br>
+
+![alt text](images/result.png)
+
+<br>
 
 ### Acceptance Criteria
 
