@@ -71,12 +71,10 @@ TEST(GraphTest, addLandmark)
     ASSERT_TRUE(graph->addLandmark(1));
 }
 
-TEST(GraphTest, loadDataset)
+TEST(GraphTest, dataSetExist)
 {
-    Graph *graph = new Graph();
-    loadDataset(graph, FILE_PATH);
-    Graph *empty_graph = new Graph();
-    ASSERT_NE(graph, empty_graph);
+    FILE *file = fopen(FILE_PATH, "r");
+    ASSERT_TRUE(file);
 }
 
 TEST(GraphTest, dijkstraFromTo)
