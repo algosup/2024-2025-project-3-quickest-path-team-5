@@ -21,7 +21,7 @@
 
 The Tasks & Schedule section is divided into three parts. All information is maintained and updated in Notion for real-time tracking and collaboration.
 
-1. **All the Tasks:** [View all tasks]([#](https://spark-vessel-8f5.notion.site/Daily-Task-List-177204fa481680dbae3eddb0873509be?pvs=4))  
+1. **All the Tasks:** [View all tasks]((https://spark-vessel-8f5.notion.site/Daily-Task-List-177204fa481680dbae3eddb0873509be?pvs=4))  
    This section lists every task with detailed descriptions, assigned roles, and deadlines.
 
 2. **Gantt Chart:** [View the Gantt chart](https://spark-vessel-8f5.notion.site/192204fa481680d89f57f57e6b29fd33?v=192204fa48168178983d000c597d17a7&pvs=4)  
