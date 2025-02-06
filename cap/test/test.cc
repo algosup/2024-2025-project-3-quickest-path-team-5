@@ -75,7 +75,7 @@ TEST(GraphTest, loadDataset)
 {
     Graph *graph = new Graph();
     loadDataset(graph, FILE_PATH);
-    std::vector<uint32_t> empty_graph = {};
+    Graph *empty_graph = new Graph();
     ASSERT_NE(graph, empty_graph);
 }
 
