@@ -5,19 +5,17 @@
 #include <time.h>
 
 #include "csv_reader.h"
-#include "mermaid_writter.h"
+#include "graphviz_exporter.h"
 #include "graphLib.h"
 
 #define FILE_PATH "../../data/USA-roads.csv"
-#define MERMAID_FILE "../../data/USA-roads.txt"
-#include <sys/resource.h> // For memory usage tracking
+#define EXPRT_FILE_PATH "../../data/USA-roads.dot"
 
 int main(void) {
     char* defaultFilePath = FILE_PATH;
-    char* defaultMermaidFile = MERMAID_FILE;
+    char* defaultExportFile = EXPRT_FILE_PATH;
     bool isExtracted = false;
 
-    // Ask the user for the file path
     printf("Enter the path to the dataset file (default: %s): ", defaultFilePath);
     char input[1024];
     fgets(input, sizeof(input), stdin);
@@ -32,35 +30,29 @@ int main(void) {
     }
 
 
-        // Ask user if they want to extract the graph to a Mermaid file
-    printf("Do you want to extract the graph to a Mermaid file? (y/n): ");
+    printf("Do you want to export the graph? (y/n): ");
     fgets(input, sizeof(input), stdin);
-    if (input[0] == 'y') {
+    if (input[0] == 'y' || input[0] == 'Y') {
         isExtracted = true;
     }
 
     if (isExtracted) {
-        // Ask the user for the mermaid file path
-        printf("Enter the path to the mermaid file (default: %s): ", defaultMermaidFile);
+        printf("Enter the path to the exporting file (default: %s): ", defaultExportFile);
         fgets(input, sizeof(input), stdin);
         if (input[0] != '\n') {
             input[strcspn(input, "\n")] = 0; // Remove the newline character
-            defaultMermaidFile = input;
+            defaultExportFile = input;
         }
     }
 
     
 
-    struct rusage usage;
     graph_t* graph = createGraph();
     clock_t begin = clock();    
     readDataset(graph, FILE_PATH);
     clock_t end = clock();
     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     printf("Time spent reading the dataset: %f seconds\n", time_spent);
-    getrusage(RUSAGE_SELF, &usage);
-    float memUsage = (float)(usage.ru_maxrss / (1024.0f * 1024.0f)); // Convert to MB
-    printf("Memory usage: %d MB\n\n", (int)memUsage);
 
     begin = clock();    
     if (isDAG(graph)) {
@@ -71,8 +63,6 @@ int main(void) {
     end = clock();
     time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     printf("Time spent checking for cycles: %f seconds\n", time_spent);
-    memUsage = (float)(usage.ru_maxrss / (1024.0f * 1024.0f)); // Convert to MB
-    printf("Memory usage: %d MB\n\n", (int)memUsage);
 
     begin = clock();    
     if (areAllNodesAccessible(graph)) {
@@ -83,21 +73,17 @@ int main(void) {
     end = clock();
     time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     printf("Time spent checking for connectivity: %f seconds\n", time_spent);
-    memUsage = (float)(usage.ru_maxrss / (1024.0f * 1024.0f)); // Convert to MB
-    printf("Memory usage: %d MB\n\n", (int)memUsage);
 
     if (isExtracted) {
         begin = clock();    
-        if (writeMermaidFile(MERMAID_FILE, graph)) {
-            printf("Mermaid file written successfully.\n");
+        if (exportGraphvizFile(defaultExportFile, graph)) {
+            printf("File exported successfully.\n");
         } else {
             fprintf(stderr, "Failed to write the Mermaid file.\n");
         }
         end = clock();
         time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-        printf("Time spent writing the Mermaid file: %f seconds\n", time_spent);
-        memUsage = (float)(usage.ru_maxrss / (1024.0f * 1024.0f)); // Convert to MB
-        printf("Memory usage: %d MB\n\n", (int)memUsage);
+        printf("Time spent exporting the graph: %f seconds\n", time_spent);
     }
 
     freeGraph(graph);

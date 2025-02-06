@@ -1,0 +1,333 @@
+<!--     HTML: Interface for the Quickest Path Finder       -->
+<!--              file: index.html                          -->
+<!--     brief: HTML file for the interface                 -->
+<!--     authors: Rémy CHARLES, Maxime CARON, Robin GOUMY, Mathias GAGNEPAIN   -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pathfinding Visualizer | Route Optimization API</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #9e7a68;
+            --secondary: #bed0d6;
+            --background: #e1dfde;
+            --text: #1e293b;
+            --border: #bed0d6;
+            --primary-accent: #97523e
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .header p {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .control-panel {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            margin-top: 2rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+        }
+
+        button:hover {
+            background: var(--primary-accent);
+        }
+
+        .results-panel {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        #map {
+            height: 400px;
+            background: #f1f5f9;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            background-image: url('img/map.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .step-list {
+            list-style: none;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 1rem;
+        }
+
+        .step-item {
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total-time {
+            display: none;
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        hr {
+            display: none;
+            border: none;
+            border-top: 2px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+
+        .loader {
+            display: none;
+            border: 4px solid #f1f5f9;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 1rem auto;
+        }
+
+        .app-logo {
+            height: 10rem; /* Adjust size as needed */
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 1.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>CAP Interface</h1>
+            <p>Visualize optimal paths with real-time calculation based on cap API</p>
+        </header>
+
+        <main class="main-content">
+            <section class="control-panel">
+                <div class="form-group">
+                    <img class="app-logo" src="img/logo.png" alt="App Logo">
+                <div class="form-group">
+                    <label for="start">Start Node:</label>
+                    <input type="text" id="start" placeholder="Enter starting node">
+                </div>
+                <div class="form-group">
+                    <label for="end">End Node:</label>
+                    <input type="text" id="end" placeholder="Enter destination node">
+                </div>
+                <div class="form-group">
+                    <label for="format">Choose a response format:</label>
+                    <select name="format" id="format">
+                        <option value="*/*">Any</option>
+                        <option value="application/json">JSON</option>
+                        <option value="application/xml">XML</option>
+                    </select>
+                </div>
+                <button onclick="calculatePath()">Find Optimal Path</button>
+                <div class="loader" id="loader"></div>
+            </section>
+
+            <section class="results-panel">
+                <div id="map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d12777246.305388913!2d-99.54357086800154!3d39.91460237976112!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sfr!4v1738766968973!5m2!1sen!2sfr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <h2>Path Details</h2>
+                <div class="total-time" id="totalTime"></div>
+                <hr>
+                <ul class="step-list" id="steps"></ul>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 ALGOSUP - Team 5</p>
+            <p> No Right Reserved</p>
+        </footer>
+    </div>
+
+    <script>
+        async function calculatePath() {
+            const start = document.getElementById('start').value;
+            const end = document.getElementById('end').value;
+            const loader = document.getElementById('loader');
+            const results = document.getElementById('steps');
+            const totalTime = document.getElementById('totalTime');
+            const hr = document.querySelector('hr');
+            const format = document.getElementById('format').value;
+
+            loader.style.display = 'block';
+            totalTime.style.display = 'block';
+            results.innerHTML = '';
+            totalTime.textContent = 'Calculating the travel time...';
+            hr.style.display = 'block';
+
+            try {
+                const response = await fetch(`http://localhost:8080/quickest-path?source=${encodeURIComponent(start)}&destination=${encodeURIComponent(end)}`, {
+                    headers: { 'Accept': format }
+                });
+
+                const contentType = response.headers.get("Content-Type");
+
+                let path = [];
+                let travelTime = "";
+
+                if (contentType.includes("application/json")) {
+                    // Handle JSON response
+                    const data = await response.json();
+                    if (data.error) {
+                        alert(data.error);
+                        return;
+                    }
+                    path = data.path;
+                    travelTime = data.travel_time;
+                } else if (contentType.includes("application/xml") || contentType.includes("text/xml")) {
+                    // Handle XML response
+                    const text = await response.text();
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(text, "application/xml");
+
+                    const pathElements = xmlDoc.getElementsByTagName("node");
+                    for (let step of pathElements) {
+                        path.push(step.textContent);
+                    }
+
+                    const travelTimeElement = xmlDoc.getElementsByTagName("travel_time")[0];
+                    travelTime = travelTimeElement ? travelTimeElement.textContent : "Unknown";
+                } else {
+                    throw new Error("Unsupported response format.");
+                }
+
+                // Display steps
+                results.innerHTML = ''; // Clear previous results
+                for (let i = 0; i < path.length - 1; i++) {
+                    const step = path[i];
+                    const nextStep = path[i + 1];
+                    const li = document.createElement('li');
+                    li.className = 'step-item';
+                    li.innerHTML = `<span>Step ${i + 1}</span> <span>${step} → ${nextStep}</span>`;
+                    results.appendChild(li);
+                }
+
+                // Display total time
+                totalTime.textContent = `Total Travel Time: ${travelTime}`;
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to calculate path');
+            } finally {
+                loader.style.display = 'none';
+            }
+        }
+
+    </script>
+</body>
+
+</html>
