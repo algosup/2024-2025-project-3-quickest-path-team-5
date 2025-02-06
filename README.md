@@ -22,32 +22,36 @@ CAP is a REST API that allows you to find the quickest path between two verticie
 
 1. Install [CMake 3.30 or higher](https://cmake.org/download/)
 2. Install [Clang 12 or higher](https://releases.llvm.org/download.html)
-3. Clone GoogleTest repository
+3. Install [Boost 1.87.0 or higher](https://www.boost.org/users/history/version_1_87_0.html)
+4. Install [ASIO 1.30.0 or higher](https://think-async.com/Asio/)
+5. Install [PKGConfig](https://www.freedesktop.org/wiki/Software/pkg-config/)
+6. Install [jsoncpp 1.9.6 or higher](https://github.com/open-source-parsers/jsoncpp)
+7. Clone GoogleTest repository
     ```bash
     # From the root folder of the project
     git clone https://github.com/google/googletest.git
     ```
     Make sure to clone the repository to the root of the project and that the folder is named `googletest`.
-4. Generate the build files
+8. Generate the build files
     ```bash
     # From the root folder of the project
     cd cap
     cmake -S . -B build
     ```
     This command can require some modifications depending on your operating system.
-5. Build the project
+9. Build the project
     ```bash
     # From the root folder of the project
     cd cap
     cmake --build build
     ```
-6. Run the project
+10. Run the project
     ```bash
     # From the root folder of the project
     cd cap
     ./build/cap
     ```
-7. Run the tests (optional)
+11. Run the tests (optional)
     ```bash
     # From the root folder of the project
     cd cap
@@ -102,7 +106,7 @@ DGV is a tool that allows you to validate a graph file. The tool will check if t
 
 # Contributors
 
-| Photo | Name | Role | Contact |
+| Photo | Role | Name | Contact |
 |---|---|---|---|
 | <img src="https://avatars.githubusercontent.com/u/145991425?v=4" width="100" height="100"> | Project Manager | Habi CAILLEAU| [GitHub](https://github.com/habicll) \| [LinkedIn](https://www.linkedin.com/in/habi-cailleau-3b72b5293/) | 
 | <img src="https://avatars.githubusercontent.com/u/182214449?v=4" width="100" height="100"> | Program Manager | Robin GOUMY |[GitHub](https://github.com/RobinGOUMY) \| [LinkedIn](https://www.linkedin.com/in/robin-goumy-66452832a/) |
