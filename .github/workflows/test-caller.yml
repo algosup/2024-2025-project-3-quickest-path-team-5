@@ -1,0 +1,58 @@
+name: Run Tests
+
+on:
+     pull_request:
+        branches:
+            - main
+
+jobs:
+    system_requirements:
+        runs-on: [self-hosted, linux, x64]
+        steps:
+            - name: Instal software requirements
+              run: |  
+                    echo "Installing software requirements"
+                    sudo apt-get update
+                    sudo apt-get install -y cmake clang make
+                    
+            - name: Checkout code
+              uses: actions/checkout@v3
+              with:
+                 ref: ${{ github.event.pull_request.head.sha }}
+            - name: checkout message
+              run: |
+                    echo "Checking out the repository"
+                    echo "Repository: ${{ github.repository }} has been checked out"
+    build:
+        runs-on: [self-hosted, linux, x64]
+        needs: system_requirements
+        steps:
+            - name: Getting Google Test
+              run: |
+                    echo "Getting Google Test"
+                    git clone https://github.com/google/googletest.git
+            - name: Update software requirements
+              run: |
+                    sudo apt-get update && sudo apt-get install -y cmake clang make
+            - name: Build
+              run: |
+                        echo "Building the project"
+                        cd dag_graph_validator
+                        cmake -S . -B build
+                        cd build
+                        make
+                        cd ..
+                        echo "Build complete"
+                        echo "Ready to run tests"
+    test:
+        runs-on: [self-hosted, linux, x64]
+        needs: build
+        steps:
+            - name: Run tests
+              run: |
+                    echo "Running tests"
+                    cd dag_graph_validator
+                    cd bin
+                    ./tests
+                    echo "Tests complete"
+              shell: bash
