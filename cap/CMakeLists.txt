@@ -25,6 +25,7 @@ add_executable(tests
   src/data_struct/node.cpp
   src/data_struct/edge.cpp
   src/api/api.cpp
+  src/io/csv_reader.cpp
   test/test.cc
   ../googletest/googletest/src/gtest-all.cc
 )
@@ -32,6 +33,7 @@ add_executable(tests
 target_include_directories(tests
   PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/src/data_struct"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/io"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/api"
     "${CMAKE_CURRENT_SOURCE_DIR}/../googletest/googletest/include"
     "${CMAKE_CURRENT_SOURCE_DIR}/../googletest/googletest"
