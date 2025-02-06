@@ -12,8 +12,6 @@
 
 </div>
 
----
-
 | Role | Name |
 |---|---|
 | Project Manager       | Habi CAILLEAU       |
@@ -81,6 +79,7 @@
 
 ---
 
+
 ## Introduction
 
 ### Document Purpose
@@ -140,6 +139,8 @@ As defined by the project owner, the team is arranged as follows:
 | **Test Plan**     | A document describing what, when, and how to test in software.                                                         |
 | **UI**            | User Interface - What users see and interact with in software, like buttons and menus.                                 |
 | **XML**           | Extensible Markup Language - A flexible format for structuring and exchanging data.                                    |
+
+---
 
 
 ---
@@ -372,6 +373,7 @@ The algorithm returns:
 
 Although optional, a simple web interface will be developed using HTML and native CSS to improve user experience.
 
+Alternatively, you can download the complete file with all the directions from point A to point B.
 
 The aim is to have one main page with all the information. Users will be able to enter their landmarks. 
 
