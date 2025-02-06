@@ -390,7 +390,7 @@ You can also download the complete file with all directions from landmark A to l
 
 <br>
 
-- Select your preferred download format: Choose between XML and JSON.
+- Select your preferred response format: Choose between XML and JSON.
 
 <br>
 
