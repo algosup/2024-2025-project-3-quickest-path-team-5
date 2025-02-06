@@ -12,16 +12,6 @@
 
 </div>
 
-# Functional Specifications - Project Quickest Path
-
-## **Title:** CAP (Cap Api Pathfinder)
-
-**Author:** Robin GOUMY
-
-**Team:** 5
-
-![alt text](images/logo_quickest_path.png)
-
 | Role | Name |
 |---|---|
 | Project Manager       | Habi CAILLEAU       |
@@ -42,7 +32,6 @@
 
 - [Functional Specifications - Project Quickest Path](#functional-specifications---project-quickest-path)
   - [**Title:** CAP (Cap Api Pathfinder)](#title-cap-cap-api-pathfinder)
-
     - [*Last Update on January 30th, 2025*](#last-update-on-january-30th-2025)
   - [Introduction](#introduction)
     - [Document Purpose](#document-purpose)
