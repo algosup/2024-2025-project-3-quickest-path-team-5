@@ -84,7 +84,7 @@ The 2024-2025 Project 3 aims to develop a high-performance software solution for
 
 | Name    | Role        | Represented By | Contact                    | Expectation                                                     |
 | ------- | ----------- | -------------- | -------------------------- | --------------------------------------------------------------- |
-| ALGOSUP | Third-party | Franck JEANNIN | franck.jeannin@algosup.com | The third-party expect us to develop the Quickest-Path project. |
+| ALGOSUP | Third-party | Franck JEANNIN | not available.               | The third-party expect us to develop the Quickest-Path project. |
 
 <br>
 
@@ -101,7 +101,7 @@ Here are the milestones of the project defined by the project manager in order t
 | User Manual              | A document made for the end user that will explains how to use our software and also all the information they need to know about. | 07/02/2025           |
 
 
-The end of the project is scheduled for 02/14/2025. We will present the final product this day.
+The end of the project is scheduled for 14/02/2025. We will present the final product this day.
 
 <br>
 
