@@ -75,7 +75,8 @@ TEST(GraphTest, loadDataset)
 {
     Graph *graph = new Graph();
     loadDataset(graph, FILE_PATH);
-    ASSERT_NE(graph, nullptr);
+    std::vector<uint32_t> empty_graph = {};
+    ASSERT_NE(graph, empty_graph);
 }
 
 TEST(GraphTest, dijkstraFromTo)
