@@ -1,257 +1,333 @@
 <!--     HTML: Interface for the Quickest Path Finder       -->
 <!--              file: index.html                          -->
 <!--     brief: HTML file for the interface                 -->
-<!--     authors: Rémy CHARLES, Maxime CARON, Robin GOUMY   -->
-
+<!--     authors: Rémy CHARLES, Maxime CARON, Robin GOUMY, Mathias GAGNEPAIN   -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAP</title>
+    <title>Pathfinding Visualizer | Route Optimization API</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS: Updated Color Palette */
-        html, body {
-            font-family: Arial, sans-serif;
+        :root {
+            --primary: #9e7a68;
+            --secondary: #bed0d6;
+            --background: #e1dfde;
+            --text: #1e293b;
+            --border: #bed0d6;
+            --primary-accent: #97523e
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            height: 100%;
-            background: #F8F9FA; /* Light Gray */
-            color: #343A40; /* Dark Gray */
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
         }
 
-        /* Header */
-        header {
-            background: #007BFF; /* Primary Blue */
-            color: white;
-            padding: 1.5rem;
+        body {
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .header {
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            flex-shrink: 0;
+            margin-bottom: 3rem;
         }
 
-        header img {
-            position: absolute;
-            top: 25px;
-            left: 80px;
-            height: 100px;
-            width: auto;
-        }
-
-        header h1, header h2 {
-            margin: 10px 0;
-        }
-
-        header h1 {
+        .header h1 {
             font-size: 2.5rem;
-            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
         }
 
-        header h2 {
-            font-size: 1.5rem;
+        .header p {
+            color: #64748b;
+            font-size: 1.1rem;
         }
 
-        /* Main Content */
-        main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin: 40px auto;
-            max-width: 600px;
-            background: #E5EDF1;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 70%;
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin-top: 2rem;
         }
 
-        /* Form Inputs */
-        form {
-            display: absolute;
-            flex-direction: column;
-            width: 100%;
-            margin-top: 10px;
+        .control-panel {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            margin-top: 2rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
         }
 
         label {
-            margin-bottom: 5px;
-            font-weight: bold;
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text);
         }
 
-        input {
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #6C757D; /* Medium Gray */
-            border-radius: 5px;
-            width: 96%;
-            background: white;
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
         }
 
-        /* Buttons */
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
         button {
-            background-color: #007BFF; /* Primary CTA */
+            background: var(--primary);
             color: white;
             border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s;
-            padding: 10px;
-            border-radius: 5px;
+            transition: background 0.2s;
             width: 100%;
         }
 
         button:hover {
-            background-color: #0056B3; /* Darker Blue */
+            background: var(--primary-accent);
         }
 
-        /* Response Sections */
-        .response-section {
-            margin-top: 15px;
+        .results-panel {
             background: white;
-            padding: 15px;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        #map {
+            height: 400px;
+            background: #f1f5f9;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: 90%;
+            margin-bottom: 1.5rem;
+            background-image: url('img/map.png');
+            background-size: cover;
+            background-position: center;
         }
 
-        /* API Output */
-        pre {
-            border: 1px solid #6C757D;
-            padding: 10px;
-            border-radius: 5px;
-            overflow-x: auto;
-            background: #F8F9FA;
+        .step-list {
+            list-style: none;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 1rem;
         }
 
-        /* Status Colors */
-        .success {
-            color: #28A745; /* Green */
+        .step-item {
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .warning {
-            color: #FFC107; /* Orange */
-        }
-
-        .error {
-            color: #DC3545; /* Red */
-        }
-
-        /* Sticky Footer */
-        footer {
-            text-align: center;
-            padding: 15px;
-            background: #343A40; /* Dark Gray */
+        .total-time {
+            display: none;
+            background: var(--primary);
             color: white;
-            width: 100%;
-            flex-shrink: 0;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        hr {
+            display: none;
+            border: none;
+            border-top: 2px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+
+        .loader {
+            display: none;
+            border: 4px solid #f1f5f9;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 1rem auto;
+        }
+
+        .app-logo {
+            height: 10rem; /* Adjust size as needed */
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 1.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
+    
 </head>
+
 <body>
-    <header class="flex-container">
-        <img src="http://localhost:8080/img/logo.png" alt="Quickest Path Logo">
-        <div class="text">
-            <h1>CAP</h1>
-            <h2>The Quickest Path Finder</h2>
-        </div>
-    </header>
-    <main>
-        <section class="form-section">
-            <form id="api-form">
-                <label for="source">Source:</label>
-                <input type="text" id="source" name="source" placeholder="Enter the landmark A" required>
+    <div class="container">
+        <header class="header">
+            <h1>CAP Interface</h1>
+            <p>Visualize optimal paths with real-time calculation based on cap API</p>
+        </header>
 
-                <label for="destination">Destination:</label>
-                <input type="text" id="destination" name="destination" placeholder="Enter the landmark B" required>
+        <main class="main-content">
+            <section class="control-panel">
+                <div class="form-group">
+                    <img class="app-logo" src="img/logo.png" alt="App Logo">
+                <div class="form-group">
+                    <label for="start">Start Node:</label>
+                    <input type="text" id="start" placeholder="Enter starting node">
+                </div>
+                <div class="form-group">
+                    <label for="end">End Node:</label>
+                    <input type="text" id="end" placeholder="Enter destination node">
+                </div>
+                <div class="form-group">
+                    <label for="format">Choose a response format:</label>
+                    <select name="format" id="format">
+                        <option value="*/*">Any</option>
+                        <option value="application/json">JSON</option>
+                        <option value="application/xml">XML</option>
+                    </select>
+                </div>
+                <button onclick="calculatePath()">Find Optimal Path</button>
+                <div class="loader" id="loader"></div>
+            </section>
 
-                <button type="submit">Find Path</button>
-            </form>
-        </section>
+            <section class="results-panel">
+                <div id="map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d12777246.305388913!2d-99.54357086800154!3d39.91460237976112!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sfr!4v1738766968973!5m2!1sen!2sfr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <h2>Path Details</h2>
+                <div class="total-time" id="totalTime"></div>
+                <hr>
+                <ul class="step-list" id="steps"></ul>
+            </section>
+        </main>
 
-        <!-- 1️ Path Section -->
-        <section class="response-section">
-            <h3>Path (Steps from A to B):</h2>
-            <pre id="path-output">Waiting for API response...</pre>
-        </section>
+        <footer>
+            <p>&copy; 2025 ALGOSUP - Team 5</p>
+            <p> No Right Reserved</p>
+        </footer>
+    </div>
 
-        <!-- 2️ Travel Time Section -->
-        <section class="response-section">
-            <h3>Travel Time:</h2>
-            <pre id="travel-time-output">Waiting for API response...</pre>
-        </section>
-
-        <!-- 3️ Raw API Output and Download Button -->
-        <section class="response-section">
-            <h3>API Response:</h2>
-            <pre id="response-output">Waiting for API response...</pre>
-            <button id="download-btn" style="display: none;">Download Response</button>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2025 Quickest Path Project Team 5</p>
-    </footer>
     <script>
-        // JavaScript: Handle form submission and API interaction
-        document.getElementById("api-form").addEventListener("submit", async (event) => {
-            event.preventDefault();
+        async function calculatePath() {
+            const start = document.getElementById('start').value;
+            const end = document.getElementById('end').value;
+            const loader = document.getElementById('loader');
+            const results = document.getElementById('steps');
+            const totalTime = document.getElementById('totalTime');
+            const hr = document.querySelector('hr');
+            const format = document.getElementById('format').value;
 
-            // Get input values
-            const source = document.getElementById("source").value;
-            const destination = document.getElementById("destination").value;
-
-            // Construct the API request URL
-            const url = `http://localhost:8080/quickest-path?source=${encodeURIComponent(source)}&destination=${encodeURIComponent(destination)}`;
+            loader.style.display = 'block';
+            totalTime.style.display = 'block';
+            results.innerHTML = '';
+            totalTime.textContent = 'Calculating the travel time...';
+            hr.style.display = 'block';
 
             try {
-                // Send API request using GET method with Accept header
-                const response = await fetch(url, {
-                    method: "GET",
-                    headers: {
-                        "Accept": "application/json, application/xml"
-                    }
+                const response = await fetch(`http://localhost:8080/quickest-path?source=${encodeURIComponent(start)}&destination=${encodeURIComponent(end)}`, {
+                    headers: { 'Accept': format }
                 });
 
-                if (!response.ok) {
-                    throw new Error(`API Error: ${response.status}`);
+                const contentType = response.headers.get("Content-Type");
+
+                let path = [];
+                let travelTime = "";
+
+                if (contentType.includes("application/json")) {
+                    // Handle JSON response
+                    const data = await response.json();
+                    if (data.error) {
+                        alert(data.error);
+                        return;
+                    }
+                    path = data.path;
+                    travelTime = data.travel_time;
+                } else if (contentType.includes("application/xml") || contentType.includes("text/xml")) {
+                    // Handle XML response
+                    const text = await response.text();
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(text, "application/xml");
+
+                    const pathElements = xmlDoc.getElementsByTagName("node");
+                    for (let step of pathElements) {
+                        path.push(step.textContent);
+                    }
+
+                    const travelTimeElement = xmlDoc.getElementsByTagName("travel_time")[0];
+                    travelTime = travelTimeElement ? travelTimeElement.textContent : "Unknown";
+                } else {
+                    throw new Error("Unsupported response format.");
                 }
 
-                const data = await response.json(); // Parse JSON response
+                // Display steps
+                results.innerHTML = ''; // Clear previous results
+                for (let i = 0; i < path.length - 1; i++) {
+                    const step = path[i];
+                    const nextStep = path[i + 1];
+                    const li = document.createElement('li');
+                    li.className = 'step-item';
+                    li.innerHTML = `<span>Step ${i + 1}</span> <span>${step} → ${nextStep}</span>`;
+                    results.appendChild(li);
+                }
 
-                // 1️⃣ Display Path (Steps from A to B)
-                document.getElementById("path-output").textContent = data.path ? data.path.join(" → ") : "No path found";
-
-                // 2️⃣ Display Travel Time
-                document.getElementById("travel-time-output").textContent = `Estimated Time: ${data.travel_time} minutes`;
-
-                // 3️⃣ Display Raw API Response
-                const rawResponse = JSON.stringify(data, null, 2);
-                document.getElementById("response-output").textContent = rawResponse;
-
-                // Enable the download button
-                const downloadBtn = document.getElementById("download-btn");
-                downloadBtn.style.display = "block";
-
-                // Set up download button to download the file
-                const blob = new Blob([rawResponse], { type: "application/json" });
-                const urlObject = window.URL.createObjectURL(blob);
-                downloadBtn.onclick = () => {
-                    const a = document.createElement("a");
-                    a.href = urlObject;
-                    a.download = "quickest-path-response.json";
-                    a.click();
-                    window.URL.revokeObjectURL(urlObject);
-                };
+                // Display total time
+                totalTime.textContent = `Total Travel Time: ${travelTime}`;
 
             } catch (error) {
-                document.getElementById("path-output").textContent = "Error fetching path data";
-                document.getElementById("travel-time-output").textContent = "Error fetching travel time";
-                document.getElementById("response-output").textContent = `Error: ${error.message}`;
+                console.error('Error:', error);
+                alert('Failed to calculate path');
+            } finally {
+                loader.style.display = 'none';
             }
-        });
+        }
+
     </script>
 </body>
+
 </html>
