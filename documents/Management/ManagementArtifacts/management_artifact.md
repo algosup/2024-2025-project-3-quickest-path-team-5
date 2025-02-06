@@ -16,7 +16,21 @@
 
 </div>
 
-## Tasks & schedule
+
+## Tasks & Schedule
+
+The Tasks & Schedule section is divided into three parts. All information is maintained and updated in Notion for real-time tracking and collaboration.
+
+1. **All the Tasks:** [View all tasks]([#](https://spark-vessel-8f5.notion.site/Daily-Task-List-177204fa481680dbae3eddb0873509be?pvs=4))  
+   This section lists every task with detailed descriptions, assigned roles, and deadlines.
+
+2. **Gantt Chart:** [View the Gantt chart](https://spark-vessel-8f5.notion.site/192204fa481680d89f57f57e6b29fd33?v=192204fa48168178983d000c597d17a7&pvs=4)  
+   A visual timeline created in Notion that outlines project milestones and deadlines.
+
+3. **Actual Time Logs:** [View actual time logs](https://spark-vessel-8f5.notion.site/Daily-Task-List-177204fa481680dbae3eddb0873509be?pvs=4)  
+   A record of the actual time spent on each task, maintained and updated regularly in Notion.
+
+<br>
 
 ## RACI
 
@@ -42,6 +56,8 @@ A = Accountable: Ultimately answerable for the task.
 C = Consulted: Person whose input is sought.
 I = Informed: Person kept up-to-date on progress.
 
+<br>
+
 ## MoScoW
 
 | Must Have                      | Should Have           | Could Have              | Won't Have       |
@@ -51,6 +67,7 @@ I = Informed: Person kept up-to-date on progress.
 | Data checking                  |                       |                         |                  |
 | Data integrity validation tool |                       |                         |                  |
 
+<br>
 
 ## Risks and assumptions
 
@@ -69,7 +86,106 @@ The following risks could come accross during the project, here is a detailled w
 | Market conditions and user expectations remain stable    | Assumption    | Low        | Monitor the external environment periodically and adjust project goals only if significant changes are detected; otherwise, assume a stable baseline for planning.  |
 
 
-## KPI
+<br>
+
+## Key Performance Indicators (KPIs)  
+
+### Documents  
+This section tracks the progress of essential project documents:  
+- **Functional Specification**  
+- **Technical Specification**  
+- **Test Plan**  
+- **Test Cases**  
+- **User Manual**  
+
+**Formula:**  
+$$
+\text{Progress (\%)} = \frac{\text{Current Number of Completed Sections}}{\text{Total Predefined Sections}} \times 100
+$$  
+
+Where:  
+- **Current Number of Completed Sections** = Fully completed and validated sections  
+- **Total Predefined Sections** = Sections outlined at the start, subject to minor adjustments  
+<br>
+
+## Development  
+Key software development KPIs include:  
+- **API Backend & Implementation**  
+- **Data Checking & Integrity Validation**  
+- **Graph Data Structure Implementation**  
+- **Algorithm Design for Pathfinding**  
+
+**Formula:**  
+$$
+\text{Progress (\%)} = \frac{(\text{Completed Tasks} + \sum \text{Partial Progress on Ongoing Tasks})}{\text{Total Tasks Planned}} \times 100
+$$  
+
+Where:  
+- **Completed Tasks** = Fully developed and tested components  
+- **Partial Progress on Ongoing Tasks** = Estimated completion level of in-progress features  
+
+<br>
+
+## Performance & Quality  
+This section includes:  
+- **Performance Optimization**  
+- **Memory Consumption Optimization**  
+- **Bug Fixing**  
+- **Test Suite Development**  
+
+### Defect Detection Efficiency (DDE)  
+Measures the effectiveness of testing in identifying defects before release.  
+
+**Formula:**  
+$$
+\text{DDE (\%)} = \frac{\text{Defects Detected During Testing}}{\text{Total Number of Defects}} \times 100
+$$  
+
+### Bug Fix Rate  
+Measures the percentage of reported bugs that have been resolved.  
+
+**Formula:**  
+$$
+\text{Bug Fix Rate (\%)} = \frac{\text{Fixed Bugs}}{\text{Total Reported Bugs}} \times 100
+$$  
+
+<br>
+
+## Human Resources  
+To monitor the efficiency and well-being of the team, we track:  
+- **Overtime Hours**  
+- **Unjustified Absences**  
+- **Team Mood**  
+
+### Team Mood Score 
+Measures team morale based on weekly self-assessments.  
+
+**Formula:**  
+$$
+\text{Mood Score} = \frac{\sum \text{Individual Mood Ratings}}{\text{Total Team Members}}
+$$  
+
+Mood is measured weekly on a scale of 1 to 10.  
+
+---
+
+By applying these KPIs and their respective formulas, we ensure a structured, data-driven approach to project management, allowing for real-time progress tracking and informed decision-making.  
+
+
+The complete KPI document can be accessed via [link](https://spark-vessel-8f5.notion.site/KPIs-177204fa4816806ca08fe59365d99d74?pvs=4).  
+Additionally, a comprehensive visual presentation highlighting all project achievements is available [here](https://docs.google.com/spreadsheets/d/1O52cw3Ta-6EVw85Rz4RBrDvwIUuy__FmBcQSuzbgIPo/edit?usp=sharing).
+
+<br>
 
 ## Weekly report
 
+Each week, a meeting was held that informed the creation of these weekly reports, giving me a clear overview of our progress and ensuring we remain on track.
+
+you can access to them via these links :
+
+- [Weekly Report 1](link)
+- [Weekly Report 2](link)
+- [Weekly Report 3](link)
+- [Weekly Report 4](link)
+- [Weekly Report 5](link)
+- [Weekly Report 6](link)
