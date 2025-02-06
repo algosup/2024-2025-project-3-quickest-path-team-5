@@ -3,7 +3,7 @@
 | Name           | date      | role |
 | -------------- | --------- |------|
 | Alexandre Bopp | 1/13/2025 | Technical Writer |
-| Robin Goumy    |     -     | Program Manager |
+| Robin Goumy    | 1/21/2025 | Program Manager |
 | Jason Grosso   |     -     | Quality Assurance |
 
 <img src="images/map2.jpg" alt="GPS Navigation" height="100%" width="100%" style="display: block; margin: auto; object-fit:cover;">
@@ -69,19 +69,7 @@ The software provides a **REST API** that allows users to find travel times and 
 
   These steps will help you confirm your system's specifications for ensuring compatibility with the software.
 
-- **Software Requirements**:
-
-  - **C++ Compiler**:  
-    You will need a program called GCC to run the software. This is a tool that helps your computer understand and execute the code.
-
-    - To install it, just click [here to download GCC](https://gcc.gnu.org/) and follow the easy steps on the website.
-
-  - **HTTP Server**:  
-    An HTTP server is needed to make the software work on your computer. If you don't already have one, we suggest using **Apache** or **Nginx**.
-
-    - Don’t worry, these servers are widely used and have easy-to-follow [guides](https://www.ionos.fr/digitalguide/serveur/configuration/installer-un-serveur-apache-nos-conseils/). 
-
-- **Data File**:
+- **Data File**(optional):
 
   - **USA-roads.csv**:  
     This is a file that contains information about roads and travel times between landmarks. It’s very important for the software to work correctly.
@@ -89,153 +77,157 @@ The software provides a **REST API** that allows users to find travel times and 
 
 ## 3. Installation Guide
 
-### 1. **Download the Software**
+### Download the Software 
 
 To start, you need to get the software on your computer. There are two options for this:
 
-#### Case 1: **Using Git** (recommended if you have Git installed):
+#### Using Git (recommended if you have Git installed)
 
-1. Open the **Command Prompt** (Windows) or **Terminal** (Mac).
-2. Type the following command to download the software:
+1. Open the **Command Prompt** (Windows) or **Terminal** (Mac).  
+2. Type the following command to download the software:  
 
-   ```bash
-   git clone https://github.com/algosup/2024-2025-project-3-quickest-path-team-5
-   ```
+  ```bash
+      git clone https://github.com/algosup/2024-2025-project-3-quickest-path-team-5
+  ```
 
-   Tip: If you don’t have Git installed, please visit this [link](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) to install Git.
+   *Tip: If you don’t have Git installed, please visit this [link](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) to install Git.*
 
-#### Case 2: **Manual** Download:
+### Manual Download
 
-Go to the [GitHub repository](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5) and click Download ZIP. Extract the ZIP file to a location on your computer.
-Note: Make sure the folder you download is <strong>easy</strong> to access.
+1. Go to the [GitHub repository](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5) and click **Download ZIP**.  
+2. Extract the ZIP file to a location on your computer.  
 
-### 2. Setting up the Environment
-
-To run the software, you need a C++ compiler installed on your system. Follow these steps:
-
-| **Operating System** | **Instructions**                                                                                                                                         |
-|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Windows (Install MinGW)** | MinGW is a lightweight tool to compile C++ code. <br> 1. [Download MinGW here](https://ics.uci.edu/~pattis/common/handouts/mingweclipse/mingw.html). |
-| **Mac (Install GCC)**       | Use Homebrew, a package manager for Mac, to install the compiler. <br> 1. Open Terminal. <br> 2. Run this command: `brew install gcc` <br> *(If Homebrew isn’t installed, follow the instructions here: [Homebrew](https://brew.sh/))* |
+   *Note: Make sure the folder you download is **easy** to access.*
 
 ---
 
-- Install CMake (Required)
+### Setting Up the Environment 
 
-  CMake is a tool that simplifies the compilation of complex projects.
+To run the software, you need to install the following dependencies:
 
-  - Visit the official website: [CMake Download](https://cmake.org/download).  
-  - Download and install the version suitable for your system (Windows, Mac, Linux).
+#### CMake (Required)
 
-### 3. Compile the Software
+CMake is a tool that simplifies the compilation of complex projects.  
+Download and install the version suitable for your system (Windows, Mac, Linux) from [CMake Download](https://cmake.org/download).
 
-- **Before You Start: Open Your Terminal**
+#### Clang (C++ Compiler)
 
-  Open your terminal application:
-
-  - **Windows:** Search for "Command Prompt" or "PowerShell" in the Start Menu.
-  - **Mac/Linux:** Open the Terminal app from the Applications folder or search for it.
-
-- **Step 1: Navigate to the Project Folder**
+- **On Mac**, install Clang via the LLVM package:
   
-    Use the `cd` command to go to the folder where you downloaded the software.
+  ```bash
+    brew install llvm
+  ```
+
+- **On Windows**, use Chocolatey to install Clang:  
+
+  ```bash
+    choco install llvm
+  ```
+
+#### Crow Web Framework
+
+You’ll need to install the Crow web framework.  
+Follow the Crow installation guide for CMake-based projects.
+
+#### MinGW (on Windows for Makefiles)
+
+If you’re working on Windows and need mingw32-make, install MinGW.  
+Instructions can be found in the MinGW installation guide.
+
+---
+
+### Building the Project
+
+#### Generate Build Files Using CMake
+
+Create a build directory and navigate into it:  
+
+```bash
+  mkdir build
+  cd build
+  ```
+
+- **For Windows (MinGW)**:  
   
-    ```bash
-    cd /path/to/your/folder/2024-2025-project-3-quickest-path-team-5
-    ```
+  ```bash
+    cmake -S .. -B . -G "MinGw Makefiles  
+  ```
 
-    ![Navigate to Project Folder](images/path-folder.png)
+- **For Mac/Linux**:  
 
-- **Step 2: Create a Build Directory**
+  ```bash
+    cmake -S .. -B .
+  ```
+
+---
+
+### Compile the Project
+
+- **For Windows (with MinGW)**:
+
+  ```bash
+    mingw32-make
+  ```
+
+- **For Mac/Linux**:  
   
-    Create a separate folder for the build process and move into it.
-
-    ```bash
-    mkdir build
-    cd build
-    ```
-
-    Result in the terminal:
-
-    ![Create Build Directory](images/mkdir.png)
-
-- **Step 3: Generate Makefiles**
-  
-    Use CMake to generate the necessary build files.
-
-    ```bash
-    cmake ..
-    ```
-
-- **Step 4: Build the Software**
-
-    Compile the software using the `make` command.
-
-    ```bash
+  ```bash
     make
-    ```
+  ```
 
-- **Step 5: Run the software**
+---
 
-     ADD description
+### Running the Software
 
-    ```bash
-    // add command line
-    ```
+#### Running cap
 
-- **Tip:**
-    If you prefer not to use CMake, ensure the project includes a Makefile or other build instructions.
+After building, navigate to the bin directory and run the software:  
 
-## 4. Tests
+  ```bash
+    cd ../bin
+    ./cap
+  ```
 
-### Overview
+#### Running DAG (Directed Acyclic Graph) Validation
 
-The test suite verifies the correctness, performance, and compliance of the software. It ensures the application meets all defined requirements, including validating the dataset and adhering to the 10% approximation rule.
+If you want to run the DAG validation:  
+
+Navigate to the `dag_graph_validator` directory:  
+
+  ```bash
+    cd dag_graph_validator
+  ```
+
+Run the CMake commands to build (consider your OS: Windows or Mac/Linux).  
+
+Then, run the validation tool:  
+
+  ```bash
+    cd bin
+    ./dag
+  ```
+
+---
 
 ### Running Tests
 
-Follow these steps to run the test suite and verify the dataset:
+#### Test Suite
 
-- Step 1: Navigate to the Test Directory
-    Move into the `bin` directory where the test executable is located.
+To verify everything is working correctly, run the test suite.
 
-    ```bash
-    cd ../bin
-    ```
+Navigate to the test directory:  
 
-- Step 2: Run the Test Suite
+  ```bash
+    cd /Yourpath/to/tests
+  ```
 
-    Execute the test program to validate the software.
+Run the tests:  
 
-    ```bash
-    ./test
-    ```
+  ```bash
+    ./tests
+  ```
 
-- Step 3: Verify the Dataset
-
-    Use the dataset verification tool to ensure proper setup.
-
-    ```bash
-    ./dgv
-    ```
-
-### Results
-
-#### ./Test Result
-
-The `./test` program outputs the following:
-
-- Validation of travel times and paths.
-- Checks for performance requirements.
-
-#### Dataset Verification Result
-
-The `./dgv` program confirms:
-
-- The dataset's correctness.
-- Readiness for the application.
-
-## 5. Usage Instructions
+## 4. Usage Instructions
 
 ### Finding the Quickest Path
 
@@ -251,11 +243,11 @@ The `./dgv` program confirms:
 
   1. Enter your two landmarks, your source and your destination
 
-      ![alt text](images/source_destination.png)
+      ![alt text](images/destination.png)
 
   2. Choose your download format
 
-      ![alt text](images/response_format.png)
+      ![alt text](images/format.png)
 
   3. Submit your request
 
@@ -263,13 +255,9 @@ The `./dgv` program confirms:
 
   4. Waiting to access the travel times and the steps
 
-      ![alt text](images/travel_time_and_steps.png)
+      ![alt text](images/results.png)
 
-- **Example of a response**:
-
-    // Add screenshots.
-
-## 6. Troubleshooting
+## 5. Troubleshooting
 
 ### Common Issues
 
@@ -278,14 +266,14 @@ The `./dgv` program confirms:
 | **Missing or Incorrect `USA-roads.csv` File** | The file is missing or doesn't match the required format.                  | 1. Ensure the file is in the same folder as the software. <br> 2. The file should look like: `Landmark_A_ID, Landmark_B_ID, Time`. <br>  |
 | **API Not Responding**             | The server is not running.                                                 | 1. Check if the server is running by typing: <br> `curl http://localhost:<PORT>/api/path?source_id=1&destination_id=5` <br> 2. Ensure the server is on port 8080. <br> 3. Ensure no other program is using the same port. |
 | **Unexpected Results**             | The API is giving wrong results.                                           | 1. Double-check the IDs you're using. <br> 2. Ensure the dataset is correct.                          |
-| **400 (Bad Request)**              | Missing or incorrect data in your request.                                 | 1. Ensure you include both `source_id` and `destination_id`. <br> 2. Example: <br> `http://localhost:<PORT>/api/path?source_id=1&destination_id=5` |
-| **404 (Not Found)**                | The requested resource doesn't exist.                                      | 1. Verify the URL and endpoint are correct.                                                            |
-| **500 (Internal Server Error)**   | Something went wrong on the server.                                        | 1. Check the server logs for specific errors. <br> 2. Ensure the `USA-roads.csv` file is correct.    |
+| **Bad Request**              | Missing or incorrect data in your request.                                 | 1. Ensure you include both `source_id` and `destination_id`. <br> 2. Example: <br> `http://localhost:<PORT>/api/path?source_id=1&destination_id=5` |
+| **Not Found**                | The requested resource doesn't exist.                                      | 1. Verify the URL and endpoint are correct.                                                            |
+| **Internal Server Error**   | Something went wrong on the server.                                        | 1. Check the server logs for specific errors. <br> 2. Ensure the `USA-roads.csv` file is correct.    |
 | **Server Fails to Start**          | The server won't run.                                                      | 1. Check that you have installed all required dependencies. <br> 2. Look at error messages for missing files or libraries. |
 | **Slow API Response**              | The response takes too long.                                               | 1. Ensure your dataset doesn't have unnecessary data. <br> 2. Try limiting how many requests are being made at once. |
 | **Permission Denied Errors**       | You can't access files or run commands.                                    | 1. Run the software as an administrator (use `sudo` on Linux). <br> 2. Ensure the `USA-roads.csv` file can be read. |
 
-## 7. FAQs
+## 6. FAQs
 
 ### **Common Questions**
 
@@ -328,7 +316,7 @@ The `./dgv` program confirms:
 - **Q: Where can I report bugs or request features?**  
   - **A:** Please use the project's GitHub repository issue tracker or contact the development team directly.
 
-## 8. Legal Mentions
+## 7. Legal Mentions
 
 ### 1. Copyright  
 
@@ -357,13 +345,13 @@ This document is provided for informational purposes only. It may not be copied,
 
   | **Category**        | **Details**                                                 |
   |---------------------|-------------------------------------------------------------|
-  | **Email**          | team_5@algosup.com                                   |
+  | **Github issue**    | Create an issue on github                                   |
   | **Company Name**   | Team 5                                                       |
   | **Response Time**  | We aim to respond within 24-48 hours.                        |
   | **Work Time**      | Monday to Friday, 9 AM - 5 PM (CET - Central European Time). |
   | **Support Topics** | Bugs, Feature Requests, General Inquiries, Setup Assistance. |
 
-## 9. Appendix
+## 8. Appendix
 
 ### Glossary:
 
