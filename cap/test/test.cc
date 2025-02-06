@@ -14,12 +14,14 @@
  * Test Node
  ***********************************************************************/
 
-TEST(NodeTest, createNode) {
+TEST(NodeTest, createNode)
+{
     Node *node = new Node(1);
     ASSERT_NE(node, nullptr);
 }
 
-TEST(NodeTest, addEdgeSorted) {
+TEST(NodeTest, addEdgeSorted)
+{
     Node *node = new Node(1);
     node->addEdgeSorted(2, 1);
     ASSERT_EQ(node->edges[0].destID, 2);
@@ -29,7 +31,8 @@ TEST(NodeTest, addEdgeSorted) {
  * Test Edge
  ***********************************************************************/
 
-TEST(EdgeTest, createEdge) {
+TEST(EdgeTest, createEdge)
+{
     Edge *edge = new Edge(1, 1);
     ASSERT_NE(edge, nullptr);
 }
@@ -38,73 +41,93 @@ TEST(EdgeTest, createEdge) {
  * Test Graph
  ***********************************************************************/
 
-void insertEdgesIntoGraph(Graph *graph) {
-    for(uint32_t i = 0; i < 50; i++)
-        graph->addEdge(i, i+1, 1);  
+void insertEdgesIntoGraph1(Graph *graph)
+{
+    for (uint32_t i = 0; i < 20; i++)
+        graph->addEdge(i, i + 1, 1);
 }
 
-TEST(GraphTest, creatGraph) {
+void insertEdgesIntoGraph2(Graph *graph)
+{
+    for (uint32_t i = 0; i < 20; i++)
+        graph->addEdge(i + 1, i, 1);
+}
+
+TEST(GraphTest, creatGraph)
+{
     Graph *graph = new Graph();
     ASSERT_NE(graph, nullptr);
 }
 
-TEST(GraphTest, addEdge) {
+TEST(GraphTest, addEdge)
+{
     Graph *graph = new Graph();
     ASSERT_TRUE(graph->addEdge(1, 2, 1));
 }
 
-TEST(GraphTest, addLandmark) {
+TEST(GraphTest, addLandmark)
+{
     Graph *graph = new Graph();
     ASSERT_TRUE(graph->addLandmark(1));
 }
 
-TEST(GraphTest, loadDataset) {
+TEST(GraphTest, loadDataset)
+{
     Graph *graph = new Graph();
     loadDataset(graph, FILE_PATH);
     ASSERT_NE(graph, nullptr);
 }
 
-TEST(GraphTest, dijkstraFromTo) {
+TEST(GraphTest, dijkstraFromTo)
+{
     uint32_t from = 1;
-    uint32_t to = 45;
+    uint32_t to = 13;
     Graph *graph = new Graph();
-    insertEdgesIntoGraph(graph);
+    insertEdgesIntoGraph1(graph);
     graph->selectLandmarks(16);
-    ASSERT_NO_THROW(graph->dijkstra(from, to));
+    std::vector<uint32_t> expected_path = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+    ASSERT_EQ(graph->dijkstra(from, to), expected_path);
 }
 
-TEST(GraphTest, dijkstraToFrom) {
+TEST(GraphTest, dijkstraToFrom)
+{
     uint32_t from = 1;
-    uint32_t to = 45;
+    uint32_t to = 13;
     Graph *graph = new Graph();
-    insertEdgesIntoGraph(graph);
+    insertEdgesIntoGraph1(graph);
     graph->selectLandmarks(16);
-    ASSERT_NO_THROW(graph->dijkstra(to, from));
+    std::vector<uint32_t> expected_path = {13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+    ASSERT_EQ(graph->dijkstra(to, from), expected_path);
 }
 
-TEST(GraphTest, aStarFromTo) {
+TEST(GraphTest, aStarFromTo)
+{
     uint32_t from = 1;
-    uint32_t to = 45;
+    uint32_t to = 13;
     Graph *graph = new Graph();
-    insertEdgesIntoGraph(graph);
+    insertEdgesIntoGraph1(graph);
     graph->selectLandmarks(16);
-    ASSERT_NO_THROW(graph->aStarLandmark(from, to));
+    std::vector<uint32_t> expected_path = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+    ASSERT_EQ(graph->aStarLandmark(from, to), expected_path);
 }
 
-TEST(GraphTest, aStarToFrom) {
+TEST(GraphTest, aStarToFrom)
+{
     uint32_t from = 1;
-    uint32_t to = 45;
+    uint32_t to = 13;
     Graph *graph = new Graph();
-    insertEdgesIntoGraph(graph);
+    insertEdgesIntoGraph1(graph);
     graph->selectLandmarks(16);
-    ASSERT_NO_THROW(graph->aStarLandmark(to, from));
+    std::vector<uint32_t> expected_path = {13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+    ASSERT_EQ(graph->aStarLandmark(to, from), expected_path);
 }
 
 /***********************************************************************
  * Run all tests
  ***********************************************************************/
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
