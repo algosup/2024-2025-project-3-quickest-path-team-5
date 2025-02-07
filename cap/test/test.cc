@@ -7,6 +7,8 @@
 #include "gtest/gtest.h"
 #include "graph.hpp"
 #include "csv_reader.hpp"
+#include <time.h>
+#include <cstring>
 
 #define FILE_PATH "../../data/USA-roads.csv"
 
@@ -24,7 +26,7 @@ TEST(NodeTest, addEdgeSorted)
 {
     Node *node = new Node(1);
     node->addEdgeSorted(2, 1);
-    ASSERT_EQ(node->edges[0].destID, 2);
+    ASSERT_EQ(node->edges[0].destID, (uint32_t)2);
 }
 
 /***********************************************************************
@@ -119,6 +121,29 @@ TEST(GraphTest, aStarToFrom)
     graph->selectLandmarks(16);
     std::vector<uint32_t> expected_path = {13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
     ASSERT_EQ(graph->aStarLandmark(to, from), expected_path);
+}
+
+TEST(GraphTest, aStarSpeedTest)
+{
+    const char *defaultFilePath = FILE_PATH;
+    char buffer[512];
+    std::strcpy(buffer, defaultFilePath);
+    ASSERT_TRUE(checkFileExists(buffer));
+    Graph *graph = new Graph();
+    loadDataset(graph, buffer);
+    graph->selectLandmarks(16);
+    clock_t begin = clock();
+    std::vector<uint32_t> res = graph->aStarLandmark(9588784, 2720178); // Longuest path to process we kwow
+    clock_t end = clock();
+    ASSERT_GT(res.size(),(size_t) 0);
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    ASSERT_LT(time_spent, 1);
+    begin = clock();
+    res = graph->aStarLandmark(9489093, 22377087); // Longuest path we kwow
+    end = clock();
+    ASSERT_GT(res.size(),(size_t) 0);
+    time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    ASSERT_LT(time_spent, 1);
 }
 
 /***********************************************************************
