@@ -8,6 +8,7 @@
 #include <crow_all.h>
 #include <sstream>
 #include <stdexcept>
+#include <optional>
 
 using namespace std;
 
