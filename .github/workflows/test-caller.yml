@@ -37,7 +37,7 @@ jobs:
             - name: Build
               run: |
                         echo "Building the project"
-                        cd dag_graph_validator
+                        cd cap
                         cmake -S . -B build
                         cd build
                         make
@@ -51,7 +51,7 @@ jobs:
             - name: Run tests
               run: |
                     echo "Running tests"
-                    cd dag_graph_validator
+                    cd cap
                     cd bin
                     ./tests
                     echo "Tests complete"
