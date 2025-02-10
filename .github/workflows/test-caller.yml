@@ -53,7 +53,7 @@ jobs:
                     echo "Getting dataset"
                     mkdir data
                     cd data
-                    git clone https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/releases/tag/v1.0/USA-roads.csv
+                    wget https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/releases/tag/v1.0/USA-roads.csv
             - name: Run tests
               run: |
                     echo "Running tests"
