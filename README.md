@@ -12,7 +12,7 @@ For further technical information, please refer to the [technical specifications
 
 ---
 
-# CAP (Cap API Pathfinding)
+# CAP (Cap API Pathfinder)
 
 CAP is a REST API that allows you to find the quickest path between two verticies of a graph that contains 24 million vertices. The API promises a response time below 1 second in every case. This has been achieved by using a custom algorithm that is based on the A* algorithm. The API is written in C++ and uses the [Crow](https://crowcpp.org/master/) library to handle the HTTP requests.
 
