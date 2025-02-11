@@ -99,7 +99,10 @@ This section tracks the progress of essential project documents:
 - **User Manual**  
 
 **Formula:**  
+
+<div align="center">
 $$\text{Progress (\%)} = \frac{\text{Current Number of Completed Sections}}{\text{Total Predefined Sections}} \times 100$$  
+<div>
 
 Where:  
 - **Current Number of Completed Sections** = Fully completed and validated sections  
@@ -114,9 +117,11 @@ Key software development KPIs include:
 - **Algorithm Design for Pathfinding**  
 
 **Formula:**  
-$$  
-\text{Progress (\%)} = \frac{(\text{Completed Tasks} + \sum \text{Partial Progress on Ongoing Tasks})}{\text{Total Tasks Planned}} \times 100  
-$$  
+
+<div align="center">
+$$\text{Progress (\%)} = \frac{(\text{Completed Tasks} + \sum \text{Partial Progress on Ongoing Tasks})}{\text{Total Tasks Planned}} \times 100$$  
+<div>
+
 
 Where:  
 - **Completed Tasks** = Fully developed and tested components  
@@ -134,18 +139,20 @@ This section includes:
 ### Defect Detection Efficiency (DDE)  
 Measures the effectiveness of testing in identifying defects before release.  
 
-**Formula:**  
-$$  
-\text{DDE (\%)} = \frac{\text{Defects Detected During Testing}}{\text{Total Number of Defects}} \times 100  
-$$  
+**Formula:**
+
+<div align="center">
+$$\text{DDE (\%)} = \frac{\text{Defects Detected During Testing}}{\text{Total Number of Defects}} \times 100$$  
+<div>
 
 ### Bug Fix Rate  
 Measures the percentage of reported bugs that have been resolved.  
 
 **Formula:**  
-$$  
-\text{Bug Fix Rate (\%)} = \frac{\text{Fixed Bugs}}{\text{Total Reported Bugs}} \times 100  
-$$  
+
+<div align="center">
+$$\text{Bug Fix Rate (\%)} = \frac{\text{Fixed Bugs}}{\text{Total Reported Bugs}} \times 100$$  
+<div>
 
 <br>
 
@@ -159,9 +166,10 @@ To monitor the efficiency and well-being of the team, we track:
 Measures team morale based on weekly self-assessments.  
 
 **Formula:**  
-$$  
-\text{Mood Score} = \frac{\sum \text{Individual Mood Ratings}}{\text{Total Team Members}}  
-$$  
+
+<div align="center">
+$$\text{Mood Score} = \frac{\sum \text{Individual Mood Ratings}}{\text{Total Team Members}}$$  
+<div>
 
 Mood is measured weekly on a scale of 1 to 10.  
 
