@@ -1,4 +1,4 @@
-# Welcome to the Quickest Path API project!
+# Welcome to the Quickest Path API project! 
 
 ---
 
@@ -12,9 +12,12 @@ For further technical information, please refer to the [technical specifications
 
 ---
 
-# CAP (Cap API Pathfinding)
+# CAP (Cap API Pathfinder)
 
 CAP is a REST API that allows you to find the quickest path between two verticies of a graph that contains 24 million vertices. The API promises a response time below 1 second in every case. This has been achieved by using a custom algorithm that is based on the A* algorithm. The API is written in C++ and uses the [Crow](https://crowcpp.org/master/) library to handle the HTTP requests.
+
+>[!CAUTION]
+>A minimum of 8GB RAM is required for the software.
 
 ---
 
@@ -49,13 +52,13 @@ CAP is a REST API that allows you to find the quickest path between two verticie
     ```bash
     # From the root folder of the project
     cd cap
-    ./build/cap
+    ./bin/cap
     ```
 11. Run the tests (optional)
     ```bash
     # From the root folder of the project
     cd cap
-    ./build/tests
+    ./bin/tests
     ```
 
 ---
@@ -93,13 +96,13 @@ DGV is a tool that allows you to validate a graph file. The tool will check if t
     ```bash
     # From the root folder of the project
     cd dag_graph_validator
-    ./build/dgv
+    ./bin/dgv
     ```
 7. Run the tests (optional)
     ```bash
     # From the root folder of the project
     cd dag_graph_validator
-    ./build/tests
+    ./bin/tests
     ```
 
 ---
