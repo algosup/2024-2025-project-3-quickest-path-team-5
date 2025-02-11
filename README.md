@@ -49,7 +49,7 @@ CAP is a REST API that allows you to find the quickest path between two verticie
     ```bash
     # From the root folder of the project
     cd cap
-    ./build/cap
+    ./bin/cap
     ```
 11. Run the tests (optional)
     ```bash
@@ -93,7 +93,7 @@ DGV is a tool that allows you to validate a graph file. The tool will check if t
     ```bash
     # From the root folder of the project
     cd dag_graph_validator
-    ./build/dgv
+    ./bin/dgv
     ```
 7. Run the tests (optional)
     ```bash
