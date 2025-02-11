@@ -21,7 +21,7 @@
 
 The Tasks & Schedule section is divided into three parts. All information is maintained and updated in Notion for real-time tracking and collaboration.
 
-1. **All the Tasks:** [View all tasks](https://spark-vessel-8f5.notion.site/Daily-Task-List-177204fa481680dbae3eddb0873509be?pvs=4)  
+1. **All the Tasks:** [View all tasks](https://spark-vessel-8f5.notion.site/177204fa481680bbb2c8d06169a54f1f?v=177204fa4816808a8327000c91da52ee&pvs=4)  
    This section lists every task with detailed descriptions, assigned roles, and deadlines.
 
 2. **Gantt Chart:** [View the Gantt chart](https://spark-vessel-8f5.notion.site/192204fa481680d89f57f57e6b29fd33?v=192204fa48168178983d000c597d17a7&pvs=4)  
@@ -183,9 +183,14 @@ Each week, a meeting was held that informed the creation of these weekly reports
 
 you can access to them via these links :
 
-- [Weekly Report 1](link)
-- [Weekly Report 2](link)
-- [Weekly Report 3](link)
-- [Weekly Report 4](link)
-- [Weekly Report 5](link)
+- [Weekly Report 1](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/Management/weeklyReport.md/weekly_report_1.md)
+- [Weekly Report 2](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/Management/weeklyReport.md/weekly_report_2.md)
+- [Weekly Report 3](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/Management/weeklyReport.md/weekly_report_3.md)
+- [Weekly Report 4](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/Management/weeklyReport.md/weekly_report_4.md)
+- [Weekly Report 5](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/Management/weeklyReport.md/weekly_report_5.md)
 - [Weekly Report 6](link)
+
+
+Also a cumulative document to access to all of them in one single page was made to centralize every meeting's results :
+
+[Cumulative document for the 6 weeks](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/Management/weeklyReport.md/cumulative.md)
