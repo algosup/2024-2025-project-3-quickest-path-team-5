@@ -104,7 +104,7 @@ This section tracks the progress of essential project documents:
 
 $$\text{Progress (\%)} = \frac{\text{Current Number of Completed Sections}}{\text{Total Predefined Sections}} \times 100$$ 
 
-<div>
+</div>
 
 Where:  
 - **Current Number of Completed Sections** = Fully completed and validated sections  
