@@ -101,7 +101,9 @@ This section tracks the progress of essential project documents:
 **Formula:**  
 
 <div align="center">
-$$\text{Progress (\%)} = \frac{\text{Current Number of Completed Sections}}{\text{Total Predefined Sections}} \times 100$$  
+
+$$\text{Progress (\%)} = \frac{\text{Current Number of Completed Sections}}{\text{Total Predefined Sections}} \times 100$$ 
+
 <div>
 
 Where:  
@@ -119,8 +121,10 @@ Key software development KPIs include:
 **Formula:**  
 
 <div align="center">
+
 $$\text{Progress (\%)} = \frac{(\text{Completed Tasks} + \sum \text{Partial Progress on Ongoing Tasks})}{\text{Total Tasks Planned}} \times 100$$  
-<div>
+
+</div>
 
 
 Where:  
@@ -142,8 +146,10 @@ Measures the effectiveness of testing in identifying defects before release.
 **Formula:**
 
 <div align="center">
+
 $$\text{DDE (\%)} = \frac{\text{Defects Detected During Testing}}{\text{Total Number of Defects}} \times 100$$  
-<div>
+
+</div>
 
 ### Bug Fix Rate  
 Measures the percentage of reported bugs that have been resolved.  
@@ -151,8 +157,10 @@ Measures the percentage of reported bugs that have been resolved.
 **Formula:**  
 
 <div align="center">
+
 $$\text{Bug Fix Rate (\%)} = \frac{\text{Fixed Bugs}}{\text{Total Reported Bugs}} \times 100$$  
-<div>
+
+</div>
 
 <br>
 
@@ -168,8 +176,10 @@ Measures team morale based on weekly self-assessments.
 **Formula:**  
 
 <div align="center">
+
 $$\text{Mood Score} = \frac{\sum \text{Individual Mood Ratings}}{\text{Total Team Members}}$$  
-<div>
+
+</div>
 
 Mood is measured weekly on a scale of 1 to 10.  
 
