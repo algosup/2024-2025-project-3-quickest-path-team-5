@@ -37,7 +37,7 @@ jobs:
             - name: Build
               run: |
                         echo "Building the project"
-                        cd dag_graph_validator
+                        cd cap
                         cmake -S . -B build
                         cd build
                         make
@@ -48,10 +48,16 @@ jobs:
         runs-on: [self-hosted, linux, x64]
         needs: build
         steps:
+            - name: Get Dataset
+              run: |
+                    echo "Getting dataset"
+                    mkdir data
+                    cd data
+                    wget https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/releases/tag/v1.0/USA-roads.csv
             - name: Run tests
               run: |
                     echo "Running tests"
-                    cd dag_graph_validator
+                    cd cap
                     cd bin
                     ./tests
                     echo "Tests complete"
