@@ -188,7 +188,7 @@ Mood is measured weekly on a scale of 1 to 10.
 By applying these KPIs and their respective formulas, we ensure a structured, data-driven approach to project management, allowing for real-time progress tracking and informed decision-making.  
 
 
-The complete KPI document can be accessed via [link](https://spark-vessel-8f5.notion.site/KPIs-177204fa4816806ca08fe59365d99d74?pvs=4).  
+The complete KPI document can be accessed via this [link](https://spark-vessel-8f5.notion.site/KPIs-177204fa4816806ca08fe59365d99d74?pvs=4).  
 Additionally, a comprehensive visual presentation highlighting all project achievements is available [here](https://docs.google.com/spreadsheets/d/1O52cw3Ta-6EVw85Rz4RBrDvwIUuy__FmBcQSuzbgIPo/edit?usp=sharing).
 
 <br>
@@ -204,7 +204,7 @@ you can access to them via these links :
 - [Weekly Report 3](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/Management/weeklyReport.md/weekly_report_3.md)
 - [Weekly Report 4](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/Management/weeklyReport.md/weekly_report_4.md)
 - [Weekly Report 5](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/Management/weeklyReport.md/weekly_report_5.md)
-- [Weekly Report 6](link)
+- [Weekly Report 6](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/Management/weeklyReport.md/weekly_report_6.md)
 
 
 Also a cumulative document to access to all of them in one single page was made to centralize every meeting's results :
