@@ -1,4 +1,0 @@
-/Users/habi/Documents/GitHub/2024-2025-project-3-quickest-path-team-5/cap/build/CMakeFiles/tests.dir
-/Users/habi/Documents/GitHub/2024-2025-project-3-quickest-path-team-5/cap/build/CMakeFiles/cap.dir
-/Users/habi/Documents/GitHub/2024-2025-project-3-quickest-path-team-5/cap/build/CMakeFiles/edit_cache.dir
-/Users/habi/Documents/GitHub/2024-2025-project-3-quickest-path-team-5/cap/build/CMakeFiles/rebuild_cache.dir
