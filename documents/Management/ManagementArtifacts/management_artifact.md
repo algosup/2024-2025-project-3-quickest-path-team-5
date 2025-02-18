@@ -99,9 +99,12 @@ This section tracks the progress of essential project documents:
 - **User Manual**  
 
 **Formula:**  
-$$
-\text{Progress (\%)} = \frac{\text{Current Number of Completed Sections}}{\text{Total Predefined Sections}} \times 100
-$$  
+
+<div align="center">
+
+$$\text{Progress (\%)} = \frac{\text{Current Number of Completed Sections}}{\text{Total Predefined Sections}} \times 100$$ 
+
+</div>
 
 Where:  
 - **Current Number of Completed Sections** = Fully completed and validated sections  
@@ -116,9 +119,13 @@ Key software development KPIs include:
 - **Algorithm Design for Pathfinding**  
 
 **Formula:**  
-$$
-\text{Progress (\%)} = \frac{(\text{Completed Tasks} + \sum \text{Partial Progress on Ongoing Tasks})}{\text{Total Tasks Planned}} \times 100
-$$  
+
+<div align="center">
+
+$$\text{Progress (\%)} = \frac{(\text{Completed Tasks} + \sum \text{Partial Progress on Ongoing Tasks})}{\text{Total Tasks Planned}} \times 100$$  
+
+</div>
+
 
 Where:  
 - **Completed Tasks** = Fully developed and tested components  
@@ -136,18 +143,24 @@ This section includes:
 ### Defect Detection Efficiency (DDE)  
 Measures the effectiveness of testing in identifying defects before release.  
 
-**Formula:**  
-$$
-\text{DDE (\%)} = \frac{\text{Defects Detected During Testing}}{\text{Total Number of Defects}} \times 100
-$$  
+**Formula:**
+
+<div align="center">
+
+$$\text{DDE (\%)} = \frac{\text{Defects Detected During Testing}}{\text{Total Number of Defects}} \times 100$$  
+
+</div>
 
 ### Bug Fix Rate  
 Measures the percentage of reported bugs that have been resolved.  
 
 **Formula:**  
-$$
-\text{Bug Fix Rate (\%)} = \frac{\text{Fixed Bugs}}{\text{Total Reported Bugs}} \times 100
-$$  
+
+<div align="center">
+
+$$\text{Bug Fix Rate (\%)} = \frac{\text{Fixed Bugs}}{\text{Total Reported Bugs}} \times 100$$  
+
+</div>
 
 <br>
 
@@ -161,9 +174,12 @@ To monitor the efficiency and well-being of the team, we track:
 Measures team morale based on weekly self-assessments.  
 
 **Formula:**  
-$$
-\text{Mood Score} = \frac{\sum \text{Individual Mood Ratings}}{\text{Total Team Members}}
-$$  
+
+<div align="center">
+
+$$\text{Mood Score} = \frac{\sum \text{Individual Mood Ratings}}{\text{Total Team Members}}$$  
+
+</div>
 
 Mood is measured weekly on a scale of 1 to 10.  
 
@@ -172,7 +188,7 @@ Mood is measured weekly on a scale of 1 to 10.
 By applying these KPIs and their respective formulas, we ensure a structured, data-driven approach to project management, allowing for real-time progress tracking and informed decision-making.  
 
 
-The complete KPI document can be accessed via [link](https://spark-vessel-8f5.notion.site/KPIs-177204fa4816806ca08fe59365d99d74?pvs=4).  
+The complete KPI document can be accessed via this [link](https://spark-vessel-8f5.notion.site/KPIs-177204fa4816806ca08fe59365d99d74?pvs=4).  
 Additionally, a comprehensive visual presentation highlighting all project achievements is available [here](https://docs.google.com/spreadsheets/d/1O52cw3Ta-6EVw85Rz4RBrDvwIUuy__FmBcQSuzbgIPo/edit?usp=sharing).
 
 <br>
@@ -188,7 +204,7 @@ you can access to them via these links :
 - [Weekly Report 3](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/Management/weeklyReport.md/weekly_report_3.md)
 - [Weekly Report 4](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/Management/weeklyReport.md/weekly_report_4.md)
 - [Weekly Report 5](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/Management/weeklyReport.md/weekly_report_5.md)
-- [Weekly Report 6](link)
+- [Weekly Report 6](https://github.com/algosup/2024-2025-project-3-quickest-path-team-5/blob/main/documents/Management/weeklyReport.md/weekly_report_6.md)
 
 
 Also a cumulative document to access to all of them in one single page was made to centralize every meeting's results :
