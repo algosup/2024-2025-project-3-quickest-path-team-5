@@ -65,7 +65,7 @@
 
 - Refining speech delivery for clarity and confidence.
 
-- Everyone didn't agree with the final presentation so we changed the slides many times.
+- Not everyone agreed with the final presentation, so we had to revise the slides multiple times.
 
 
 <br>
